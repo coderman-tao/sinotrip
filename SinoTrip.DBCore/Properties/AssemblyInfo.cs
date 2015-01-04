@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // 有关程序集的常规信息通过以下
 // 特性集控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("SinoTrip.Biz")]
+[assembly: AssemblyTitle("SinoTrip.DBCore")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("SinoTrip.Biz")]
+[assembly: AssemblyProduct("SinoTrip.DBCore")]
 [assembly: AssemblyCopyright("Copyright © Microsoft 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 如果此项目向 COM 公开，则下列 GUID 用于类型库的 ID
-[assembly: Guid("3cfb9357-7de0-4083-8f60-6c6d1497f98c")]
+[assembly: Guid("44b88c62-33bb-4c76-bf41-c7be19e3a882")]
 
 // 程序集的版本信息由下面四个值组成: 
 //
