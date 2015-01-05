@@ -3,19 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SinoTrip.DAL", "SinoTrip.DAL\SinoTrip.DAL.csproj", "{8E774388-CC6D-4EC4-86A2-02198A47E36D}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SinoTrip.Biz", "SinoTrip.Biz\SinoTrip.Biz.csproj", "{D115D158-D9EC-4BB0-8043-D913C2EA7330}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SinoTrip.FrameWork", "SinoTrip.FrameWork\SinoTrip.FrameWork.csproj", "{ECDFB705-B0E9-43FF-82AE-958AF25A1C76}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SinoTrip.Entity", "SinoTrip.Entity\SinoTrip.Entity.csproj", "{E232716F-EFA0-4DFC-A2DC-E4A340691B8F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SinoTrip.API", "SinoTrip.API\SinoTrip.API.csproj", "{4C8241E9-6462-4B63-B2AF-0D4E0495A6A5}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SinoTrip.DB", "SinoTrip.DBCore\SinoTrip.DB.csproj", "{DBD13957-1D76-4B62-940D-F40A86E7ADD0}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SinoTrip.Core", "SinoTrip.Core\SinoTrip.Core.csproj", "{358A23B1-E903-449D-A05C-3AA3D026BE2E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SinoTrip.Cache", "SinoTrip.Cache\SinoTrip.Cache.csproj", "{76A7CEF3-0CD5-4A61-8FCE-C98175C764C3}"
 EndProject
@@ -23,16 +17,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SinoTrip.WebView", "SinoTri
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SinoTrip.WebBase", "SinoTrip.WebBase\SinoTrip.WebBase.csproj", "{1DB5BF34-7CC7-4FA7-B1D9-EB81B9613CCC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SinoTrip.API", "SinoTrip.API\SinoTrip.API.csproj", "{19198779-5BFA-4452-8850-80A699BF91ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SinoTrip.Core", "SinoTrip.Core\SinoTrip.Core.csproj", "{BBA7A3FB-22C2-460A-A82E-171BB98001E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SinoTrip.DAL", "SinoTrip.DAL\SinoTrip.DAL.csproj", "{C045ECF2-A06A-4F76-9910-F7B91C6C5385}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{8E774388-CC6D-4EC4-86A2-02198A47E36D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8E774388-CC6D-4EC4-86A2-02198A47E36D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8E774388-CC6D-4EC4-86A2-02198A47E36D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8E774388-CC6D-4EC4-86A2-02198A47E36D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D115D158-D9EC-4BB0-8043-D913C2EA7330}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D115D158-D9EC-4BB0-8043-D913C2EA7330}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D115D158-D9EC-4BB0-8043-D913C2EA7330}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,18 +41,10 @@ Global
 		{E232716F-EFA0-4DFC-A2DC-E4A340691B8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E232716F-EFA0-4DFC-A2DC-E4A340691B8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E232716F-EFA0-4DFC-A2DC-E4A340691B8F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4C8241E9-6462-4B63-B2AF-0D4E0495A6A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4C8241E9-6462-4B63-B2AF-0D4E0495A6A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4C8241E9-6462-4B63-B2AF-0D4E0495A6A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4C8241E9-6462-4B63-B2AF-0D4E0495A6A5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DBD13957-1D76-4B62-940D-F40A86E7ADD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DBD13957-1D76-4B62-940D-F40A86E7ADD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DBD13957-1D76-4B62-940D-F40A86E7ADD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DBD13957-1D76-4B62-940D-F40A86E7ADD0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{358A23B1-E903-449D-A05C-3AA3D026BE2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{358A23B1-E903-449D-A05C-3AA3D026BE2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{358A23B1-E903-449D-A05C-3AA3D026BE2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{358A23B1-E903-449D-A05C-3AA3D026BE2E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{76A7CEF3-0CD5-4A61-8FCE-C98175C764C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{76A7CEF3-0CD5-4A61-8FCE-C98175C764C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76A7CEF3-0CD5-4A61-8FCE-C98175C764C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -69,6 +57,18 @@ Global
 		{1DB5BF34-7CC7-4FA7-B1D9-EB81B9613CCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1DB5BF34-7CC7-4FA7-B1D9-EB81B9613CCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1DB5BF34-7CC7-4FA7-B1D9-EB81B9613CCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19198779-5BFA-4452-8850-80A699BF91ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19198779-5BFA-4452-8850-80A699BF91ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19198779-5BFA-4452-8850-80A699BF91ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19198779-5BFA-4452-8850-80A699BF91ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBA7A3FB-22C2-460A-A82E-171BB98001E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBA7A3FB-22C2-460A-A82E-171BB98001E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBA7A3FB-22C2-460A-A82E-171BB98001E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBA7A3FB-22C2-460A-A82E-171BB98001E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C045ECF2-A06A-4F76-9910-F7B91C6C5385}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C045ECF2-A06A-4F76-9910-F7B91C6C5385}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C045ECF2-A06A-4F76-9910-F7B91C6C5385}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C045ECF2-A06A-4F76-9910-F7B91C6C5385}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{19198779-5BFA-4452-8850-80A699BF91ED}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SinoTrip.API</RootNamespace>
+    <AssemblyName>SinoTrip.API</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Ctrip\Biz\HotelBiz.cs" />
+    <Compile Include="Ctrip\Model\Hotel\BaseCallEntity.cs" />
+    <Compile Include="Ctrip\Model\Hotel\BaseReturnEntity.cs" />
+    <Compile Include="Ctrip\Model\Hotel\CtripEnum.cs" />
+    <Compile Include="Ctrip\Model\Hotel\ErrorCode.cs" />
+    <Compile Include="Ctrip\Model\Hotel\Module\AreaInfo.cs" />
+    <Compile Include="Ctrip\Model\Hotel\Module\AvaiRoomRate.cs" />
+    <Compile Include="Ctrip\Model\Hotel\Module\CancelPenalty.cs" />
+    <Compile Include="Ctrip\Model\Hotel\Module\CtripHotelRepEntity.cs" />
+    <Compile Include="Ctrip\Model\Hotel\Module\DepositPayment.cs" />
+    <Compile Include="Ctrip\Model\Hotel\Module\DepositPaymentInfo.cs" />
+    <Compile Include="Ctrip\Model\Hotel\Module\DescriptiveInfo.cs" />
+    <Compile Include="Ctrip\Model\Hotel\Module\ErrorInfo.cs" />
+    <Compile Include="Ctrip\Model\Hotel\Module\Facility.cs" />
+    <Compile Include="Ctrip\Model\Hotel\Module\GuaranteePayment.cs" />
+    <Compile Include="Ctrip\Model\Hotel\Module\HotelCacheChange.cs" />
+    <Compile Include="Ctrip\Model\Hotel\Module\HotelContact.cs" />
+    <Compile Include="Ctrip\Model\Hotel\Module\HotelDescriptiveInfo.cs" />
+    <Compile Include="Ctrip\Model\Hotel\Module\HotelPolicyInfo.cs" />
+    <Compile Include="Ctrip\Model\Hotel\Module\HotelRatePlan.cs" />
+    <Compile Include="Ctrip\Model\Hotel\Module\HotelRatePlanRQ.cs" />
+    <Compile Include="Ctrip\Model\Hotel\Module\HotelReservation.cs" />
+    <Compile Include="Ctrip\Model\Hotel\Module\HotelReservationID.cs" />
+    <Compile Include="Ctrip\Model\Hotel\Module\HotelRoom.cs" />
+    <Compile Include="Ctrip\Model\Hotel\Module\MultimediaDescription.cs" />
+    <Compile Include="Ctrip\Model\Hotel\Module\MultimediaTextDescription.cs" />
+    <Compile Include="Ctrip\Model\Hotel\Module\Person.cs" />
+    <Compile Include="Ctrip\Model\Hotel\Module\Pertain.cs" />
+    <Compile Include="Ctrip\Model\Hotel\Module\PolicyInfoCode.cs" />
+    <Compile Include="Ctrip\Model\Hotel\Module\RelativePosition.cs" />
+    <Compile Include="Ctrip\Model\Hotel\Module\RoomFacility.cs" />
+    <Compile Include="Ctrip\Model\Hotel\Module\RoomRate.cs" />
+    <Compile Include="Ctrip\Model\Hotel\Module\RoomRatePlan.cs" />
+    <Compile Include="Ctrip\Model\Hotel\Module\VendorMessage.cs" />
+    <Compile Include="Ctrip\Model\Hotel\Module\ZoneInfo.cs" />
+    <Compile Include="Ctrip\Model\Hotel\Request\OTA_HotelAvailRQ.cs" />
+    <Compile Include="Ctrip\Model\Hotel\Request\OTA_HotelCacheChangeRQ.cs" />
+    <Compile Include="Ctrip\Model\Hotel\Request\OTA_HotelDescriptiveInfoRQ.cs" />
+    <Compile Include="Ctrip\Model\Hotel\Request\OTA_HotelRatePlanRQ.cs" />
+    <Compile Include="Ctrip\Model\Hotel\Request\OTA_HotelSearchRQ.cs" />
+    <Compile Include="Ctrip\Model\Hotel\Response\OTA_HotelAvailRS.cs" />
+    <Compile Include="Ctrip\Model\Hotel\Response\OTA_HotelCacheChangeRS.cs" />
+    <Compile Include="Ctrip\Model\Hotel\Response\OTA_HotelDescriptiveInfoRS.cs" />
+    <Compile Include="Ctrip\Model\Hotel\Response\OTA_HotelRatePlanRS.cs" />
+    <Compile Include="Ctrip\Model\Hotel\Response\OTA_HotelSearchRS.cs" />
+    <Compile Include="Ctrip\Model\Hotel\ReturnHeaderInfo.cs" />
+    <Compile Include="Ctrip\SDK\APICommon.cs" />
+    <Compile Include="Ctrip\SDK\WebSvcCaller.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Ctrip\Template\OTA_HotelSearchRQ.xml">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SinoTrip.FrameWork\SinoTrip.FrameWork.csproj">
+      <Project>{ecdfb705-b0e9-43ff-82ae-958af25a1c76}</Project>
+      <Name>SinoTrip.FrameWork</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -47,15 +47,14 @@
   <ItemGroup>
     <Compile Include="Common\Constant.cs" />
     <Compile Include="Common\ExtensionMethods.cs" />
-    <Compile Include="Drawing\ImageOperation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\Rijndael.cs" />
-    <Compile Include="Utils\HtmlUtil.cs" />
-    <Compile Include="Utils\XmlUtil..cs" />
-    <Compile Include="Web\AjaxMsg.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Drawing\" />
     <Folder Include="IO\" />
+    <Folder Include="Utils\" />
+    <Folder Include="Web\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

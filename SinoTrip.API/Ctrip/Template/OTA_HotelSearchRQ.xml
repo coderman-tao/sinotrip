@@ -1,0 +1,23 @@
+﻿<HotelRequest>
+  <RequestBody xmlns:ns="http://www.opentravel.org/OTA/2003/05" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <ns:OTA_HotelSearchRQ Version="1.0" PrimaryLangID="zh" xsi:schemaLocation="http://www.opentravel.org/OTA/2003/05 OTA_HotelSearchRQ.xsd" xmlns="http://www.opentravel.org/OTA/2003/05">
+      <ns:Criteria AvailableOnlyIndicator="$AvailableOnlyIndicator">
+        <!-- 查询具体信息-->
+        <ns:Criterion>
+          <!--酒店信息查询条件：查询属性中至少有一条查询条件-->
+          <!-- HotelCityCode属性：城市ID ，int类型，可空-->
+          <!-- AreaID属性：行政区ID ，int类型，可空-->
+          <!-- HotelName属性：酒店名称，string类型，可空-->
+          <ns:HotelRef HotelCityCode="2" AreaID="112"  HotelName="上海"/>
+          <!--酒店的坐标：返回的酒店信息中的坐标类型-->
+          <!-- PositionTypeCode属性：坐标类型，string类型，可空，参见ListCode(PTC)，501Mapbar 坐标，502Google 坐标，默认为502-->
+          <ns:Position PositionTypeCode="502" />
+          <!--酒店等级-->
+          <!-- Provider属性：评分者，string类型，可空，HotelStarRate(酒店星级)，CtripStarRate(携程星级)，CtripRecommendRate(携程评分)-->
+          <!-- Rating属性：分数或级别，decimal类型，可空-->
+          <ns:Award Provider="HotelStarRate" Rating="3"/>
+        </ns:Criterion>
+      </ns:Criteria>
+    </ns:OTA_HotelSearchRQ>
+  </RequestBody>
+</HotelRequest>
