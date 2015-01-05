@@ -1,0 +1,842 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>&#45;$SITE.name</title>
+      #include("pageHeadCode.htm")
+
+<script type="text/javascript" src="/res/js/flights.js"></script>
+<script type="text/javascript" src="/res/js/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="/res/js/json2.js"></script>
+<link href="/Skin/Default/style/flight_logo.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+.inputbox span.inputTitle{ width:60px;}
+.inputbox span.inputContent input[type="text"]{ width:200px}
+
+div.flightbox{border:1px solid #ffffff; background-color:#f1f1f1; overflow:hidden; padding:1px}
+div.flightbox div.outboundTitle{line-height:35px; border:1px solid #eee; background-color:#f7f7f7; padding-left:10px; font-weight:bold;}
+div.flightbox.over{ border:1px solid #ff3300;}
+
+
+table.flightsearch_table
+{
+    border:0px;
+    border-collapse: collapse;
+    margin: 0 auto;    
+    width: 100%;    
+}
+
+
+
+table.flightsearch_table td
+{
+    border: 0px solid #ccc;
+    height: 20px;
+    padding: 0px 4px 0px 4px;
+    line-height: 20px;
+    font-size: 13px;
+    font-family:Tahoma;
+}
+table.flightsearch_table td{ padding:10px 4px;}
+table.flightsearch_table thead td{ background-color:#fefefe; border-bottom:1px solid #eee}
+table.flightsearch_table thead td.logo{width:50px;}
+table.flightsearch_table thead td.cityname{width:150px;}
+table.flightsearch_table thead td.timedata{width:70px;}
+table.flightsearch_table thead td.flightname{width:150px; color:#666}
+table.flightsearch_table thead td.flightnote{ width:100px; color:#666}
+table.flightsearch_table thead td.flightprice{width:100px; font-size:24px; font-weight:bold; font-family:微软雅黑; color:#ff3300; text-align:right}
+table.flightsearch_table thead td.opricenote{ width:80px; line-height:18px; color:#666}
+table.flightsearch_table thead td.bottombox{width:80px;}
+table.flightsearch_table thead td.tag{ width:80px}
+
+table.flightsearch_table thead td span.flightno{ font-weight:bold}
+table.flightsearch_table thead td div.major{  font-weight:bold; font-size:13px; color:#333}
+table.flightsearch_table  .oprice{text-decoration: line-through; font-size:12px; color:#999}
+
+table.flightsearch_table .remarks{ color:#0066cc; border-bottom:1px dashed #333}
+table.flightsearch_table .typeprice{ color:#ff3300; text-align:right; font-size:16px; font-weight:bold; padding-top:5px;}
+table.flightsearch_table .opriceStr{ font-size:12px; color:#666; line-height:14px;}
+table.flightsearch_table .opricetd{ line-height:14px; color:#666;}
+
+table.flightsearch_table tbody td{ line-height:35px; border-bottom:1px dashed #ccc; padding:4px}
+
+table.flightsearch_table tbody tr.tdover td{ background-color:#fefef0}
+table.flightsearch_table td span.yhbox
+{
+    padding:0px 2px;
+    font-size:12px; font-weight:normal;border:1px solid #ff9933; background-color:#ff3300;
+    -moz-user-select:none;
+      display:inline-block;  
+       line-height:16px;  height:16px; color:#ffffff
+  }
+
+#flightCalendar{height:55px; border-bottom:0px solid #ff6600; text-align:center; background:#fcfcfc; margin-bottom:5px}
+#flightCalendar a
+{
+    -moz-user-select:none;
+      display:inline-block;         width:14%;       height:50px;       line-height:25px;        border:1px solid #eee;
+        border-bottom:2px solid #ccc;   
+          background-color:#ffffff;
+           position:relative;
+           bottom:0px;           
+           color:#333;
+           
+    }
+#flightCalendar a span{ -moz-user-select:none;
+      display:inline-block;  height:25px; line-height:30px; width:100%}
+      
+   #flightCalendar a span.price{ font-size:13px; color:#ff3300; font-weight:bold; line-height:18px} 
+   
+ #flightCalendar a.current
+{
+   
+    border-bottom-color:#ffffff;
+     border-top:4px solid #ff6600;
+      height:47px;    
+}
+#flightCalendar a:hover
+{
+     height:47px;
+    border-top:4px solid #ccc;
+    border-bottom-color:#ffffff;
+}
+
+</style>
+</head>
+<body>
+  #set($lefMeun = 0)
+    <!--是否显示左侧菜单-->
+    #parse("pageHead.htm")   
+
+<div class="pagebox" style=" overflow:hidden; padding-top:0px;">
+        <div style="overflow: hidden; float: left; width: 940px">
+        <form name="buyForm" action="" method="post">
+
+        <input type="hidden" name="flighttype" id="flighttype"/>
+        <input type="hidden" name="outycabinPrice" id="outycabinPrice"/>
+        <input type="hidden" name="outprice" id="outprice"/>
+        <input type="hidden" name="outroute" id="outroute"/>
+        <input type="hidden" name="outdpt" id="outdpt"/>
+        <input type="hidden" name="outarr" id="outarr"/>
+      <input type="hidden" name="outdptname" id="outdptname"/>
+        <input type="hidden" name="outarrname" id="outarrname"/>
+        <input type="hidden" name="outcarrier" id="outcarrier"/>
+        <input type="hidden" name="outcode" id="outcode"/>
+        <input type="hidden" name="outplanType" id="outplanType"/>
+        <input type="hidden" name="outdate" id="outdate"/>
+         <input type="hidden" name="outdpttime" id="outdpttime"/>
+         <input type="hidden" name="outarrtime" id="outarrtime"/>
+         <input type="hidden" name="outtgq" id="outtgq"/>       
+         <input type="hidden" name="outflightno" id="outflightno" />
+         <input type="hidden" name="outflightobj" id="outflightobj" />
+         <input type="hidden" name="outhbsobj" id="outhbsobj" />
+
+       <input type="hidden" name="inycabinPrice" id="inycabinPrice"/>
+        <input type="hidden" name="inprice" id="inprice"/>
+        <input type="hidden" name="inroute" id="inroute"/>
+        <input type="hidden" name="incarrier" id="incarrier"/>
+        <input type="hidden" name="incode" id="incode"/>
+        <input type="hidden" name="inplanType" id="inplanType"/>
+        <input type="hidden" name="indate" id="indate"/>
+        <input type="hidden" name="indpt" id="indpt"/>
+        <input type="hidden" name="inarr" id="inarr"/>
+         <input type="hidden" name="indptname" id="indptname"/>
+        <input type="hidden" name="inarrname" id="inarrname"/>
+        <input type="hidden" name="indpttime" id="indpttime"/>
+         <input type="hidden" name="inarrtime" id="inarrtime"/>
+         <input type="hidden" name="intgq" id="intgq"/>  
+          <input type="hidden" name="inflightno" id="inflightno" />
+           <input type="hidden" name="inflightobj" id="inflightobj" />
+         <input type="hidden" name="inhbsobj" id="inhbsobj" />
+        </form>
+         <form name="flightSearchForm" action="" method="post">
+         <div  id="searchFlightPageBox" style=" overflow:hidden; padding-top:5px">
+         <div class="f_select_tab" id="f_select_tab" style=" display:none">
+                            <div class="f_select_tabitem current" style=" line-height:30px ;width:120px; border:1px solid #eee; border-bottom-widht:0px" data="0">国内航班</div>
+                            <div class="f_select_tabitem" style="line-height:30px ; width:120px;border:1px solid #eee; border-bottom-widht:0px" data="1">出境航班</div>
+           </div>  
+        <div class="thisbox" style="background-color: #f7f7f7;">
+                    <div style="padding: 10px 15px 10px 15px">
+                        <div style=" border-color:#ccc" class="minbox">    
+                          <div class="boxcontent">                         
+                          <div class="inputbox">
+                          <span class="inputTitle">出发城市</span>
+                          <span class="inputContent">
+                          <input name="homecity" onfocus="showFlightCity($('#isDomestic').val(),this)"  readonly="readonly" title="点选出发城市三字码" type="text" class="searchflight"/>
+                           </span>                        
+                          <span class="inputTitle">到达城市</span>
+                          <span class="inputContent">
+                          <input name="destcity" onfocus="showFlightCity($('#isDomestic').val(),this)"    readonly="readonly" title="点选到达城市三字码" type="text" class="searchflight"/>
+                           </span>
+                          <span class="inputTitle">
+                          <input type="hidden"  name="isDomestic" id="isDomestic" class="searchflight" value="0"/>
+                          </span>
+                         
+                         <span style="width:60px; text-align:right">单程</span><input type="radio" value="0" name="flighttype" checked="checked" class="searchflight"/>
+                        <span style="width:60px; text-align:right">往返</span><input type="radio" value="1" name="flighttype" class="searchflight"/>
+                          </div> 
+                            <div class="inputbox">
+                          <span class="inputTitle">出发时间</span>
+                          <span class="inputContent">
+                          <input name="staredata" id="staredata" onfocus="WdatePicker({doubleCalendar:true,dateFmt:'yyyy-MM-dd',errDealMode:1,minDate:'%y-%M-%d',skin:'twoer'})" readonly="readonly"  title="yyyy-MM-dd" type="text" class="searchflight" />
+                           </span>
+                          
+                          <span class="inputTitle">回程时间</span>
+                          <span class="inputContent">
+                          <input name="backdate" onfocus="WdatePicker({doubleCalendar:true,dateFmt:'yyyy-MM-dd',errDealMode:1,minDate:'#F{$dp.$D(\'staredata\',{d:1});}',skin:'twoer'})" readonly="readonly"  type="text" title="yyyy-MM-dd"  class="searchflight" />
+                           </span>
+                           <span class="inputTitle"></span>
+                          <span class="inputContent" style=" padding-left:40px">
+                           <span class="inputbutton orange" style="width:100px;" onclick="searchFlightPage('.searchflight')">✈ 搜索</span>
+                           </span>
+                          </div>                
+                         </div>                   
+                        </div>                          
+                     </div>
+                                             
+                    
+                </div>
+        </div>
+         </form>
+
+         <div id="outboundBox">
+         
+         
+         </div>
+         <div id="flightCalendar"></div>
+        
+
+         <div id="flightSearchResultBox">           
+         
+        
+         </div>       
+
+
+        </div>
+        <div style="width: 240px; overflow: hidden; float: right"> 
+           <div style="background-color: #f7f7f7;" class="thisbox">                    
+                    <div style="padding: 10px 15px 10px 15px">
+                        <div class="minbox">
+                            <div class="minboxtitle">
+                            <span class="iconStr">特</span><span class="title"><h2>国内特价机票</h2></span>
+                            </div>     
+                                             
+                        </div>                          
+                     </div>
+                        <ul class="stringList" style=" border-width:0px; background-color:#ffffff">   
+             #foreach($item in $tjlist)         
+                    <li>
+                    <a href="/Mall/Flights/SearchResult.aspx?flighttype=0&isDomestic=0&homecity=$item.cfCity&destcity=$item.ddCity&staredata=$item.jsDate" target="_blank" title="$item.cfcityName出发&nbsp;$item.cfName至&nbsp;$item.ddcityName特价机票&nbsp;$item.ddName特价机票">$item.cfcityName&nbsp;→&nbsp;$item.ddcityName</a>
+                    <span style="padding-right:10px; float:right; color:Red">￥$item.pj</span>
+                    </li>                                 
+         #end
+                    </ul>
+                                             
+                    
+                </div>
+
+        </div> 
+
+
+</div>
+<script type="text/javascript">
+
+    $(".flightbox").live("mouseover", function () {
+        $(this).addClass("over");
+
+    }).live("mouseout", function () {
+        $(this).removeClass("over");
+    }
+    )
+
+    $(".flightbox").find("tbody").find("tr").live("mouseover", function () {
+        $(this).addClass("tdover");
+    }).live("mouseout", function () {
+        $(this).removeClass("tdover");
+    }
+    )
+
+
+    var flightData = {
+        outbound: {},
+        inbound: {},
+        isout: true,
+        flighttype: $flighttype,
+        isDomestic: $isDomestic,
+        homecity: "$homecity",
+        destcity: "$destcity",
+        staredata : "$staredata",
+        backdate : "$backdate"
+    };
+   
+   //AJAX获取时间获取内的最低价
+    function LowesPriceAjax(LowesObj) {
+     
+
+        var url = "/AJAX/SearchFlight.ashx?action=lowestPrice&ts=" + Math.random();
+        var data = {};
+      
+        var thisdatastr = LowesObj.staredata.Format("yyyy-MM-dd");
+        var enddatastr = LowesObj.enddata.Format("yyyy-MM-dd");
+        
+        data.staretime = thisdatastr;
+        data.endtime = enddatastr;
+        data.leg = LowesObj.homecity +","+ LowesObj.destcity;
+
+        jQuery.ajax({
+            url: url,
+            type: "POST",
+            data: data,
+            success: function (response) {
+              
+                LowesObj.result = JSON.parse(response);
+                LowesObj.returnFn(LowesObj);
+            }
+        });
+    }
+
+    //设置最低价日历
+    function setLowsePrice(LowesObj) {
+       
+        var lowseprice = new Array();
+
+        if (parseInt(LowesObj.result.resultCode) == 1)
+            lowseprice = LowesObj.result.monthLowestPrices;
+
+        var _thisdata = LowesObj.staredata
+
+        var _s = '<a href="javascript:void(0)" onclick="{3}" class="{2}"><span>{0}</span><span class="price">{1}</span></a>'
+        var _str = "";
+       
+        for (var i = 0; i < 7; i++) {
+            
+            var _d = _thisdata.DateAdd("d", i);
+
+            var _day = _d.getDate();
+            if (_day < 10)
+                _day = "0" + _day;
+
+            var _month = _d.getMonth() + 1;
+            if (_month < 10)
+                _month = "0" + _month;
+
+            var _timestr = _d.getFullYear() + "-" + _month + "-" + _day;
+
+            var _pricestr = "查看";
+            var _class = "";
+
+            if (lowseprice.length > 0) {
+                var _index = lowseprice.indexOf(function (item) { return (_timestr == item.date) });
+                if (_index >= 0) {
+                    _pricestr = "￥" +lowseprice[_index].price;
+                }
+            }
+
+            if (LowesObj.thistime == _timestr)
+                _class = "current";
+
+            var _onclick = "searchFlight('" + LowesObj.isDomestic + "','" + LowesObj.homecity + "','" + LowesObj.destcity + "','" + _timestr + "')";
+           
+
+            _str += (_s.format(_timestr, _pricestr, _class,_onclick));
+        }
+        $("#flightCalendar").html(_str);
+
+    }
+
+    //获取最低价信息
+    function getLowestPrice(thistime, _homecity, _destcity, _isDomestic) {
+
+        var _thisdata = new Date();
+
+        _thisdata = new Date(_thisdata.getFullYear() + "/" + (_thisdata.getMonth() + 1) + "/" + _thisdata.getDate());
+        var _beforedata = new Date(thistime.replace(/\-/g, '/'))
+
+        for (var i = -3; i < 0; i++) {
+            if (_thisdata <= _beforedata.DateAdd("d", i)) {
+                _thisdata = _beforedata.DateAdd("d", i);
+                break;
+            }
+        }
+        var _enddata = _thisdata.DateAdd("d", 6);
+
+        var data = {};
+        data.staredata = _thisdata;
+        data.enddata = _enddata;
+
+        data.homecity = _homecity;
+        data.destcity = _destcity;
+        data.thistime = thistime;
+        data.isDomestic = _isDomestic;
+        data.returnFn = function (item) { setLowsePrice(item) };
+        LowesPriceAjax(data);
+    }
+
+    //搜索航班
+    function searchFlight(_isDomestic, _homecity, _destcity, _datatime) {
+        var url = "/AJAX/SearchFlight.ashx?action=search&ts=" + Math.random();
+        var data = {};
+        data.isDomestic = _isDomestic;
+        data.homecity = _homecity;
+        data.destcity = _destcity;
+        data.datatime = _datatime;
+
+        
+
+        jQuery.Xload();
+        jQuery.ajax({
+            url: url,
+            type: "POST",
+            data: data,
+            success: function (response) {
+                jQuery.XloadHide();
+                //JSON.parse(response)
+                if (flightData.isout) {
+                    flightData.outbound = JSON.parse(response);
+                    flightData.staredata = _datatime;
+                    setFlightList(flightData.outbound, true)
+                } else {
+                    flightData.inbound = JSON.parse(response);
+                    flightData.backdate = _datatime;
+                    setFlightList(flightData.inbound, false)
+                }
+            }
+        });
+
+    }
+   
+   //设置舱位信息
+   function setHBS(cwc) {
+       var _s = '<tr><td></td><td></td><td>{5}</td><td>{0}&nbsp;<{4}></td><td><span class="remarks XoverTip" data="{1}">退改签</span></td>'
+       _s += '<td class=\"opricetd\">票面{2} &nbsp;{7}</td><td class=""><div style=\" text-align:left\" class="typeprice">￥{3}</div></td><td>{6}</td></tr>';
+        //0 舱位名称
+        //1 退改签
+        //2票面价
+        //3实际价
+        //4折扣
+        //5 buttonname
+
+        var cabins = cwc.cwcode.Cabins;
+        var _str = "";
+        var buttonstr = "";
+        var _type = "in";
+        if (flightData.isout)
+            _type = "out";
+
+        flightData[_type + cwc.code] = cwc;
+        for (var i = 0; i < cabins.length; i++) {
+
+            if (parseInt(cabins[i].Price) <= 0)
+                continue;
+
+
+            buttonstr = "<span class=\"inputbutton orange\" style=\"width:50px;\" onclick=\"buyFlight(true,'" + cwc.code + "'," + i + ")\">预订</span>";
+
+
+
+
+            if (flightData.flighttype == 1 && flightData.isout == true) {
+                buttonstr = "<span class=\"inputbutton orange\" style=\"width:50px;\" onclick=\"buyFlight(false,'" + cwc.code + "'," + i + ")\">去程</span>";
+            } else if (flightData.flighttype == 1 && flightData.isout == false) {
+                buttonstr = "<span class=\"inputbutton orange\" style=\"width:50px;\" onclick=\"buyFlight(false,'" + cwc.code + "'," + i + ")\">回程</span>";
+            }
+
+
+            var lowstr = ((cabins[i].scgd == "" ? "" : cabins[i].scgd + ";") + (cabins[i].tpgd == "" ? "" : cabins[i].tpgd + ";") + (cabins[i].qzgd == "" ? "" : cabins[i].qzgd + ";") + (cabins[i].bzbz == "" ? "" : cabins[i].bzbz + ";"));
+            lowstr = lowstr.replace(/\;/g, '</br>');
+
+            var seat = "<span style=\"color:Green\">位置充足</span>"
+
+            if (cabins[i].Status != "A" && cabins[i].Status != "a") {
+                seat = "余位 <span style=\"color:Red\">" + cabins[i].Status + "</span>";
+                if (parseInt(cabins[i].Status) == 0) {
+                    if (parseInt(cabins[i].zclx) == 0) {
+                        buttonstr = "<span class=\"inputbutton\" style=\"width:50px;\" data=\"无可售余位\">无余位</span>";
+                    } else if (parseInt(cabins[i].zclx) == 4) {
+
+                        buttonstr = "<span class=\"inputbutton green2\" style=\"width:50px;\" onclick=\"buyFlight(true,'" + cwc.code + "'," + i + ")\">申请</span>";
+                        seat = "<span style=\"color:Red\">需申请</span>"
+                      
+                    } else {
+                        continue;
+                    }
+                       
+
+                }
+            }
+
+            var realPriceStr = "";
+
+
+           
+
+            var _zk = (parseFloat(cabins[i].Zk) >= 1) ? "全价" : (10*(parseFloat(cabins[i].Zk) * 10)/10).toFixed(1) + "折";
+
+            
+            var _yh = parseInt(cabins[i].CommisionPrice) + parseInt(cabins[i].yhj)
+
+            if (_yh > 0)
+                realPriceStr = "<span class=\"yhbox\">减" + _yh + "</span>";
+
+
+            var _price = cabins[i].Price - _yh;
+
+            //buttonfn = buttonfn.format(cwc.code);            
+
+            _str += _s.format(cabins[i].CodeName, lowstr, cabins[i].Price, _price, _zk, seat, buttonstr, realPriceStr);
+
+        }
+
+        $("#lowcode_" + cwc.code).html(_str);
+    }
+    //获取舱位信息
+    function getpolicy(code) {
+
+        var _low = $("#lowcode_" + code);
+
+        var thiscode = $("#flightSearchResultBox").data("thiscode");
+
+        //$("." + thiscode).html("查看");
+        $("#lowcode_" + thiscode).hide();
+
+
+        if (thiscode == code) {
+            $("#flightSearchResultBox").data("thiscode", "");
+            return;
+        } else {
+            $("#flightSearchResultBox").data("thiscode", code);
+
+        }
+       
+
+        if (_low.html() != "") {
+            _low.show();
+            //$("." + thiscode).html("收起");
+            return;
+        }      
+        var datalist;
+        if (flightData.isout)
+            datalist = flightData.outbound.OtherCw;
+        else
+            datalist = flightData.inbound.OtherCw;
+
+        var hbs = null;
+        if (datalist == null)
+            alrt(datalist);
+        else
+            datalist = datalist.Cws;
+
+        var _index = datalist.indexOf(function (item) { return item.hbh == code });
+      
+        if (_index >= 0)
+            hbs = datalist[_index].HBS; 
+        if (hbs != null) { 
+            var objs = {};
+            objs.returnFn = function (item) { setHBS(item) };
+            objs.hbs = JSON.stringify(hbs);
+            objs.code = code
+            getCWAjax(objs)
+        }
+    }
+
+    //AJAX获取舱位信息
+    function getCWAjax(hbsobj) {
+      
+        var url = "/AJAX/SearchFlight.ashx?action=cwList&ts=" + Math.random();
+        var data = {};
+        data.jsonStr = hbsobj.hbs;        
+        jQuery.Xload();
+        jQuery.ajax({
+            url: url,
+            type: "POST",
+            data: data,
+            success: function (response) {
+                jQuery.XloadHide();
+                hbsobj.returnFn({ cwcode: JSON.parse(response), code: hbsobj.code });
+            }
+        });
+    }
+       
+    //设置航班列表信息
+    function setFlightList(data, isout) {
+
+        if (parseInt(data.resultCode) != 1) {
+            jQuery.Xmsg("无可用的航班信息，请重新选择！");
+            return false;
+        }
+
+        var _note = "";
+        if (flightData.flighttype == 1 && isout)
+            _note = "<h2 style=\"padding:5px;padding-left:10px\">请选择去程航班</h2>";
+
+    if (isout)
+        $("#outboundBox").html(_note);
+
+    flightData.isout = isout;
+
+        var templatestr1="<div class=\"flightbox\"><table class=\"flightsearch_table\"><thead><tr>";
+         templatestr1+="<td class=\"logo\"><div class=\"flight_logo pubFlights_{0}\">&nbsp;</div></td>"
+         templatestr1 += "<td class=\"cityname\"><div>{1}<span class=\"flightno\">{2}</span></div><div style=\" color:#666\">计划机型<span class=\"remarks XoverTip\" data=\"{8}\">{3}</span>{9}</div></td>";
+         templatestr1 += "<td class=\"timedata\"><div class=\"major\">{4}</div><div>{5}</div></td>";
+         templatestr1 += "<td class=\"flightname\"><div class=\"major\">{6}</div><div>{7}</div></td>"
+       
+         var templatestr2 = "<td class=\"flightnote\"><div>机建{0}+燃油{1}</div><div><span class=\"remarks XoverTip\" data=\"{5}\">退改签</span></div></td>"
+         templatestr2 += "<td class=\"flightprice\"><div style=\"padding-bottom:5px;line-height:30px; \">￥{3}</div><div>{8}</div></td>"
+         templatestr2 += "<td class=\"opricenote\"><div class=\"oprice\">票面￥{2}</div><div>{4}</div></td>"
+         templatestr2 += "<td class=\"bottombox\"><div>{7}</div></td>"
+         templatestr2 += "</tr></thead><tbody style=\"color:#333\" id=\"lowcode_{6}\"></tbody></table></div>";
+         tempdata = data;        
+
+         var datalist = tempdata.DataList;
+         var dptname = datalist.DptName;
+         var arrname = datalist.ArrName;
+         var datatime = datalist.Date;
+         var flightlists = datalist.Flights;
+         var _flightstr = "";
+
+
+         getLowestPrice(datatime, datalist.Dpt, datalist.Arr, flightData.isDomestic);
+
+         for (var i = 0; i < flightlists.length; i++) {           
+         var _carrier = flightlists[i].Carrier;
+         var _code = flightlists[i].Code;
+         var _plantype = flightlists[i].Plantype
+         var _depttime = flightlists[i].DptTime.replace(/(.{2})/, '$1:');
+         var _arrtime = flightlists[i].ArrTime.replace(/(.{2})/, '$1:');
+         var _dpt = getAriportName(flightlists[i].Dpt);
+         var _arr = getAriportName(flightlists[i].Arr);
+          var _tax = flightlists[i].Tax;
+          var _airtax = flightlists[i].AirTax;
+
+          var _price = flightlists[i].Price;
+          var _yprice = flightlists[i].Yprice;
+
+          var _yhprice = parseInt(flightlists[i].Price) - parseInt(flightlists[i].LowCommisionPrice) - parseInt(flightlists[i].Lowyhj)
+
+
+          var _lowzk = (parseFloat(flightlists[i].LowZk) * 10 >= 10) ? "原价" : (10*(parseFloat(flightlists[i].LowZk) * 10)/10) + "折";
+
+          //var _lowzk = (_yhprice / _yprice) * 10;
+          //_lowzk = (_lowzk >= 10) ? "原价" : parseFloat(_lowzk).toFixed(1) + "折";         
+
+
+          var _carriername = getAriName(_carrier);
+          var lowstr = ((flightlists[i].Lowscgd == "" ? flightlists[i].Lowscgd : flightlists[i].Lowscgd + ";") + (flightlists[i].Lowtpgd == "" ? flightlists[i].Lowtpgd : flightlists[i].Lowtpgd + ";") + (flightlists[i].Lowqzgd == "" ? flightlists[i].Lowqzgd : flightlists[i].Lowqzgd + ";") + (flightlists[i].Lowbzbz == "" ? flightlists[i].Lowbzbz : flightlists[i].Lowbzbz + ";"));
+          lowstr = lowstr.replace(/\;/g, '</br>');
+          var plantypeName = getPlantypeName(_plantype);
+
+
+
+          var buttonstr = "<span style=\"width:50px;\" class=\"inputbutton green " + _code + "\" onclick=\"getpolicy('" + _code + "')\">详情</span>";
+
+          if (isout && new Date(datatime) > new Date(flightData.backdate))
+              buttonstr = "<span style=\"width:50px;\" class=\"inputbutton XoverTip\" data=\"航班出发时间大于回程时间，请重新选择航班出发时间！</br>或者重新检索航班信息！\">超期！</span>";
+          else if (!isout && new Date(datatime) < new Date(flightData.staredata))
+              buttonstr = "<span style=\"width:50px;\" class=\"inputbutton XoverTip\" data=\"航班回程时间小时出发时间，请重新选择航班回程时间！</br>或者重新检索航班信息！\">超期！</span>";
+
+          var _yh = parseInt(flightlists[i].LowCommisionPrice) + parseInt(flightlists[i].Lowyhj);
+          var _yhstr="";
+          if (_yh > 0)
+              _yhstr = "<span class=\"yhbox\">立减" + _yh + "</span>";
+          var _ztstr = '';
+          if (parseInt(flightlists[i].Stops) > 0)
+              _ztstr = '<span style=\"padding-left:5px; color:Red\">经停' + flightlists[i].Stops + '</span>';
+          var _yhj = parseInt(_price) - _yh
+          _flightstr += templatestr1.format(_carrier, _carriername, _code, _plantype, _depttime, _arrtime, _dpt, _arr, plantypeName, _ztstr);
+          _flightstr += templatestr2.format(_airtax, _tax, _price, _yhj, _lowzk, lowstr, _code, buttonstr, _yhstr);        
+
+          
+
+      }
+      $("#flightSearchResultBox").data("thiscode", "");
+      $("#flightSearchResultBox").html(_flightstr);
+    }
+    
+    //设置起始航班信息
+    function setOutboundBox() {
+
+        var templatestr1 = "<div class=\"flightbox thisbox\"><div class=\"outboundTitle\">去程航班({9})</div><table class=\"flightsearch_table\"><thead><tr>";
+         templatestr1+="<td class=\"logo\"><div class=\"flight_logo pubFlights_{0}\">&nbsp;</div></td>"
+         templatestr1 += "<td class=\"cityname\"><div>{1}<span class=\"flightno\">{2}</span></div><div style=\" color:#666\">计划机型<span class=\"remarks XoverTip\" data=\"{8}\">{3}</span></div></td>";
+         templatestr1 += "<td class=\"timedata\"><div class=\"major\">{4}</div><div>{5}</div></td>";
+         templatestr1 += "<td class=\"flightname\"><div class=\"major\">{6}</div><div>{7}</div></td>"
+
+         var templatestr2 = "<td class=\"flightnote\"><div>机建{0}+燃油{1}</div><div><span class=\"remarks XoverTip\" data=\"{5}\">退改签</span></div></td>"
+         templatestr2 += "<td class=\"flightprice\"><div style=\"padding-bottom:5px;line-height:30px; \">￥{2}</div>"//<div>{4}</div>
+         templatestr2 += "<td class=\"opricenote\"><div class=\"\">票面￥{3}</div><div>{7}</div></td>"
+         templatestr2 += "<td class=\"bottombox\"><span style=\"width:50px;\" class=\"inputbutton\" onclick=\"setFlightList(flightData.outbound,true)\">修改</span></td>"
+         templatestr2 += "</tr></thead></table></div>";
+
+         tempdata = flightData.outbound;
+         var datalist = tempdata.DataList;
+         var dptname = datalist.DptName;
+         var arrname = datalist.ArrName;
+         var datatime = datalist.Date;
+         var flightlists = datalist.Flights;
+         var _flightstr = "";
+
+         var i = flightlists.indexOf(function (item) { return (item.Code == flightData.outboundCode) });
+         var _carrier = flightlists[i].Carrier;
+         var _code = flightlists[i].Code;
+         var _plantype = flightlists[i].Plantype
+         var _depttime = flightlists[i].DptTime.replace(/(.{2})/, '$1:');
+         var _arrtime = flightlists[i].ArrTime.replace(/(.{2})/, '$1:');
+         var _dpt = getAriportName(flightlists[i].Dpt);
+         var _arr = getAriportName(flightlists[i].Arr);
+          var _tax = flightlists[i].Tax;
+          var _airtax = flightlists[i].AirTax;
+          //var _price = flightlists[i].Price;
+          var _yprice = flightlists[i].Yprice;
+          var _lowzk = (parseFloat(flightlists[i].LowZk) * 10 >= 10) ? "原价" : (10 * (parseFloat(flightlists[i].LowZk) * 10)/10) + "折";
+          var _carriername = getAriName(_carrier);
+
+          var plantypeName = getPlantypeName(_plantype)
+          var _cwlist = flightData["out" + flightData.outboundCode];
+
+          var _cwobj = _cwlist.cwcode.Cabins[flightData.outboundIndex];
+        
+            var lowstr = ((_cwobj.scgd == "" ? "" : _cwobj.scgd + ";") + (_cwobj.tpgd == "" ? "" : _cwobj.tpgd + ";") + (_cwobj.qzgd == "" ? "" : _cwobj.qzgd + ";") + (_cwobj.bzbz == "" ? "" : _cwobj.bzbz + ";"));
+            lowstr = lowstr.replace(/\;/g, '</br>');
+
+            var _zk = ((parseFloat(_cwobj.Zk) * 10) >= 10) ? "全价" : (10 * (parseFloat(_cwobj.Zk) * 10)/10) + "折";
+
+            _flightstr += templatestr1.format(_carrier, _carriername, _code, _plantype, _depttime, _arrtime, _dpt, _arr, plantypeName, datatime);
+
+
+
+            var _yh = parseInt(_cwobj.CommisionPrice) + parseInt(_cwobj.yhj);
+
+            var _yhstr = "";
+            if (_yh > 0)
+                _yhstr = "<span class=\"yhbox\">立减" + _yh + "</span>";
+
+            var yhprice = parseInt(_cwobj.Price) - _yh;
+
+           _flightstr += templatestr2.format(_airtax, _tax, yhprice, _cwobj.Price, _zk, lowstr, _code, _yhstr);
+
+          $("#outboundBox").html(_flightstr);
+      }
+
+
+   function submitFlight(flightType) {
+       var tempdata = flightData.outbound;
+       var datalist = tempdata.DataList;
+       var flightlists = datalist.Flights;
+       var i = flightlists.indexOf(function (item) { return (item.Code == flightData.outboundCode) });
+
+       $("#flighttype").val(flightType);
+       $("#outdate").val(datalist.Date); //时间
+       $("#outycabinPrice").val(flightlists[i].Yprice); //Y舱价格
+       $("#outroute").val(flightlists[i].Dpt + flightlists[i].Arr); //航程 
+
+
+       $("#outdpt").val(flightlists[i].Dpt); //航程 
+       $("#outarr").val(flightlists[i].Arr); //航程 
+
+       $("#outdptname").val(datalist.DptName); //航程 
+       $("#outarrname").val(datalist.ArrName); //航程
+
+       $("#outflightno").val(flightlists[i].Code); //航班号          
+       $("#outcarrier").val(flightlists[i].Carrier); //航空公司       
+       $("#outplanType").val(flightlists[i].Plantype); //机型
+
+       $("#outdpttime").val(flightlists[i].DptTime.replace(/(.{2})/, '$1:'));
+       $("#outarrtime").val(flightlists[i].ArrTime.replace(/(.{2})/, '$1:'));      
+
+       var _cwlist = flightData["out" + flightData.outboundCode];
+       var _cwobj = _cwlist.cwcode.Cabins[flightData.outboundIndex];
+       $("#outprice").val(_cwobj.Price); //销售价       
+       $("#outcode").val(_cwobj.Code); //舱位代码
+
+       var lowstr = ((_cwobj.scgd == "" ? "" : _cwobj.scgd + ";") + (_cwobj.tpgd == "" ? "" : _cwobj.tpgd + ";") + (_cwobj.qzgd == "" ? "" : _cwobj.qzgd + ";") + (_cwobj.bzbz == "" ? "" : _cwobj.bzbz + ";"));
+       lowstr = lowstr.replace(/\;/g, '</br>');
+       $("#outtgq").val(lowstr);
+
+       $("#outflightobj").val(flightlists[i].Carrier);
+       $("#outhbsobj").val(flightlists[i].Plantype);
+       $("#outflightobj").val(JSON.stringify(flightlists[i]));
+       $("#outhbsobj").val(JSON.stringify(_cwobj));
+         
+
+       if (flightType == 1) {
+            tempdata = flightData.inbound;
+            datalist = tempdata.DataList;
+            flightlists = datalist.Flights;
+            i = flightlists.indexOf(function (item) { return (item.Code == flightData.inboundCode) });          
+
+           $("#indate").val(datalist.Date); //时间
+           $("#inycabinPrice").val(flightlists[i].Yprice); //Y舱价格
+           $("#inroute").val(flightlists[i].Dpt + flightlists[i].Arr); //航程    
+
+           $("#indpt").val(flightlists[i].Dpt); //航程 
+           $("#inarr").val(flightlists[i].Arr); //航程
+
+           $("#indptname").val(datalist.DptName); //航程 
+           $("#inarrname").val(datalist.ArrName); //航程
+
+           $("#inflightno").val(flightlists[i].Code); //航班号        
+           $("#incarrier").val(flightlists[i].Carrier); //航空公司       
+           $("#inplanType").val(flightlists[i].Plantype); //机型
+
+           $("#indpttime").val(flightlists[i].DptTime.replace(/(.{2})/, '$1:'));
+           $("#inarrtime").val(flightlists[i].ArrTime.replace(/(.{2})/, '$1:'));  
+
+           var _cwlist = flightData["in" + flightData.inboundCode];
+           var _cwobj = _cwlist.cwcode.Cabins[flightData.inboundIndex];
+           var lowstr = ((_cwobj.scgd == "" ? "" : _cwobj.scgd + ";") + (_cwobj.tpgd == "" ? "" : _cwobj.tpgd + ";") + (_cwobj.qzgd == "" ? "" : _cwobj.qzgd + ";") + (_cwobj.bzbz == "" ? "" : _cwobj.bzbz + ";"));
+           lowstr = lowstr.replace(/\;/g, '</br>');
+           $("#intgq").val(lowstr);         
+           $("#inprice").val(_cwobj.Price); //销售价       
+           $("#incode").val(_cwobj.Code); //舱位代码
+
+
+           $("#inflightobj").val(JSON.stringify(flightlists[i]));
+           $("#inhbsobj").val(JSON.stringify(_cwobj));
+
+
+       }
+       
+
+
+
+       var url = "/Mall/Flights/FlightFill.aspx";
+       document.buyForm.action = url;
+       document.buyForm.submit();
+
+
+   }
+
+
+
+    //购买按钮
+    function buyFlight(isbuy,code,thisindex) {
+
+        if (flightData.isout == true) {
+            flightData.outboundCode = code;
+            flightData.outboundIndex = thisindex;
+            if (flightData.flighttype == 1) {
+                flightData.isout = false;
+                setOutboundBox();
+                searchFlight(flightData.isDomestic, flightData.destcity, flightData.homecity, flightData.backdate);
+            } else {
+                
+                submitFlight(0)
+            }
+
+        } else {
+            flightData.inboundCode = code;
+            flightData.inboundIndex = thisindex;
+            //提交
+           
+            submitFlight(1)
+        }
+
+    }
+    
+    searchFlight(flightData.isDomestic, flightData.homecity, flightData.destcity, flightData.staredata)
+
+    
+
+</script>
+      #parse("pageFoot.htm")
+</body>
+</html>

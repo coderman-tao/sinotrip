@@ -1,18 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Web.Script.Serialization;
-using System.Data;
-using System.Web;
-using System.Reflection;
+﻿using SinoTrip.FrameWork.Web;
+using System;
 using System.Collections;
-using System.Text.RegularExpressions;
+using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
-using System.Runtime.Serialization.Json;
 using System.IO;
-using System.Xml.Serialization;
+using System.Linq;
+using System.Reflection;
+using System.Runtime.Serialization.Json;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using System.Web;
+using System.Web.Script.Serialization;
 using System.Xml;
+using System.Xml.Serialization;
 
 namespace SinoTrip.FrameWork.Common
 {
@@ -28,7 +30,7 @@ namespace SinoTrip.FrameWork.Common
         /// <param name="str"></param>
         /// <param name="err"></param>
         /// <returns></returns>
-        public static string ToString(this object str, string err)
+        public static string ToStringEx(this object str, string err)
         {
             if (str != null)
                 return str.ToString();
@@ -45,7 +47,7 @@ namespace SinoTrip.FrameWork.Common
         {
             try
             {
-                return (int)((dt.ToUniversalTime() - new DateTime(1970, 1, 1)).TotalSeconds);
+                return (int)((dt.ToUniversalTime() - Constant.MinDateTime).TotalSeconds);
 
             }
             catch (Exception)
@@ -62,19 +64,31 @@ namespace SinoTrip.FrameWork.Common
         /// <returns></returns>
         public static DateTime UnixIntToDT(this int ts)
         {
-            return TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1)).AddSeconds(ts);
+            return TimeZone.CurrentTimeZone.ToLocalTime(Constant.MinDateTime).AddSeconds(ts);
         }
 
 
         public static decimal ToDecimal(this object obj)
         {
             if (obj == null || DBNull.Value == obj)
-                return 0;
+                return 0M;
 
             return Convert.ToDecimal(obj);
         }
 
-
+        public static decimal ToDecimal(this object obj, string format)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(format))
+                    return obj.ToDecimal();
+                return obj.ToInt32(0).ToString(format).ToDecimal();
+            }
+            catch
+            {
+                return obj.ToDecimal();
+            }
+        }
 
         public static DateTime ToDateTime(this string dt)
         {
@@ -154,6 +168,33 @@ namespace SinoTrip.FrameWork.Common
             T obj = (T)ser.ReadObject(ms);
             return obj;
         }
+        /// <summary>
+        /// xml转实体类
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="xmlStr"></param>
+        /// <returns></returns>
+        public static T XmlToEntity<T>(this string xmlStr) where T : new()
+        {
+            var model = new T();
+            try
+            {
+                byte[] ret = Encoding.UTF8.GetBytes(xmlStr);
+                using (System.IO.MemoryStream mem = new System.IO.MemoryStream(ret))
+                {
+
+                    XmlTextWriter writer = new XmlTextWriter(mem, Encoding.UTF8);
+                    XmlSerializer xz = new XmlSerializer(typeof(T));
+                    model = (T)xz.Deserialize(mem);
+                }
+                return model;
+            }
+            catch (Exception ex)
+            {
+
+                return new T();
+            }
+        }
 
         /// <summary>
         /// Ext分页Json数据
@@ -161,7 +202,7 @@ namespace SinoTrip.FrameWork.Common
         /// <param name="obj"></param>
         /// <param name="total"></param>
         /// <returns></returns>
-        public static string ToExtPageJson(this object obj, int total)
+        public static string ToExtPageJson(this object obj, long total)
         {
             string rs = ToJson(obj);
             return "{'result':" + rs + ",'total':" + total + "}";
@@ -234,25 +275,6 @@ namespace SinoTrip.FrameWork.Common
             }
             return entity;
         }
-
-        /// <summary>
-        /// Ext AJAX标准成功返回信息
-        /// </summary>
-        /// <param name="context"></param>
-        public static void ExtSuccess(this HttpContext context, string msg)
-        {
-            //context.Response.Write(Msg.AjaxINFO.MSG_SUCCESS(msg));
-        }
-
-        /// <summary>
-        /// Ext AJAX标准成功返回信息
-        /// </summary>
-        /// <param name="context"></param>
-        public static void ExtError(this HttpContext context, string msg)
-        {
-            //context.Response.Write(Msg.AjaxINFO.MSG_ERROR(msg));
-        }
-
 
         /// <summary>
         /// DataTable 对象 转换为Json 字符串
@@ -544,52 +566,6 @@ namespace SinoTrip.FrameWork.Common
 
         }
 
-        /// <summary>
-        /// XML转实体类
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="file"></param>
-        /// <returns></returns>
-        public static T DeSerializeXML<T>(this T obj, string file, string rootStr) where T : new()
-        {
-            T t;
-            using (FileStream fs = new FileStream(file, FileMode.Open))
-            {
-                XmlSerializer formatter = new XmlSerializer(typeof(T));
-                if (!string.IsNullOrEmpty(rootStr))
-                {
-                    formatter = new XmlSerializer(typeof(T), new XmlRootAttribute(rootStr));
-                }
-                t = (T)formatter.Deserialize(fs);
-            }
-            return t;
-        }
-        /// <summary>
-        /// xml转实体类
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="xmlStr"></param>
-        /// <returns></returns>
-        public static T XmlToEntity<T>(this string xmlStr) where T : new()
-        {
-            var model = new T();
-            try
-            {
-                byte[] ret = Encoding.UTF8.GetBytes(xmlStr);
-                using (System.IO.MemoryStream mem = new System.IO.MemoryStream(ret))
-                {
 
-                    XmlTextWriter writer = new XmlTextWriter(mem, Encoding.UTF8);
-                    XmlSerializer xz = new XmlSerializer(typeof(T));
-                    model = (T)xz.Deserialize(mem);
-                }
-                return model;
-            }
-            catch (Exception ex)
-            {
-
-                return new T();
-            }
-        }
     }
 }

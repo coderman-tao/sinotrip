@@ -1,0 +1,81 @@
+﻿table.hotleitem_table {
+    border: 0 none;
+    border-collapse: collapse;
+    margin: 0 auto;
+    width: 100%;
+}
+table.hotleitem_table td 
+{
+    border:0px;
+    border-bottom: 1px solid #ccc;   
+    font-family: Tahoma;
+    font-size: 13px;
+    height: 45px;
+    line-height: 45px;   
+    padding: 0px 4px 0px 10px;    
+}
+
+table.hotleitem_table td span{ line-height:18px}
+
+table.hotleitem_table td.hometype
+{
+  border-right:  1px solid #ccc;  
+}
+table.hotleitem_table td.hometypebox
+{
+  border:0px;
+   border-bottom: 1px solid #ccc;   
+  padding:0px;
+  
+}
+
+table.hotleitem_table tr.typelist td
+{
+   border-bottom: 1px dashed #f0f0cc;  
+  padding: 0px 4px 0px 4px;
+   width:110px;
+}
+
+
+table.hotleitem_table table{ border:0px}
+
+
+
+table.hotleitem_table thead th {
+    background: #f7f7f7;
+    border:0px;
+    border-top:1px solid #eee;
+    border-bottom: 1px solid #eee;
+    text-align:left;
+    width:110px;
+}
+
+table.hotleitem_table td.price {
+    color: #ff3300;
+    font-family: 微软雅黑;
+    font-size: 18px;   
+    text-align: left;      
+}
+
+
+
+
+
+
+
+
+
+span.yhbox {
+    -moz-user-select: none;
+    background-color: #ff3300;
+    border: 1px solid #ff9933;
+    color: #ffffff;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: normal;
+    height: 16px;
+    line-height: 16px;
+    padding: 0 2px;
+}
+span.yhbox.T{background-color:#009933; border-color:#00cc66}
+span.yhbox.S,span.yhbox.Y{ color:Red; background-color:#fffcd1; border-color:#ff9933}

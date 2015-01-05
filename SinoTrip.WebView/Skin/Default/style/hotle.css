@@ -1,0 +1,83 @@
+﻿ul.LandMarkBox{ padding:0px; margin:0px; overflow:hidden; border-bottom:1px solid #eee; position:relative}
+ul.LandMarkBox li{ list-style:None; padding:0px; margin:0px 0px 0px 17px; border:1px solid #eee; position:relative;top:1px; float:left; width:148px; height:100px; }
+
+ul.LandMarkBox li span,ul.LandMarkBox li a
+{
+    text-decoration: none;
+    -moz-user-select: none;
+    display: inline-block;
+    text-align:center;
+     position:absolute;     
+ }
+    ul.LandMarkBox li a{ position:relative; width:148px; height:100px;}  
+    ul.LandMarkBox li span.landname{ height:25px; line-height:25px; text-align:center; background-color:#70d1ff; width:100%; color:#FFFFFF; font-family:微软雅黑; position:static}
+    ul.LandMarkBox li span.landname.v2{background-color:#70d1ff;}    
+    ul.LandMarkBox li span.landname.v3{background-color:#70d1ff;}
+    
+    
+    ul.LandMarkBox li span.mapbj{ width:50px; height:18px; left:49px; bottom:0px;}  
+    
+     ul.LandMarkBox li span.maplogo{ width:39px; height:55px; left:50px; bottom:10px;}
+     
+     ul.LandMarkBox li span.maplogo.BUSINESS{ background:url(../images/hotel/BUSINESS.png) no-repeat}
+     ul.LandMarkBox li span.maplogo.HOSPITAL{ background:url(../images/hotel/HOSPITAL.png) no-repeat}
+     ul.LandMarkBox li span.maplogo.PAVILIONHALL{ background:url(../images/hotel/PAVILIONHALL.png) no-repeat}
+     ul.LandMarkBox li span.maplogo.SCENICSPOTS{ background:url(../images/hotel/SCENICSPOTS.png) no-repeat}
+     ul.LandMarkBox li span.maplogo.SUBWAY{ background:url(../images/hotel/SUBWAY.png) no-repeat}
+     ul.LandMarkBox li span.maplogo.TRAINAIR{ background:url(../images/hotel/TRAINAIR.png) no-repeat}
+     ul.LandMarkBox li span.maplogo.UNIVERSITY{ background:url(../images/hotel/UNIVERSITY.png) no-repeat}     
+     ul.LandMarkBox li a:hover{ width:144px; height:96px; border:2px solid #eee}
+     
+     
+     
+.hotleimg{ background:url(../images/hotel/un_index16.png) no-repeat}
+.hotleimg.Landbj{ background-position:0px 0px}
+ul.LandMarkBox li.current span.hotleimg.Landbj{background-position:-100px 0px}
+
+.landboxs{overflow:hidden; padding:10px; }
+
+
+.landboxs a
+{
+    -moz-user-select: none;
+    display: inline-block; 
+    border:1px solid #ccc; 
+    padding:0px 5px 0px 25px; 
+    margin:3px; 
+    line-height:30px; 
+     position:relative;
+    height:30px}
+.landboxs a:hover{ border-color:#70d1ff; color:#70d1ff}
+ .landboxs a span
+ {     -moz-user-select: none;
+    display: inline-block; 
+     height:30px;     
+     
+ }
+ .landboxs a span.mapicon
+ {
+     background:url(../images/hotel/un_index16.png) no-repeat -20px -40px; 
+      width:20px;
+      position:absolute; top:0px; left:5px
+ }
+ 
+ .hotHoteltitle{ background:url(../images/hotel/un_index16.png) no-repeat 0px -165px; height:45px; width:192px;  position:absolute; right:0px; top:0px}
+ 
+ .citylist{ height:25px; bottom:0px; left:180px; position:absolute;}
+ 
+  .citylist a,.citylist span{  -moz-user-select: none; height:25px;
+    display: inline-block;  color:#32a9d7; padding:0px 15px}
+    
+    .citylist a:hover{ font-weight:bold}
+    
+    
+    .hotellist a{ -moz-user-select: none;
+    display: inline-block; width:19%; height:250px; margin-left:7px; margin-top:10px}
+    
+    .hotellist a:hover{ background-color:#d9f3ff}
+    
+    .hotellist a span{ -moz-user-select: none;
+    display: inline-block; }
+    
+     .hotellist a span.hotelname{width:100%; height:38px; padding-top:5px ;overflow:hidden; line-height:16px;font-size:13px; font-weight:bold; font-family:微软雅黑}
+     .hotellist a span.price{width:200px; text-align:right; color:Red; font-size:14px; font-family:微软雅黑; font-weight:bolder}

@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>特卖惠&#45;$SITE.name</title>#include("pageHeadCode.htm")
+    <link href="/Skin/default/style/tourlist.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    #parse("pageHead.htm")
+    #set($rs=$tool.GetSaleList())
+    <div class="pagebox">
+        <div class="pageWay">
+            您的位置：<a href="/" title="安徽中青旅荞面旅游网">首页</a> > <span title="荞面特卖惠">荞面特卖惠</span> </div>       
+    </div>
+    <div class="pagebox">
+        <div style="overflow: hidden; position: relative;">
+            <!--左-->
+            <div style="width: 855px; overflow: hidden; float: left">
+                <div class="thisbox">
+                    <div class="tourlist" id="product_tourlist">
+                   #if($rs.count==0)
+                   <img src="/skin/default/images/temp001.jpg"/>
+                   #end
+                    #foreach($item in $rs)
+                    #if ($item.endtime>$now)
+                        <div class="tourbox">
+                            <div class="imgbox">
+                                <img width="238px" height="170px" src="$tool.getFileImg($item.coverserver,$item.cover,320)"></div>
+                            <div class="tourcounet">
+                                <div class="touritem">
+                                    <a href="/sale/$!item.forum/$!item.id&#45;$!item.productid&#45;$!item.planid&#46;html" target="_blank" title="$!item.title">
+                                        <h3> $!item.title</h3>
+                                    </a>
+                                    <div style="height: 10px">
+                                    </div>
+                                    <div>
+                                        出发时间：$tool.UnixFormat($!item.startdate,"MM月dd日")</div>
+                                    <div>
+                                        活动开始时间：$tool.UnixFormat($!item.starttime,"MM月dd日hh:mm:ss")</div>
+                                    <div>
+                                        活动结束时间：$tool.UnixFormat($!item.endtime,"MM月dd日hh:mm:ss")</div>
+                                    <div>
+                                       <span style="color:#ff6600; font-size:14px; font-weight:bolder">仅剩:</span>&nbsp;&nbsp;<span style="color:Red; font-size:14px; font-weight:bolder">$!item.last个</span></div>
+                                    <div class="tourlistDis">
+                                    </div>
+                                </div>
+                                <div class="pricebox">
+                                    <div class="price">
+                                        ￥$!item.price.toString("0.00")</div>
+                                    <div>
+                                        市场价：<span style="text-decoration: line-through; color: #666">￥$!item.rrp.toString("0.00")</span></div>
+                                    <div style="padding-top: 30px">
+                                   #if ($item.starttime>$now)
+                                        <span class="inputbutton" style="width: 100px">抢购尚未开始</span>
+                                   #else
+                                        #if ($item.last>0)
+                                            <a href="/sale/$!item.forum/$!item.id&#45;$!item.productid&#45;$!item.planid&#46;html" target="_blank" title=" $!item.title">
+                                            <span class="inputbutton orange" style="width: 100px">立即抢购</span> </a>
+                                        #else
+                                             <span class="inputbutton" style="width: 100px">抢光了</span>
+                                         #end
+                                    #end
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    #end
+                    #end
+                    </div>
+                </div>
+            </div>
+            <!--右-->
+            <div style="width: 322px; float: right;">
+                <div style="background-color: #f7f7f7;" class="thisbox">
+                    <div style="padding: 10px 15px 10px 15px">
+                        <div class="minbox">
+                            <div class="minboxtitle">
+                                <span class="iconStr">特</span><span class="title"><h2>
+                                    往期特卖</h2>
+                                </span>
+                            </div>
+                            <div class="boxcontent">
+                             #foreach($item in $rs)
+                                #if ($item.endtime<$now)
+                                <div class="contentlist">
+                                    <div class="imgbox">
+                                        <a href="/sale/$!item.forum/$!item.id&#45;$!item.productid&#45;$!item.planid&#46;html" target="_blank" title="$!item.title">
+                                            <img height="166px" width="268px" alt="$!item.title" src="$tool.getFileImg($item.coverserver,$item.cover,320)" /></a>
+                                    </div>
+                                    <div class="namenote">
+                                        <a class="namebox" href="/sale/$!item.forum/$!item.id&#45;$!item.productid&#45;$!item.planid&#46;html" target="_blank" title="$!item.title"><span
+                                            class="productname">$!item.title</span>￥$!item.price.toString("0.00")</a>
+                                    </div>
+                                </div>
+                                #end
+                            #end
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    #parse("pageFoot.htm")
+</body>
+</html>
+<script type="text/javascript">
+    $("#product_tourlist").find(".tourbox").hover(function () {
+
+        $(this).addClass("opt");
+    }, function () {
+
+        $(this).removeClass("opt");
+    })
+</script>

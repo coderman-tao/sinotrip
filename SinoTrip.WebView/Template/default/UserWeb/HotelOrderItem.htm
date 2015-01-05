@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>酒店订单详情</title>#include("pageHeadCode.htm")
+    <link href="/Skin/default/style/order.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="/skin/default/js/flightOrder.js"></script>
+</head>
+<body>
+    #set($lefMeun = 0)
+    <!--是否显示左侧菜单-->
+    #parse("pageHead.htm")
+    <div style="width: 1200px; margin: 0 auto; margin-top: 10px">
+        <div class="orderPageMiddle">
+            <div style="padding: 40px">
+                <div style="padding: 20px; overflow: hidden; border: 3px solid #ff6600;">
+                    <div style="margin-top: 5px" class="contentBox">
+                        <div style="border: 1px solid #eee" class="thisbox">
+                            <div class="inputbox">
+                                <span class="inputTitle">预定日期：</span><span class="inputContent" style="font-weight: bold">$!Info.CreateDateTime</span>
+                                 <span class="inputTitle">入住人数：</span><span class="inputContent" style="font-weight: bold">$!Info.Count</span>
+                                <span class="inputTitle">订单号：</span><span class="inputContent" style="font-weight: bold">$!Info.Serialno</span>
+                                <span class="inputTitle">订单状态：</span><span class="inputContent" style="font-weight: bold">$!Info.StatusName</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contentBox">
+                        <div class="orderTitle">
+                            酒店信息</div>
+                        <div class="inputbox" style="height: 150px">
+                            <span class="inputTitle">酒店名称：</span><span class="inputContent">$!Info.HotelName</span><br />
+                            <span class="inputTitle">地址：</span><span class="inputContent">$!Info.Address</span><br />
+                            <span class="inputTitle">联系电话：</span><span class="inputContent">$!Info.Tel</span>
+                        </div>
+                    </div>
+                    <div class="contentBox">
+                        <div class="orderTitle">
+                            入住信息</div>
+                        <table class="thisbox">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        房型
+                                    </th>
+                                    <th>
+                                        入住时间
+                                    </th>
+                                    <th>
+                                        离店时间
+                                    </th>
+                                    <th>
+                                        单价
+                                    </th>
+                                    <th>
+                                        房间数
+                                    </th>
+                                    <th>
+                                        总价
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody id="hdxx" align="center">
+                            <tr>
+                            <td>$!Info.RoomRate.RoomTypeName</td>
+                            <td>$!Info.StartDate</td>
+                            <td>$!Info.EndDate</td>
+                            <td>$!Info.Price</td>
+                            <td>$!Info.RoomRate.Quantity
+                            </td>
+                            <td>$!Info.TotalAmount</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                         <div class="inputbox">
+                            <span class="inputTitle">入住人姓名：</span><span class="inputContent" style="font-weight: bold"> #foreach($item in $Info.ResGuests) $item.GuestProfile.PersonName&nbsp; #end</span>
+                        </div>
+                    </div>
+                    <div class="orderTitle">
+                        联系人信息</div>
+                    <div style="margin-top: 5px" class="contentBox">
+                        <div style="border: 1px solid #eee" class="thisbox">
+                            <div class="inputbox">
+                                <span class="inputTitle">联系人：</span><span class="inputContent">$!Info.ContactName</span>
+                                <span class="inputTitle">手机号：</span><span class="inputContent">$!Info.ContactMobile</span>
+                                <span class="inputTitle">Email：</span><span class="inputContent">$!Info.ContactEmail</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="inputbox" style="text-align: right">
+                        <span class="inputTitle">订单金额：</span><span class="inputContent">￥$!Info.TotalAmount</span>
+                        <span class="inputTitle">优惠金额：</span><span class="inputContent">￥0</span>
+                        <span class="inputTitle">订单应付：</span><span class="inputContent" style="font-size: 14px;
+                            font-weight: bold; color: Red">￥$!Info.TotalAmount</span>
+                    </div>
+                    <div style="text-align: center; padding: 30px;" id="paybutton">
+                   #if($Info.Payment=="S"&&$Info.Status=="RCM")
+                       <a style="width:100px; margin-left:20px" class="inputbutton orange" href="/OrderPay/default.aspx?orderno=$Serialno&type=2" target="_blank">确认支付</a>
+                   #end
+                    <a style="width:100px; margin-left:20px" class="inputbutton orange" href="/OrderPay/default.aspx?orderno=$Info.Serialno&type=2" target="_blank">确认支付</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="orderPagebottom">
+        </div>
+    </div>
+    <script type="text/javascript">
+      
+    </script>
+    #parse("pageFoot.htm")
+</body>
+</html>

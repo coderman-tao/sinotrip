@@ -1,0 +1,353 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>旅游线路下单&#45;$SITE.name</title>
+    #include("pageHeadCode.htm")
+    <link href="/Skin/default/style/order.css" rel="stylesheet" type="text/css" />
+   
+</head>
+<body>
+    #set($lefMeun = 0)
+    <!--是否显示左侧菜单-->
+    #parse("pageHead.htm")
+   <div class="pagebox" style=" background-color:#fbfbfb">
+   
+   
+   <div style=" overflow:hidden; padding:20px 40px 40px 40px; ">
+   <a name="flowPath"></a>
+     <div id="flowPath" class="flowPath step1"></div>    
+     
+
+<div style=" padding:20px; width:1075px; overflow:hidden; border:3px solid #ff6600; background:#ffffff">
+<div style=" padding:10px 0px 10px 0px; overflow:hidden; ">
+	 <span class="boldStr important"></span><span class="boldStr">$tourinfo.name</span>  
+	 
+	　发团日期：$tool.UnixFormat($planinfo.starttime,"yyyy年MM月dd日")
+	 </div>
+<!--第一步-->
+<div style=" overflow:hidden" id="fill_1" class="fillBox">
+
+<div class="orderTitle">产品信息</div> 
+ #set($feecontain=$tourinfo.feecontain)
+  #set($feenocontain=$tourinfo.feenocontain)
+  #if ($tourinfo.traffic==$tool.GetM("TRA_TYPE_QC"))
+    #set($feecontain="")
+     #set($feenocontain="")
+    #foreach($prices in $pricelist)
+         #if ($prices.pricetype == $tool.GetM("PRICE_TYPE_ADULT") ||$prices.pricetype == $tool.GetM("PRICE_TYPE_CHILD")) 
+                #set($feecontain = "$feecontain <h3>$prices.name</h3>$prices.feecontain") 
+                #set($feenocontain = "$feenocontain<h3>$prices.name</h3>$prices.feenocontain")           
+           #end 
+
+
+  #end
+  #end
+<div id="tapBox" style=" overflow:hidden">	
+<ul class="eTap" style="width:1070px" id="pricenoteTap">
+<li class="current noKeep">费用包含</li>
+<li class="noKeep">费用不包含</li>
+</ul>
+<div class="tapContentBox" id="pricenoteContent">
+<div class="tapListContent noKeep">$feecontain</div>
+<div class="tapListContent noKeep" style=" display:none">$feenocontain</div>
+</div>
+</div>
+
+<div id="pricebox">
+<div style=" overflow:hidden">
+<div class="orderTitle">人员·价格类型</div>
+<table class="PriceTable" style="margin-top:10px">
+	<thead>
+		<tr>
+			<th width="20%">名称</th>
+			<th width="40%">说明</th>
+			<th width="10%">门市价</th>
+			<th width="10%">网店价</th>			
+			<th width="10%">数量</th>
+			<th width="10%">小计</th>		
+		</tr>
+	</thead>
+<tbody id="listContent" style="text-align:center">
+ #foreach($prices in $pricelist)
+#if($prices.pricetype!=$tool.GetM("PRICE_TYPE_VARY"))
+<tr><td>$prices.name<input type="hidden" value="$prices.id" name="priceid" class="pactcotent"></td>
+<td class="td_left">$prices.note</td>
+<td class="" style="text-decoration: line-through">￥$prices.market.ToString("#0.00")</td>
+<td class="">￥$prices.price.ToString("#0.00")</td>
+<td><select name="pricenumber_$prices.id" class="pactcotent" price="$prices.price"  priceseat="$prices.seat"  orig="$pagetool.getun($prices.id,$pulist)" priceid="$prices.id" pricetype="$prices.pricetype" usertype="$prices.usertype" pricename="$prices.name">
+</select>
+</td>
+<td class="mPrice">￥0.00</td></tr>
+#end
+#end
+</tbody>
+</table>
+</div>
+<div style=" overflow:hidden">
+<div class="orderTitle">附加服务</div>
+<table id="Table1">
+	<thead>
+		<tr>			
+			<th width="20%">名称</th>			
+			<th width="50%">说明</th>
+            <th width="10%">价格</th>
+			<th width="10%">份数</th>
+			<th width="10%">小计</th>		
+		</tr>
+	</thead>
+<tbody id="additive"  style="text-align:center">
+#foreach($prices in $pricelist)
+#if($prices.pricetype==$tool.GetM("PRICE_TYPE_VARY"))
+<tr><td>$prices.name<input type="hidden" value="$prices.id" name="additiveid" class="pactcotent"></td>
+<td class="td_left">$prices.note</td>
+<td class="">￥$prices.price.ToString("#0.00")</td>
+<td>
+<select name="additivenumber_$prices.id" class="selectvary pactcotent" price="$prices.price" priceseat="$prices.seat" orig="$pagetool.getun($prices.id,$pulist)" priceid="$prices.id" pricetype="$prices.pricetype" usertype="$prices.usertype" pricename="$prices.name">
+
+</select></td>
+<td class="mPrice">￥0.00</td></tr>
+#end
+#end
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+<!--第二步-->
+<div style=" overflow:hidden; display:none" id="fill_2" class="fillBox">
+<div class="orderTitle">签约人信息</div> 
+<input type="hidden" name="tourid" class="pactcotent" value="$tourinfo.id"/>
+<input type="hidden" name="planid" class="pactcotent" value="$planinfo.id"/>
+<input type="hidden" name="planoutsign" class="pactcotent" value="$planinfo.outsign"/>
+<input type="hidden" id="pactId" name="pactid" class="pactcotent"/>
+<div style=" padding:30px 10px 30px 10px; border:1px solid #eee" class="thisbox" id="pactUserBox">
+<div class="inputbox"><span class="inputTitle">签约人姓名：</span><span class="inputContent">
+<input type="text" maxL="6" minL="2" err="签约人的姓名为必填项!2至6个中文字符" checkType="chinese|notempty" id="pactUserName" name="pactname" class="pactuser usercheck pactcotent"/>
+</span><span class="inputMsg">此项内容为合同的签定者</span></div>
+
+<div class="inputbox" id="mobilebox"><span class="inputTitle">签约人手机：</span><span class="inputContent">
+<input type="text" err="请正确输入签约人的联系手机号码！" checkType="notempty|mobile" name="pactmobile" class="pactuser usercheck pactcotent" id="pactUserMobile" disabled="disabled"/>
+</span><span class="inputMsg">我们将通过短信息通知您定单的处理进程</span></div>
+
+<div id="editmobilebox" style=" display:none">
+<div class="inputbox"><span class="inputTitle">签约人手机：</span><span class="inputContent">
+<input type="text" err="请输入需要获取验证的手机号码" checkType="notempty|mobile"  name="editmobile" class="editmobile" id="editmobile"  style="width:160px;"/>
+<span class="inputbutton">获取验证</span></span><span class="inputMsg">我们将通过短信息通知您定单的处理进程，填入手机号点击获取验证</span></div>
+
+<div class="inputbox"><span class="inputTitle">手机验证码：</span><span class="inputContent">
+<input type="text" style="width:160px;"　err="请输入手机短信收到的6位验证码" checkType="notempty|intege1" maxL="6" minL="6" name="editnumber" id="editnumber" class="editmobile"/>
+<span class="inputbutton">验证手机</span></span><span class="inputMsg">点击上面的获取验证码，填入你手机收到验证码进行验证操作</span></div>
+</div>
+<div class="inputbox"><span class="inputTitle">签约人性别：</span><span class="inputContent"><span style="width:60px; text-align:right">男</span><input type="radio" name="pactsex" class="pactcotent" value="0" />
+<span  style="width:60px; text-align:right">女</span><input type="radio"  name="pactsex" value="1" class="pactcotent"/></span><span class="inputMsg"></span></div>
+<div class="inputbox"><span class="inputTitle">证件类型：</span><span class="inputContent">
+<select err="请选择签约人证件类型" checkType="notempty" name="pactcardtype" id="pactCardType" class="pactuser usercheck pactcotent"><option value="">请选择</option><option value="435">身份证</option><option value="437">军官证</option><option value="436">护照</option><option value="438">回乡证</option><option value="439">其它证件</option></select>
+</span><span class="inputMsg"></span></div>
+
+<div class="inputbox"><span class="inputTitle">证件号码：</span><span class="inputContent">
+<input type="text" err="请正确输入签约人证件号码！" checkType="notempty" id="pactUserCard" name="pactcard" class="pactuser usercheck pactcotent"/>
+</span><span class="inputMsg">用于识别合同的签定者有效性，请认真填写核实</span></div>
+<div style=" padding-left:120px;"><span style="width:230px;" class="inputbutton orange" onclick="copyPactUser()">复制签约人信息到游客栏</span></div>
+</div>
+
+<div class="orderTitle">出游人信息</div>
+<table id="Table2" class="thisbox">
+	<thead>
+		<tr>			
+			<th width="5%">联系人</th>			
+			<th width="15%">姓名</th>
+            <th width="10%">性别</th>
+			<th width="15%">证件类型</th>
+			<th width="20%">证件号</th>	
+            <th width="20%">联系手机</th>
+             <th width="15%">服务类型</th>	
+		</tr>
+	</thead> 
+<tbody id="userinput" class="userinput">
+
+</tbody>
+</table>
+
+
+</div>
+
+<!--第三步-->
+<div style=" overflow:hidden; display:none" id="fill_3" class="fillBox">
+<div class="orderTitle">签约人信息</div> 
+<div style=" padding:30px 10px 30px 10px; border:1px solid #eee" class="thisbox" id="confirmPactUser">
+<div class="inputbox">
+<span class="inputTitle">签约人姓名：</span><span class="inputContent boldStr" item="pactname"></span>
+<span class="inputTitle">签约人手机：</span><span class="inputContent boldStr" item="pactmobile"></span>
+<span class="inputTitle">签约人性别：</span><span class="inputContent boldStr" item="pactsex"></span>
+<span class="inputTitle">证件类型：</span><span class="inputContent boldStr" item="pactcardtype"></span>
+<span class="inputTitle">证件号码：</span><span class="inputContent boldStr" item="pactcard"></span>
+</div>
+</div>
+<div class="orderTitle">游客信息</div> 
+<table id="Table3" class="thisbox">
+	<thead>
+		<tr>			
+			<th width="5%"></th>			
+			<th width="15%">姓名</th>
+            <th width="10%">性别</th>
+			<th width="15%">证件类型</th>
+			<th width="20%">证件号</th>	
+            <th width="20%">联系手机</th>
+             <th width="15%">服务类型</th>	
+		</tr>
+	</thead>
+<tbody id="confirmTourist" class="userinput">
+
+</tbody>
+</table>
+<div  id="addserver">
+<div class="orderTitle">服务分配</div> 
+<div style=" padding:10px; border:1px solid #eee" class="thisbox" id="additiveList">
+
+</div>
+</div>
+<div id="couponBox" style=" padding-top:30px;">
+<div class="orderTitle" style=" display:">点券优惠<span style=" font-size:12px; font-weight:normal; color:#666; padding-left:10px;">相同类型优惠只能选择一项，可累加使用的优惠可与其它类型优惠类型同时使用</span></div> 
+<div style=" padding:10px; border:1px solid #eee" class="thisbox" id="Div1">
+<div id="lijianBox">
+<div style=" line-height:35px; color:#ff6600">◕‿◕&nbsp;优惠活动</div>
+<div>
+<table class="PriceTable">
+    <thead>
+        <tr>
+        <th style="width:20px">
+            </th>
+           <th style="width:270px">
+                名称
+            </th>
+            <th style="width:80px">
+                优惠
+            </th>
+            <th style="width:80px">
+                条件
+            </th>
+            <th>
+                说明
+            </th>
+           <th style="width:140px">
+                有效期
+            </th>
+        </tr>
+    </thead>
+<tbody id="lijianbody">                                    
+</tbody>
+</table>
+</div>
+</div>
+<div id="userCupBox" style=" margin-top:10px">
+<div style=" line-height:35px; color:#ff6600">❤&nbsp;优惠券</div>
+<div>
+<table class="PriceTable">
+    <thead>
+               <tr>
+        <th style="width:20px">
+            </th>
+           <th style="width:270px">
+                名称
+            </th>
+            <th style="width:80px">
+                优惠
+            </th>
+            <th style="width:80px">
+                条件
+            </th>
+            <th>
+                说明
+            </th>
+           <th style="width:140px">
+                有效期
+            </th>
+        </tr>
+    </thead>
+<tbody id="userCupbody">                                    
+</tbody>
+</table>
+</div>
+</div>
+
+<div style=" line-height:35px; color:#ff6600;">☁&nbsp;优惠码</div>
+<div>
+<input type="text" id="cupcode" class="pactcotent" value="" title="折扣码/抵用券编码" style=" width:250px" name="coupcode"/>
+<span class="inputbutton" title="优惠码验证" style= "height:35px; line-height:35px; margin-left:10px" onclick="checkCupCode($tourinfo.producttype, $tourinfo.id, $planinfo.id)">验证</span>
+<span id="codemsg" style="padding-left:10px"></span>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+ <div style="line-height:30px; text-align:right; padding:10px;background:#f7f7f7; margin-top:10px"> 
+  <div>产品金额 <span class="" id="pricesum">￥0.00</span></div>
+  <div> + 附加服务<span class="" id="pricevary">￥0.00</span></div>
+   <div id="breakPrice">- 优惠<span class="" id="discount">￥0.00</span></div>
+   <div>= 应付<span class="boldStr " id="payPrice">￥0.00</span></div>
+ </div> 
+ 
+
+<div style="line-height:44px; width:1080px; overflow:hidden; padding-right:40px; margin-top:10px" id="orderButtonBox">
+<div class="imgButton orderButton" id="stepButtonR" style="display: " onclick="setFillStep(true)">下一步</div>
+<div class="imgButton orderButton" id="stepButtonL" style="display:none" onclick="setFillStep(false)">上一步</div>
+ <div style=" width:800px; float:right; text-align:right; padding-right:5px; color:Red">
+我已阅读并接受注意事项、服务标准、旅游
+相关事项提示、行程单中所例其他所有内容<input type="checkbox" id="check_packname" name="check_packname"/>
+</div>
+</div>
+
+
+
+<div style=" border:1px solid #cccccc; margin-top:5px;">
+ <div style=" line-height:32px; padding-left:20px;">
+ <div style=" line-height:30px;height:30px;">
+    <span style=" font-size:14px; font-weight:bold; color:#333333">订购协议</span>    
+    </div>
+ </div>
+ <div style="overflow:hidden;"> 
+<div style=" height:100px; overflow-y:auto; padding:10px; font-size:13px; line-height:20px; color:#000">
+<span style=" color:Red">注：产品页面所例行程图文，仅供参考，你所预订的旅游行程及标准请点击<span class="blue" style=" font-size:13px; font-weight:normal"><a target="_blank" href="/mall/tour/Itinerary.aspx?eid=$planinfo.outsign">[查看行程单]</a></span></span>
+<br><br>1.订单生效后如因客人自身原因要求变更订单或者取消订单，客人需承担因变更所产生的相关费用及取消订单而产生的相应损失。如机票，签证费用等。
+<br><br>2.如客人所订购的产品在目的地停留的日期部分或全部处在春节、国庆节、五一劳动节、元旦等国家法定节假日或地方性重大节日期间，已生效的订单不可进行任何变更。
+<br><br>3.若客人所定购的产品未能及时付清相关费用，而此产品价格、景点、服务标准等发生变更，我社不承担任何责任。
+<br><br>4. 因网上数据更新有一定的延时，您所选择的线路及价格以工作人员回复为准
+<br><br>5.客人需确保在荞面网上填写的信息准确、有效，如因填写的信息错误导致无法跟团出游，我社不承担任何责任。
+<br><br>6. 客人在旅行中应注意人身财产安全，妥善保管自己的证件及行李物品， 如果发生人身意外或随身携带行李物品遗失、被盗、被抢等情况，我社会积极协助办理，但无赔偿之责任
+<br><br>7.客人需确保身体状况可以外出旅游，60周岁以上老年人需有子女陪同。如因客人刻意隐瞒自身身体状况导致外出旅游发生意外，我社不承担任何责任
+
+   </div>
+ </div>
+ </div>
+ </div>
+ 
+</div>
+
+
+  
+  #set($canSeat = $planinfo.seat - $planinfo.buyseat)
+
+  <script type="text/javascript">
+      var canSeat = $canSeat //可售的位置数
+      var usernumber = 0; //人数
+      var seatnumber = 0; //占位数
+      var adultnumber = 0; //成人数
+      var selectlist = $("#pricebox").find("select")
+      var selectvary = $("#pricebox").find("select[class=selectvary]");
+      var mPricelist = $("#pricebox").find(".mPrice")
+      var pricesum = 0;
+      var pricevary = 0;
+      var discount = 0;
+      var fillstep = 1;
+      var tid = $tourinfo.id;
+      var pid = $planinfo.id;
+      var pt = $tourinfo.producttype;
+      
+  </script>
+   <script src="/Skin/default/js/tourfill.js" type="text/javascript"></script>
+  #parse("pageFoot.htm")
+     
+</body>
+</html>

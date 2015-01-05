@@ -1,0 +1,321 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>$tourinfo.title&#45;$SITE.name</title>
+    #include("pageHeadCode.htm")
+    <script src="/res/js/myfocus-2.0.1.min.js" type="text/javascript"></script>
+    <script src="/res/js/Lcalendar.js" type="text/javascript"></script>  
+    <link href="/Skin/default/style/touritem.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    #set($lefMeun = 0)
+    <!--是否显示左侧菜单-->
+    #parse("pageHead.htm")
+    <!--产品名称-->
+    <div class="pagebox">
+        <div class="pageWay">
+            您的位置：<a href="/" title="安徽中青旅荞面旅游网">首页</a> > <a href='$tool.GetPageUrl("TYPE-263-$tourinfo.areatype",0)' title="$tool.GetSetting($tourinfo.areatype).name旅游线路报价">$tool.GetSetting($tourinfo.areatype).name旅游</a> > <span>$tourinfo.name</span></div>
+        <div class="tournamebox">
+            <span class="imglab lab_1">度假游</span>
+            <h2 style=" color:#ff6600">
+                $tourinfo.title</h2>
+            <div style="line-height: 20px; color: #666">
+                $tourinfo.describe</div>
+        </div>
+    </div>
+    <!--图片及基本售卖信息-->
+    <div class="pagebox">
+        <div style="height: 390px; width: 835px; padding: 10px; float: left" class="thisbox">
+            <div id="tourFocus">
+                <!--焦点图盒子-->
+                <div class="loading">
+                    图片加载中......</div>
+                <div class="pic">
+                    <!--图片列表-->
+                    <ul>
+                        <!--该样式只会显示前四张图片，只输出四张图，小于三张对版面美观度会有影响-->
+                        #foreach($senic in $pageTool.getSenicList(4))
+                        <li><a href="javascript:void(0)">
+                            <img thumb="$senic.name" alt="$senic.name" text="" src="$tool.getFileImg($senic.server,$senic.cover,640)"
+                                alt="$senic.name" />
+                        </a></li>
+                        #end
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div style="width: 322px; float: right; overflow: hidden">
+            <div style=background-color: #f7f7f7" class="thisbox">
+                <div style="padding: 10px 15px 10px 15px; line-height: 20px">
+                    <div style="height: 30px">
+                        <span class="signNote">产品编号：$tourinfo.id</span></div>
+                    <div class="tourBasicBox">
+                        <ul>
+                            <li><span class="name">市场价格：</span>￥<span class="name" style="text-decoration: line-through" id="market_price">...</span></li>
+                            <li><span class="name">荞面优价：</span>￥<span class="price" id="web_price">...</span>元 <span class="name">
+                                起</span></li>
+                            <li><span class="name">当前团期：</span><span class="signStr" id="starttime">.年.月.日</span></li>
+                            <li><span class="name">提前报名：</span>建议提前&nbsp;<span class="signStr">$tourinfo.beforehand</span>&nbsp;天报名</li>
+                            <li><span class="name">付款方式：</span><span class="payicon yl">银联在线</span><span class="payicon wy">网银</span><span
+                                class="payicon xyk">信用卡</span></li>
+                            <li id="discountBox">
+                           <!-- <span class="discountBox"><span class="discountname">减</span>立减50元/人</span> -->
+                            <!--<span class="discountBox"><span class="discountname">送</span>旅游意外保险</span>--></li>
+                        </ul>
+                    </div>
+                    <div class="tour_kf">
+                        <a href="javascript:void(0)" onclick="openKFWIN()">
+                            <img border="0" src="/Skin/default/images/tour_kf.jpg" width="288px"/></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="clear:both" />
+    <!--团期信息-->
+    <div class="pagebox">
+        <div style="overflow: hidden; position: relative;">
+            <!--左-->
+            <div style="width: 855px; overflow: hidden; float: left">
+                <!--日历-->
+                <div class="thisbox calendarBox" id="calendar">
+                    <div class="calendarTop">
+                        点击日历价格查看详情 <span class="calendarTxt"><span class="calendarButton leftbutton" id="calendarButton_left"
+                            onclick="changeMonth(0)"></span><span id="calendarTxt">2014 年 8 月</span> <span class="calendarButton rightbutton"
+                                id="calendarButton_right" onclick="changeMonth(1)"></span></span>
+                    </div>
+                    <div class="calendarTitle">
+                        <span>周日</span><span>周一</span><span>周二</span><span>周三</span><span>周四</span><span>周五</span><span
+                            class="after">周六</span>
+                    </div>
+                    <div class="calendarList">
+                        <a href="javascript:void(0)"></a><a href="javascript:void(0)"></a><a href="javascript:void(0)"></a><a href="javascript:void(0)"></a><a href="javascript:void(0)"></a><a href="javascript:void(0)"></a><a href="javascript:void(0)" class="after"></a>
+                        <a href="javascript:void(0)"></a><a href="javascript:void(0)"></a><a href="javascript:void(0)"></a><a href="javascript:void(0)"></a><a href="javascript:void(0)"></a><a href="javascript:void(0)"></a><a href="javascript:void(0)" class="after"></a>
+                        <a href="javascript:void(0)"></a><a href="javascript:void(0)"></a><a href="javascript:void(0)"></a><a href="javascript:void(0)"></a><a href="javascript:void(0)"></a><a href="javascript:void(0)"></a><a href="javascript:void(0)" class="after"></a>
+                        <a href="javascript:void(0)"></a><a href="javascript:void(0)"></a><a href="javascript:void(0)"></a><a href="javascript:void(0)"></a><a href="javascript:void(0)"></a><a href="javascript:void(0)"></a><a href="javascript:void(0)" class="after"></a>
+                        <a href="javascript:void(0)"></a><a href="javascript:void(0)"></a><a href="javascript:void(0)"></a><a href="javascript:void(0)"></a><a href="javascript:void(0)"></a><a href="javascript:void(0)"></a><a href="javascript:void(0)" class="after"></a>
+                        <a href="javascript:void(0)"></a><a href="javascript:void(0)"></a><a href="javascript:void(0)"></a><a href="javascript:void(0)"></a><a href="javascript:void(0)"></a><a href="javascript:void(0)"></a><a href="javascript:void(0)" class="after"></a>
+                    </div>
+                </div>
+                <!--费用情况-->
+                <div style="margin-top: 10px;">
+                    <!--<h1 style=" color:#ff6600;">服务标准</h1>-->
+                    <div class="divTab" id="pricenoteTap">
+                     #if( $tourinfo.traitnote!="")
+                        <a href="javascript:void(0)" class="current">特色推荐</a>
+                     #end
+                        <a href="javascript:void(0)" class="noKeep">费用包含</a>
+                         <a href="javascript:void(0)" class="noKeep">费用不包含</a>
+                    </div>
+                    <div class="TabContentList" id="pricenoteContent">
+                     #if( $tourinfo.traitnote!="")
+                    <div class="TabContent" style="display:none">
+                            <div style="padding: 15px; color:#ff3300; font-size:13px">
+                              $tourinfo.traitnote
+                            </div>
+                          
+                      </div>
+                        #end
+                         <div class="TabContent noKeep" style="display:none">
+                         <div style="padding: 15px;"> 
+                           <div style="display: ">
+                                    $tourinfo.feecontain
+                                </div>
+                                </div>
+                         </div>
+                        <div class="TabContent noKeep" style="display:none">
+                          
+                            <div style="padding: 15px;">                              
+                                <div style="display: ">
+                                    $tourinfo.feenocontain
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--行程-->
+                <div style="margin-top: 10px;" id="tournotelistbox">
+                   <!-- <h1 style=" color:#ff6600;" id="abcd">行程标准</h1>-->
+                    <div id="tournoteTab" style=" position:relative">
+                    <div class="divTab" id="tournotelist">
+                        <a href="#journeybox" class="current">参考行程</a><a href="#usernotebox">游客须知</a><a href="#buynotebox">预订须知</a>
+                    </div>
+                    </div>
+                    <a name="journeybox" class="tournotelist"/>
+                    <div class="ProductContent">
+                        <div class="ProductContent_Title">
+                            <span class="signNote">参考行程</span></div>
+                        #foreach($days in $journeys)
+                        <div class="ProductContent_data">
+                            <div class="journeytitle">
+                                <span class="daystr"><span class="daynumber">$days.day</span>第$days.day天</span>
+                                <span>$tool.getDistrict($days.orgcode).name</span> 
+                                #if($days.traffic==0) 
+                                <span>-</span>
+                                #else 
+                                <span class="journeyicon tra$days.traffic">&nbsp;</span>
+                                 #end 
+                                 <span>$tool.getDistrict($days.dstcode).name</span>
+                                #foreach($journeydistrict in $pageTool.getJourneydist($days.id)) 
+                                #if($journeydistrict.traffic==0)
+                                <span>-</span> 
+                                #else 
+                                <span class="journeyicon tra$journeydistrict.traffic">&nbsp;</span>
+                                #end 
+                                <span>$tool.getDistrict($journeydistrict.dstcode).name</span> 
+                                #end 
+                                <span class="journeyicon hotle" title="$days.hotelnote">住宿：$tool.NameHtml($days.hotelnote,28)</span> 
+                                #set($meal ="") 
+                                #if ($days.breakfast == 1) 
+                                #set($meal="$meal早餐") 
+                                #end 
+                                #if ($days.lunch == 1) 
+                                #set($meal="$meal 中餐") 
+                                #end 
+                                #if ($days.dinner == 1) 
+                                #set($meal="$meal 晚餐") 
+                                #end 
+                                #if ($meal == "") 
+                                #set($meal = "见服务标准") 
+                                #end 
+                                <span class="journeyicon meal">餐饮：$meal</span>
+                            </div>
+                            <div class="journeyContent">
+                                $days.data
+                                <div class="TabContent">
+                                    #set($imgnumber=0) 
+                                    #foreach($senic in $days.Seniclist) 
+                                    #set($imgnumber = $imgnumber + 1) 
+                                    #if($imgnumber < 3)
+                                    <div class="ContentImg" style=" height:210px; overflow:hidden">
+                                        <img src="$tool.getFileImg($senic.server,$senic.cover,320)" alt="$senic.name" /></div>
+                                    #end #end
+                                </div>
+                            </div>
+                        </div>
+                        #end
+                    </div>
+                    <a name="usernotebox" class="tournotelist"/>
+                    <div class="ProductContent">
+                        <div class="ProductContent_Title">
+                            <span class="signNote">游客须知</span></div>
+                        <div class="ProductContent_data">
+                            $tourinfo.usernote
+                        </div>
+                    </div>
+                    <a name="buynotebox" class="tournotelist"/>
+                    <div class="ProductContent">
+                        <div class="ProductContent_Title">
+                            <span class="signNote">预订须知</span></div>
+                        <div class="ProductContent_data">
+                            $tourinfo.paynote
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <!--右-->
+            <div style="width: 322px; float: right;">
+                <div style="background-color: #f7f7f7;" class="thisbox">
+                    <div style="padding: 10px 15px 10px 15px">
+                        <div id="pricebox">
+                            <div style="border-bottom: 1px dashed #eee">
+                                <img border="0" src="/Skin/default/images/buy1.jpg" /></div>
+                            <div style="text-align: center; margin-top: 5px">
+                                <select style="width: 270px" id="planselect" onchange="setPlanPrice(this.value)">
+                                </select>
+                            </div>
+                            <div style="border-top: 1px dashed #eee">
+                                <img border="0" src="/Skin/default/images/buy2.jpg" /></div>
+                            <div style="text-align: center; margin-top: 5px">
+                            <form action="" method="post" name="priceForm">
+                                <table class="PriceTable">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                名称
+                                            </th>
+                                            <th>
+                                                售价
+                                            </th>
+                                            <th style="width: 50px;">
+                                                人数
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="priceBody">
+                                    </tbody>
+                                </table>
+                            </form>
+                            </div>
+                            <div style="padding: 10px 0px 0px 15px; font-size: 24px; color: #ff6600">
+                                预计：<span id="planprice">0.00</span> 元</div>
+                            <div style="padding: 15px; text-align: right">
+
+                                <a href="javascript:void(0)" onclick="buyItem($tourinfo.id)" id="buybutton">
+                                    <img border="0" src="/Skin/default/images/buy.jpg" />
+                                </a>
+                                <span class="inputbutton" style=" width:170px; padding:5px; display:none" id="nobuybotton">售罄下架</span>
+                                </div>
+
+                        </div>
+                        <div class="buyflow_box">
+                            <div class="buyflow_title">
+                                预订流程说明
+                                <div class="buyflowhelp">
+                                    <a href="/help/" target="_blank" title="预订常见问题">查看更多常见预订问题 > </a>
+                                </div>
+                            </div>
+                            <img border="0" src="/Skin/default/images/buyflow.jpg" />
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background-color: #f7f7f7;" class="thisbox">                    
+                    <div style="padding: 10px 15px 10px 15px">
+                        <div class="minbox" style=" border-color:#ccc">
+                            <div class="minboxtitle">
+                            <span class="iconStr">荐</span><span class="title"><h2>相关产品推荐</h2></span>
+                            </div>     
+
+
+                          <div class="boxcontent">
+
+                           #foreach($item in $tool.RelevantTour($tourinfo.keystr,$tourinfo.areaconfig,"",$tourinfo.areatype,5))
+                            <div class="contentlist">
+                            <div class="imgbox">
+                            <a href="/Tour/$item.id&#46;html" title="$item.title">
+                            <img src="$tool.getFileImg($item.coverserver,$item.cover,320)"/></a>                             
+                            </div>
+                            <div class="namenote">
+                            <a class="namebox" href="/Tour/$item.id&#46;html" title="$item.title"><span class="productname">$tool.NameHtml($item.name,30)</span>￥$item.price.toString("0.00")</a>
+                            </div>
+                            </div>
+                            
+                           #end
+                            
+                         </div>                   
+                        </div>                          
+                     </div>
+                        
+                                             
+                    
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var planday = $tourinfo.days;
+        var tourid = $tourinfo.id;
+        var tourtraffic = $tourinfo.traffic;
+        //var areattype = $tourinfo.areattype;
+        var planlist = {};
+        var planitem = {};
+       
+    </script>
+    <script src="/Skin/default/js/touritem.js" type="text/javascript"></script>
+    #parse("pageFoot.htm")
+</body>
+</html>

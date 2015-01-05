@@ -1,0 +1,138 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>&#45;$SITE.name</title>
+      #include("pageHeadCode.htm")
+<script type="text/javascript" src="/res/js/flights.js"></script>
+<script type="text/javascript" src="/res/js/My97DatePicker/WdatePicker.js"></script>
+<style type="text/css">
+.inputbox span.inputTitle{ width:60px;}
+.inputbox span.inputContent input[type="text"]{ width:200px}
+
+</style>
+
+</head>
+<body>
+  #set($lefMeun = 0)
+    <!--是否显示左侧菜单-->
+    #parse("pageHead.htm")   
+
+<div class="pagebox" style=" overflow:hidden; padding-top:0px;">
+
+<div class="flight_topbox">
+
+<form name="flightSearchForm" action="" method="post" target="_blank">
+<div class="flight_searchBjBox"></div>
+        <div class="thisbox" style="background-color:; width:380px; height:304px; position:absolute; top:50px; left:50px;" id="searchFlightPageBox">                    
+                    <div style="padding: 10px 15px 10px 15px">
+                        <div style=" border-color:#ccc" class="">
+                            <div class="f_select_tab" id="f_select_tab" style=" display:none">
+                            <div class="f_select_tabitem current" data="0">国内航班</div>
+                            <div class="f_select_tabitem" style=" width:49%" data="1">出境航班</div>
+                            </div>  
+
+                          <div class="boxcontent">
+                           <div class="inputbox" style=" height:20px; line-height:20px">
+                          <span class="inputTitle">
+                          <input type="hidden"  name="isDomestic" id="isDomestic" class="searchflight" value="0"/></span>
+                         <span style="width:60px; text-align:right">单程</span><input type="radio" value="0" name="flighttype" checked="checked" class="searchflight"/>
+<span style="width:60px; text-align:right">往返</span><input type="radio" value="1" name="flighttype" class="searchflight"/>
+                          </div>  
+                          <div class="inputbox">
+                          <span class="inputTitle">出发城市</span>
+                          <span class="inputContent">
+                          <input name="homecity" onfocus="showFlightCity($('#isDomestic').val(),this)"  readonly="readonly" title="点选出发城市三字码" type="text" class="searchflight"/>
+                           </span>
+                          </div>                 
+                          <div class="inputbox">
+                          <span class="inputTitle">到达城市</span>
+                          <span class="inputContent">
+                          <input name="destcity" onfocus="showFlightCity($('#isDomestic').val(),this)"    readonly="readonly" title="点选到达城市三字码" type="text" class="searchflight"/>
+                           </span>
+                          </div> 
+                            <div class="inputbox">
+                          <span class="inputTitle">出发时间</span>
+                          <span class="inputContent">
+                          <input name="staredata" id="staredata" onfocus="WdatePicker({doubleCalendar:true,dateFmt:'yyyy-MM-dd',errDealMode:1,minDate:'%y-%M-%d',skin:'twoer'})" readonly="readonly"  title="yyyy-MM-dd" type="text" class="searchflight" />
+                           </span>
+                          </div>  
+                          <div class="inputbox">
+                          <span class="inputTitle">回程时间</span>
+                          <span class="inputContent">
+                          <input name="backdate" onfocus="WdatePicker({doubleCalendar:true,dateFmt:'yyyy-MM-dd',errDealMode:1,minDate:'#F{$dp.$D(\'staredata\',{d:1});}',skin:'twoer'})" readonly="readonly"  type="text" title="yyyy-MM-dd"  class="searchflight" />
+                           </span>
+                          </div> 
+
+                          <div style=" padding-top:10px; text-align:right; text-align:center"><span class="inputbutton orange" style="width:100px;" onclick="searchFlightPage('.searchflight')">✈ 搜索</span></div>
+                                                   
+                         </div>                   
+                        </div>                          
+                     </div>
+                        
+                                             
+                    
+                </div>      
+         </form>
+
+</div>
+
+
+
+         <div style="overflow: hidden; float: left; width: 380px">
+
+
+
+        <div style="overflow:hidden">
+        
+
+
+
+        </div>
+        </div>
+        <div style="width: 550px; overflow: hidden; float: right">   
+
+           
+
+        </div> 
+
+
+
+
+
+   
+
+
+</div>
+
+
+
+<div class="pagebox" style=" overflow:hidden; padding:10px 0px;">
+
+<div><h2 style=" font-family:微软雅黑; padding:10px 0px; border-bottom:5px solid #f7f7f7">国内特价机票</h2></div>
+<div style=" overflow:hidden;">
+
+<ul class="stringList" style=" border:0px; padding:0px; font-size:14px;">
+            
+
+             #foreach($item in $tjlist)
+                   <li style=" border-right:1px solid #eee; width:390px; float:left; padding-left:2px;">
+                   <a style="color:#666" href="/Mall/Flights/SearchResult.aspx?flighttype=0&isDomestic=0&homecity=$item.cfCity&destcity=$item.ddCity&staredata=$item.jsDate" target="_blank" title="$item.cfcityName出发&nbsp;$item.cfName至&nbsp;$item.ddcityName特价机票&nbsp;$item.ddName特价机票">$item.cfcityName[$item.cfName]&nbsp;→&nbsp;$item.ddcityName[$item.ddName]</a>
+                    <span style="padding-right:10px; float:right; color:Red">￥$item.pj</span>
+                    </li>
+                     #end
+                                
+ </ul>
+
+</div>
+
+</div>
+
+
+
+<script type="text/javascript">
+   $('#isDomestic').val(0);
+   $("#searchFlightPageBox").find("input[type=text]").val("");
+</script>
+      #parse("pageFoot.htm")
+</body>
+</html>

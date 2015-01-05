@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>$!info.title&#45;站点公告&#45;$SITE.name</title>
+    #include("pageHeadCode.htm")
+</head>
+<body>
+ #parse("pageHead.htm")
+    <div class="pagebox">
+        <div style="overflow: hidden; position: relative;">
+            <!--左-->
+            <div style="width: 855px; overflow: hidden; float: left">
+                <div class="boxcontent" style="background:#ffffff; margin-top:20px">
+                    <h2 style="color: #ff6600; text-align: center">
+                        $!info.title</h2>
+                    <p>$!info.data</p>
+                </div>
+            </div>
+            <!--右-->
+            <div style="width: 322px; float: right;">
+                <div style="background-color: #f7f7f7;" class="thisbox">
+                    <div style="padding: 10px 15px 10px 15px">
+                        <div class="minbox">
+                            <div class="minboxtitle">
+                                <span class="iconStr">公告</span><span class="title"><h2>
+                                    近期公告</h2>
+                                </span>
+                            </div>
+                            <div class="boxcontent">
+                                <ul>
+                                    #foreach($item in $tool.GetAnnouncement(0,20)) 
+                                    <li style="line-height: 25px"><a title="$item.title" target="_blank" href="/news/$item.id&#46;html">
+                                        $tool.NameHtml($!item.title,30)</a></li>
+                                    #end
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    #parse("pageFoot.htm")
+</body>
+</html>

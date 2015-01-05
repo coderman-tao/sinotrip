@@ -1,0 +1,184 @@
+﻿.visaDiv
+{
+    border: 1px solid #f4a642;
+}
+.visaul
+{
+    margin: 0;
+    padding: 0;
+    width: 99%;
+    overflow: hidden;
+}
+.visaul li
+{
+    height: 30px;
+    float: left;
+    padding: 0px 15px 0px 30px;
+    margin: 2px;
+    border: 0px solid #ff6600;
+    line-height: 20px;
+    cursor: pointer;
+    color: #333333;
+    list-style: inside;
+    width: 260px;
+    font-weight: bold;
+}
+.title
+{
+    background: :url(../images/user/tab_bj.jpg) repeat-x;
+    height: 30px;
+    margin: 15px 0 0 0;
+    border: 1px solid #f4a642;
+    border-bottom: 0px;
+}
+.title .spantitle
+{
+    color: #ff6600;
+    font-weight: bold;
+    line-height: 30px;
+    margin-left: 30px;
+    float: left;
+}
+.title .more
+{
+    float: right;
+    color: #ff6600;
+    line-height: 30px;
+    margin-right: 5px;
+}
+
+.searchbox_list
+{
+    overflow: hidden;
+    padding: 5px 0px 5px 0px;
+}
+.searchbox_listtitle
+{
+    width: 40px;
+    float: left;
+    line-height: 25px;
+    font-weight: bold;
+}
+.search_ul
+{
+    margin: 0;
+    padding: 0;
+    width: 860px;
+    overflow: hidden;
+    line-height: 20px;
+}
+.search_ul li
+{
+    height: 20px;
+    float: left;
+    padding: 0px 5px 0px 5px;
+    margin: 2px;
+    border: 0px solid #ff6600;
+    line-height: 20px;
+    text-align: center;
+    list-style: none;
+    cursor: pointer;
+    color: #333333;
+}
+.search_ul li.licurr, .search_ul li.liover
+{
+    background-color: #ff6600;
+    color: #ffffff;
+}
+
+.search_ul a
+{
+    height: 20px;
+    float: left;
+    padding: 0px 5px 0px 5px;
+    margin: 2px;
+    border: 0px solid #ff6600;
+    line-height: 20px;
+    text-align: center;
+    list-style: none;
+    cursor: pointer;
+    color: #333333;
+    display: block;
+}
+.search_ul a.licurr, .search_ul a.liover
+{
+    background-color: #ff6600;
+    color: #ffffff;
+}
+
+.pageIcon
+{
+    background: url(../images/visa/pageIcon.png) no-repeat;
+}
+.ecTop
+{
+    background-position: 0px -105px;
+    background-repeat: repeat-x;
+    overflow: hidden;
+    border-bottom: 1px solid #ececec;
+    width: 100%;
+}
+.ecTopText
+{
+    height: 35px;
+    line-height: 35px;
+    width: 120px;
+    padding-left: 10px;
+    font-size: 13px;
+    color: #ffffff;
+    font-weight: bold;
+    float: left;
+    background-position: 0px -140px;
+    background-repeat: repeat-x;
+}
+.ecTopicon
+{
+    height: 35px;
+    line-height: 35px;
+    width: 30px;
+    float: left;
+    background-position: 0px -175px;
+}
+table
+{
+    display: table;
+    border-collapse: separate;
+    border-spacing: 2px;
+    border-color: gray;
+}
+tbody
+{
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+tr
+{
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
+td, th
+{
+    display: table-cell;
+    vertical-align: inherit;
+}
+.tour_table_title {
+line-height: 32px;
+height: 32px;
+background-image: url(../images/tour_title_bj.jpg);
+padding-left: 20px;
+overflow: hidden;
+width: 930px;
+}
+.tour_table_title li {
+height: 32px;
+list-style: none;
+width: 125px;
+margin-left: 3px;
+float: left;
+text-align: center;
+border: 0px;
+font-size: 14px;
+font-weight: bold;
+}

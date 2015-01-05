@@ -1,0 +1,41 @@
+﻿<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="/Skin/default/style/user.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+    #pdf1 a{ color:Blue};
+    </style>
+    #include("pageHeadCode.htm")
+    <script type="text/javascript" src="/res/js/pdfobject.js"></script>
+</head>
+<body>
+    #set($lefMeun = 0)
+    <!--是否显示左侧菜单-->
+    #parse("pageHead.htm")
+
+
+
+<script type="text/javascript">
+    window.onload = function () {
+        var success = new PDFObject({
+            url: "$pact.path$pact.ordersno&#46;pdf",
+            pdfOpenParams: {
+                scrollbars: "0",
+                toolbar: "0",
+                statusbar: "0"
+            }
+        }).embed("pdf1");
+    };
+</script> 
+<div style=" text-align:center; margin:30px">
+ <a href="$pact.path$pact.ordersno&#46;pdf" target="_blank"><span class="inputbutton green">点击下载该合同</span></a>
+ <a href="http://rj.baidu.com/soft/detail/24591.html" target="_blank" title="百度下载中心PDF绿色版"><span class="inputbutton orange">点击下载PDF阅读器</span></a>
+ </div>
+<div id="pdf1" style=" text-align:center; line-height:200px; margin:0 auto;width:960px; height:800px; font-size:16px; font-weight:bold">
+您的浏览器不支持PDF文件的在线显示，请 <a href="$pact.path$pact.ordersno&#46;pdf" target="_blank">点击浏览下载合同</a> 后查看或尝试使用360或Chrome
+</div>
+
+    #parse("pageFoot.htm")
+    </body>
+</html>
+

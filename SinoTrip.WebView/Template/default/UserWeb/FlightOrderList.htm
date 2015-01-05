@@ -1,0 +1,150 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>#include("pageHeadCode.htm")
+    <link href="/Skin/default/style/user.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="/skin/default/js/flightOrder.js"></script>
+</head>
+<body>
+    #set($lefMeun = 0)
+    <!--是否显示左侧菜单-->
+    #parse("pageHead.htm")
+    <div class="pagebox" style="margin-top: 10px">
+        <div class=" userPageTop">
+            <div class="userPagetitleL">
+            </div>
+            <div class="userPagetitleR">
+            </div>
+        </div>
+        <!--左右分-->
+        <div style="overflow: hidden; border: 1px solid #ccc; border-top: 5px solid #ccc">
+            <div style="width: 255px; overflow: hidden; float: left">
+                <div class="userpageleft">
+                    <div class="user_menu_box">
+                        #include("UserWeb/userMenu.htm")
+                    </div>
+                </div>
+                <div class="userpageleft2">
+                </div>
+            </div>
+            <div style="width: 920px; overflow: hidden; float: right; padding-top: 10px">
+            <div class="minboxtitle">
+            #if($orderType=="1")
+                  <span class="iconStr">机</span><span class="title"><h2>国内机票订单</h2></span>
+            #else
+                 <span class="iconStr">机</span><span class="title"><h2>国际机票订单</h2></span>
+            #end
+           
+              </div>
+
+
+                <!--资料修改-->
+                <div style="overflow: hidden; margin: 0 auto; width: 890px">
+                    <table class="ordertable" id="Table1">
+                        <thead>
+                            <tr>
+                                <th style="width: 80px;">
+                                    订单号
+                                </th>
+                                <th>
+                                    航班信息
+                                </th>
+                                <th>
+                                    出发日期
+                                </th>
+                                <th>
+                                    预订日期
+                                </th>
+                                <th>
+                                    价格
+                                </th>
+                                 <th>
+                                    支付状态
+                                </th>
+                                <th>
+                                    订单状态
+                                </th>
+                                <th>
+                                    操作
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="listEmployeeContent">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+ 
+    <script type="text/javascript">
+
+
+
+
+        function getOrderList() {
+            var url = "/AJAX/SearchFlight.ashx?action=getorderlist&ts=" + Math.random();
+            var data = {};
+            data.type = $orderType;
+            jQuery.Xload();
+            jQuery.ajax({
+                url: url,
+                type: "POST",
+                data: data,
+                success: function (response) {
+                    jQuery.XloadHide();
+
+                    var json = response.toJson();
+
+
+
+                    if (json.success == false) {
+                        window.location.href = "login.aspx";
+
+                    } else if (parseInt(json.resultCode) == 1) {
+
+                        var str = "<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>{5}</td><td>{6}</td><td>{7}</td></tr>";
+
+
+
+                        var tdstr = "<tr><td colspan=\"7\">没有查询到满足条件的机票订单数据!</td></tr>"
+
+                        if (json.ticketOrdersInfos.length > 0)
+                            tdstr = "";
+                        for (var i = 0; i < json.ticketOrdersInfos.length; i++) {
+
+                            var orderno = "F" + json.ticketOrdersInfos[i].orderNumber;
+
+                            var flightNote = json.ticketOrdersInfos[i].departureCityName + "[" + json.ticketOrdersInfos[i].departureCity + "]→" + json.ticketOrdersInfos[i].arrivalCityName + "[" + json.ticketOrdersInfos[i].arrivalCity + "]";
+
+                            flightNote = "<span style=\"color:#005ea7;font-weight:bold;\">" + flightNote + "</span>";
+
+                            var paystatus = (parseInt(json.ticketOrdersInfos[i].paymentStatus) == 1) ? "<span style=\"color:Green\">已支付</span>" : "<span style=\"color:Red\">未支付</span>";
+
+                            var _status = getFlaghtStatus(json.ticketOrdersInfos[i].orderStatus);
+
+                            var _url = "<a href=\"FlightOrderItem.aspx?orderno=" + json.ticketOrdersInfos[i].orderNumber + "\" target=\"_blank\">订单详情</a>";
+
+                            tdstr += str.format(orderno, flightNote, json.ticketOrdersInfos[i].departureDate, json.ticketOrdersInfos[i].bookingDate, parseFloat(json.ticketOrdersInfos[i].fareTotal).toFixed(2), paystatus, _status, _url);
+
+                        }
+
+                        $("#listEmployeeContent").html(tdstr);
+
+                    }
+                }
+
+            });
+
+        }
+
+
+        getOrderList();
+      
+         
+      
+      
+    </script>
+    #parse("pageFoot.htm")
+</body>
+</html>

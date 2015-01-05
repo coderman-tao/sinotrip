@@ -1,0 +1,201 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+      <title>安徽中青旅在线支付</title>
+    #include("pageHeadCode.htm")  
+     <link href="/Skin/default/style/user.css" rel="stylesheet" type="text/css" />   
+         <link href="/Skin/default/style/order.css" rel="stylesheet" type="text/css" />  
+</head>
+<body>
+ #set($lefMeun = 0)
+    <!--是否显示左侧菜单-->
+    #parse("pageHead.htm")
+
+
+   <div style=" width:1200px; margin:0 auto;  margin-top:10px">
+  
+   <div class="orderPageTop">
+   
+   
+   </div>
+   <form name="alipayment" id="alipayment" action="/OrderPay/UnionPay/UnionPayFrom.aspx" method="post">
+   <div class="orderPageMiddle">
+   
+   <div style=" padding:20px">
+   <div style=" overflow:hidden; float:left; width:550px">
+   
+   <div style=" padding:30px 10px 30px 10px; border:1px solid #eee" class="thisbox" id="pactUserBox">
+   
+<div class="inputbox"><span class="inputTitle">订单编号：</span>
+<span class="inputMsg">$serialno</span></div>
+<input name="OrderCade"  class="pay"  id="OrderCade" type = "hidden" value = "$serialno&#45;$tool.CreateNum(8)"/>
+
+<div class="inputbox"><span class="inputTitle">收款单位：</span>
+<span class="inputMsg">安徽中国青年旅行社有限责任公司</span></div>
+
+
+<div class="inputbox"><span class="inputTitle">产品名称：</span>
+<span class="inputMsg">$name</span></div>
+<input class="pay" name="aliorder" id="aliorder" type = "hidden" value = "$tool.NameHtml($name,30)"/>
+
+<div class="inputbox"><span class="inputTitle">订单总额：</span>
+<span class="inputMsg">$dealmoney.toString("0.00")</span></div>
+
+
+
+<div class="inputbox"><span class="inputTitle">未结余款：</span>
+<span class="inputMsg">$price.toString("0.00")</span></div>
+
+
+#if($payDiscount>0 && $price > $payDiscount)
+<div class="inputbox" style=" ">
+<span class="inputMsg" style=" color:Red">
+周五、周六使用银联在线全额支付;订单金额满100减200,满500减100<font color="Blue">&nbsp;参加活动<input type="checkbox" id="paydiscount" /></font>
+</span>
+</div>
+
+#end
+
+
+<div class="inputbox"><span class="inputTitle">本次付款：</span>
+<span class="inputMsg">
+#if($type==0)
+<input type="text"  class="pay"  value='$price.toString("0")' id="alimoney" name="alimoney"/>
+#end
+
+#if($type>0)
+  $price.toString("0.00")
+  <input type="hidden"  class="pay"  value='$price.toString("0")' name="alimoney"/>
+#end
+</span></div>
+
+
+<div style=" padding-left:120px; padding-top:30px">
+<span style="width:230px;" class="inputbutton orange" id="nextstep">银联支付</span></div>
+</div>
+   
+   </div>
+  <div style=" float:right; width:560px; padding:20px">
+          <div style=" padding-left:210px; height:160px; overflow:hidden; background:Url(/Skin/default/images/user/Find_face.jpg) no-repeat; line-height:25px">
+		 <div> H1、如果您多次点击产生多个支付页面，请保留一个页面完成支付。如因多次支付造成重复扣款，我们会在确认后给您退款。</div>
+		<div>H2、如果您的银行卡或者账户已被扣款，但没有支付成功，这可能是由于网络传输问题造成，我们会尽快为您确认付款，请耐心等待。</div>
+		<div><a style="text-decoration:underline; color:Blue"><strong></strong></a></br></div></div>
+
+<div style=" width:500px;color:#ff6600; line-height:25px; padding:10px 0px 0px 10px; text-align:left">
+<div style="font-weight:bold; color:Red">您也可以选择以下方式进行付款</div>
+<div style="color:Blue">支付宝转帐</div>
+<div style="padding-left:20px; ">帐号：web@51760.com&nbsp;&nbsp;&nbsp;帐户名：安徽中国青年旅行社有限责任公司</div>
+
+          </div>
+		  </div>
+             
+
+
+   </div>
+</div>
+</form>
+   <div class="orderPagebottom"> </div>
+   
+   </div>
+
+
+   <script type="text/javascript">
+       $(function () {
+           $("#nextstep").click(function () {
+               // #if($type>0)
+
+               var url = "/OrderPay/UnionPay/UnionPayFrom.aspx?type=$type";
+               document.alipayment.action = url;
+               document.alipayment.submit();   
+
+               //#end
+
+
+
+               // #if($type==0)
+
+               if ($("#alimoney").val() == "" && parseInt($("#alimoney").val()) == 0) {
+                   jQuery.Xmsg({ type: "err", msg: "请输入本次支付金额!" });
+                   return false;
+               }
+
+               var reg = new RegExp(/^\d*\.?\d{0,2}$/);
+               if (!reg.test($("#alimoney").val())) {
+                   jQuery.Xmsg({ type: "err", msg: "请输入正确金额!" });
+                   return false;
+               }
+               if (parseInt($("#alimoney").val()) < 1) {
+                   jQuery.Xmsg({ type: "err", msg: "付款金额最小为1元!" });
+                   return false;
+               }
+               if (parseInt($price) < parseInt($("#alimoney").val())) {
+
+                   if (confirm("付款金额大于应付金额，确认支付吗？")) {
+
+                   } else {
+                       return false;
+                   }
+               }             
+               //订单验证
+               var url = "/AJAX/TourOrder.aspx?action=CheckTourPay";
+               var data = {};
+               data = jQuery.Xfilled(".pay", false);
+               data.id = $erpid;   
+               jQuery.Xload();
+               jQuery.ajax({
+                   url: url,
+                   type: "POST",
+                   data: data,
+                   success: function (response) {
+                       jQuery.XloadHide();
+                       var url = "/OrderPay/UnionPay/UnionPayFrom.aspx";
+                       document.alipayment.action = url;
+                       document.alipayment.submit();                      
+                       // jQuery.Xmsg(json.msg);
+                   }
+               });
+            // #end
+
+
+
+           })
+
+
+
+
+           $("#alimoney").keyup(function () {
+
+               var val = $(this).val();
+               if (!val.match(/^[\+\-]?\d*?\.?\d*?$/))
+                   $(this).val("");
+           })
+           $("#alimoney").focus(function () {
+
+               var val = $(this).val();
+               if (!val.match(/^[\+\-]?\d*?\.?\d*?$/))
+                   $(this).val("");
+           })
+       })
+
+       //#if($payDiscount>0 && $price > $payDiscount)
+
+       $("#paydiscount").change(function () {
+           if ($(this).attr("checked")) {
+               $("#alimoney").val($price - $payDiscount);
+               $("#alimoney").attr("readonly","readonly");
+           } else {
+               $("#alimoney").val($price);
+               $("#alimoney").removeAttr("readonly");
+           }
+       })
+
+      
+
+      // #end
+
+     
+   </script>
+      
+      #parse("pageFoot.htm")
+</body>
+</html>

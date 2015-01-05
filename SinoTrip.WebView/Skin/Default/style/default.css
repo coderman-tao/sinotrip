@@ -1,0 +1,183 @@
+﻿
+.ticketTjTitleBox{ padding-left:10px; height:40px; line-height:30px; background:url(../images/flights/ticketlisttitle.jpg) no-repeat left bottom; font-family:微软雅黑; color:#3983e4}
+
+table.default_top_min_advert td{ border-width:0px; padding:0px; width:166px; overflow:hidden; height:320px}
+table.default_top_min_advert { border-width:0px}
+table.default_top_min_advert td.over{ border:1px solid #eee}
+
+
+.default_search_box_bj,.default_search_box
+{
+    height:365px; position:absolute; bottom:0px; width:380px;
+  /* -moz-border-radius-topright: 25px; 
+-webkit-border-top-right-radius: 25px; 
+   -moz-border-radius: 0px 25px 0px 25px; 
+-webkit-border-radius:  0px 25px 0px 25px; */
+                                           
+ }
+ 
+ 
+
+ .default_search_box
+ {
+     border:1px solid #f7f7f7;
+     z-index:9;
+    height:364px; position:absolute; bottom:0px; width:378px;
+     }
+.default_search_box_bj 
+{
+    z-index:8;
+    background-color:#ffffff;
+     filter:alpha(opacity=86);
+		-moz-opacity:0.86;
+		opacity:0.86;
+ }
+
+
+
+.leftbutton{height:145px; cursor:pointer}
+.leftbutton.current{ }
+
+.leftbutton div.buttonbj
+{
+    height:145px; width:55px; position:absolute ;
+    
+    }
+    
+.leftbutton div.buttonbtab_tour,.leftbutton div.buttonbtab_flight{
+ height:80px; width:55px; position:absolute ; padding-top:65px; text-align:center; font-size:14px; font-family:微软雅黑;
+ color:#666; line-height:16px;
+
+}
+
+
+.leftbutton div.buttonbtab_tour{ background:url(../images/defult_tour_m.png) no-repeat center  }
+.leftbutton div.buttonbtab_flight{ background:url(../images/defult_flight_m.png) no-repeat center  }
+
+.leftbutton.current div.buttonbj
+{     
+   
+    -moz-border-radius: 15px 0px 0px 15px; 
+    -webkit-border-radius:15px 0px 0px 15px;
+    border:1px solid #0066ff; 
+    border-right:0px;
+    box-shadow: 0 8px 6px -6px #ebebeb;
+    height:145px; 
+    background-color:#ffffff;
+     filter:alpha(opacity=50);
+		-moz-opacity:0.50;
+		opacity:0.50;    
+		
+    }
+
+.topbutton.current{border-bottom:1px solid #ffffff; -moz-border-radius: 10px 10px 10px 10px; -webkit-border-radius:10px 10px 10px 10px;}/*box-shadow: 0 8px 6px -6px #ebebeb;*/
+.bottombutton.current{border-top:1px solid #ffffff;-moz-border-radius: 10px 10px 10px 10px; -webkit-border-radius:10px 10px 10px 10px;}
+
+.default_user{ overflow:hidden; border-top:3px solid #ff3300; background:Url(../images/default_user_top.png) no-repeat right top}
+	.default_user_box,.default_order_list{height:76px; padding:10px 5px 5px 10px; padding-left:86px; line-height:20px; color:#666}
+	.default_user_function{line-height:30px;}
+	.default_user_face,.default_order_face{ width:64px; height:64px; top:18px; left:10px; border:1px solid #eee; position:absolute;border-radius:32px; overflow:hidden}
+	.default_order_list{ height:65px}
+	.default_order_face{ top:10px}
+	.default_user_function a{text-decoration:none;-moz-user-select:none; display:inline-block; padding-right:5px; color:#ff3300}
+	
+	.default_user_buttonlist{height:30px; padding:5px; text-align:center;}
+	.default_user_buttonlist span.buttonbox{ padding:0px 5px 0px 5px}
+	.default_user_buttonlist span.buttonbox a
+	{		
+		text-decoration:none;
+		-moz-user-select:none; 
+		display:inline-block; 
+		padding:5px 15px 5px 15px; 
+		color:#ffffff; height:23px; 
+		line-height:23px;
+		background:#fca204;
+		border-radius:5px; 
+		
+	 } 
+	 
+	 .ahcyts_honor{ background:url(../images/ahcyts_honor.png) no-repeat right center; overflow:hidden; padding:5px 85px 0px 20px; line-height:20px; color:#666}
+	 
+	
+	.default_box_title{ height:45px; padding:0px 120px 0px 250px; background:url(../images/default_box_title.jpg) no-repeat left 0px; position:relative;}
+	
+	
+	.default_box_title a{ position:absolute; right:10px; color:#ff3300; top:0px; height:25px; line-height:25px;top:20px; font-family:宋体}
+
+	.default_box_title.floor1,.default_box_title.floor2,.default_box_title.floor3,.default_box_title.floor4,.default_box_title.floor5{ background-position:left -80px;border-bottom:3px solid #bababa; margin-bottom:5px; padding-left:160px;}
+	
+	/**/
+	.default_box_title.floor2{ background-position:left -160px}
+	.default_box_title.floor3{ background-position:left -240px}
+	.default_box_title.floor4{ background-position:left -320px}
+	.default_box_title.floor5{ background-position:left -400px}
+	
+	
+	
+	
+	.default_product_list{ overflow:hidden; padding:10px 0px 0px 0px; margin:0}
+	.default_product_list li{ overflow:hidden; margin:0; height:235px; width:275px; padding-left:13px; float:left}
+	.default_product_list li .imgbox{ border:1px solid #eee; height:175px; }
+	
+	.default_product_list li .imgbox a{-moz-user-select:none; display:inline-block; width:275px; height:175px;position:absolute;} 
+	.default_product_list li .imgbox a .imgcontent{-moz-user-select:none; display:inline-block; width:275px; height:175px; overflow:hidden; position:relative; z-index:1}
+	.default_product_list li .imgbox a img{ border:0}
+	
+	.default_product_list li a.namebox{width:275px;-moz-user-select:none; display:inline-block;line-height:35px; position:relative; text-align:right; font-family:微软雅黑; font-size:14px; font-weight:bold; color:#ff3300; padding-right:5px}
+	.default_product_list li a.namebox span.productname{ -moz-user-select:none; display:inline-block;width:180px; height:35px; position:absolute; top:0; left:0; overflow:hidden; text-align:left;}
+
+	
+	
+	.floorBox{padding:0px 300px 0px 250px; height:375px; position:relative; overflow:hidden}
+	.floorBox .leftbox,.floorBox .rightbox{height:360px;position:absolute; top:0px;overflow:hidden;}
+	.floorBox .leftbox{width:240px; left:0px; }
+	.floorBox .rightbox{ width:295px; right:0px; padding:5px}
+	.floor_rightBoxcontent{overflow:hidden; border:1px solid #eee; width:295px; height:360px; overflow:hidden}
+	
+	.floor_leftlabbox{overflow:hidden; padding:10px 5px 0px 10px; color:#666; line-height:25px}
+	.floor_leftlabbox .labletitle{font-size:14px; font-weight:bold;line-height:35px}
+	.floor_leftlabbox .lablelist{line-height:13px}	
+	.floor_leftlabbox .lablelist a{ border-right:1px solid #ccc;-moz-user-select:none; display:inline-block; padding:0px 10px 0px 10px; height:13px; margin:6px 0px 6px 0px}
+	.floor_leftlabbox .lablelist a:hover{ color:#ff6600}
+	.dist_list_box{ position:absolute; width:890px; }
+	.dist_list_box a{ position:relative;-moz-user-select:none; display:inline-block; color:#666; text-align:center; padding-top:18px; height:30px; line-height:30px; top:0px; overflow:hidden  }
+	.dist_list_box a.mouseover{ color:#ff3300;  font-size:12px; font-weight:bold}
+	.dist_list_box a.mouseover .button_bj{ height:10px; bottom:0px; left:0%;border-bottom:3px solid #ff6600; width:100%; background:url(../images/arrow.png) no-repeat center bottom;position:absolute;-moz-user-select:none; display:inline-block;}
+	
+	
+	.switch_dist_content{height:375px; width:635px; position:absolute; overflow:hidden; display:none;}
+	
+	.switch_dist_content a{-moz-user-select:none; display:inline-block; width:200px; height:175px; float:left;padding:5px 0px 5px 9px}
+	.switch_dist_content a .contentbox{ text-align:center ;height:175px; border:1px solid #eee;-moz-user-select:none; display:inline-block; width:200px; overflow:hidden; position:relative;}
+	.switch_dist_content a .contentbox img{ height:175px; border:0px}
+	.switch_dist_content a .contentbox .contenttitle_bj
+	{
+		 filter:alpha(opacity=70);
+		-moz-opacity:0.70;
+		opacity:0.70;
+		height:30px; position:absolute; left:0px; bottom:0px; 
+	     width:200px; background-color:#000000;		
+		}
+	.switch_dist_content a .contentbox .contenttitle_bj.mousemove{ background-color:#333333}	
+		
+	.switch_dist_content a .contentbox .productname,.switch_dist_content a .contentbox .price,.switch_dist_content a .contentbox .contenttitle
+	{
+		-moz-user-select:none; display:inline-block;
+		font-size:13px;
+	    position:absolute;	   
+	    bottom:0px;
+	    line-height:30px;	   
+	}
+	
+	.switch_dist_content a .contentbox .contenttitle { color:#ffffff; padding:0px 10px 0px 10px; text-align:left; bottom:-100%}
+	
+	.switch_dist_content a .contentbox .productname{ width:140px;  overflow:hidden; left:5px; text-align:left; color:#ffffff; height:30px;}
+	.switch_dist_content a .contentbox .price{  font-family:Arial; color:Red; font-weight:bold;width:75px; right:5px; text-align:right; height:30px;}
+	
+	
+	
+	.mF_rapoo_wrap{ padding:0px; border-width:0px;}
+	
+	
+	.inputbox span.inputTitle{ width:60px;}
+.inputbox span.inputContent input[type="text"]{ width:200px}

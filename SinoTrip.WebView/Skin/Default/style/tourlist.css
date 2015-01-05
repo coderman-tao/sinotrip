@@ -1,0 +1,45 @@
+﻿span.inputTitle.w80{ width:80px; padding-left:5px}
+.searchbox
+{
+    line-height: 35px;
+    height: 35px;
+    border-bottom:1px dotted  #ccc;
+   padding:0px 110px 0px 80px;
+   overflow:hidden
+}
+
+.searchbox.showbox{ height:auto}
+
+.searchbox span,.searchbox a
+{
+    -moz-user-select: none;
+    display: inline-block;
+
+}
+.searchbox span.searchtitle
+{
+   
+    width: 80px;
+    text-align: right;
+    color:#666;
+}
+
+.searchbox a{padding:0px 10px 0px 10px;  text-align:center; color:#006cbf}
+.searchbox a.allkeyword{ color:#ff6600;}
+.searchbox a.current{ color:#006cbf; font-weight:bold}
+div.keyButtonbox{width:120px; height:20px; position:absolute;left:705px; top:5px}
+div.keytypebox{width:100px; height:20px; position:absolute; right:0px; text-align:right}
+.keywordbutton{ height:25px; background-color:#fefefe; border-color:#eaeaea; line-height:25px; width:50px; padding:0; margin:0}
+
+.tourlist div.tourbox{ border:1px solid #ffffff; border-bottom:1px solid #ccc; padding:10px; height:170px;}
+.tourlist div.tourbox.opt{ border:1px solid #ff6600;}
+.tourlist div.tourbox div.imgbox{ width:238px; height:170px; float:left; overflow:hidden; border:1px solid #eee; position:relative}
+
+.tourlist div.tourbox div.tourcounet{ width:425px; padding-right:155px;float:right; position:relative; height:170px; overflow:hidden; }
+.tourlist div.tourbox div.tourcounet div.pricebox{ width:150px; position:absolute; top:0px; right:0px; height:170px; line-height:35px}
+
+
+.tourlist div.tourbox div.touritem{ line-height:35px; color:#666}
+.tourlist div.tourbox div.touritem h3{ color:#ff6600; height:25px; line-height:20px; margin:0px; padding:0px;}
+
+.tourlistDis{ margin-top:5px}

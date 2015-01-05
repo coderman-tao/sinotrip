@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <link href="/Skin/default/style/user.css" rel="stylesheet" type="text/css" />
+      <title></title>
+    #include("pageHeadCode.htm")  
+   
+</head>
+<body>
+
+ #set($lefMeun = 0)
+    <!--是否显示左侧菜单-->
+    #parse("pageHead.htm")
+    <div class="pagebox" style=" height:300px;">
+    
+    </div>
+      #parse("pageFoot.htm")
+
+
+
+      <script type="text/javascript">
+          QC.Login.signOut()
+          jQuery.Xmsg({ msg: "成功安全退出！", button: function () { window.location.href = "/" } })
+
+            
+      
+   
+      </script>
+</body>
+</html>

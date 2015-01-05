@@ -1,0 +1,12 @@
+﻿<channels xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <channel id="265" name="电商频道" url="http://www.qiaomian.com">
+    <block forum="263">跟团旅游</block>
+    <block forum="264">代办签证</block>
+    <block forum="265">景点门票</block>
+    <block forum="266">酒店预订</block>
+    <block forum="267">机票预订</block>
+    <block forum="268">半自由行</block>
+  </channel>
+  <channel id="266" name="特卖频道" url="http://www.qiaomian.com/sale">
+  </channel>
+</channels>

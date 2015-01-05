@@ -13,12 +13,13 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SinoTrip.WebView</RootNamespace>
     <AssemblyName>SinoTrip.WebView</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -39,36 +40,517 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="NVelocity">
+      <HintPath>..\UsingDlls\NVelocity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Config\data\MallChannel.xml" />
+    <Content Include="App_Config\Search\Dictionaries\ChsDoubleName1.txt" />
+    <Content Include="App_Config\Search\Dictionaries\ChsDoubleName2.txt" />
+    <Content Include="App_Config\Search\Dictionaries\ChsSingleName.txt" />
+    <Content Include="App_Config\Search\Dictionaries\Stopword.txt" />
+    <Content Include="App_Config\Search\Dictionaries\Synonym.txt" />
+    <Content Include="App_Config\Search\Dictionaries\Wildcard.txt" />
+    <Content Include="App_Config\Search\PanGu.xml" />
+    <Content Include="head.aspx" />
+    <Content Include="Hotel\Default.aspx" />
+    <Content Include="Res\js\common.js" />
+    <Content Include="Res\js\flights.js" />
+    <Content Include="Res\js\Hotel.js" />
+    <Content Include="Res\js\imgUpolad\expressInstall.swf" />
+    <Content Include="Res\js\imgUpolad\swfobject.js" />
+    <Content Include="Res\js\imgUpolad\uploadImage.swf" />
+    <Content Include="Res\js\jquery-1.4.1.min.js" />
+    <Content Include="Res\js\jquery-1.8.2.min.js" />
+    <Content Include="Res\js\jquery-form.js" />
+    <Content Include="Res\js\jquerycountDown.js" />
+    <Content Include="Res\js\jQueryRotate.2.2.js" />
+    <Content Include="Res\js\jqueryUpload.js" />
+    <Content Include="Res\js\json2.js" />
+    <Content Include="Res\js\Lcalendar.js" />
+    <Content Include="Res\js\mf-pattern\img\mF_51xflash\play.gif" />
+    <Content Include="Res\js\mf-pattern\img\mF_51xflash\tit-ar.gif" />
+    <Content Include="Res\js\mf-pattern\img\mF_classicHB\btn-blue.gif" />
+    <Content Include="Res\js\mf-pattern\img\mF_classicHB\btn-gray.gif" />
+    <Content Include="Res\js\mf-pattern\img\mF_classicHC\btn-bg.png" />
+    <Content Include="Res\js\mf-pattern\img\mF_classicHC\btn-red.gif" />
+    <Content Include="Res\js\mf-pattern\img\mF_games_tb\ar.gif" />
+    <Content Include="Res\js\mf-pattern\img\mF_kdui\dots.png" />
+    <Content Include="Res\js\mf-pattern\img\mF_kdui\slider-arrows.png" />
+    <Content Include="Res\js\mf-pattern\img\mF_kiki\ar-left.gif" />
+    <Content Include="Res\js\mf-pattern\img\mF_kiki\ar-right.gif" />
+    <Content Include="Res\js\mf-pattern\img\mF_kiki\tit-ar.gif" />
+    <Content Include="Res\js\mf-pattern\img\mF_pithy_tb\btn.gif" />
+    <Content Include="Res\js\mf-pattern\img\mF_pithy_tb\turn.gif" />
+    <Content Include="Res\js\mf-pattern\img\mF_qiyi\bg.jpg" />
+    <Content Include="Res\js\mf-pattern\img\mF_qiyi\loading.gif" />
+    <Content Include="Res\js\mf-pattern\img\mF_sohusports\sh-btn.gif" />
+    <Content Include="Res\js\mf-pattern\img\mF_taobaomall\btn-bg2.gif" />
+    <Content Include="Res\js\mf-pattern\img\mF_tbhuabao\btn-bg.gif" />
+    <Content Include="Res\js\mf-pattern\mF_51xflash.css" />
+    <Content Include="Res\js\mf-pattern\mF_51xflash.js" />
+    <Content Include="Res\js\mf-pattern\mF_classicHB.css" />
+    <Content Include="Res\js\mf-pattern\mF_classicHB.js" />
+    <Content Include="Res\js\mf-pattern\mF_classicHC.css" />
+    <Content Include="Res\js\mf-pattern\mF_classicHC.js" />
+    <Content Include="Res\js\mf-pattern\mF_dleung.css" />
+    <Content Include="Res\js\mf-pattern\mF_dleung.js" />
+    <Content Include="Res\js\mf-pattern\mF_expo2010.css" />
+    <Content Include="Res\js\mf-pattern\mF_expo2010.js" />
+    <Content Include="Res\js\mf-pattern\mF_fancy.css" />
+    <Content Include="Res\js\mf-pattern\mF_fancy.js" />
+    <Content Include="Res\js\mf-pattern\mF_fscreen_tb.css" />
+    <Content Include="Res\js\mf-pattern\mF_fscreen_tb.js" />
+    <Content Include="Res\js\mf-pattern\mF_games_tb.css" />
+    <Content Include="Res\js\mf-pattern\mF_games_tb.js" />
+    <Content Include="Res\js\mf-pattern\mF_kdui.css" />
+    <Content Include="Res\js\mf-pattern\mF_kdui.js" />
+    <Content Include="Res\js\mf-pattern\mF_kiki.css" />
+    <Content Include="Res\js\mf-pattern\mF_kiki.js" />
+    <Content Include="Res\js\mf-pattern\mF_ladyQ.css" />
+    <Content Include="Res\js\mf-pattern\mF_ladyQ.js" />
+    <Content Include="Res\js\mf-pattern\mF_liquid.css" />
+    <Content Include="Res\js\mf-pattern\mF_liquid.js" />
+    <Content Include="Res\js\mf-pattern\mF_liuzg.css" />
+    <Content Include="Res\js\mf-pattern\mF_liuzg.js" />
+    <Content Include="Res\js\mf-pattern\mF_luluJQ.css" />
+    <Content Include="Res\js\mf-pattern\mF_luluJQ.js" />
+    <Content Include="Res\js\mf-pattern\mF_pconline.css" />
+    <Content Include="Res\js\mf-pattern\mF_pconline.js" />
+    <Content Include="Res\js\mf-pattern\mF_peijianmall.css" />
+    <Content Include="Res\js\mf-pattern\mF_peijianmall.js" />
+    <Content Include="Res\js\mf-pattern\mF_pithy_tb.css" />
+    <Content Include="Res\js\mf-pattern\mF_pithy_tb.js" />
+    <Content Include="Res\js\mf-pattern\mF_qiyi.css" />
+    <Content Include="Res\js\mf-pattern\mF_qiyi.js" />
+    <Content Include="Res\js\mf-pattern\mF_quwan.css" />
+    <Content Include="Res\js\mf-pattern\mF_quwan.js" />
+    <Content Include="Res\js\mf-pattern\mF_rapoo.css" />
+    <Content Include="Res\js\mf-pattern\mF_rapoo.js" />
+    <Content Include="Res\js\mf-pattern\mF_shutters.css" />
+    <Content Include="Res\js\mf-pattern\mF_shutters.js" />
+    <Content Include="Res\js\mf-pattern\mF_slide3D.css" />
+    <Content Include="Res\js\mf-pattern\mF_slide3D.js" />
+    <Content Include="Res\js\mf-pattern\mF_sohusports.css" />
+    <Content Include="Res\js\mf-pattern\mF_sohusports.js" />
+    <Content Include="Res\js\mf-pattern\mF_taobao2010.css" />
+    <Content Include="Res\js\mf-pattern\mF_taobao2010.js" />
+    <Content Include="Res\js\mf-pattern\mF_taobaomall.css" />
+    <Content Include="Res\js\mf-pattern\mF_taobaomall.js" />
+    <Content Include="Res\js\mf-pattern\mF_tbhuabao.css" />
+    <Content Include="Res\js\mf-pattern\mF_tbhuabao.js" />
+    <Content Include="Res\js\mf-pattern\mF_YSlider.css" />
+    <Content Include="Res\js\mf-pattern\mF_YSlider.js" />
+    <Content Include="Res\js\misc.js" />
+    <Content Include="Res\js\My97DatePicker\calendar.js" />
+    <Content Include="Res\js\My97DatePicker\lang\en.js" />
+    <Content Include="Res\js\My97DatePicker\lang\zh-cn.js" />
+    <Content Include="Res\js\My97DatePicker\lang\zh-tw.js" />
+    <Content Include="Res\js\My97DatePicker\skin\datePicker.gif" />
+    <Content Include="Res\js\My97DatePicker\skin\default\datepicker.css" />
+    <Content Include="Res\js\My97DatePicker\skin\default\img.gif" />
+    <Content Include="Res\js\My97DatePicker\skin\twoer\datepicker-dev.css" />
+    <Content Include="Res\js\My97DatePicker\skin\twoer\datepicker.css" />
+    <Content Include="Res\js\My97DatePicker\skin\twoer\img.gif" />
+    <Content Include="Res\js\My97DatePicker\skin\twoer\img.png" />
+    <Content Include="Res\js\My97DatePicker\skin\WdatePicker.css" />
+    <Content Include="Res\js\My97DatePicker\skin\whyGreen\bg.jpg" />
+    <Content Include="Res\js\My97DatePicker\skin\whyGreen\datepicker.css" />
+    <Content Include="Res\js\My97DatePicker\skin\whyGreen\img.gif" />
+    <Content Include="Res\js\My97DatePicker\WdatePicker.js" />
+    <Content Include="Res\js\myfocus-2.0.1.min.js" />
+    <Content Include="Res\js\myfocus-2.0.4.min.js" />
+    <Content Include="Res\js\pdfobject.js" />
+    <Content Include="Res\js\swfupload\cancel_upload.jpg" />
+    <Content Include="Res\js\swfupload\handlers.js" />
+    <Content Include="Res\js\swfupload\swfupload.cookies.js" />
+    <Content Include="Res\js\swfupload\swfupload.js" />
+    <Content Include="Res\js\swfupload\swfupload.proxy.js" />
+    <Content Include="Res\js\swfupload\swfupload.queue.js" />
+    <Content Include="Res\js\swfupload\swfupload.speed.js" />
+    <Content Include="Res\js\swfupload\swfupload.swf" />
+    <Content Include="Res\js\swfupload\swfupload_fp9.swf" />
+    <Content Include="Res\js\swfupload\upload-btn.png" />
+    <Content Include="Skin\Default\images\400.jpg" />
+    <Content Include="Skin\Default\images\ahcyts_honor.png" />
+    <Content Include="Skin\Default\images\arrow.png" />
+    <Content Include="Skin\Default\images\buy.jpg" />
+    <Content Include="Skin\Default\images\buy1.jpg" />
+    <Content Include="Skin\Default\images\buy2.jpg" />
+    <Content Include="Skin\Default\images\buyflow.jpg" />
+    <Content Include="Skin\Default\images\calendarButton.jpg" />
+    <Content Include="Skin\Default\images\centerline.jpg" />
+    <Content Include="Skin\Default\images\coupon\bg-1.jpg" />
+    <Content Include="Skin\Default\images\coupon\bg-2.jpg" />
+    <Content Include="Skin\Default\images\coupon\bg-3.jpg" />
+    <Content Include="Skin\Default\images\coupon\bg-4.jpg" />
+    <Content Include="Skin\Default\images\coupon\bg-5.jpg" />
+    <Content Include="Skin\Default\images\coupon\button.png" />
+    <Content Include="Skin\Default\images\default_box_title.jpg" />
+    <Content Include="Skin\Default\images\default_user_top.png" />
+    <Content Include="Skin\Default\images\defult_flight.png" />
+    <Content Include="Skin\Default\images\defult_flight_m.png" />
+    <Content Include="Skin\Default\images\defult_tour.png" />
+    <Content Include="Skin\Default\images\defult_tour_m.png" />
+    <Content Include="Skin\Default\images\dialogpanel_icon.png" />
+    <Content Include="Skin\Default\images\flights\book_progress1_1.png" />
+    <Content Include="Skin\Default\images\flights\flightslogo.png" />
+    <Content Include="Skin\Default\images\flights\flight_pagebj.jpg" />
+    <Content Include="Skin\Default\images\flights\ico_sprite.png" />
+    <Content Include="Skin\Default\images\flights\ticketlisttitle.jpg" />
+    <Content Include="Skin\Default\images\freeIcon.png" />
+    <Content Include="Skin\Default\images\grey_icon.gif" />
+    <Content Include="Skin\Default\images\gtyIcon.png" />
+    <Content Include="Skin\Default\images\hotel\800.jpg" />
+    <Content Include="Skin\Default\images\hotel\BUSINESS.png" />
+    <Content Include="Skin\Default\images\hotel\HOSPITAL.png" />
+    <Content Include="Skin\Default\images\hotel\PAVILIONHALL.png" />
+    <Content Include="Skin\Default\images\hotel\SCENICSPOTS.png" />
+    <Content Include="Skin\Default\images\hotel\StarLevel.png" />
+    <Content Include="Skin\Default\images\hotel\SUBWAY.png" />
+    <Content Include="Skin\Default\images\hotel\TRAINAIR.png" />
+    <Content Include="Skin\Default\images\hotel\UNIVERSITY.png" />
+    <Content Include="Skin\Default\images\hotel\un_index16.png" />
+    <Content Include="Skin\Default\images\index1.jpg" />
+    <Content Include="Skin\Default\images\index2.jpg" />
+    <Content Include="Skin\Default\images\index3.jpg" />
+    <Content Include="Skin\Default\images\index4.jpg" />
+    <Content Include="Skin\Default\images\index5.jpg" />
+    <Content Include="Skin\Default\images\index6.jpg" />
+    <Content Include="Skin\Default\images\index7.jpg" />
+    <Content Include="Skin\Default\images\journey_icon.gif" />
+    <Content Include="Skin\Default\images\left_menu.png" />
+    <Content Include="Skin\Default\images\logo.jpg" />
+    <Content Include="Skin\Default\images\menu_login_button.jpg" />
+    <Content Include="Skin\Default\images\mini_kf.png" />
+    <Content Include="Skin\Default\images\natural.jpg" />
+    <Content Include="Skin\Default\images\navigation.png" />
+    <Content Include="Skin\Default\images\offline_face.jpg" />
+    <Content Include="Skin\Default\images\online_face.jpg" />
+    <Content Include="Skin\Default\images\order\orderflowPath.jpg" />
+    <Content Include="Skin\Default\images\order_icon.gif" />
+    <Content Include="Skin\Default\images\pay_icon.png" />
+    <Content Include="Skin\Default\images\product_imglab.png" />
+    <Content Include="Skin\Default\images\search.png" />
+    <Content Include="Skin\Default\images\tab_bj.jpg" />
+    <Content Include="Skin\Default\images\tab_line.jpg" />
+    <Content Include="Skin\Default\images\td_bj.gif" />
+    <Content Include="Skin\Default\images\tejia.png" />
+    <Content Include="Skin\Default\images\temp001.jpg" />
+    <Content Include="Skin\Default\images\tour_kf.jpg" />
+    <Content Include="Skin\Default\images\user\cart.png" />
+    <Content Include="Skin\Default\images\user\coupon_box_title_l.jpg" />
+    <Content Include="Skin\Default\images\user\face.png" />
+    <Content Include="Skin\Default\images\user\find-email.jpg" />
+    <Content Include="Skin\Default\images\user\find-mob.jpg" />
+    <Content Include="Skin\Default\images\user\Find_face.jpg" />
+    <Content Include="Skin\Default\images\user\find_title.jpg" />
+    <Content Include="Skin\Default\images\user\help.png" />
+    <Content Include="Skin\Default\images\user\helppage_lbox2.jpg" />
+    <Content Include="Skin\Default\images\user\help_box_title_l.jpg" />
+    <Content Include="Skin\Default\images\user\help_box_title_r.jpg" />
+    <Content Include="Skin\Default\images\user\help_icon.gif" />
+    <Content Include="Skin\Default\images\user\icon.gif" />
+    <Content Include="Skin\Default\images\user\login.gif" />
+    <Content Include="Skin\Default\images\user\loginbj.jpg" />
+    <Content Include="Skin\Default\images\user\login_bj.jpg" />
+    <Content Include="Skin\Default\images\user\login_gif.gif" />
+    <Content Include="Skin\Default\images\user\login_icon.gif" />
+    <Content Include="Skin\Default\images\user\menu_icon.gif" />
+    <Content Include="Skin\Default\images\user\orderlist_icon.jpg" />
+    <Content Include="Skin\Default\images\user\pass_icon.gif" />
+    <Content Include="Skin\Default\images\user\regbj.jpg" />
+    <Content Include="Skin\Default\images\user\reg_an.jpg" />
+    <Content Include="Skin\Default\images\user\reg_bottom.jpg" />
+    <Content Include="Skin\Default\images\user\reg_face.jpg" />
+    <Content Include="Skin\Default\images\user\reg_middle.jpg" />
+    <Content Include="Skin\Default\images\user\reg_title.jpg" />
+    <Content Include="Skin\Default\images\user\reg_top.jpg" />
+    <Content Include="Skin\Default\images\user\ResePas.jpg" />
+    <Content Include="Skin\Default\images\user\table_bj.jpg" />
+    <Content Include="Skin\Default\images\user\table_down.jpg" />
+    <Content Include="Skin\Default\images\user\table_th.jpg" />
+    <Content Include="Skin\Default\images\user\table_up.jpg" />
+    <Content Include="Skin\Default\images\user\UserPage_bottom.jpg" />
+    <Content Include="Skin\Default\images\user\UserPage_bottoms.jpg" />
+    <Content Include="Skin\Default\images\user\userpage_lbox.jpg" />
+    <Content Include="Skin\Default\images\user\userpage_lbox2.jpg" />
+    <Content Include="Skin\Default\images\user\UserPage_middle.jpg" />
+    <Content Include="Skin\Default\images\user\UserPage_middles.jpg" />
+    <Content Include="Skin\Default\images\user\UserPage_top.jpg" />
+    <Content Include="Skin\Default\images\user\UserPage_tops.jpg" />
+    <Content Include="Skin\Default\images\user\user_box_title_bj.jpg" />
+    <Content Include="Skin\Default\images\user\user_box_title_l.jpg" />
+    <Content Include="Skin\Default\images\user\user_box_title_r.jpg" />
+    <Content Include="Skin\Default\images\user\User_icon.gif" />
+    <Content Include="Skin\Default\images\user\user_l_title.jpg" />
+    <Content Include="Skin\Default\images\user\user_title_bj.jpg" />
+    <Content Include="Skin\Default\images\user\v.png" />
+    <Content Include="Skin\Default\images\visa\buy.png" />
+    <Content Include="Skin\Default\images\visa\pageIcon.png" />
+    <Content Include="Skin\Default\images\visa\visastep.jpg" />
+    <Content Include="Skin\Default\images\weixin.jpg" />
+    <Content Include="Skin\Default\js\default.js" />
+    <Content Include="Skin\Default\js\flightOrder.js" />
+    <Content Include="Skin\Default\js\pageHead.js" />
+    <Content Include="Skin\Default\js\sale\touritem.js" />
+    <Content Include="Skin\Default\js\tourfill.js" />
+    <Content Include="Skin\Default\js\touritem.js" />
+    <Content Include="Skin\Default\js\UserWeb\order.js" />
+    <Content Include="Skin\Default\js\UserWeb\orderList.js" />
+    <Content Include="Skin\Default\style\default.css" />
+    <Content Include="Skin\Default\style\flight_logo.css" />
+    <Content Include="Skin\Default\style\flight_order.css" />
+    <Content Include="Skin\Default\style\hotle.css" />
+    <Content Include="Skin\Default\style\hotleitem.css" />
+    <Content Include="Skin\Default\style\order.css" />
+    <Content Include="Skin\Default\style\style.css" />
+    <Content Include="Skin\Default\style\touritem.css" />
+    <Content Include="Skin\Default\style\tourlist.css" />
+    <Content Include="Skin\Default\style\user.css" />
+    <Content Include="Skin\Default\style\visa.css" />
+    <Content Include="Template\default\CouponReceive.htm" />
+    <Content Include="Template\default\default.htm" />
+    <Content Include="Template\default\head.html" />
+    <Content Include="Template\default\help\default.html" />
+    <Content Include="Template\default\help\info.html" />
+    <Content Include="Template\default\Mall\Flights\default.htm" />
+    <Content Include="Template\default\Mall\Flights\FlightFill.htm" />
+    <Content Include="Template\default\Mall\Flights\SearchResult.htm" />
+    <Content Include="Template\default\Mall\Hotel\default.htm" />
+    <Content Include="Template\default\Mall\Hotel\HotelFill.htm" />
+    <Content Include="Template\default\Mall\Hotel\HotelItem.htm" />
+    <Content Include="Template\default\Mall\Hotel\HotelList.htm" />
+    <Content Include="Template\default\Mall\tejia.htm" />
+    <Content Include="Template\default\Mall\Tour\free.htm" />
+    <Content Include="Template\default\Mall\Tour\Itinerary.htm" />
+    <Content Include="Template\default\Mall\Tour\TourFill.htm" />
+    <Content Include="Template\default\Mall\Tour\TourItem.htm" />
+    <Content Include="Template\default\Mall\Tour\TourList.htm" />
+    <Content Include="Template\default\Mall\Visa\default.html" />
+    <Content Include="Template\default\Mall\Visa\info.html" />
+    <Content Include="Template\default\Mall\Visa\list.html" />
+    <Content Include="Template\default\Mall\Visa\Order.html" />
+    <Content Include="Template\default\news\info.html" />
+    <Content Include="Template\default\OrderPay\default.htm" />
+    <Content Include="Template\default\pageFoot.htm" />
+    <Content Include="Template\default\pageHead.htm" />
+    <Content Include="Template\default\pageHeadCode.htm" />
+    <Content Include="Template\default\register.html" />
+    <Content Include="Template\default\Sale\default.html" />
+    <Content Include="Template\default\Sale\info_tour.html" />
+    <Content Include="Template\default\Sale\info_visa.html" />
+    <Content Include="Template\default\Sale\order_tour.html" />
+    <Content Include="Template\default\Sale\order_visa.html" />
+    <Content Include="Template\default\UserWeb\CheckTourPact.htm" />
+    <Content Include="Template\default\UserWeb\coupon.html" />
+    <Content Include="Template\default\UserWeb\default.htm" />
+    <Content Include="Template\default\UserWeb\ErpPactshow.htm" />
+    <Content Include="Template\default\UserWeb\FlightOrderItem.htm" />
+    <Content Include="Template\default\UserWeb\FlightOrderList.htm" />
+    <Content Include="Template\default\UserWeb\HotelOrderItem.htm" />
+    <Content Include="Template\default\UserWeb\HotelOrderList.htm" />
+    <Content Include="Template\default\UserWeb\login.htm" />
+    <Content Include="Template\default\UserWeb\logout.htm" />
+    <Content Include="Template\default\UserWeb\PactShow.htm" />
+    <Content Include="Template\default\UserWeb\register.htm" />
+    <Content Include="Template\default\UserWeb\ResetPass.htm" />
+    <Content Include="Template\default\UserWeb\RevisePass.htm" />
+    <Content Include="Template\default\UserWeb\ReviseUser.htm" />
+    <Content Include="Template\default\UserWeb\TourOrderItem.htm" />
+    <Content Include="Template\default\UserWeb\TourOrderList.htm" />
+    <Content Include="Template\default\UserWeb\userMenu.htm" />
+    <Content Include="Template\default\副本 default.htm" />
+    <Content Include="Template\default\副本 pageHead.htm" />
+    <Content Include="ValidateCode.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="head.aspx.cs">
+      <DependentUpon>head.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="head.aspx.designer.cs">
+      <DependentUpon>head.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Hotel\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Hotel\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TemplateBase.cs" />
+    <Compile Include="ValidateCode.aspx.cs">
+      <DependentUpon>ValidateCode.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ValidateCode.aspx.designer.cs">
+      <DependentUpon>ValidateCode.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Config\Database.config" />
+    <Content Include="App_Config\Eos4.config" />
+    <Content Include="App_Config\log4net.config" />
+    <Content Include="App_Config\Search\Dictionaries\Dict.dct" />
+    <Content Include="App_Config\Setting.config" />
+    <Content Include="Res\js\imgUpolad\uploadImage.mxml" />
+    <Content Include="Res\js\mf-pattern\img\.svn\all-wcprops" />
+    <Content Include="Res\js\mf-pattern\img\.svn\entries" />
+    <Content Include="Res\js\mf-pattern\img\mF_51xflash\.svn\all-wcprops" />
+    <Content Include="Res\js\mf-pattern\img\mF_51xflash\.svn\entries" />
+    <Content Include="Res\js\mf-pattern\img\mF_51xflash\.svn\prop-base\play.gif.svn-base" />
+    <Content Include="Res\js\mf-pattern\img\mF_51xflash\.svn\prop-base\Thumbs.db.svn-base" />
+    <Content Include="Res\js\mf-pattern\img\mF_51xflash\.svn\prop-base\tit-ar.gif.svn-base" />
+    <Content Include="Res\js\mf-pattern\img\mF_51xflash\.svn\text-base\play.gif.svn-base" />
+    <Content Include="Res\js\mf-pattern\img\mF_51xflash\.svn\text-base\Thumbs.db.svn-base" />
+    <Content Include="Res\js\mf-pattern\img\mF_51xflash\.svn\text-base\tit-ar.gif.svn-base" />
+    <Content Include="Res\js\mf-pattern\img\mF_classicHB\.svn\all-wcprops" />
+    <Content Include="Res\js\mf-pattern\img\mF_classicHB\.svn\entries" />
+    <Content Include="Res\js\mf-pattern\img\mF_classicHB\.svn\prop-base\btn-blue.gif.svn-base" />
+    <Content Include="Res\js\mf-pattern\img\mF_classicHB\.svn\prop-base\btn-gray.gif.svn-base" />
+    <Content Include="Res\js\mf-pattern\img\mF_classicHB\.svn\text-base\btn-blue.gif.svn-base" />
+    <Content Include="Res\js\mf-pattern\img\mF_classicHB\.svn\text-base\btn-gray.gif.svn-base" />
+    <Content Include="Res\js\mf-pattern\img\mF_classicHC\.svn\all-wcprops" />
+    <Content Include="Res\js\mf-pattern\img\mF_classicHC\.svn\entries" />
+    <Content Include="Res\js\mf-pattern\img\mF_classicHC\.svn\prop-base\btn-bg.png.svn-base" />
+    <Content Include="Res\js\mf-pattern\img\mF_classicHC\.svn\prop-base\btn-red.gif.svn-base" />
+    <Content Include="Res\js\mf-pattern\img\mF_classicHC\.svn\text-base\btn-bg.png.svn-base" />
+    <Content Include="Res\js\mf-pattern\img\mF_classicHC\.svn\text-base\btn-red.gif.svn-base" />
+    <Content Include="Res\js\mf-pattern\img\mF_games_tb\.svn\all-wcprops" />
+    <Content Include="Res\js\mf-pattern\img\mF_games_tb\.svn\entries" />
+    <Content Include="Res\js\mf-pattern\img\mF_games_tb\.svn\prop-base\ar.gif.svn-base" />
+    <Content Include="Res\js\mf-pattern\img\mF_games_tb\.svn\text-base\ar.gif.svn-base" />
+    <Content Include="Res\js\mf-pattern\img\mF_kdui\.svn\all-wcprops" />
+    <Content Include="Res\js\mf-pattern\img\mF_kdui\.svn\entries" />
+    <Content Include="Res\js\mf-pattern\img\mF_kdui\.svn\prop-base\dots.png.svn-base" />
+    <Content Include="Res\js\mf-pattern\img\mF_kdui\.svn\prop-base\slider-arrows.png.svn-base" />
+    <Content Include="Res\js\mf-pattern\img\mF_kdui\.svn\prop-base\Thumbs.db.svn-base" />
+    <Content Include="Res\js\mf-pattern\img\mF_kdui\.svn\text-base\dots.png.svn-base" />
+    <Content Include="Res\js\mf-pattern\img\mF_kdui\.svn\text-base\slider-arrows.png.svn-base" />
+    <Content Include="Res\js\mf-pattern\img\mF_kdui\.svn\text-base\Thumbs.db.svn-base" />
+    <Content Include="Res\js\mf-pattern\img\mF_kiki\.svn\all-wcprops" />
+    <Content Include="Res\js\mf-pattern\img\mF_kiki\.svn\entries" />
+    <Content Include="Res\js\mf-pattern\img\mF_kiki\.svn\prop-base\ar-left.gif.svn-base" />
+    <Content Include="Res\js\mf-pattern\img\mF_kiki\.svn\prop-base\ar-right.gif.svn-base" />
+    <Content Include="Res\js\mf-pattern\img\mF_kiki\.svn\prop-base\Thumbs.db.svn-base" />
+    <Content Include="Res\js\mf-pattern\img\mF_kiki\.svn\prop-base\tit-ar.gif.svn-base" />
+    <Content Include="Res\js\mf-pattern\img\mF_kiki\.svn\text-base\ar-left.gif.svn-base" />
+    <Content Include="Res\js\mf-pattern\img\mF_kiki\.svn\text-base\ar-right.gif.svn-base" />
+    <Content Include="Res\js\mf-pattern\img\mF_kiki\.svn\text-base\Thumbs.db.svn-base" />
+    <Content Include="Res\js\mf-pattern\img\mF_kiki\.svn\text-base\tit-ar.gif.svn-base" />
+    <Content Include="Res\js\mf-pattern\img\mF_pithy_tb\.svn\all-wcprops" />
+    <Content Include="Res\js\mf-pattern\img\mF_pithy_tb\.svn\entries" />
+    <Content Include="Res\js\mf-pattern\img\mF_pithy_tb\.svn\prop-base\btn.gif.svn-base" />
+    <Content Include="Res\js\mf-pattern\img\mF_pithy_tb\.svn\prop-base\turn.gif.svn-base" />
+    <Content Include="Res\js\mf-pattern\img\mF_pithy_tb\.svn\text-base\btn.gif.svn-base" />
+    <Content Include="Res\js\mf-pattern\img\mF_pithy_tb\.svn\text-base\turn.gif.svn-base" />
+    <Content Include="Res\js\mf-pattern\img\mF_qiyi\.svn\all-wcprops" />
+    <Content Include="Res\js\mf-pattern\img\mF_qiyi\.svn\entries" />
+    <Content Include="Res\js\mf-pattern\img\mF_qiyi\.svn\prop-base\bg.jpg.svn-base" />
+    <Content Include="Res\js\mf-pattern\img\mF_qiyi\.svn\prop-base\loading.gif.svn-base" />
+    <Content Include="Res\js\mf-pattern\img\mF_qiyi\.svn\text-base\bg.jpg.svn-base" />
+    <Content Include="Res\js\mf-pattern\img\mF_qiyi\.svn\text-base\loading.gif.svn-base" />
+    <Content Include="Res\js\mf-pattern\img\mF_sohusports\.svn\all-wcprops" />
+    <Content Include="Res\js\mf-pattern\img\mF_sohusports\.svn\entries" />
+    <Content Include="Res\js\mf-pattern\img\mF_sohusports\.svn\prop-base\sh-btn.gif.svn-base" />
+    <Content Include="Res\js\mf-pattern\img\mF_sohusports\.svn\text-base\sh-btn.gif.svn-base" />
+    <Content Include="Res\js\mf-pattern\img\mF_taobaomall\.svn\all-wcprops" />
+    <Content Include="Res\js\mf-pattern\img\mF_taobaomall\.svn\entries" />
+    <Content Include="Res\js\mf-pattern\img\mF_taobaomall\.svn\prop-base\btn-bg2.gif.svn-base" />
+    <Content Include="Res\js\mf-pattern\img\mF_taobaomall\.svn\text-base\btn-bg2.gif.svn-base" />
+    <Content Include="Res\js\mf-pattern\img\mF_tbhuabao\.svn\all-wcprops" />
+    <Content Include="Res\js\mf-pattern\img\mF_tbhuabao\.svn\entries" />
+    <Content Include="Res\js\mf-pattern\img\mF_tbhuabao\.svn\prop-base\btn-bg.gif.svn-base" />
+    <Content Include="Res\js\mf-pattern\img\mF_tbhuabao\.svn\text-base\btn-bg.gif.svn-base" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Res\js\mf-pattern\img\.svn\prop-base\" />
+    <Folder Include="Res\js\mf-pattern\img\.svn\props\" />
+    <Folder Include="Res\js\mf-pattern\img\.svn\text-base\" />
+    <Folder Include="Res\js\mf-pattern\img\.svn\tmp\prop-base\" />
+    <Folder Include="Res\js\mf-pattern\img\.svn\tmp\props\" />
+    <Folder Include="Res\js\mf-pattern\img\.svn\tmp\text-base\" />
+    <Folder Include="Res\js\mf-pattern\img\mF_51xflash\.svn\props\" />
+    <Folder Include="Res\js\mf-pattern\img\mF_51xflash\.svn\tmp\prop-base\" />
+    <Folder Include="Res\js\mf-pattern\img\mF_51xflash\.svn\tmp\props\" />
+    <Folder Include="Res\js\mf-pattern\img\mF_51xflash\.svn\tmp\text-base\" />
+    <Folder Include="Res\js\mf-pattern\img\mF_classicHB\.svn\props\" />
+    <Folder Include="Res\js\mf-pattern\img\mF_classicHB\.svn\tmp\prop-base\" />
+    <Folder Include="Res\js\mf-pattern\img\mF_classicHB\.svn\tmp\props\" />
+    <Folder Include="Res\js\mf-pattern\img\mF_classicHB\.svn\tmp\text-base\" />
+    <Folder Include="Res\js\mf-pattern\img\mF_classicHC\.svn\props\" />
+    <Folder Include="Res\js\mf-pattern\img\mF_classicHC\.svn\tmp\prop-base\" />
+    <Folder Include="Res\js\mf-pattern\img\mF_classicHC\.svn\tmp\props\" />
+    <Folder Include="Res\js\mf-pattern\img\mF_classicHC\.svn\tmp\text-base\" />
+    <Folder Include="Res\js\mf-pattern\img\mF_games_tb\.svn\props\" />
+    <Folder Include="Res\js\mf-pattern\img\mF_games_tb\.svn\tmp\prop-base\" />
+    <Folder Include="Res\js\mf-pattern\img\mF_games_tb\.svn\tmp\props\" />
+    <Folder Include="Res\js\mf-pattern\img\mF_games_tb\.svn\tmp\text-base\" />
+    <Folder Include="Res\js\mf-pattern\img\mF_kdui\.svn\props\" />
+    <Folder Include="Res\js\mf-pattern\img\mF_kdui\.svn\tmp\prop-base\" />
+    <Folder Include="Res\js\mf-pattern\img\mF_kdui\.svn\tmp\props\" />
+    <Folder Include="Res\js\mf-pattern\img\mF_kdui\.svn\tmp\text-base\" />
+    <Folder Include="Res\js\mf-pattern\img\mF_kiki\.svn\props\" />
+    <Folder Include="Res\js\mf-pattern\img\mF_kiki\.svn\tmp\prop-base\" />
+    <Folder Include="Res\js\mf-pattern\img\mF_kiki\.svn\tmp\props\" />
+    <Folder Include="Res\js\mf-pattern\img\mF_kiki\.svn\tmp\text-base\" />
+    <Folder Include="Res\js\mf-pattern\img\mF_pithy_tb\.svn\props\" />
+    <Folder Include="Res\js\mf-pattern\img\mF_pithy_tb\.svn\tmp\prop-base\" />
+    <Folder Include="Res\js\mf-pattern\img\mF_pithy_tb\.svn\tmp\props\" />
+    <Folder Include="Res\js\mf-pattern\img\mF_pithy_tb\.svn\tmp\text-base\" />
+    <Folder Include="Res\js\mf-pattern\img\mF_qiyi\.svn\props\" />
+    <Folder Include="Res\js\mf-pattern\img\mF_qiyi\.svn\tmp\prop-base\" />
+    <Folder Include="Res\js\mf-pattern\img\mF_qiyi\.svn\tmp\props\" />
+    <Folder Include="Res\js\mf-pattern\img\mF_qiyi\.svn\tmp\text-base\" />
+    <Folder Include="Res\js\mf-pattern\img\mF_sohusports\.svn\props\" />
+    <Folder Include="Res\js\mf-pattern\img\mF_sohusports\.svn\tmp\prop-base\" />
+    <Folder Include="Res\js\mf-pattern\img\mF_sohusports\.svn\tmp\props\" />
+    <Folder Include="Res\js\mf-pattern\img\mF_sohusports\.svn\tmp\text-base\" />
+    <Folder Include="Res\js\mf-pattern\img\mF_taobaomall\.svn\props\" />
+    <Folder Include="Res\js\mf-pattern\img\mF_taobaomall\.svn\tmp\prop-base\" />
+    <Folder Include="Res\js\mf-pattern\img\mF_taobaomall\.svn\tmp\props\" />
+    <Folder Include="Res\js\mf-pattern\img\mF_taobaomall\.svn\tmp\text-base\" />
+    <Folder Include="Res\js\mf-pattern\img\mF_tbhuabao\.svn\props\" />
+    <Folder Include="Res\js\mf-pattern\img\mF_tbhuabao\.svn\tmp\prop-base\" />
+    <Folder Include="Res\js\mf-pattern\img\mF_tbhuabao\.svn\tmp\props\" />
+    <Folder Include="Res\js\mf-pattern\img\mF_tbhuabao\.svn\tmp\text-base\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SinoTrip.Cache\SinoTrip.Cache.csproj">
+      <Project>{76a7cef3-0cd5-4a61-8fce-c98175c764c3}</Project>
+      <Name>SinoTrip.Cache</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SinoTrip.FrameWork\SinoTrip.FrameWork.csproj">
+      <Project>{ecdfb705-b0e9-43ff-82ae-958af25a1c76}</Project>
+      <Name>SinoTrip.FrameWork</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SinoTrip.WebBase\SinoTrip.WebBase.csproj">
+      <Project>{1db5bf34-7cc7-4fa7-b1d9-eb81b9613ccc}</Project>
+      <Name>SinoTrip.WebBase</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

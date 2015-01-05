@@ -1,0 +1,24 @@
+﻿    #if ($user.id<=0)
+            var html = '<div style="width: 105px; padding-left: 10px; float: left">'
+                + '<a href="javascript:void(0)">+ 关注荞面</a></div>'
+                + '<div style="width: 300px; padding-left: 10px; float: left"> '
+                + '<span>您好，欢迎光临荞面旅游网</span></div>'
+                + '<div style="width: 200px; padding-left: 10px; float: right">'
+                 + '<span><a href="javascript:void(0)">收藏我们</a></span> <span class="titleicon line"><a href="javascript:void(0)">帮助中心</a></span></div>'
+                 + '<div style="width: 400px; padding-left: 10px; float: right;">'
+                 + '<span><a href="/UserWeb/Register.aspx">注册</a></span> <span class="titleicon line"><a href="/UserWeb/login.aspx">登录</a></span>'
+                 + ' <span class="titleicon myqm"><a href="/UserWeb/default.aspx">我的荞面</a></span>'
+                 + ' <span class="titleicon myorder"><a href="javascript:void(0)">我的订单</a></span></div>'
+    #else
+        var html = '<div style="width: 105px; padding-left: 10px; float: left">'
+                + '<a href="javascript:void(0)">+ 关注荞面</a></div>'
+                + '<div style="width: 300px; padding-left: 10px; float: left"> '
+                + '<span>您好<span style="color:Red">$!user.username</span>，欢迎光临荞面旅游网</span></div>'
+                + '<div style="width: 200px; padding-left: 10px; float: right">'
+                 + '<span><a href="javascript:void(0)">收藏我们</a></span> <span class="titleicon line"><a href="javascript:void(0)">帮助中心</a></span></div>'
+                 + '<div style="width: 400px; padding-left: 10px; float: right;">'
+                 + '<span class="titleicon line"><a href="/UserWeb/logout.aspx">退出</a></span>'
+                 + ' <span class="titleicon myqm"><a href="/UserWeb/default.aspx">我的荞面</a></span>'
+                 + ' <span class="titleicon myorder"><a href="javascript:void(0)">我的订单</a></span></div>'
+    #end
+    $("#page_member_login").html(html)

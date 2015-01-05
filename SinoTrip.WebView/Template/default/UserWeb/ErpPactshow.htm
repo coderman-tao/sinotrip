@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+      <title>查看下载合同</title>
+    #include("pageHeadCode.htm")  
+     <link href="/Skin/default/style/user.css" rel="stylesheet" type="text/css" />   
+         <link href="/Skin/default/style/order.css" rel="stylesheet" type="text/css" />  
+</head>
+<body>
+ #set($lefMeun = 0)
+    <!--是否显示左侧菜单-->
+    #parse("pageHead.htm")
+
+
+    <div  style=" width:1200px; margin:0 auto;  margin-top:10px">
+    <div style=" text-align:center; line-height:30px; color:Red">==点击图片查看 或者 直接鼠标右键另存至本地 ==</div>
+  #foreach($item in $htList)
+
+    <a href="http://t.qiaomian.com/upload/ht/$item" target="_blank" title="点击查看合同"><img src="http://t.qiaomian.com/upload/ht/$item" alt="电子合同" border="0"  style=" width:590px"/></a>
+  #end
+  
+      </div>
+
+
+
+      
+      #parse("pageFoot.htm")
+</body>
+</html>

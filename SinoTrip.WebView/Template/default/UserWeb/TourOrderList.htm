@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>#include("pageHeadCode.htm")
+    <link href="/Skin/default/style/user.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    #set($lefMeun = 0)
+    <!--是否显示左侧菜单-->
+    #parse("pageHead.htm")
+    <div class="pagebox" style="margin-top: 10px">
+        <div class=" userPageTop">
+            <div class="userPagetitleL">
+            </div>
+            <div class="userPagetitleR">
+            </div>
+        </div>
+        <!--左右分-->
+        <div style="overflow: hidden; border: 1px solid #ccc; border-top: 5px solid #ccc">
+            <div style="width: 255px; overflow: hidden; float: left">
+                <div class="userpageleft">
+                    <div class="user_menu_box">
+                        #include("UserWeb/userMenu.htm")
+                    </div>
+                </div>
+                <div class="userpageleft2">
+                </div>
+            </div>
+            <div style="width: 920px; overflow: hidden; float: right; padding-top: 10px">
+            <div class="minboxtitle">
+            #if($orderType==264)
+                  <span class="iconStr">签</span><span class="title"><h2>签证订单例表</h2></span>
+            #else
+                 <span class="iconStr">游</span><span class="title"><h2>线路订单例表</h2></span>
+            #end
+
+              </div>
+
+
+                <!--资料修改-->
+                <div style="overflow: hidden; margin: 0 auto; width: 890px">
+                    <table class="ordertable" id="Table1">
+                        <thead>
+                            <tr>
+                                <th style="width: 80px;">
+                                    订单信息
+                                </th>
+                                <th>
+                                    订单金额
+                                </th>
+                                <th>
+                                    订单应付
+                                </th>
+                                <th>
+                                    订单状态
+                                </th>
+                                <th>
+                                    时间
+                                </th>
+                                <th>
+                                    操作
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="listEmployeeContent">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/jscript" src="/Skin/default/js/UserWeb/order.js"></script>
+    <script type="text/javascript">
+
+
+
+
+        function getOrderList() {
+            var url = "/AJAX/TourOrder.aspx?action=TourOrderList&ts=" +Math.random();
+            var data = {};
+            data.type = $orderType;
+            jQuery.Xload();
+            jQuery.ajax({
+                url: url,
+                type: "POST",
+                data:data,
+                success: function (response) {
+                    jQuery.XloadHide();
+                    var json = response.toJson();
+                    if (json.success) {
+                        var str = "";
+                        var result = json.result;
+                        for (var i = 0; i < result.length; i++) {
+
+                            str += '<tr class="top">';
+                            str += '<td colspan="6">订单编号：<span class="pnumber">' + result[i].serialno + '</span>';
+                            str += ' <span class="pname">' + result[i].name + '</span></td></tr>'
+                            str += '<tr class="content">'
+                            str += '<td class="productimg' + (result[i].status == M.ORDER_TOUR_STATUS_YQX ? "_502" : "") + '"></td>';
+                            str += '<td>￥' + parseFloat(result[i].dealmoney).toFixed(2) + '</td>'
+                            str += '<td>' + ((result[i].status != M.ORDER_TOUR_STATUS_YQX) ? '<span class="orderprice">￥' + parseFloat(parseFloat(result[i].dealmoney) - parseFloat(result[i].payment)).toFixed(2) + '</span>' : "<span style='color:#999'>0.00</span>") + '</td>'
+                            str += '<td>' + getOrderStatus(result[i]) + '</td><td>'
+                            if (result[i].SpareInt == M.PRODUCT_TYPE_GTLY) {
+                                str += '<div><span style="color:#000000">发团：</span>' + dateFormat("Y年m月d日", result[i].starttime) + '</div>'
+                            }
+
+                            str += '<div><span style="color:#000000">下单：</span>' + dateFormat("Y/m/d h:i:s", result[i].createtime) + '</div></td>'
+                            str += ' <td>' + getOrderListButton(result[i]) + '</td>'
+                            str += ' </tr>';
+
+
+                        }
+                        $("#listEmployeeContent").html(str);
+
+                    } else {
+                        if (json.msg == "-1")
+                            window.location.href = "login.aspx";
+                        else
+                            jQuery.Xmsg(json.msg);
+
+                    }
+                }
+
+            });
+
+        }
+      
+
+            getOrderList();
+      
+         
+      
+      
+    </script>
+    #parse("pageFoot.htm")
+</body>
+</html>

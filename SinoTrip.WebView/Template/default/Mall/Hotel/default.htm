@@ -1,0 +1,347 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>特价酒店预订&#45;$SITE.name</title>
+
+    <script type="text/javascript" src="/res/js/Hotel.js"></script>
+      #include("pageHeadCode.htm")
+      <link href="/Skin/default/style/hotle.css" rel="stylesheet" type="text/css"/> 
+<style type="text/css">
+.inputbox span.inputTitle { width:80px}
+</style>
+<script type="text/javascript" src="/res/js/My97DatePicker/WdatePicker.js"></script>
+</head>
+<body>
+  #set($lefMeun = 0)
+    <!--是否显示左侧菜单-->
+    #parse("pageHead.htm")
+
+ <style type="text/css">
+ 
+ 
+ 
+ </style>
+
+<div class="pagebox">
+        <div style="overflow: hidden; padding-top:10px;padding-bottom:10px">
+           
+            <div style="width: 380px; float: left;">     
+            <div style=" position:absolute; z-index:2px;">           
+                <div style=" position:relative; top:1px; background-color:#fcfcfc; width:380px; ">
+                <div style=" line-height:45px; height:45px; padding-left:10px; background-color:#32a9d7; color:#ffffff;border-radius:10px 10px 0px 0px"><h2>搜索国内酒店</h2></div>
+                <div style=" padding:20px 5px 19px 5px; border:1px solid #ccc; border-bottom-width:0px">
+                <form action="/Mall/Hotel/Hotellist.aspx" method="post" name="hotleListSubmit">
+              <div class="inputbox">
+              <span class="inputTitle">入住城市：</span>
+              <span class="inputContent"><input value="$!cityname" style=" width:220px" id="cityname" name="cityname" onfocus="showHotelCity(0,this,$('#hotlecityhidden'),$('#landmarkboxs'))" readonly="readonly" title="点选入住城市" type="text"/>
+              <input type="hidden" value="$!citycode" name="citycode" id="hotlecityhidden"/></span>
+              </div>
+              <div class="inputbox">          
+              <span class="inputTitle">入住时间：</span>
+              <span class="inputContent"><input style=" width:220px" id="inDate" name="inDate" value="$inDate" type="text" onfocus="WdatePicker({doubleCalendar:true,dateFmt:'yyyy-MM-dd',errDealMode:1,minDate:'%y-%M-%d',skin:'twoer'})"/></span>
+              </div>
+              <div class="inputbox">
+              <span class="inputTitle">离店时间：</span>
+              <span class="inputContent"><input  style=" width:220px"  id="outDate"  name="outDate"  value="$outDate" type="text" onfocus="WdatePicker({doubleCalendar:true,dateFmt:'yyyy-MM-dd',errDealMode:1,minDate:'%y-%M-%d',skin:'twoer'})"/></span>
+             </div>
+             <div class="inputbox" style="">
+             <span class="inputTitle">&nbsp;</span>
+             <a href="javascript:" onclick="document.hotleListSubmit.submit()" class="inputbutton green" style="width:150px; background-color:#32a9d7">确定</a>
+             </div>
+                        </form>
+                
+                </div>
+                </div>
+            </div>
+
+            </div>
+
+
+
+            <!--右-->
+            <div style="width: 800px; overflow: hidden; float:right">            
+
+            <img src="/skin/default/images/hotel/800.jpg" style=" height:275px">              
+        
+            </div>
+        </div>
+    </div>
+
+    <div class="pagebox">
+        <div style=" overflow:hidden; border:1px solid #ccc; padding:10px 0px; background-color:#fcfcfc" class="thisbox" id="landmarkboxs">
+        <ul class="LandMarkBox" id="LandMarkBox">
+        <li class="current"><a href="javascript:">
+        <span class="landname">商业区</span>
+        <span class="mapbj hotleimg Landbj"></span>
+        <span class="maplogo BUSINESS"></span>
+        </a></li>
+        <li><a href="javascript:">
+        <span class="landname v2">医疗机构</span>
+        <span class="mapbj hotleimg Landbj"></span>
+        <span class="maplogo HOSPITAL"></span>
+         </a></li>
+       
+        <li><a href="javascript:">
+         <span class="landname">展览会场</span>
+        <span class="mapbj hotleimg Landbj"></span>
+        <span class="maplogo PAVILIONHALL"></span>
+          </a></li>
+       
+        <li><a href="javascript:">
+         <span class="landname v3">景点景区</span>
+        <span class="mapbj hotleimg Landbj"></span>
+        <span class="maplogo SCENICSPOTS"></span>
+          </a></li>
+       
+        <li><a href="javascript:">
+         <span class="landname">地铁站</span>
+        <span class="mapbj hotleimg Landbj"></span>
+        <span class="maplogo SUBWAY"></span>
+          </a></li>
+       
+        <li ><a href="javascript:">
+          <span class="landname v2">大学校区</span>
+        <span class="mapbj hotleimg Landbj"></span>
+        <span class="maplogo UNIVERSITY"></span>
+          </a></li>
+       
+        <li><a href="javascript:">
+         <span class="landname">机场车站</span>
+        <span class="mapbj hotleimg Landbj"></span>
+        <span class="maplogo TRAINAIR"></span>
+        </a>
+        </li>
+         
+        </ul>
+        <div id="landboxlist" style=" background-color:#ffffff; margin:0px 19px 0px 17px; border:1px solid #eee; border-top-width:0px;">
+        
+        #set($Landtypes=["BUSINESS","HOSPITAL","PAVILIONHALL","SCENICSPOTS","SUBWAY","UNIVERSITY","TRAINAIR"])
+         #foreach($types in $Landtypes)    
+             
+        <div style="#if($velocityCount!=1)display:none#end" class="landboxs">
+             #foreach($rows in $thistool.GetMarkInfos($types)) 
+
+              #foreach($row in $rows.LandMarkChildInfos) 
+                        <a href="/Mall/Hotel/Hotellist.aspx?inDate=$inDate&outDate=$outDate&citycode=$citycode&landname=$row.LandMarkChildName" target="_blank"><span class="mapicon"></span>$row.LandMarkChildName</a>
+                #end
+
+             #end
+        </div>
+        #end
+        </div>
+        </div>
+
+
+    </div>
+
+
+
+      <div class="pagebox" style=" padding-top:10px; ">
+      <div style=" height:45px; position:relative;">
+      <div style=" height:44px; border-bottom:5px solid #32a9d7">
+      <h2 style=" width:250px; font-family:微软雅黑; font-weight:bold; color:#32a9d7; line-height:55px">热门城市酒店</h2>
+
+      <div class="citylist" id="citylist">
+      <a href="javascript:void(0)">合肥</a><a href="javascript:void(0)">北京</a><a href="javascript:void(0)">上海</a><a href="javascript:void(0)">南京</a><a href="javascript:void(0)">杭州</a><a href="javascript:void(0)">广州</a>
+      <a href="javascript:void(0)" onclick="showHotelCityA(this)">更多>>></a>
+      </div>
+      <div class="hotHoteltitle">
+      
+      </div>
+      </div>
+      </div>
+
+      <div style="border:1px solid #ccc; margin-top:10px" class="thisbox" id="cityHotellists">
+         <div style=" overflow:hidden" class="hotellist">
+          #foreach($item in $tool.getResultHotels("HFE",10))
+         <a href="/Hotel/$item.BasicPropertys.CityCode/$inDate/$outDate/$item.BasicPropertys.HotelCode&#46;html" target="_blank" title="在线预订$item.BasicPropertys.HotelName$item.BasicPropertys.HotelEnglishName">
+         <img onError="this.src='/res/images/noHotelImg.jpg'"  alt="$item.BasicPropertys.HotelName$item.BasicPropertys.HotelEnglishName"  height="170" width="225" src="$tool.getHotleImg($item.BasicPropertys.Images)"/>
+          <span class="hotelname">$item.BasicPropertys.HotelName</span>
+          <span title="$tool.getstarlevel($item.BasicPropertys.Rank)" class="starlevel  price h$item.BasicPropertys.Rank" style="">￥#if($item.BasicPropertys.FlagS)
+                       $tool.GetHotlePrice($item.BasicPropertys.Rank,"S",$item.BasicPropertys.MinRate)
+                       #else
+                       $tool.GetHotlePrice($item.BasicPropertys.Rank,"T",$item.BasicPropertys.MinRate)
+                       #end</span>         
+          </a>
+         #end          
+        </div>
+
+         <div style=" overflow:hidden; display:none" class="hotellist">
+          #foreach($item in $tool.getResultHotels("PEK",10))
+         <a href="/Hotel/$item.BasicPropertys.CityCode/$inDate/$outDate/$item.BasicPropertys.HotelCode&#46;html" target="_blank" title="在线预订$item.BasicPropertys.HotelName$item.BasicPropertys.HotelEnglishName">
+          <img onError="this.src='/res/images/noHotelImg.jpg'"  alt="$item.BasicPropertys.HotelName$item.BasicPropertys.HotelEnglishName"  height="170" width="225" src="$tool.getHotleImg($item.BasicPropertys.Images)"/>
+          <span class="hotelname">$item.BasicPropertys.HotelName</span>
+          <span title="$tool.getstarlevel($item.BasicPropertys.Rank)" class="starlevel  price h$item.BasicPropertys.Rank" style="">￥#if($item.BasicPropertys.FlagS)
+                       $tool.GetHotlePrice($item.BasicPropertys.Rank,"S",$item.BasicPropertys.MinRate)
+                       #else
+                       $tool.GetHotlePrice($item.BasicPropertys.Rank,"T",$item.BasicPropertys.MinRate)
+                       #end</span>         
+          </a>
+         #end          
+        </div>
+
+         <div style=" overflow:hidden; display:none" class="hotellist">
+          #foreach($item in $tool.getResultHotels("SHA",10))
+         <a href="/Hotel/$item.BasicPropertys.CityCode/$inDate/$outDate/$item.BasicPropertys.HotelCode&#46;html" target="_blank" title="在线预订$item.BasicPropertys.HotelName$item.BasicPropertys.HotelEnglishName">
+      <img onError="this.src='/res/images/noHotelImg.jpg'"  alt="$item.BasicPropertys.HotelName$item.BasicPropertys.HotelEnglishName"  height="170" width="225" src="$tool.getHotleImg($item.BasicPropertys.Images)"/>
+          <span class="hotelname">$item.BasicPropertys.HotelName</span>
+          <span title="$tool.getstarlevel($item.BasicPropertys.Rank)" class="starlevel  price h$item.BasicPropertys.Rank" style="">￥#if($item.BasicPropertys.FlagS)
+                       $tool.GetHotlePrice($item.BasicPropertys.Rank,"S",$item.BasicPropertys.MinRate)
+                       #else
+                       $tool.GetHotlePrice($item.BasicPropertys.Rank,"T",$item.BasicPropertys.MinRate)
+                       #end</span>         
+          </a>
+         #end          
+        </div>
+
+         <div style=" overflow:hidden; display:none" class="hotellist">
+          #foreach($item in $tool.getResultHotels("NKG",10))
+         <a href="/Hotel/$item.BasicPropertys.CityCode/$inDate/$outDate/$item.BasicPropertys.HotelCode&#46;html" target="_blank" title="在线预订$item.BasicPropertys.HotelName$item.BasicPropertys.HotelEnglishName">
+          <img onError="this.src='/res/images/noHotelImg.jpg'"  alt="$item.BasicPropertys.HotelName$item.BasicPropertys.HotelEnglishName"  height="170" width="225" src="$tool.getHotleImg($item.BasicPropertys.Images)"/>
+          <span class="hotelname">$item.BasicPropertys.HotelName</span>
+          <span title="$tool.getstarlevel($item.BasicPropertys.Rank)" class="starlevel  price h$item.BasicPropertys.Rank" style="">￥#if($item.BasicPropertys.FlagS)
+                       $tool.GetHotlePrice($item.BasicPropertys.Rank,"S",$item.BasicPropertys.MinRate)
+                       #else
+                       $tool.GetHotlePrice($item.BasicPropertys.Rank,"T",$item.BasicPropertys.MinRate)
+                       #end</span>         
+          </a>
+         #end          
+        </div>
+
+         <div style=" overflow:hidden; display:none" class="hotellist">
+          #foreach($item in $tool.getResultHotels("HGH",10))
+         <a href="/Hotel/$item.BasicPropertys.CityCode/$inDate/$outDate/$item.BasicPropertys.HotelCode&#46;html" target="_blank" title="在线预订$item.BasicPropertys.HotelName$item.BasicPropertys.HotelEnglishName">
+      <img onError="this.src='/res/images/noHotelImg.jpg'"  alt="$item.BasicPropertys.HotelName$item.BasicPropertys.HotelEnglishName"  height="170" width="225" src="$tool.getHotleImg($item.BasicPropertys.Images)"/>
+          <span class="hotelname">$item.BasicPropertys.HotelName</span>
+          <span title="$tool.getstarlevel($item.BasicPropertys.Rank)" class="starlevel  price h$item.BasicPropertys.Rank" style="">￥#if($item.BasicPropertys.FlagS)
+                       $tool.GetHotlePrice($item.BasicPropertys.Rank,"S",$item.BasicPropertys.MinRate)
+                       #else
+                       $tool.GetHotlePrice($item.BasicPropertys.Rank,"T",$item.BasicPropertys.MinRate)
+                       #end</span>         
+          </a>
+         #end          
+        </div>
+
+         <div style=" overflow:hidden; display:none" class="hotellist">
+          #foreach($item in $tool.getResultHotels("CAN",10))
+         <a href="/Hotel/$item.BasicPropertys.CityCode/$inDate/$outDate/$item.BasicPropertys.HotelCode&#46;html" target="_blank" title="在线预订$item.BasicPropertys.HotelName$item.BasicPropertys.HotelEnglishName">
+          <img onError="this.src='/res/images/noHotelImg.jpg'"  alt="$item.BasicPropertys.HotelName$item.BasicPropertys.HotelEnglishName"  height="170" width="225" src="$tool.getHotleImg($item.BasicPropertys.Images)"/>
+          <span class="hotelname">$item.BasicPropertys.HotelName</span>
+          <span title="$tool.getstarlevel($item.BasicPropertys.Rank)" class="starlevel  price h$item.BasicPropertys.Rank" style="">￥#if($item.BasicPropertys.FlagS)
+                       $tool.GetHotlePrice($item.BasicPropertys.Rank,"S",$item.BasicPropertys.MinRate)
+                       #else
+                       $tool.GetHotlePrice($item.BasicPropertys.Rank,"T",$item.BasicPropertys.MinRate)
+                       #end</span>         
+          </a>
+         #end          
+        </div>
+      </div>
+
+
+      </div>
+    <script type="text/javascript">
+
+        $("#cityname").val("");
+        var LandMarkBoxLi = $("#LandMarkBox").find("li");
+
+        LandMarkBoxLi.bind("click", function (i) {
+            LandMarkBoxLi.removeClass("current");
+            $(this).addClass("current");
+            var _index = $(this).index();
+            boxlists = $("#landboxlist").find(".landboxs");
+            boxlists.hide();
+            boxlists.eq(_index).show();
+        })
+
+        var citylist = $("#citylist").find("a");
+
+       var cityHotellist = $("#cityHotellists").find(".hotellist");
+
+
+
+        citylist.bind("click", function () {
+            var _index = $(this).index();
+            
+            if (_index == citylist.length-1)
+                return;
+            cityHotellist.hide();
+            cityHotellist.eq(_index).show();
+
+        })
+
+
+        function showHotelCityA(thisdom) {
+            var _thisdom = $(thisdom);
+            var _offset = _thisdom.offset();
+
+            var citybox;
+            citybox = $('#inHotelCityA');
+            citybox.show();
+            citybox.css({ "top": _offset.top + _thisdom.outerHeight(), "left": _offset.left });
+            citybox.data("inputdemo", _thisdom)
+
+            var isSet = citybox.data("isSets");
+            if (!isSet || isSet == null) {
+                citybox.hover(function () {
+                    $(this).show();
+                }, function () {
+                    $(this).hide();
+                    _thisdom.blur();
+                })
+                citybox.find(".close").click(function () {
+                    citybox.hide();
+                    _thisdom.blur();
+                })
+                var _tabs = citybox.find(".h_citytabList").find("a");
+
+                var _cityboxStr = "";
+                var _data = hotleCity;
+
+                _tabs.each(function () {
+
+                    var _objs = _data[$(this).html()];
+                    if (_objs == null)
+                        return;
+                    _cityboxStr += "<li>";
+                    for (var i = 0; i < _objs.length; i++) {
+                        _cityboxStr += "<a target=\"_blank\"  href=\"/Mall/Hotel/HotelList.aspx?citycode=" + _objs[i].code + "\" code=\"" + _objs[i].code + "\">" + _objs[i].name + "</a>";
+                    }
+                    _cityboxStr += "</li>";
+
+                })
+                citybox.find(".citybox").html(_cityboxStr);
+                var _citys = citybox.find(".citybox").find("li");
+                _citys.eq(0).show();
+                _tabs.bind("click", function () {
+                    var _index = $(this).index();
+                    _tabs.removeClass("current");
+                    $(this).addClass("current");
+                    _citys.hide().eq(_index).show();
+                })
+                citybox.data("isSets",true);
+            }
+
+        }
+
+
+    </script>
+    <div class="f_citybox h_citybox thisbox" id="inHotelCityA">       
+        <div class="Xtitle"><span class="XtitleStr">国内入住城市选择</span><span class="iconbtn" style="display: inline;"><span title="关闭" class="close">&nbsp;</span></span></div>
+         <div class="h_citytab f_citytab">
+        <div style="position:absolute">
+        <div style=" position:relative; bottom:0px; padding-left:2px" class="f_citytabList h_citytabList">          
+         <a href="javascript:void(0)" class="current">热门</a>
+         <a href="javascript:void(0)">ABCDEF</a>
+         <a href="javascript:void(0)">GHIJ</a>
+         <a href="javascript:void(0)">KLMN</a>
+         <a href="javascript:void(0)">PQRSTUVW</a>
+         <a href="javascript:void(0)">XYZ</a>
+        </div>
+        </div>
+        </div>
+        <ul class="citybox">       
+        </ul>
+        </div>
+      #parse("pageFoot.htm")
+</body>
+</html>

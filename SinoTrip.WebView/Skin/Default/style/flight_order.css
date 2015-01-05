@@ -1,0 +1,47 @@
+﻿.flowStep{ width:24.9%; float:left; height:15px; text-align:right; background:url(../images/flights/book_progress1_1.png) no-repeat; background-position:right -15px;}
+.flowStep div.stepTitle{ position:relative;  top:-15px; text-align:center}
+.flowStep.current{background-position:right 0px;}
+.flowStep.current div.stepTitle{ color:#ff6600; font-weight:bold}
+
+.orderbox{width:780px; overflow:hidden; float:left; background-color:#ffffff;}
+.rightbox{ width:390px; float:right; overflow:hidden;}
+
+.flightbox{overflow:hidden; border:1px solid #eee; background-color:#fcfcfc; padding:10px;}
+
+.flightbox span,.flightbox a
+{
+    -moz-user-select:none;
+      display:inline-block;         line-height:35px;        
+       padding:0px 5px;
+ }
+ 
+ .flightbox span.timedata, .flightbox span.route, .flightbox span.routetype{ font-size:13px; font-weight:bold}
+ 
+  .flightbox span.cityname{ padding-left:18px; color:#666; height:20px; margin-top:10px; line-height:18px; padding-right:0px}
+  
+  .flightbox span.flightno{ padding:0px;color:#666; font-weight:bold}
+  .flightbox span.remarks{color:#0066cc;}
+  .flightbox span.dpttime{ font-weight:bold; text-align:right; width:35%;line-height:18px;}
+  .flightbox span.arrtime{font-weight:bold; text-align:left;width:35%;line-height:18px;}
+   .flightbox span.dpt{ text-align:right; width:38%;line-height:18px; color:#666}
+  .flightbox span.arr{ text-align:left;width:38%;line-height:18px;color:#666}
+  .flightbox span.pointlogo{width:14%;line-height:18px; text-align:center; background:url(../images/flights/ico_sprite.png) no-repeat; background-position:right 0px;}
+   .flightbox span.price{ font-weight:bold; font-size:14px; color:#ff6600; padding:0px; }
+   
+   
+   .order_detail_list{ padding:0px; padding-top:5px; margin:0px; overflow:hidden;}
+   .order_detail_list li{ list-style:None; position:relative;background:url(../images/flights/ico_sprite.png) no-repeat;background-position:0px -385px; line-height:25px; height:25px}
+   .order_detail_list li span.lefttext,.order_detail_list li span.righttext
+   {
+         -moz-user-select:none;
+      display:inline-block; 
+       padding:0px 5px;
+       background-color:#fffee0;
+       position:absolute;
+       color:#666;
+       
+       
+    }
+    .order_detail_list li span.lefttext.hilite,.order_detail_list li span.righttext.hilite{font-weight:bold; color:#000000}
+   .order_detail_list li span.lefttext{left:0px;}
+   .order_detail_list li span.righttext{ right:0px;}

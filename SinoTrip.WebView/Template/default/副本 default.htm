@@ -1,0 +1,454 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>$SITE.subtitle&#45;$SITE.name</title>#include("pageHeadCode.htm")
+    <meta name="description" content="荞面旅游网是安徽中青旅旗下电子商务平台,提供自助游(自由行),国内旅游,出境旅游,自驾游,公司旅游。专业服务,百强旅行社品质保证,服务超百万人出游" />
+    <script src="/res/js/myfocus-2.0.1.min.js" type="text/javascript"></script>
+    <script src="/Skin/Default/js/default.js" type="text/javascript"></script>
+    <link href="/Skin/Default/style/default.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    #set($lefMeun = 1)
+    <!--是否显示左侧菜单,1显示,0隐藏-->
+    #parse("pageHead.htm")
+    <!--内容-->
+    <div class="pagebox" style="margin-top: 2px; width: 1190px">
+        <div style="padding-left: 235px;">
+            <div style="width: 953px; height: 450px;" class="thisbox">
+                <div id="myFocus">
+                    <!--焦点图盒子-->
+                    <div class="loading">
+                        图片加载中......</div>
+                    <div class="pic">
+                        <!--图片列表-->
+                        <ul>
+                            #set ($hdp=$tool.GetBlockData("MK_SYHDP")) #foreach($block in $hdp.blockData)
+                            <li><a href="$block.url" target="_blank">
+                                <img src="$block.cover" height="450" width="950" alt="$block.title" text="$block.summary"
+                                    thumb="$block.title" /></a></li>
+                            #end
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--抢游-->
+    <div class="pagebox" style=" display:none">
+        <div style="padding-right: 303px; height: 330px; position: relative;">
+            <div style="width: 880px; height: 320px;" class="thisbox">
+                <div class="default_box_title" style="line-height: 65px">
+                    <a href="#">更多线路>></a></div>
+                <ul class="default_product_list">
+                    #set ($tm=$tool.GetBlockData("MK_SYTM")) 
+                    #foreach($block in $tm.blockData)
+                    <li style=" padding-top:10px">
+                        <div class="imgbox">
+                            <a href="$block.url" title=""><span class="imglab lab_0">特惠抢购</span><span class="imgcontent"><img
+                                src="$tool.getFileImg($block.coverserver,$block.cover,640)" height="$tm.picheight"
+                                width="$tm.picwidth" alt="" /></span></a></div>
+                        <a class="namebox" href="$!block.url"><span class="productname">$block.title</span>￥$block.price.toString("0.00")</a></li>
+                    #end
+                </ul>
+            </div>
+            <div style="overflow: hidden; height: 345px; width: 300px; position: absolute; right: 0px;
+                top: 0px">
+                <div style="height: 140px" class="thisbox">
+                    <div class="default_user">
+                        <div class="default_user_box">
+                            <div class="default_user_face">
+                                <img alt="用户头像" src="/Skin/default/images/online_face.jpg" /></div>
+                            <div>
+                                Hi！您好</div>
+                            <div>
+                                欢迎访问荞面旅游网</div>
+                              #set ($uid=$QU.id)
+                             #if ($uid>0)
+                            <div class="default_user_function">
+                                <a href="/UserWeb/" title="会员中心">会员中心</a><a href="/UserWeb/RevisePass.aspx" title="密码修改">密码修改</a><a href="/UserWeb/logout.aspx" title="退出登录">退出登录</a></div>
+                            #end
+                        </div>
+                        <div class="default_user_buttonlist">
+                            <span class="buttonbox"><a href="/UserWeb/login.aspx" title="会员登录">会员登录</a></span> <span class="buttonbox">
+                                <a href="/UserWeb/Register.aspx" title="免费注册">免费注册</a></span> <span class="buttonbox">
+                                 #if ($uid>0)
+                                <a href="/UserWeb/TourOrderList.aspx" title="我的订单">我的订单</a>
+                                 #end
+                                </span>
+                        </div>
+                    </div>
+                </div>
+                <div style="height: 170px" class="thisbox">
+                    <div class="ahcyts_honor">
+                        <div>
+                            全国百强</div>
+                        <div>
+                            五星诚信</div>
+                        <div>
+                            全国青年文明号</div>
+                        <div>
+                            全国旅行社业服务标准化示范单位</div>
+                        <div>
+                            ISO9001-2008质量认证企业</div>
+                        <div>
+                            大陆居民赴台指定组团社</div>
+                        <div>
+                            国际航协一级代理</div>
+                        <div>
+                            省级客运服务</div>
+                    </div>
+                </div>
+                <div style="height: 190px; display:none" class="thisbox">
+                    <div style="padding-left: 10px; font-size: 14px; line-height: 25px; font-weight: bold;
+                        color: #ff6600">
+                        他/她们刚刚下单啦!
+                    </div>
+                    <div class="default_order_list" style="position: relative">
+                        <div class="default_order_face">
+                            <img alt="用户头像" src="/Skin/default/images/offline_face.jpg" /></div>
+                        <div>
+                            网站会员：admin &nbsp;&nbsp;3分钟前</div>
+                        <div>
+                            在线预订：韩国双飞5日游</div>
+                        <div>
+                            手机号码：137****1180</div>
+                    </div>
+                    <div class="default_order_list" style="position: relative">
+                        <div class="default_order_face">
+                            <img alt="用户头像" src="/Skin/default/images/offline_face.jpg" /></div>
+                        <div>
+                            网站会员：admin &nbsp;&nbsp;4分钟前</div>
+                        <div>
+                            在线预订：台湾环岛八日游</div>
+                        <div>
+                            手机号码：137****1180</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--1楼-->
+    <div class="pagebox switch_dist_list">
+        <div class="default_box_title floor1">
+            <div class="dist_list_box">
+                <a href="javascript:void(0)" class="mouseover"><span class="button_bj"></span>黄山</a>
+                <a href="javascript:void(0)"><span class="button_bj"></span>九华山</a> <a href="javascript:void(0)">
+                    <span class="button_bj"></span>苏杭古镇</a> <a href="javascript:void(0)"><span class="button_bj">
+                    </span>海滨</a>
+            </div>
+            <a href="/domestic/0-0-0-313-0-0.html">更多旅游线路>></a>
+        </div>
+        <div class="floorBox thisbox">
+            <div class="leftbox">
+           #set ($ahrm=$tool.GetSingleBlock("MK_SY1LAHRM")) 
+           $!ahrm.BDATA.data
+           #set ($jzmj=$tool.GetSingleBlock("MK_SY1LJZMJ")) 
+           $!jzmj.BDATA.data
+            </div>
+
+            <div class="rightbox">
+                <div class="floor_rightBoxcontent">
+                    #set ($tm=$tool.GetSingleBlock("MK_SY1LGG")) 
+                    <a href="$!tm.BDATA.url" target="$tm.target">
+                        <img src="$!tm.BDATA.cover" height="$tm.picheight" width="$tm.picwidth" alt="$tm.BDATA.title" /></a>
+                </div>
+            </div>
+
+            <div style="overflow: hidden; position: relative; height: 375px;">
+                <div class="switch_dist_content" style="display: block">
+                    #set ($hs=$tool.GetBlockData("MK_SY1L_1B"))
+                     #foreach($block in $hs.blockData)
+                     <a href="$!block.url">
+                        <span class="contentbox"><span class="contenttitle_bj"></span><span class="contenttitle">
+                            $block.title</br>$!block.summary</span> <span class="productname">$block.title</span>
+                            <span class="price">￥$block.price.toString("0")</span>
+                            <img class="productimg" src="$tool.getFileImg($block.coverserver,$block.cover,320)"
+                                alt="" />
+                        </span></a>#end
+                </div>
+                <div class="switch_dist_content">
+                  #set ($jhs=$tool.GetBlockData("MK_SY1L_2B")) 
+                  #foreach($block in $jhs.blockData)
+                     <a href="$!block.url">
+                        <span class="contentbox"><span class="contenttitle_bj"></span><span class="contenttitle">
+                            $block.title</br>$!block.summary</span> <span class="productname">$block.title</span>
+                            <span class="price">￥$block.price.toString("0")</span>
+                            <img class="productimg" src="$tool.getFileImg($block.coverserver,$block.cover,320)"
+                                alt="" />
+                        </span></a>#end
+                </div>
+                <div class="switch_dist_content">
+                  #set ($sh=$tool.GetBlockData("MK_SY1L_3B")) 
+                  #foreach($block in $sh.blockData)
+                     <a href="$!block.url">
+                        <span class="contentbox"><span class="contenttitle_bj"></span><span class="contenttitle">
+                            $block.title</br>$!block.summary</span> <span class="productname">$block.title</span>
+                            <span class="price">￥$block.price.toString("0")</span>
+                            <img class="productimg" src="$tool.getFileImg($block.coverserver,$block.cover,320)"
+                                alt="" />
+                        </span></a>#end
+                </div>
+                <div class="switch_dist_content">
+                    #set ($hb=$tool.GetBlockData("MK_SY1L_4B")) #foreach($block in $hb.blockData)
+                     <a href="$!block.url">
+                        <span class="contentbox"><span class="contenttitle_bj"></span><span class="contenttitle">
+                            $block.title</br>$!block.summary</span> <span class="productname">$block.title</span>
+                            <span class="price">￥$block.price.toString("0")</span>
+                            <img class="productimg" src="$tool.getFileImg($block.coverserver,$block.cover,320)"
+                                alt="" />
+                        </span></a>#end
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--2楼-->
+    <div class="pagebox switch_dist_list">
+        <div class="default_box_title floor2">
+            <div class="dist_list_box">
+                <a href="javascript:void(0)" class="mouseover"><span class="button_bj"></span>海南</a>
+                <a href="javascript:void(0)"><span class="button_bj"></span>云贵</a> <a href="javascript:void(0)">
+                    <span class="button_bj"></span>桂林</a> <a href="javascript:void(0)"><span class="button_bj">
+                    </span>西北/华北</a>
+            </div>
+            <a href="/domestic/0-0-0-315-0-0.html">更多旅游线路>></a>
+        </div>
+        <div class="floorBox thisbox">
+            <div class="leftbox">
+             #set ($gnlycs=$tool.GetSingleBlock("MK_SY2LGNLY")) 
+             $!gnlycs.BDATA.data
+              #set ($xcts=$tool.GetSingleBlock("MK_SY2LXCTS")) 
+             $!xcts.BDATA.data
+                
+            </div>
+            <div class="rightbox">
+                <div class="floor_rightBoxcontent">
+                    #set ($tm=$tool.GetSingleBlock("MK_SY2LGG")) 
+                    <a href="$!tm.BDATA.url" target="$tm.target">
+                        <img src="$!tm.BDATA.cover" height="$tm.picheight" width="$tm.picwidth" alt="$tm.BDATA.title" /></a>
+                </div>
+            </div>
+            <div style="overflow: hidden; position: relative; height: 375px;">
+                <div class="switch_dist_content" style="display: block">
+                    #set ($hn=$tool.GetBlockData("MK_SY2L_1B"))
+                     #foreach($block in $hn.blockData)
+                     <a href="$!block.url">
+                        <span class="contentbox"><span class="contenttitle_bj"></span><span class="contenttitle">
+                            $block.title</br>$!block.summary</span> <span class="productname">$block.title</span>
+                            <span class="price">￥$block.price.toString("0")</span>
+                            <img class="productimg" src="$tool.getFileImg($block.coverserver,$block.cover,320)"
+                                alt="" />
+                        </span></a>#end
+                </div>
+                <div class="switch_dist_content">
+                  #set ($yg=$tool.GetBlockData("MK_SY2L_2B")) 
+                  #foreach($block in $yg.blockData)
+                     <a href="$!block.url">
+                        <span class="contentbox"><span class="contenttitle_bj"></span><span class="contenttitle">
+                            $block.title</br>$!block.summary</span> <span class="productname">$block.title</span>
+                            <span class="price">￥$block.price.toString("0")</span>
+                            <img class="productimg" src="$tool.getFileImg($block.coverserver,$block.cover,320)"
+                                alt="" />
+                        </span></a>#end
+                </div>
+                <div class="switch_dist_content">
+                  #set ($gl=$tool.GetBlockData("MK_SY2L_3B")) 
+                  #foreach($block in $gl.blockData)
+                     <a href="$!block.url">
+                        <span class="contentbox"><span class="contenttitle_bj"></span><span class="contenttitle">
+                            $block.title</br>$!block.summary</span> <span class="productname">$block.title</span>
+                            <span class="price">￥$block.price.toString("0")</span>
+                            <img class="productimg" src="$tool.getFileImg($block.coverserver,$block.cover,320)"
+                                alt="" />
+                        </span></a>#end
+                </div>
+                <div class="switch_dist_content">
+                    #set ($hb=$tool.GetBlockData("MK_SY2L_4B")) 
+                    #foreach($block in $hb.blockData)
+                     <a href="$!block.url">
+                        <span class="contentbox"><span class="contenttitle_bj"></span><span class="contenttitle">
+                            $block.title</br>$!block.summary</span> <span class="productname">$block.title</span>
+                            <span class="price">￥$block.price.toString("0")</span>
+                            <img class="productimg" src="$tool.getFileImg($block.coverserver,$block.cover,320)"
+                                alt="" />
+                        </span></a>#end
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--3楼-->
+    <div class="pagebox switch_dist_list">
+        <div class="default_box_title floor3">
+            <div class="dist_list_box">
+                <a href="javascript:void(0)" class="mouseover"><span class="button_bj"></span>港澳台</a>
+                <a href="javascript:void(0)"><span class="button_bj"></span>泰国</a> <a href="javascript:void(0)">
+                    <span class="button_bj"></span>东南亚</a>
+                    <a href="javascript:void(0)">
+                    <span class="button_bj"></span>欧美</a>
+            </div>
+            <a href="/around.html">更多旅游线路>></a>
+        </div>
+        <div class="floorBox thisbox">
+            <div class="leftbox">
+                  #set ($rmcj=$tool.GetSingleBlock("MK_SY3LRMCJ")) 
+                $!rmcj.BDATA.data
+                 #set ($hdly=$tool.GetSingleBlock("MK_SY3LHDLY")) 
+                $!hdly.BDATA.data
+                
+            </div>
+        <div class="rightbox">
+                <div class="floor_rightBoxcontent">
+                    #set ($tm=$tool.GetSingleBlock("MK_SY3LGG")) 
+                    <a href="$!tm.BDATA.url" target="$tm.target">
+                        <img src="$!tm.BDATA.cover" height="$tm.picheight" width="$tm.picwidth" alt="$tm.BDATA.title" /></a>
+                </div>
+            </div>
+            <div style="overflow: hidden; position: relative; height: 375px;">
+                <div class="switch_dist_content" style="display: block">
+                     #set ($tm=$tool.GetBlockData("MK_SY3L_1B")) #foreach($block in $tm.blockData)
+                     <a href="$!block.url">
+                        <span class="contentbox"><span class="contenttitle_bj"></span><span class="contenttitle">
+                            $block.title</br>$!block.summary</span> <span class="productname">$block.title</span>
+                            <span class="price">￥$block.price.toString("0")</span>
+                            <img class="productimg" src="$tool.getFileImg($block.coverserver,$block.cover,320)"
+                                alt="" />
+                        </span></a>#end
+                </div>
+                <div class="switch_dist_content">
+                    #set ($tm=$tool.GetBlockData("MK_SY3L_2B")) #foreach($block in $tm.blockData)
+                     <a href="$!block.url">
+                        <span class="contentbox"><span class="contenttitle_bj"></span><span class="contenttitle">
+                            $block.title</br>$!block.summary</span> <span class="productname">$block.title</span>
+                            <span class="price">￥$block.price.toString("0")</span>
+                            <img class="productimg" src="$tool.getFileImg($block.coverserver,$block.cover,320)"
+                                alt="" />
+                        </span></a>#end
+                </div>
+                <div class="switch_dist_content">
+                   #set ($tm=$tool.GetBlockData("MK_SY3L_3B")) #foreach($block in $tm.blockData)
+                     <a href="$!block.url">
+                        <span class="contentbox"><span class="contenttitle_bj"></span><span class="contenttitle">
+                            $block.title</br>$!block.summary</span> <span class="productname">$block.title</span>
+                            <span class="price">￥$block.price.toString("0")</span>
+                            <img class="productimg" src="$tool.getFileImg($block.coverserver,$block.cover,320)"
+                                alt="" />
+                        </span></a>#end
+                </div>
+                <div class="switch_dist_content">
+                      #set ($tm=$tool.GetBlockData("MK_SY3L_4B")) #foreach($block in $tm.blockData)
+                     <a href="$!block.url">
+                        <span class="contentbox"><span class="contenttitle_bj"></span><span class="contenttitle">
+                            $block.title</br>$!block.summary</span> <span class="productname">$block.title</span>
+                            <span class="price">￥$block.price.toString("0")</span>
+                            <img class="productimg" src="$tool.getFileImg($block.coverserver,$block.cover,320)"
+                                alt="" />
+                        </span></a>#end
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--4楼-->
+    <div class="pagebox switch_dist_list">
+        <div class="default_box_title floor4">
+            <div class="dist_list_box">
+                <a href="javascript:void(0)" class="mouseover"><span class="button_bj"></span>第二课堂</a>
+                <a href="javascript:void(0)"><span class="button_bj"></span>亲子游</a>
+            </div>
+            <a href="/domestic/0-0-0-0-16-0.html">更多旅游线路>></a>
+        </div>
+        <div class="floorBox thisbox">
+            <div class="leftbox">     
+
+         <ul class="stringList">
+          #foreach($item in $tool.TourPageList("第2课堂",0,0,10))
+            <li><a title="$item.title ￥$item.price.toString("0.00")" target="_blank" href="/tour/$item.id&#46;html">
+                 $tool.NameHtml($item.name,30)</a></li>     
+          #end
+         </ul>
+            </div>
+           <div class="rightbox">
+                <div class="floor_rightBoxcontent">
+                    #set ($tm=$tool.GetSingleBlock("MK_SY4LGG")) 
+                    <a href="$!tm.BDATA.url" target="$tm.target">
+                        <img src="$!tm.BDATA.cover" height="$tm.picheight" width="$tm.picwidth" alt="$tm.BDATA.title" /></a>
+                </div>
+            </div>
+            <div style="overflow: hidden; position: relative; height: 375px;">
+                <div class="switch_dist_content" style="display: block">
+                    #set ($tm=$tool.GetBlockData("MK_SY4L_1B")) #foreach($block in $tm.blockData)
+                     <a href="$!block.url">
+                        <span class="contentbox"><span class="contenttitle_bj"></span><span class="contenttitle">
+                            $block.title</br>$!block.summary</span> <span class="productname">$block.title</span>
+                            <span class="price">￥$block.price.toString("0")</span>
+                            <img class="productimg" src="$tool.getFileImg($block.coverserver,$block.cover,320)"
+                                alt="" />
+                        </span></a>#end
+                </div>
+                <div class="switch_dist_content">
+                  #set ($tm=$tool.GetBlockData("MK_SY4L_2B")) #foreach($block in $tm.blockData)
+                     <a href="$!block.url">
+                        <span class="contentbox"><span class="contenttitle_bj"></span><span class="contenttitle">
+                            $block.title</br>$!block.summary</span> <span class="productname">$block.title</span>
+                            <span class="price">￥$block.price.toString("0")</span>
+                            <img class="productimg" src="$tool.getFileImg($block.coverserver,$block.cover,320)"
+                                alt="" />
+                        </span></a>#end
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--5楼-->
+    <div class="pagebox switch_dist_list">
+        <div class="default_box_title floor5">
+            <div class="dist_list_box">
+                <a href="javascript:void(0)" class="mouseover"><span class="button_bj"></span>旅游签证</a>
+                <a href="javascript:void(0)"><span class="button_bj"></span>商务签证</a>
+            </div>
+            <a href="/visa.html">更多签证>></a>
+        </div>
+        <div class="floorBox thisbox">
+            <div class="leftbox">
+             <ul class="stringList">
+            
+              #foreach($item in $tool.GetVisaList(10))
+                    <li>
+                    <a title="$item.name$item.typeName  " target="_blank" href="/visa/$item.id&#46;html">$item.name</a>
+                    <span style="padding-right:10px; float:right; color:Red">￥$item.price.ToString("0")</span>
+                    </li>
+                #end
+                </ul>
+                
+            </div>
+           <div class="rightbox">
+                <div class="floor_rightBoxcontent">
+                    #set ($tm=$tool.GetSingleBlock("MK_SY5LGG")) 
+                    <a href="$!tm.BDATA.url" target="$tm.target">
+                        <img src="$!tm.BDATA.cover" height="$tm.picheight" width="$tm.picwidth" alt="$tm.BDATA.title" /></a>
+                </div>
+            </div>
+            <div style="overflow: hidden; position: relative; height: 375px;">
+                <div class="switch_dist_content" style="display: block">
+                    #set ($lyqz=$tool.GetBlockData("MK_SY5L_1B")) #foreach($block in $lyqz.blockData)
+                     <a href="$!block.url">
+                        <span class="contentbox"><span class="contenttitle_bj"></span><span class="contenttitle">
+                            $block.title</br>$!block.summary</span> <span class="productname">$block.title</span>
+                            <span class="price">￥$block.price.toString("0")</span>
+                            <img class="productimg" width="200px" src="$tool.getFileImg($block.coverserver,$block.cover,320)"
+                                alt="" />
+                        </span></a>#end
+                </div>
+                <div class="switch_dist_content">
+                  #set ($lyqz=$tool.GetBlockData("MK_SY5L_2B")) #foreach($block in $lyqz.blockData)
+                     <a href="$!block.url">
+                        <span class="contentbox"><span class="contenttitle_bj"></span><span class="contenttitle">
+                            $block.title</br>$!block.summary</span> <span class="productname">$block.title</span>
+                            <span class="price">￥$block.price.toString("0")</span>
+                            <img class="productimg"  width="200px" src="$tool.getFileImg($block.coverserver,$block.cover,320)"
+                                alt="" />
+                        </span></a>#end
+                </div>
+            </div>
+        </div>
+    </div>
+    #parse("pageFoot.htm")
+</body>
+</html>

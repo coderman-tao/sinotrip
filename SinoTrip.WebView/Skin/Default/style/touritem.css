@@ -1,0 +1,32 @@
+﻿
+
+.tournamebox{overflow:hidden; height:60px; position:relative; padding-left:75px;}
+.tournamebox h2{ color:#333}
+
+.tourBasicBox{padding:10px; border:1px solid #ff6600; background-color:#fffbe5; height:225px}
+.tourBasicBox ul{ padding:5px; margin:0px;}
+.tourBasicBox ul li{ list-style:none; line-height:35px;}
+.tourBasicBox ul li span.name{ color:#666}
+.tourBasicBox ul li span.payicon{ -moz-user-select:none; display:inline-block; padding-left:25px; background:url(../images/pay_icon.png) no-repeat}
+.tourBasicBox ul li span.payicon.yl{ background-position:0px 5px}
+.tourBasicBox ul li span.payicon.xyk{ background-position:0px -145px}
+.tourBasicBox ul li span.payicon.kj{ background-position:0px -195px}
+.tourBasicBox ul li span.payicon.wy{ background-position:0px -245px}
+.tourBasicBox ul li span.payicon.md{ background-position:0px -45px}
+
+
+
+.tour_kf{ margin-top:10px; border:1px solid #ccc}
+#pricebox{background-color: #ffffff; border: 1px solid #ccc}
+#pricebox.notebox{ border: 1px solid Red; }
+#pricebox.notebox .PriceTable{background-color:#fffeed}
+.PriceTable { width:270px}    
+ .PriceTable th { background:#FFF5DA;
+                     color:#99650f;                             
+                    }                  
+                    
+.buyflow_box{background-color: #ffffff; border:1px solid #ccc; margin-top:10px}.buyflow_title{padding:15px; font-size:14px; color:#999; position:relative}.buyflowhelp{position:absolute; top:0; right:0; text-align:right; padding:15px 15px 15px 0px; font-size:12px;}.buyflowhelp a,buyflowhelp a:hover{ color:#006797}    .calendarBox .calendarList a, .calendarBox .calendarTitle span    {             -moz-user-select:none;
+      display:inline-block;     
+      position:relative;      width:121px;     margin:0px;    border-right:1px solid #eee;     border-bottom:1px solid #eee;     height:55px;               }    .couponetitle{ cursor:pointer}    .calendarBox .calendarTitle span    {        text-align:center;height:35px; line-height:35px; font-weight:bold; background:#f7f7f7; color:#333    }    .calendarBox .calendarList a.after, .calendarBox .calendarTitle span.after    {         border-right:0px    }        .calendarBox .calendarList a.hover{ background-color:#d8ffc0}    .calendarBox .calendarList a.current{ background-color:#ffffe0}    .calendarBox .calendarList a.timein{ background-color:#e2ffd1}        .calendarBox .calendarList  span    {          -moz-user-select:none;
+      display:inline-block;        padding:10px                }            .calendarTop{line-height:55px; padding-left:15px; position:relative; font-size:22px; color:#ccc;  font-family:微软雅黑}      .calendarTop .calendarTxt{position:absolute; right:20px; padding:0px 60px 0px 60px; height:45px; color:#999; }    .calendarTop .calendarButton{ width:45px; height:45px; position:absolute;top:5px;background:url(../images/calendarButton.jpg) no-repeat; cursor:pointer}    .calendarTop .calendarButton.leftbutton{ left:0px; background-position:0px 0px}     .calendarTop .calendarButton.rightbutton{ right:0px; background-position:0px -50px}      .calendarTop .calendarButton.leftbutton.hover{background-position:0px -100px}       .calendarTop .calendarButton.rightbutton.hover{background-position:0px -150px}           .calendarBox .calendarList span.day{ padding:10px;}    .calendarBox .calendarList span.dayprice{position:absolute; bottom:0px; left:0px; color:Red; font-weight:normal;padding:0px 0px 10px 5px; font-family:Arial}    .calendarBox .calendarList span.dayprice.plannone{ color:#999; font-weight:normal}    .calendarBox .calendarList span.dayseat{position:absolute; bottom:0px; right:0px;padding:0px 10px 10px 0px; text-align:right;}    .calendarBox .calendarList span.dayNote{ top:0px; right:0px;padding:0px 10px 10px 0px; text-align:right; color:#ff6600}                                .ProductContent{ margin-top:5px;overflow:hidden; border:1px solid #f7f7f7; line-height:20px; color:#666; font-size:14px}      .ProductContent .ProductContent_Title{ height:30px; line-height:30px; background-color:#fbf3c4; padding-left:15px;}      .ProductContent .ProductContent_data{ padding:20px;}                           .journeytitle{ height:40px; line-height:40px;}            .journeyContent{ padding-left:135px; font-size:13px}             .journeytitle span       {            -moz-user-select:none;
+            display:inline-block;              height:40px;            color:#ff6600                  }       .journeytitle span.daystr{ width:90px; padding-left:40px; color:#ff6600; font-size:14px; font-weight:bold; position:relative}       .journeytitle span.daystr .daynumber       {            width:30px; background:url(../images/journey_icon.gif) no-repeat -12px 0px;            text-align:center; color:#ffffff;            line-height:30px;             position:absolute;top:0px; left:0px; font-family:Arial; font-size:18px}              .journeytitle span.journeyicon{background:url(../images/journey_icon.gif) no-repeat; }              .journeytitle span.journeyicon.tra313{ background-position: center -40px;width:22px}       .journeytitle span.journeyicon.tra315{ background-position: center -140px;width:22px}       .journeytitle span.journeyicon.tra314{ background-position: center -90px;width:22px}              .journeytitle span.journeyicon.hotle{ background-position: 0px -200px; padding-left:50px;}        .journeytitle span.journeyicon.meal{ background-position: 0px -250px; padding-left:50px;}

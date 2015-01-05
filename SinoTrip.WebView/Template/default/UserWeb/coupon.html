@@ -1,0 +1,184 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>#include("pageHeadCode.htm")
+    <link href="/Skin/default/style/user.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    #set($lefMeun = 0)
+    <!--是否显示左侧菜单-->
+    #parse("pageHead.htm")
+    <div class="pagebox" style="margin-top: 10px">
+        <div class=" userPageTop">
+            <div class="userPagetitleL">
+            </div>
+            <div class="userPagetitleR">
+            </div>
+        </div>
+        <div style="overflow: hidden; border: 1px solid #ccc; border-top: 5px solid #ccc">
+            <div style="width: 255px; overflow: hidden; float: left">
+                <div class="userpageleft">
+                    <div class="user_menu_box">
+                        #include("UserWeb/userMenu.htm")
+                    </div>
+                </div>
+                <div class="userpageleft2">
+                </div>
+            </div>
+            <div style="width: 920px; overflow: hidden; float: right; padding-top: 10px">
+                <div id="tapBox" style="overflow: hidden">
+                    <ul class="eTap" style="width: 900px" id="pricenoteTap">
+                        <li class="current noKeep">未使用</li>
+                        <li class="noKeep">已使用</li>
+                        <li class="noKeep">已过期</li>
+                    </ul>
+                    <div class="tapContentBox" id="pricenoteContent" style="width: 890px; overflow:hidden;height:auto">
+                        <div class="tapListContent noKeep">
+                            <div style="overflow: hidden; margin: 0 auto; width: 890px">
+                                <table class="ordertable">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 80px;">
+                                                编号
+                                            </th>
+                                            <th>
+                                                面值
+                                            </th>
+                                            <th>
+                                                门槛
+                                            </th>
+                                            <th>
+                                                有效期
+                                            </th>
+                                            <th>
+                                                说明
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbody_yx">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="tapListContent noKeep" style="display: none; width: 890px">
+                            <table class="ordertable">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 80px;">
+                                            编号
+                                        </th>
+                                        <th>
+                                            面值
+                                        </th>
+                                        <th>
+                                            门槛
+                                        </th>
+                                        <th>
+                                            有效期
+                                        </th>
+                                        <th>
+                                            说明
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbody_use">
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tapListContent noKeep" style="display: none; width: 890px">
+                            <table class="ordertable">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 80px;">
+                                            编号
+                                        </th>
+                                        <th>
+                                            面值
+                                        </th>
+                                        <th>
+                                            门槛
+                                        </th>
+                                        <th>
+                                            有效期
+                                        </th>
+                                        <th>
+                                            说明
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbody_gq">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    #parse("pageFoot.htm")
+</body>
+</html>
+<script type="text/javascript">
+    $(function () {
+        $("#pricenoteTap").find("li").live("click", function () {
+            var _index = $(this).index();
+            $("#pricenoteTap").find("li").removeClass("current");
+            $(this).addClass("current");
+            $("#pricenoteContent").find(".tapListContent").hide().eq(_index).show();
+        });
+
+        var rs = $result;
+        if (!!rs) {
+            var datenow = new Date();
+            for (var i = 0; i < rs.length; i++) {
+
+                var date = new Date(parseInt(rs[i].deadline) * 1000);
+                if (rs[i].status == 0) {
+                    if (date <= datenow) {
+                        $("#tbody_gq").append(GetHtml(rs[i]));
+                    }
+                    else {
+                        $("#tbody_yx").append(GetHtml(rs[i]));
+                    }
+                }
+                if (rs[i].status == 1) {
+                    $("#tbody_use").append(GetHtml(rs[i]));
+                }
+            }
+        }
+    });
+    function GetHtml(obj) {
+        var _note = "";
+        var _credit = "";
+        if (obj.mode != M.COUPON_MODE_PERSON) {
+            _note = "订单总额满"
+            _credit = "每单减" + parseFloat(obj.credit).toFixed(2) + "元";
+        } else {
+            _note = "个人单价满"
+            _credit = "每人减" + parseFloat(obj.credit).toFixed(2) + "元";
+        }
+        if (parseInt(obj.money) > 0)
+            _note += parseFloat(obj.money).toFixed(2) + "元";
+        else
+            _note = "";
+
+        _note = _note + _credit;
+        if (obj.status == 1) {
+            _note = '<span style="color:red">使用于' + dateFormat("Y-m-d H:i:s", obj.usetime) + "</span>";
+        }
+        else {
+            if (obj.type == M.COUPON_TYPE_ALL) {
+                _note += '</br><span style="color:red">【适用范围】：全场通用，部分商品除外</span>';
+            }
+            else {
+                _note += '</br><span style="color:red">【适用范围】：' + obj.couponname + "</span>"; ;
+            }
+        }
+        var html = "<tr><td>" + obj.serialno + "</td>"
+                   + "<td>￥" + parseFloat(obj.credit).toFixed(2) + "</td>"
+                   + "<td>" + (parseInt(obj.money) <= 0 ? "无" : "满" + parseInt(obj.money)) + "</td>"
+                   + "<td>截止" + dateFormat("Y-m-d H:i:s", obj.deadline) + "</td>"
+                   + "<td>" + _note + "</td></tr>";
+        return html;
+    }
+</script>

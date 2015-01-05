@@ -1,0 +1,257 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>$result.name&#45;$SITE.name</title>
+
+    #include("pageHeadCode.htm")
+</head>
+<body>
+    #parse("pageHead.htm")
+    <div class="pagebox" style="margin-top: 2px; width: 1190px">
+        <div style="overflow: hidden">
+          <div class="minboxtitle">
+              <span class="iconStr">签</span><span class="title"><h3>
+                $result.name</h3>
+              </span>                 
+         </div>
+
+
+
+
+
+
+            <div style="overflow: hidden; border:1px solid #eee" class="thisbox">
+                <div style="width: 240px; overflow: hidden; float: left; padding: 10px;">
+                    <div style=" overflow: hidden">
+                        <img src="$tool.getFileImg($!result.coverserver,$!result.cover,1)" alt="$result.name" width="240px" height="150px" /></div>
+                    <div style="text-align: center; color: #006699; line-height: 30px">
+                    $result.name
+                    </div>
+                </div>
+                <div style="padding: 10px; width: 900px; float: right; border: 0px solid #eee">
+                    <div>
+                        <table class="noborder" style="width: 100%; font-size: 13px;">
+                            <tbody>
+                                <tr>
+                                    <td style="height: 25px; line-height: 25px">
+                                        <span style="color: #000; font-weight: bold">有效期：</span>$!result.validhour
+                                    </td>
+                                    <td>
+                                        <span style="color: #000; font-weight: bold">最多停留时间：</span>$!result.staydays
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span style="color: #000; font-weight: bold">价格：</span><span style="color: Red; font-weight: bold;
+                                            font-family: Arial">&#12288;￥$result.price.ToString("0.00")元</span>
+                                    </td>
+                                    <td>
+                                        <span style="color: #000; font-weight: bold">使馆工作预计时间：</span>$!result.workhour
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span style="color: #000; font-weight: bold">签证类型：</span><span style="color: ;
+                                            font-weight: bold; font-family: Arial">$result.typeName</span>
+                                    </td>
+                                    <td style="height: 25px; line-height: 25px">
+                                        <span style="color: #000; font-weight: bold">入境次数：</span>$!result.entryno次
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span style="color: #000; font-weight: bold;">是否面试：</span> <span style="color: ;
+                                            font-weight: bold; font-family: Arial">#if ($result.isinterview=0) 否 #else 是 #end
+                                        </span>
+                                    </td>
+                                    <td style="line-height: 20px; overflow: hidden; text-align: right">
+
+                                      <a href="/mall/visa/order.aspx?id=$result.id">
+                                        <img  src="/Skin/default/images/buy.jpg" alt="" />
+                                       </a>
+
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="line-height: 20px; overflow: hidden" colspan="2">
+                                        <span style="color: #000; font-weight: bold">受理范围：</span>
+                                        <span style="font-family: Arial">$!result.range</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="line-height: 20px; overflow: hidden" colspan="2">
+                                        <span style="color: #000; font-weight: bold">相关附件：</span>
+                                            #foreach($item in $!result.attachs)
+                                          <a href="$item.path"><span style="color: Red;text-decoration:underline; font-family: Arial">$item.filename</span></a>
+                                            #end
+                                           
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+
+             <div style="overflow: hidden; border:1px solid #eee" class="thisbox">
+
+            <div class="divTab tab" id="pricenoteTap">
+                <a href="javascript:void(0)" class="current" onclick="$('#PlanData1').hide();$('#PlanData0').show();">所需材料</a>
+                <a href="javascript:void(0)" class="noKeep" onclick="$('#PlanData0').hide();$('#PlanData1').show();"> 预定须知</a>
+            </div>
+            <div class="notebox">
+
+          
+
+                <div id="PlanData0" style="overflow: hidden; padding: 10px; display: block">
+                    <div style="overflow: hidden; background-color: #ffffff; margin: 10px 0 10px 0; display: "
+                        id="searchbox">
+                       
+                            <div class="search_ul STYPE" id="STYPE" style=" text-align:right">
+                             <span class="inputbutton green">公共材料</span>
+                      #if($result.staffcondition!="")
+                           <span class="inputbutton">在职人员</span>
+                        #end                       
+                 
+
+                       #if($result.retireecondition!="")
+                    <span class="inputbutton">退休人员</span>
+                        #end
+                          #if($result.freercondition!="")
+                           <span class="inputbutton">退休人员</span>
+                          #end
+
+                      #if($result.studentcondition!="")
+                    <span class="inputbutton">学生</span>
+                        #end
+
+                         #if($result.childcondition!="")
+                    <span class="inputbutton">学龄儿童</span>
+                        #end                              
+
+                            </div>
+                      
+                    </div>
+                    <hr />
+
+
+
+
+
+                    <div class="visacontent">
+                        <div>
+                            <h2 style="color: #999">
+                                公共材料：</h2>
+                        </div>
+                        $result.pubcondition
+                    </div>
+                 
+
+
+
+                         #if($result.staffcondition!="")
+                       <div class="visacontent"  style="display: none">
+                        <div>
+                            <h2 style="color: #999">
+                                在职人员：</h2>
+                        </div>
+                        $result.staffcondition</div>
+                        #end
+
+
+                    #if($result.freercondition!="")
+               <div class="visacontent"  style="display: none">
+                        <div>
+                            <h2 style="color: #999">
+                                自由职业者：</h2>
+                        </div>
+                        $result.freercondition</div>
+                        #end
+
+                         #if($result.retireecondition!="")
+                 <div class="visacontent"  style="display: none">
+                        <div>
+                            <h2 style="color: #999">
+                                退休人员：</h2>
+                        </div>
+                        $result.retireecondition</div>
+                        #end
+
+
+                       #if($result.studentcondition!="")
+                  <div class="visacontent"  style="display: none">
+                        <div>
+                            <h2 style="color: #999">
+                                学生：</h2>
+                        </div>
+                        $result.studentcondition</div>
+                        #end
+
+                         #if($result.childcondition!="")
+                   <div class="visacontent"  style="display: none">
+                        <div>
+                            <h2 style="color: #999">
+                                学龄儿童：</h2>
+                        </div>
+                        $result.childcondition</div>
+                        #end
+
+
+
+                </div>
+
+                <div id="PlanData1" style="overflow: hidden; padding: 10px; display: none">
+                   $result.notice
+                </div>
+            </div>
+          
+            </div>
+
+              <div style="overflow: hidden; text-align:center; padding: 10px;">
+              <a href="/mall/visa/order.aspx?id=$result.id">
+                <img border="0" src="/Skin/default/images/buy.jpg" alt="" /></a>
+
+                    </div>
+
+
+        </div>
+    </div>
+     #parse("pageFoot.htm")
+
+     <style type="text/css">
+     
+     .notebox{ font-size:13px; line-height:25px; color:#666}
+     
+     </style>
+
+</body>
+</html>
+
+
+
+
+<script type="text/javascript">
+    $("#pricenoteTap").find("a").live("click", function () {
+        var _index = $(this).index();
+        $("#pricenoteTap").find("a").removeClass("current");
+        $(this).addClass("current");
+        $("#pricenoteContent").find(".TabContent").hide().eq(_index).show();
+
+    });
+  
+</script>
+  <script type="text/javascript">
+      $("#PlanData0").find(".inputbutton").click(function () {
+          var _index = $(this).index();
+          $("#PlanData0").find(".inputbutton").removeClass("green");
+          $(this).addClass("green");
+          $("#PlanData0").find(".visacontent").hide();
+          $("#PlanData0").find(".visacontent").eq(_index).show();
+
+      })
+            
+            
+            </script>

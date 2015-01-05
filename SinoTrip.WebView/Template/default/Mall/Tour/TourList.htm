@@ -1,0 +1,367 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>旅游线路搜索&#45;$SITE.name</title>
+      #include("pageHeadCode.htm")
+<link href="/Skin/default/style/tourlist.css" rel="stylesheet" type="text/css"/> 
+<script type="text/javascript" src="/res/js/My97DatePicker/WdatePicker.js"></script>
+</head>
+<body>
+  #set($lefMeun = 0)
+    <!--是否显示左侧菜单-->
+    #parse("pageHead.htm")
+
+    <div class="pagebox">
+        <div class="pageWay">
+            您的位置：<a href="/" title="安徽中青旅荞面旅游网">首页</a> > #if($tourType!=0)<span title="$tool.GetSetting($tourType).name旅游报价">$tool.GetSetting($tourType).name旅游</span>#end </div>       
+    </div>
+
+<div class="pagebox">
+        <div style="overflow: hidden; position: relative;">
+            <!--左-->
+            <div style="width: 855px; overflow: hidden; float: left">
+              <div class="thisbox" id="searchKeyList">  
+                 
+             #if($tourType==283)
+                  #set($filename="/domestic/")
+              #elseif($tourType==272)
+                  #set($filename="/Abroad/")
+               #else
+                 #set($filename="/")              
+               #end
+
+               #if($tourType!=0)
+               <div class="searchbox" item="areaType">
+               <div style=" position:absolute">
+                <div class="keytypebox">目的地：
+                </div>
+               <div class="keyButtonbox">
+                <span class="inputbutton keywordbutton" >┼ 展开</span>
+               </div>
+               </div>          
+               <a class="allkeyword" href="$filename&#48;&#45;&#48;&#45;0&#45;$tratype&#45;$journeyType&#45;$hotletype&#46;html$searchstr">全部</a>                     
+                #foreach($item in $tool.GetWebConfig($tool.GetM("CONFIG_TYPE_AREATYPE"),$tourType,0))
+                  <a #if($item.id==$areaType)class="current" #end href="$filename&#48;&#45;$item.id&#45;0&#45;$tratype&#45;$journeyType&#45;$hotletype&#46;html$searchstr">$item.name</a>
+               #end           
+               </div> 
+               #else
+               <div class="searchbox">
+               <div style=" position:absolute">
+                <div class="keytypebox">区域分类：
+                </div>              
+               </div>                             
+                    <a href="/domestic/&#48;&#45;&#48;&#45;0&#45;$tratype&#45;$journeyType&#45;$hotletype&#46;html$searchstr">国内旅游</a>
+                    <a href="/Abroad/&#48;&#45;&#48;&#45;0&#45;$tratype&#45;$journeyType&#45;$hotletype&#46;html$searchstr">出境旅游</a>
+               </div>
+               #end
+
+               #if($areaplayList.count>0)
+               <div class="searchbox" item="areaplay">
+               <div style=" position:absolute">
+                <div class="keytypebox">玩法：
+                </div>
+               <div class="keyButtonbox">
+                <span class="inputbutton keywordbutton" >┼ 展开</span>
+               </div>
+               </div>          
+               <a class="allkeyword" href="$filename&#48;&#45;$areaType&#45;0&#45;$tratype&#45;$journeyType&#45;$hotletype&#46;html$searchstr">全部</a>                     
+                #foreach($item in $areaplayList)
+
+                  <a #if($item.id==$areaplay)class="current" #end href="$filename&#48;&#45;$areaType&#45;$item.id&#45;$tratype&#45;$journeyType&#45;$hotletype&#46;html$searchstr">$item.name</a>
+               #end           
+               </div>
+               #end
+
+
+               <div class="searchbox" item="tratype">
+               <div style=" position:absolute">
+                <div class="keytypebox">交通：
+                </div>
+               <div class="keyButtonbox">
+                <span class="inputbutton keywordbutton" >┼ 展开</span>
+               </div>
+               </div>          
+               <a class="allkeyword" href="$filename&#48;&#45;$areaType&#45;$areaplay&#45;0&#45;$journeyType&#45;$hotletype&#46;html$searchstr">全部</a>         
+                #foreach($item in $tool.GetSettings($tool.GetM("ROOT_TRA_TYPE")))
+               <a #if($item.id==$tratype)class="current" #end href="$filename&#48;&#45;$areaType&#45;$areaplay&#45;$item.id&#45;$journeyType&#45;$hotletype&#46;html$searchstr">$item.name</a>
+               #end           
+               </div>
+               
+              <div class="searchbox"  item="journeyType">
+               <div style=" position:absolute">
+                <div class="keytypebox">行程特色：
+                </div>
+               <div class="keyButtonbox">
+                <span class="inputbutton keywordbutton" >┼ 展开</span>
+               </div>
+               </div>          
+              <a class="allkeyword" href="$filename&#48;&#45;$areaType&#45;$areaplay&#45;$tratype&#45;0&#45;$hotletype&#46;html$searchstr">全部</a>          
+                #foreach($item in $tool.GetWebConfig($tool.GetM("CONFIG_TYPE_JOURNEYTYPE")))
+                 <a #if($item.id==$journeyType)class="current" #end href="$filename&#48;&#45;$areaType&#45;$areaplay&#45;$tratype&#45;$item.id&#45;$hotletype&#46;html$searchstr">$item.name</a>
+               #end  
+                #foreach($item in $tool.GetWebConfig($tool.GetM("CONFIG_TYPE_JOURNEYTRAIT")))
+                <a #if($item.id==$journeyType)class="current" #end href="$filename&#48;&#45;$areaType&#45;$areaplay&#45;$tratype&#45;$item.id&#45;$hotletype&#46;html$searchstr">$item.name</a>
+               #end     
+               </div>
+               <div class="searchbox"  item="hotleType">
+               <div style=" position:absolute">
+                <div class="keytypebox">住宿等级：
+                </div>
+               <div class="keyButtonbox">
+                <span class="inputbutton keywordbutton" >┼ 展开</span>
+               </div>
+               </div>          
+              <a class="allkeyword" href="$filename&#48;&#45;$areaType&#45;$areaplay&#45;$tratype&#45;$journeyType&#45;0&#46;html$searchstr">全部</a>          
+                #foreach($item in $tool.GetWebConfig($tool.GetM("CONFIG_TYPE_HOTLETYPE")))
+                 <a #if($item.id==$hotletype)class="current" #end href="$filename&#48;&#45;$areaType&#45;$areaplay&#45;$tratype&#45;$journeyType&#45;$item.id&#46;html$searchstr">$item.name</a>
+               #end                
+               </div>
+    <div style=" overflow:hidden; padding:10px 0px 10px 0px; display:none" id="allSearchBox">
+     <form action="$filename&#48;&#45;&#48;&#45;0&#45;$tratype&#45;$journeyType&#45;$hotletype&#46;html" method="post" id="toursearch"></form>            
+     <div class="inputbox">   
+    <span class="inputTitle w80">出发日期：</span>
+    <span class="inputContent">
+    <input type="text" class="toursearch" value="#if($mintime!="")$mintime#end" title="yy-mm-dd" style=" width:100px"  onfocus="WdatePicker({errDealMode:1,minDate:'%y-%M-%d',skin:'twoer'})" name="mintime" />
+    —
+    <input type="text" class="toursearch" value="#if($maxtime!="")$maxtime#end"  name="maxtime" title="yy-mm-dd" onfocus="WdatePicker({errDealMode:1,minDate:'%y-%M-%d',skin:'twoer'})"  style=" width:100px"/></span>   
+
+      <span class="inputTitle w80">行程天数：</span>
+    <span class="inputContent">
+    <input type="text" title="期望最小天数" value="#if($minday!=0)$minday#end"  style="width:100px" class="toursearch isNumber"  name="minday"/>
+    —
+    <input name="maxday" class="toursearch isNumber"   value="#if($maxday!=0)$maxday#end"   type="text" title="期望最大天数" style=" width:100px"/></span>   
+      
+    </div>
+    <div class="inputbox">  <span class="inputTitle w80">价格预算：</span>
+    <span class="inputContent">
+    <input type="text" title="最小预算" class="toursearch isNumber" value="#if($minprice!=0)$minprice#end"     style="width:100px" name="minprice"/>
+    —
+    <input name="maxprice" type="text" class="toursearch isNumber" value="#if($maxprice!=0)$maxprice#end"    title="最大预算" style=" width:100px"/></span>  
+     <span class="inputTitle w80">目的地：</span>
+    <span class="inputContent">
+    <input type="text" title="目的地/景点" value="#if($keyword!="")$keyword#end" class="toursearch"  style=" width:230px" name="keyword"/>
+    </span>
+    <span class="inputbutton green" style=" width:120px; padding:3px 0px 3px 0px; margin-left:56px;" onclick="SubmitTourSearch()">✈ 去度假</span></div>
+        
+               
+   </div>                
+              
+
+                     
+                <div style=" line-height:30px; text-align:center; height:40px; border-top:1px solid #ccc">
+                <div style=" height:30px; width:230px; position:relative; margin:0 auto">
+                <div style="top:-2px ;position:absolute; width:230px; height:30px; border:1px solid #ccc; background-color:#ffffff; border-top-width:0px;">
+                <a href="javascript:void(0)" onclick="SetAllSearch(this)" id="allsearchbutton">更多选择(住宿、价格、天数、检索)&nbsp;&nbsp;<span>ⅴ</span></a>
+                </div>
+                
+                
+                </div>
+                </div>
+            </div>
+
+
+       
+              <div class="thisbox">
+                       <div style=" height:35px; line-height:35px; background-color:#f7f7f7"></div>
+                       
+                       <div class="tourlist" id="product_tourlist">
+                      
+                       #foreach($item in $tourList)
+                       <div class="tourbox">
+                       <div class="imgbox"><span class="imglab #if($tool.GetM("PRODUCT_TYPE_GTLY")==$item.producttype)gtyIcon #else freeIcon #end"></span>
+                    
+                        <a href="/Tour/$item.id&#46;html" target="_blank" title="在线预订$item.title">
+                       <img width="238px" src="$tool.getFileImg($item.coverserver,$item.cover,320)"/>
+                       </a>
+                       </div>
+
+                       <div class="tourcounet">
+                       <div class="touritem">
+                       <a href="/Tour/$item.id&#46;html" target="_blank" title="$item.title"><h3 >$tool.NameHtml($item.title,50)</h3></a>
+                       <div style=" height:30px">$tool.NameHtml($item.describe,70)</div>
+                     
+                        <div>特色：$!tool.SetStringsConfig($item.journeytrait,$item.Producttrait)</div>
+                         <div>出发日期：$tool.SetStringsTime($item.startimes,6)</div>
+                          <div class="tourlistDis">
+                           #foreach($citem in $tool.StringsToArray($item.couponTypes)) 
+                                 #if($citem==$tool.GetM("COUPON_TYPE_QUAN"))
+                                    <span class="discountBox couponetitle"><span class="discountname">券</span>优惠券</span>                               
+                               #elseif($citem==$tool.GetM("COUPON_TYPE_LIJIAN"))
+                                     <span class="discountBox couponetitle"><span class="discountname">减</span>下单立减</span>
+                               #end
+
+                          #end
+                          </div>
+                       </div>
+                       <div class="pricebox">
+                       <div class="price">￥$item.price.toString("0.00")</div>
+                       <div>市场价：<span style="text-decoration: line-through; color:#666">￥$item.market.toString("0.00")</span></div>
+                       <div style="padding-top:30px">
+                       <a href="/Tour/$item.id&#46;html" target="_blank" title="在线预订$item.title">
+                       <span class="inputbutton orange" style=" width:100px">立即预订</span>
+                       </a>
+                       </div>
+                       </div>
+                       </div>
+                       </div>
+                        #end
+                 
+                       </div>
+                       
+                       </div>  
+
+              <div class="pageList">
+              $tool.getPageList(" <a class='{0}' href='$filename{1}&#45;$areaType&#45;$areaplay&#45;$tratype&#45;$journeyType&#45;$hotletype&#46;html$searchstr'>{2}</a>","current",6,$page,$pagesize,$total)
+              
+              </div>
+        
+            </div>
+            <!--右-->
+            <div style="width: 322px; float: right;">
+                <div style="background-color: #f7f7f7;" class="thisbox">                    
+                    <div style="padding: 10px 15px 10px 15px">
+                        <div class="minbox">
+                            <div class="minboxtitle">
+                            <span class="iconStr">特</span><span class="title"><h2>特价产品推荐</h2></span>
+                            </div>     
+                          <div class="boxcontent">
+                            #foreach($item in $tool.salePageList(0,5))
+                             #set($pageurl="/Tour/")
+                             #if($item.forum == $tool.GetM("PRODUCT_TYPE_QZ"))
+                                #set($pageurl="/visa/")
+                             #end
+                           <div class="contentlist">
+                            <div class="imgbox">
+                           <a href="$pageurl$item.productid&#46;html" title="$item.title&#65293;$item.summary" target="_blank">
+                          <img alt="$item.productname" src="$tool.getFileImg($item.coverserver,$item.cover,320)" width="270px" height="165px" alt="$item.productname"></a>                             
+                            </div>
+                            <div class="namenote">
+                            <a class="namebox" href="$pageurl$item.productid&#46;html" title="$item.title&#65293;$item.summary" target="_blank">
+                            <span class="productname">$tool.NameHtml($item.productname,30)</span>￥$item.price.toString("0.00")
+                            </a>
+                            </div>
+                            </div>
+                            #end
+                         </div>                   
+                        </div>                          
+                     </div>
+                        
+                                             
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">   
+
+
+    function SetAllSearch()
+    {
+         var thisobj = $("#allSearchBox");
+         if(thisobj.data("isShow"))         {
+                #if($searchstr!="")
+                  $("#toursearch").submit();
+                 #end
+               thisobj.slideUp()
+                thisobj.data("isShow",false);
+                $("#allsearchbutton").html("更多选择(住宿、价格、天数、检索)&nbsp;&nbsp;<span>ⅴ</span>")                 
+                 
+         }else{
+                thisobj.slideDown()
+                 thisobj.data("isShow",true);      
+                 $("#allsearchbutton").html("关闭清空高级搜索项&nbsp;&nbsp;<span>ⅴ</span>")          
+         }   
+    }
+    function SubmitTourSearch()
+    {
+        var str = "";
+        str=jQuery.XfilledUrl("toursearch",true);
+        if(str=="")
+        return;
+        
+        var searchurl = $("#toursearch").attr("action");
+      
+        searchurl = searchurl+"?" + str;
+     
+
+        $("#toursearch").attr("action",searchurl);     
+        $("#toursearch").submit();
+
+    }
+
+   #if($searchstr!="")
+        $("#allSearchBox").slideDown();
+        $("#allSearchBox").data("isShow",true); 
+        $("#allsearchbutton").html("关闭清空高级搜索项&nbsp;&nbsp;<span>ⅴ</span>")   
+   #end
+
+
+
+    var searchKeyItem;
+    #if($journeyType!=0)
+        searchKeyItem = $("#searchKeyList").find(".searchbox[item=journeyType]")
+         searchKeyItem.addClass("showbox");
+         searchKeyItem.data("isShow", true)
+        searchKeyItem.find(".keywordbutton").html("- 收起")
+    #end
+
+     #if($tratype!=0)
+        searchKeyItem = $("#searchKeyList").find(".searchbox[item=tratype]")
+         searchKeyItem.addClass("showbox");
+         searchKeyItem.data("isShow", true)
+        searchKeyItem.find(".keywordbutton").html("- 收起")
+    #end
+
+
+     #if($areaType!=0)
+        searchKeyItem = $("#searchKeyList").find(".searchbox[item=areaType]")
+         searchKeyItem.addClass("showbox");
+         searchKeyItem.data("isShow", true)
+        searchKeyItem.find(".keywordbutton").html("- 收起")
+    #end
+
+     #if($areaplay!=0)
+        searchKeyItem = $("#searchKeyList").find(".searchbox[item=areaplay]")
+         searchKeyItem.addClass("showbox");
+         searchKeyItem.data("isShow", true)
+        searchKeyItem.find(".keywordbutton").html("- 收起")
+    #end
+
+
+
+
+
+
+
+
+
+        $("#product_tourlist").find(".tourbox").hover(function () {
+
+            $(this).addClass("opt");
+        }, function () {
+
+            $(this).removeClass("opt");
+        })
+
+
+        $("#searchKeyList").find(".keywordbutton").bind("click", function () {
+            var pitem = $(this).parents(".searchbox");
+            if (pitem.data("isShow")) {
+                pitem.removeClass("showbox");
+                pitem.data("isShow", false)
+                $(this).html("┼ 展开")
+            } else {
+
+                pitem.addClass("showbox");
+                pitem.data("isShow", true)
+                $(this).html("- 收起")
+            }
+        })
+        
+      
+    </script>
+
+      #parse("pageFoot.htm")
+</body>
+</html>

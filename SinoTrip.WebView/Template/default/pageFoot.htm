@@ -1,0 +1,285 @@
+﻿<!--尾部-->
+<div class="naturalBox">
+    <img src="/Skin/default/images/natural.jpg" alt="安徽中青旅品质保证" />
+</div>
+<div class="footBox">
+    <div class="pagebox foothelpBox">
+        <div class="foothelplist">
+            <div class="helpTitle">
+                常见问题及其它</div>
+            <ul>
+                #foreach($help in $tool.GetHelp("HELP_TYPE_CJWT",true,5))
+                <li><a title="$help.title" target="_blank" href="/helps/$help.id&#46;html">$help.title</a></li>
+                #end
+            </ul>
+        </div>
+        <div class="foothelplist">
+            <div class="helpTitle">
+                支付与退款</div>
+            <ul>
+                #foreach($help in $tool.GetHelp("HELP_TYPE_ZFTK",true,5))
+                <li><a title="$help.title" target="_blank" href="/helps/$help.id&#46;html">$help.title</a></li>
+                #end
+            </ul>
+        </div>
+        <div class="foothelplist" style="float: right">
+            <div class="helpTitle">
+                关于我们</div>
+            <ul>
+                #foreach($help in $tool.GetHelp("HELP_TYPE_GYWM",true,5))
+                <li><a title="$help.title" target="_blank" href="/helps/$help.id&#46;html">$help.title</a></li>
+                #end
+            </ul>
+        </div>
+        <div class="foothelplist" style="float: right">
+            <div class="helpTitle">
+                出境证件相关</div>
+            <ul>
+                #foreach($help in $tool.GetHelp("HELP_TYPE_CJZJ",true,5))
+                <li><a title="$help.title" target="_blank" href="/helps/$help.id&#46;html">$help.title</a></li>
+                #end
+            </ul>
+        </div>
+    </div>
+    <div class="pagebox" style="border-top: 1px solid #b4b4b4;">
+        <div style="text-align:left; line-height:25px"><b>友情链接:&nbsp;&nbsp;</b>
+        #foreach($item in $LINK)
+        <a href="$!item.url" target="_blank">$!item.name</a>&nbsp;
+        #end
+        </div>
+        <p>
+            版块所有&nbsp;&nbsp;安徽中国青年旅行社有限责任公司－荞面旅游网&nbsp;未经许可不得转载 &nbsp;$SITE.record&nbsp;$SITE.statcode</p>
+        <p>
+            经营许可证号：L-AH-CJ00002&nbsp;经营范围：入境旅游、国内旅游、出境旅游&nbsp;法人代表：张剑&nbsp;投诉电话：962888-51760</p>
+    </div>
+</div>
+
+
+
+<style type="text/css">
+	.kfclose{top:100px;left:42px;width:20px;height:20px; border:1px solid #333; background:url(/skin/default/images/dialogpanel_icon.png); background-repeat:no-repeat; cursor:pointer}
+	.kfshow{top:0px;left:0px;width:30px;height:130px;background:url(/skin/default/images/mini_kf.png); cursor:pointer}
+	.tq_kf_mini{ width:30px; height:130px; overflow:hidden; }
+	</style>
+<div style=" position:fixed; right:0px; top:200px; width:110px; height:297px; z-index:998" id="kfbox">
+  <div style=" position:absolute;z-index:999"><div style=" position:absolute;" class="kfclose" id="KfEditBox"></div></div>
+  <img id="kfimg" src="http://float2006.tq.cn/staticimg.jsp?version=vip&admiuin=8599773&ltype=0&action=acd&acd=1&type_code=2&onlinepic=http://userfiles.tq.cn/userfiles/upload_221/8599773/1392349096.png&offlinepic=http://userfiles.tq.cn/userfiles/upload_221/8599773/1392349085.png" alt="客服" style=" cursor:pointer;" onclick="openKFWIN()"/>
+  
+  </div>
+			<script type="text/javascript">
+			    function openKFWIN() {
+			        window.open('http://vipwebchat.tq.cn/pageinfo.jsp?version=vip&admiuin=8599773&ltype=0&iscallback=1&page_templete_id=3288&is_message_sms=0&is_send_mail=0&action=acd&acd=1&type_code=2', 'newwindow', 'height=500, width=780, top=0,left=0, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no');
+
+			    }
+			    $(function () {
+			        var kfstr = '<div style=" position:absolute;z-index:999"><div style=" position:absolute;" class="kfclose" id="KfEditBox"></div></div>'
+
+			        $("#KfEditBox").bind("click", function () {
+			            if ($(this).hasClass("kfclose")) {
+			                $(this).removeClass("kfclose").addClass("kfshow");
+			                $("#kfbox").width(30).height(130);
+			                $("#kfimg").hide();
+			            } else {
+			                $(this).removeClass("kfshow").addClass("kfclose");
+			                $("#kfbox").width(110).height(297);
+			                $("#kfimg").show();
+			            }
+
+			        });
+
+			    })
+</script>
+
+
+<script type="text/javascript">
+
+
+    if (isPageLogin != null && isPageLogin)
+        QcLoad("QLoginBtn");
+
+
+</script>
+
+
+<!--浮动登录注册框-->
+<div class="reglogin" id="reglogin">
+    <div style="overflow: hidden; width: 320px; float: left">
+        <div style="padding: 0px 5px 0px 5px">
+            <div style="line-height: 25px;">
+                邮箱/用户名/已验的手机号</div>
+            <div>
+                <input type="text" err="用户名不能为空" title="邮箱/用户名/已验的手机号" checktype="notempty" name="username"
+                    class="userlogin" style="width: 240px;" />
+                <div class="errstr">
+                </div>
+            </div>
+        </div>
+        <div style="padding: 0px 5px 0px 5px">
+            <div style="line-height: 25px;">
+                密码&nbsp;<a href="/UserWeb/ResetPass.aspx" target="_blank">忘记密码？</a>
+            </div>
+            <div>
+                <input type="password" err="请输入您的登录密码" name="password" checktype="notempty" class="userlogin"
+                    style="width: 240px;" />
+                <div class="errstr">
+                </div>
+            </div>
+        </div>
+        <div style="padding: 5px;">
+            <span style="width: 220px;" class="inputbutton green" onclick="ajaxLogin('userlogin')">
+                登&nbsp;&nbsp;录</span>
+        </div>
+        <div style="padding: 5px;">
+            使用合作网站登录荞面旅游网</div>
+        <div style="text-align: right; width: 250px">
+            <span id="qqLoginBtn"></span>
+        </div>
+    </div>
+    <div style="overflow: hidden; width: 320px; float: right">
+        <div style="padding: 0px 5px 0px 5px">
+            <div style="line-height: 25px;">
+                手机</div>
+            <div>
+                <input type="text" err="请正确输入您的手机号码" title="请输入手机号" checktype="notempty|mobile" name="mobile"
+                    class="simpleReg mobilecode" style="width: 240px;" />
+                <div class="errstr">
+                </div>
+            </div>
+        </div>
+        <div style="padding: 0px 5px 0px 5px">
+            <div style="line-height: 25px;">
+                手机验证码</div>
+            <div>
+                <input type="text" err="请正确输入手机收到的6位验证码" checktype="notempty" name="code" class="simpleReg"
+                    style="width: 120px;" />
+                <span class="inputbutton loginbtn" onclick="sendMobileCode('mobilecode',0,this)">获取验证码</span>
+                <div class="errstr">
+                </div>
+            </div>
+        </div>
+        <div style="padding: 5px;">
+            <span style="width: 220px;" class="inputbutton orange" onclick="ajaxReg('simpleReg')">
+                快速注册</span>
+        </div>
+    </div>
+</div>
+<!--浮动第三方帐号绑定-->
+<div class="reglogin" id="BindUniteBox">
+    <div class="unitemsg">
+        <h2 id="BindUnitMsg">
+        </h2>
+    </div>
+    <div style="overflow: hidden">
+        <div style="overflow: hidden; width: 320px; float: left">
+            <div style="padding: 0px 5px 0px 5px">
+                <div style="line-height: 25px;">
+                    邮箱/用户名/已验的手机号</div>
+                <div>
+                    <input type="text" err="用户名不能为空" title="邮箱/用户名/已验的手机号" checktype="notempty" name="username"
+                        class="BindUnitlogin" style="width: 240px;" />
+                    <div class="errstr">
+                    </div>
+                </div>
+            </div>
+            <div style="padding: 0px 5px 0px 5px">
+                <div style="line-height: 25px;">
+                    密码&nbsp;<a href="/UserWeb/ResetPass.aspx" target="_blank">忘记密码？</a>
+                </div>
+                <div>
+                    <input type="password" err="请输入您的登录密码" name="password" checktype="notempty" class="BindUnitlogin"
+                        style="width: 240px;" />
+                    <div class="errstr">
+                    </div>
+                </div>
+            </div>
+            <div style="padding: 5px;">
+                <span style="width: 220px;" class="inputbutton green" onclick="BindUnite('BindUnitlogin')">
+                    绑定已有帐号</span>
+            </div>
+        </div>
+        <div style="overflow: hidden; width: 320px; float: right">
+            <div style="padding: 0px 5px 0px 5px">
+                <div style="line-height: 25px;">
+                    手机</div>
+                <div>
+                    <input type="text" err="请正确输入您的手机号码" title="请输入手机号" checktype="notempty|mobile" name="mobile"
+                        class="uniteReg uniteCode" style="width: 240px;" />
+                    <div class="errstr">
+                    </div>
+                </div>
+            </div>
+            <div style="padding: 0px 5px 0px 5px">
+                <div style="line-height: 25px;">
+                    手机验证码</div>
+                <div>
+                    <input type="text" err="请正确输入手机收到的6位验证码" checktype="notempty" name="code" class="uniteReg"
+                        style="width: 120px;" />
+                    <span class="inputbutton loginbtn" onclick="sendMobileCode('uniteCode',0,this)">获取验证码</span>
+                    <div class="errstr">
+                    </div>
+                </div>
+            </div>
+            <div style="padding: 5px;">
+                <span style="width: 220px;" class="inputbutton orange" onclick="ajaxReg('uniteReg',true)">
+                    绑定新帐号</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+     <div class="f_citybox thisbox" id="DomesticFlightCity">       
+        <div class="Xtitle"><span class="XtitleStr">国内城市/机场选择</span><span class="iconbtn" style="display: inline;"><span title="关闭" class="close">&nbsp;</span></span></div>
+         <div class="f_citytab">
+        <div style="position:absolute">
+        <div style=" position:relative; bottom:0px; padding-left:2px" class="f_citytabList">
+          <a href="javascript:void(0)" class="current">热门</a>
+         <a href="javascript:void(0)">ABCDEF</a>
+         <a href="javascript:void(0)">GHIJ</a>
+         <a href="javascript:void(0)">KLMN</a>
+         <a href="javascript:void(0)">PQRSTUVW</a>
+         <a href="javascript:void(0)">XYZ</a>
+        </div>
+        </div>
+        </div>
+        <ul class="citybox">       
+        </ul>
+        </div>
+
+
+         <div class="f_citybox thisbox" id="inFlightCity">       
+        <div class="Xtitle"><span class="XtitleStr">国际城市/机场选择</span><span class="iconbtn" style="display: inline;"><span title="关闭" class="close">&nbsp;</span></span></div>
+         <div class="f_citytab">
+        <div style="position:absolute">
+        <div style=" position:relative; bottom:0px; padding-left:2px" class="f_citytabList">
+          <a href="javascript:void(0)" class="current">国际热门</a>
+         <a href="javascript:void(0)">国内热门</a>
+         <a href="javascript:void(0)">亚洲</a>
+         <a href="javascript:void(0)">欧洲</a>
+         <a href="javascript:void(0)">美洲</a>
+         <a href="javascript:void(0)">非洲</a>
+         <a href="javascript:void(0)">大洋洲</a>
+        </div>
+        </div>
+        </div>
+        <ul class="citybox">       
+        </ul>
+        </div>
+
+
+        <div class="f_citybox h_citybox thisbox" id="inHotelCity">       
+        <div class="Xtitle"><span class="XtitleStr">国内入住城市选择</span><span class="iconbtn" style="display: inline;"><span title="关闭" class="close">&nbsp;</span></span></div>
+         <div class="h_citytab f_citytab">
+        <div style="position:absolute">
+        <div style=" position:relative; bottom:0px; padding-left:2px" class="f_citytabList h_citytabList">          
+         <a href="javascript:void(0)" class="current">热门</a>
+         <a href="javascript:void(0)">ABCDEF</a>
+         <a href="javascript:void(0)">GHIJ</a>
+         <a href="javascript:void(0)">KLMN</a>
+         <a href="javascript:void(0)">PQRSTUVW</a>
+         <a href="javascript:void(0)">XYZ</a>
+        </div>
+        </div>
+        </div>
+        <ul class="citybox">       
+        </ul>
+        </div>

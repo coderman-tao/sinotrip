@@ -1,0 +1,285 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>特价酒店预订&#45;$SITE.name</title>
+
+    <script type="text/javascript" src="/res/js/Hotel.js"></script>
+      #include("pageHeadCode.htm")
+<link href="/Skin/default/style/tourlist.css" rel="stylesheet" type="text/css"/> 
+
+<style type="text/css">
+.inputbox span.inputTitle{ width:80px}
+    .hotellist a{ -moz-user-select: none;
+    display: inline-block;margin-top:10px; border-bottom:1px dashed #999}
+    
+    .hotellist a:hover{ background-color:#d9f3ff}
+    
+    .hotellist a span{ -moz-user-select: none;
+    display: inline-block; }
+    
+     .hotellist a span.hotelname{width:100%; height:38px; padding-top:5px ;overflow:hidden; line-height:16px;font-size:13px; font-weight:bold; font-family:微软雅黑}
+     .hotellist a span.price{width:200px; text-align:right; color:Red; font-size:14px; font-family:微软雅黑; font-weight:bolder}
+</style>
+<script type="text/javascript" src="/res/js/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=1.1&services=true"></script>
+</head>
+<body>
+  #set($lefMeun = 0)
+    <!--是否显示左侧菜单-->
+    #parse("pageHead.htm")
+
+    <div class="pagebox">
+        <div class="pageWay">
+            您的位置：<a href="/" title="安徽中青旅荞面旅游网">首页</a> > <span title="酒店预订">酒店预订</span></div>
+    </div>
+
+<div class="pagebox">
+        <div style="overflow: hidden; position: relative;">
+           
+            <div style="width: 855px; overflow: hidden; float: left">            
+
+
+       
+              <div class="thisbox">
+              <div class="thisbox" id="searchKeyList">  
+                 
+                            
+                <div class="searchbox showbox" id="areaTypelist">
+               <div style=" position:absolute">
+                <div class="keytypebox">酒店位置：
+                </div>               
+               </div>          
+               <a class="allkeyword" href="$thistool.getSearchstr($!inDate,$!outDate,$!citycode,$!page,"",$!pricesRange,$!hotelLev,$!band,$!payType)">全部</a>  
+                    #foreach($item in $areas)                                  
+                      <a class="areaType #if($landtype==$item.AreaCode)current #end" href="javascript:void(0)" onclick="showlandmarkBox($velocityCount,'$item.AreaCode')">$item.AreaName</a>
+                    #end                                                        
+               </div> 
+
+               <div style=" overflow:hidden" id="landmarkBox">               
+                 #foreach($item in $areas)                    
+               <div class="searchbox showbox landmark" style=" display: #if($landtype!=$item.AreaCode)none #end">  
+                <div style=" position:absolute">
+                <div class="keytypebox">城市地标：</div>
+                </div>    
+                    #foreach($rows in $item.NewLandMarkInfos)    
+                       #foreach($row in $rows.LandMarkChildInfos) 
+                        <a #if($row.LandMarkChildName==$landname)class="current" #end href="$thistool.getSearchstr($!inDate,$!outDate,$!citycode,$!page,$!row.LandMarkChildName,$!pricesRange,$!hotelLev,$!band,$!payType)">$row.LandMarkChildName</a>
+                      #end
+                     
+                      #if($rows.LandMarkChildInfos.Count==0)
+                      <a href="#">&nbsp;</a>
+                      #end
+                    #end                                                        
+               </div>
+                #end   
+               </div>
+               
+               
+                <div class="searchbox showbox" item="areaplay">
+               <div style=" position:absolute">
+                <div class="keytypebox">价格范围：
+                </div>
+               
+               </div>          
+               <a class="allkeyword" href="$thistool.getSearchstr($!inDate,$!outDate,$!citycode,$!page,$!landname,"",$!hotelLev,$!band,$!payType)">全部</a> 
+                <a class="#if($pricesRange=="0-200") current#end" href="$thistool.getSearchstr($!inDate,$!outDate,$!citycode,$!page,$!landname,"0-200",$!hotelLev,$!band,$!payType)">200以下</a>  
+                <a class="#if($pricesRange=="201-300") current#end" href="$thistool.getSearchstr($!inDate,$!outDate,$!citycode,$!page,$!landname,"201-300",$!hotelLev,$!band,$!payType)">200-300</a>
+                <a class="#if($pricesRange=="301-500") current#end" href="$thistool.getSearchstr($!inDate,$!outDate,$!citycode,$!page,$!landname,"301-500",$!hotelLev,$!band,$!payType)">300-500</a>
+                <a class="#if($pricesRange=="501-99999") current#end" href="$thistool.getSearchstr($!inDate,$!outDate,$!citycode,$!page,$!landname,"501-99999",$!hotelLev,$!band,$!payType)">500以上</a>               
+               </div>
+               
+
+               <div class="searchbox showbox" item="tratype">
+               <div style=" position:absolute">
+                <div class="keytypebox">酒店级别：
+                </div>              
+               </div>          
+               <a class="allkeyword" href="$thistool.getSearchstr($!inDate,$!outDate,$!citycode,$!page,$!landname,$!pricesRange,"",$!band,$!payType)">全部</a>         
+                <a class="#if($hotelLev=="2") current#end" href="$thistool.getSearchstr($!inDate,$!outDate,$!citycode,$!page,$!landname,$!pricesRange,"2",$!band,$!payType)">二星/经济</a> 
+                <a class="#if($hotelLev=="3") current#end" href="$thistool.getSearchstr($!inDate,$!outDate,$!citycode,$!page,$!landname,$!pricesRange,"3",$!band,$!payType)">三星/舒适</a> 
+                <a class="#if($hotelLev=="4") current#end" href="$thistool.getSearchstr($!inDate,$!outDate,$!citycode,$!page,$!landname,$!pricesRange,"4",$!band,$!payType)">四星/高档</a> 
+                <a class="#if($hotelLev=="5") current#end" href="$thistool.getSearchstr($!inDate,$!outDate,$!citycode,$!page,$!landname,$!pricesRange,"5",$!band,$!payType)">五星/豪华</a>
+                </div>
+               
+              <div class="searchbox" item="journeyType">
+               <div style=" position:absolute">
+                <div class="keytypebox">连锁酒店：
+                </div>
+               
+               </div>          
+              <a class="allkeyword" href="$thistool.getSearchstr($!inDate,$!outDate,$!citycode,$!page,$!landname,$!pricesRange,$!hotelLev,"",$!payType)">全部</a>
+               <a class="#if($band=="HTJDLS") current#end" href="$thistool.getSearchstr($!inDate,$!outDate,$!citycode,$!page,$!landname,$!pricesRange,$!hotelLev,"HTJDLS",$!payType)">汉庭</a>
+               <a class="#if($band=="XEDJDJT") current#end" href="$thistool.getSearchstr($!inDate,$!outDate,$!citycode,$!page,$!landname,$!pricesRange,$!hotelLev,"XEDJDJT",$!payType)">格林豪泰</a>
+               <a class="#if($band=="RJ") current#end" href="$thistool.getSearchstr($!inDate,$!outDate,$!citycode,$!page,$!landname,$!pricesRange,$!hotelLev,"RJ",$!payType)">如家快捷</a>
+               <a class="#if($band=="ST") current#end" href="$thistool.getSearchstr($!inDate,$!outDate,$!citycode,$!page,$!landname,$!pricesRange,$!hotelLev,"ST",$!payType)">速8</a>
+               <a class="#if($band=="JJZX") current#end" href="$thistool.getSearchstr($!inDate,$!outDate,$!citycode,$!page,$!landname,$!pricesRange,$!hotelLev,"JJZX",$!payType)">锦江之星</a>
+               <a class="#if($band=="BDJDLS") current#end" href="$thistool.getSearchstr($!inDate,$!outDate,$!citycode,$!page,$!landname,$!pricesRange,$!hotelLev,"BDJDLS",$!payType)">布丁</a>                               
+                              </div>
+               <div class="searchbox" item="hotleType">
+               <div style=" position:absolute">
+                <div class="keytypebox">支付方式：
+                </div>              
+               </div>          
+                <a class="allkeyword" href="$thistool.getSearchstr($!inDate,$!outDate,$!citycode,$!page,$!landname,$!pricesRange,$!hotelLev,$!band,"")">全部</a>          
+                <a class="#if($payType=="S") current#end" href="$thistool.getSearchstr($!inDate,$!outDate,$!citycode,$!page,$!landname,$!pricesRange,$!hotelLev,$!band,"S")">预付</a> 
+                <a class="#if($payType=="T") current#end" href="$thistool.getSearchstr($!inDate,$!outDate,$!citycode,$!page,$!landname,$!pricesRange,$!hotelLev,$!band,"T")">前台现付</a>                                 
+               </div>  
+            </div>
+
+             <div style=" line-height:35px; background-color:#f7f7f7"> 
+                      <form action="/Mall/Hotel/HotelList.aspx$!thistool.getSearchstr("","","",0,$!landname,$!pricesRange,$!hotelLev,$!band,$!payType)" method="post" name="hotleListSubmit">
+                       <div class="inputbox">
+                       <span class="inputTitle">入住城市：</span><span class="inputContent">
+              <input value="$!cityname" style=" width:110px" name="cityname" onfocus="showHotelCity(0,this,$('#hotlecityhidden'))" readonly="readonly" title="点选入住城市" type="text"/></span>
+              <input type="hidden" value="$!citycode" name="citycode" id="hotlecityhidden"/>
+             
+              <span class="inputTitle">入住时间：</span><span class="inputContent">
+              <input style=" width:110px" name="inDate" value="$inDate" type="text" onfocus="WdatePicker({doubleCalendar:true,dateFmt:'yyyy-MM-dd',errDealMode:1,minDate:'%y-%M-%d',skin:'twoer'})"/></span>
+              <span class="inputTitle">离店时间：</span><span class="inputContent">
+              <input  style=" width:110px"  name="outDate"  value="$outDate" type="text" onfocus="WdatePicker({doubleCalendar:true,dateFmt:'yyyy-MM-dd',errDealMode:1,minDate:'%y-%M-%d',skin:'twoer'})"/></span>
+              <span class="inputTitle" style=" width:110px"><a href="javascript:" onclick="document.hotleListSubmit.submit()" class="inputbutton green" style="width:50px;">确定</a></span>
+              
+              </div>
+                        </form>
+                       </div>                     
+             <div class="tourlist" id="product_tourlist">                      
+                       
+                       #foreach($item in $roomStays)
+                       <div class="tourbox">
+                       <div class="imgbox">
+                    
+                        <a href="/Hotel/$item.BasicPropertys.CityCode/$inDate/$outDate/$item.BasicPropertys.HotelCode&#46;html" target="_blank" title="在线预订$item.BasicPropertys.HotelName$item.BasicPropertys.HotelEnglishName">
+                       <img alt="$item.BasicPropertys.HotelName$item.BasicPropertys.HotelEnglishName"  height="170" width="235" src="$thistool.getHotleImg($item.BasicPropertys.Images)"/>
+                       </a>
+                       </div>
+
+                       <div class="tourcounet">
+                       <div class="touritem">
+                       <a href="/Hotel/$item.BasicPropertys.CityCode/$inDate/$outDate/$item.BasicPropertys.HotelCode&#46;html" target="_blank" title="在线预订$item.BasicPropertys.HotelName$item.BasicPropertys.HotelEnglishName"><h3 >$item.BasicPropertys.HotelName</h3></a>
+                        <div style=" line-height:18px; color:#2b99ff">地址：$item.BasicPropertys.Address</div>
+                        <div style=" height:90px; overflow:hidden; line-height:20px; padding:10px 10px 0px 0px" title="$item.BasicPropertys.LongDesc">
+                        $tool.NameHtml($item.BasicPropertys.LongDesc,260)
+                        </div>  
+                            
+                       </div>
+                       <div class="pricebox">
+                       <div class="price">￥
+                       #if($item.BasicPropertys.FlagS)
+                       $tool.GetHotlePrice($item.BasicPropertys.Rank,"S",$item.BasicPropertys.MinRate)
+                       #else
+                       $tool.GetHotlePrice($item.BasicPropertys.Rank,"T",$item.BasicPropertys.MinRate)
+                       #end
+                        </div>
+                       <div style=" text-align:center; width:110px">$thistool.getstarlevel($item.BasicPropertys.Rank)</div>
+                       <div class="starlevel h$item.BasicPropertys.Rank" title="$thistool.getstarlevel($item.BasicPropertys.Rank)"></div>
+                       <div style="padding-top:30px">
+                       <a title="在线预订$item.BasicPropertys.HotelName$item.BasicPropertys.HotelEnglishName" href="/Hotel/$item.BasicPropertys.CityCode/$inDate/$outDate/$item.BasicPropertys.HotelCode&#46;html" target="_blank" title="在线预订" class="inputbutton orange" style=" width:100px">立即预订</a>
+                       </div>
+                       </div>
+                       </div>
+                       </div>
+                       
+                       #end
+                       </div>                       
+                       </div>  
+
+              <div class="pageList">
+              <!-- public int TotalPageNum;
+
+       /// <summary>
+       /// 总酒店数
+       /// </summary>
+       public int TotalNum;
+
+       /// <summary>
+       /// 当前页
+       /// </summary>
+       public int CurrentPage;-->
+         #set($pagestr=$thistool.getSearchstr($!inDate,$!outDate,$!citycode,0,$!landname,$!pricesRange,$!hotelLev,$!band,$!payType))
+             $tool.getPageList(" <a class='{0}' href='$pagestr&page={1}'>{2}</a>","current",6,$page,10,$pageinfo.TotalNum)
+              
+
+              </div>
+        
+            </div>
+            <!--右-->
+            <div style="width: 322px; float: right;">
+                <div style=" overflow:hidden">
+
+                <div style="width:320px;float:left;height:400px;border:1px solid gray; " id="container"></div>    
+                </div>
+
+                <div style=" overflow:hidden; padding-top:10px; height:auto" class="hotellist ">
+                  #foreach($item in $tool.getResultHotels($citycode,5))
+         <a href="/Hotel/$item.BasicPropertys.CityCode/$inDate/$outDate/$item.BasicPropertys.HotelCode&#46;html" target="_blank" title="在线预订$item.BasicPropertys.HotelName$item.BasicPropertys.HotelEnglishName">
+          <img onError="this.src='/res/images/noHotelImg.jpg'"  alt="$item.BasicPropertys.HotelName$item.BasicPropertys.HotelEnglishName"  height="240" width="320" src="$tool.getHotleImg($item.BasicPropertys.Images)"/>
+          <span class="hotelname" style="width:320px;">$item.BasicPropertys.HotelName</span>
+          <span style=" width:220px" title="$tool.getstarlevel($item.BasicPropertys.Rank)" class="starlevel  price h$item.BasicPropertys.Rank" style="">￥#if($item.BasicPropertys.FlagS)
+                       $tool.GetHotlePrice($item.BasicPropertys.Rank,"S",$item.BasicPropertys.MinRate)
+                       #else
+                       $tool.GetHotlePrice($item.BasicPropertys.Rank,"T",$item.BasicPropertys.MinRate)
+                       #end</span>         
+          </a>
+         #end         
+                
+                
+                </div>
+
+            </div>
+ 
+    </div>
+    </div>
+    <script type="text/javascript">
+        var landmarkBoxList = $("#landmarkBox").find(".landmark");
+        var areaTypelist = $("#areaTypelist").find(".areaType");
+        function showlandmarkBox(index,areacode) {
+            index = index-1
+            landmarkBoxList.hide();
+            landmarkBoxList.eq(index).show();
+            areaTypelist.removeClass("current");
+            areaTypelist.eq(index).addClass("current");
+;
+        }
+
+                    
+         // var xy = "[['117.293224','31.876684','2013071517500152.jpg','25','百花井营业部','62670080 62670020','62670030','合肥市阜阳路77号五环大厦一楼'],['117.259887','31.836551','2013060416311749.jpg','24','望江路营业部','0551-65167360,65167060 ','65167360','合肥市蜀山区望江西路与合作化南路交叉口往东100米安高广场斜对面'],['117.237313','31.847419','2013060416011255.jpg','23','1912营业部','65770130','65579332','黄山路潜山路交口西侧30米，路北西环广场2栋121室'],['117.236927 ','31.868066','2012121314132556.jpg','22','潜山北路营业部','0551-65894308','0551-65894309','合肥市潜山北路和史河路交叉口百大合家福楼下'],['117.295406','31.749925','2012083117290228.jpg','21','滨湖店','62974138 62974176','62974136','安徽省合肥市滨湖新区世纪金源大酒店东侧200米'],['117.257884','31.878108','2012083117240685.jpg','20','清溪路营业部','65138728','65129368','清溪路康居时代家园 02号（大润发超市斜对面）'],['117.29431','31.885574','2012011812361666.jpg','19','双岗店','0551-65857016','0551-65613016','合肥市庐阳区阜阳路与一环路交叉口'],['117.310318','31.869768','2012041614142593.jpg','17','大东门店','0551-64292566','0551-64294966','合肥市长江东路1121号工人文化宫一楼'],['118.379931','31.374433','2011112115273910.jpg','16','芜湖城北欧尚超市店','0553-5691166','0553-5691166','芜湖欧尚超市天门山店2楼 '],['118.370651','31.340941','2011112115280375.jpg','15','芜湖北京路中心店 ','0553-3846688','0553-3846688','芜湖北京西路8-25号 '],['118.380407','31.330485','2011112115282891.jpg','14','芜湖中二街旗舰店','0553-3878520','0553-3878520','芜湖市中二街141号 '],['117.178864','31.731972','2011110310192111.jpg','13','肥西店','0551-68230366 ','0551-68230366 ','肥西县派河大桥健康大厦斜对面'],['117.266476','31.862311','2011110213263535.jpg','12','三里庵农大店','0551-62812359 ','0551-62812359 ','合肥市梅山路和长江西路交叉口'],['117.292508','31.845182','2011110217344403.jpg','11','东陈岗营业部','0551-64652698','0551-64652698','九华山路与徽州大道交叉口建设银行东侧'],['117.276201','31.8481','2011110310212883.jpg','10','黄山路营业部','0551-63634328','0551-63634328','合肥市黄山路118号(黄山路与金寨路交口)'],['117.27805','31.885296','2011103111373468.jpg','9','财富广场营业部','0551-65681719 ','0551-65621936','合肥市北一环254号(财富广场首座汇丰银行正对面,南国花园南大门向西60米)'],['117.31453','31.880043','2011110715002163.jpg','8','元一广场营业部','0551-64247772','0551-64247772','元一时代广场'],['117.299843','31.867515','2011110215295085.jpg','7','长江路营业部','0551-62625749 ','0551-62672359 ','合肥市长江中路九中东侧 '],['117.281842','31.856287','2011110310124216.jpg','6','金寨路营业部','0551-62862185','0551-62862185','金寨路222号安徽中青旅（稻香楼对面）'],['116.805281','33.982866','2011110316394422.jpg','5','淮北门店','0561-3043915','0561-3041171','安徽省淮北市相山区相山北路19-2号'],['118.37967','31.311575','2011112115290055.jpg','3','芜湖城南欧尚店 ','0553-4832288 ','0553-4832288 ','芜湖欧尚超市花津路店1楼西门入口处 '],['117.310821','31.85382','2012040116402366.jpg','2','总部营业部','0551-64296688','0551-64290759','合肥市屯溪路周谷堆恒兴广场A区八楼'],['117.288219','31.870913','2011110309115489.jpg','1','合肥市出入境管理局服务部','0551-62650786','0551-62650786','合肥市霍邱路6号市出入境管理局一楼107室 '],]";
+         #set($lon=0)
+         #set($lan=0)
+        $(function(){
+       
+         #foreach($item in $roomStays)
+             #if($velocityCount==1)
+                 #set($lon = $item.BasicPropertys.Positions.Longitude);
+                 #set($lan = $item.BasicPropertys.Positions.Latitude);
+             #end
+             addlogo("$item.BasicPropertys.Positions.Longitude", "$item.BasicPropertys.Positions.Latitude","$item.BasicPropertys.HotelName","$item.BasicPropertys.Address","$item.BasicPropertys.HotelCode","$item.BasicPropertys.CityCode");
+        #end
+      })
+
+      var map = new BMap.Map("container");
+      var point = new BMap.Point($lon, $lan);
+      map.centerAndZoom(point, 10);
+      map.addControl(new BMap.NavigationControl());  
+
+        function addlogo(lon,lat,name,address,hotelcode,code) {
+             var opts = {
+                width: 200 // 信息窗口宽度
+            }
+          var sContent ="<div><h4 style='margin:0 0 5px 0;padding:0.2em 0'>" +name + "</h4></div>"
+          + "<a href=\"/Hotel/"+code+"/$inDate/$outDate/"+hotelcode+".html\" target=\"_blank\"><div>地址：" +address + "</div></a>"      
+          var point = new BMap.Point(lon, lat);
+          var marker = new BMap.Marker(point);
+          var infoWindow = new BMap.InfoWindow(sContent,opts);  // 创建信息窗口对象      
+        
+          map.addOverlay(marker);
+          marker.addEventListener("click", function () {
+              this.openInfoWindow(infoWindow);   
+                  infoWindow.redraw();
+              });
+         }
+
+    </script>
+
+      #parse("pageFoot.htm")
+</body>
+</html>

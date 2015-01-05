@@ -1,0 +1,159 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>$!tool.PageTitle&#45;$SITE.name</title>
+    #include("pageHeadCode.htm")
+<!--   <link href="/Skin/Default/style/visa.css" rel="stylesheet" type="text/css" />-->
+    <script src="/res/js/myfocus-2.0.1.min.js" type="text/javascript"></script>
+</head>
+<body>
+    #set($lefMeun = 1)
+    <!--是否显示左侧菜单,1显示,0隐藏-->
+    #parse("pageHead.htm")
+    <div class="pagebox" style="margin-top:2px; width: 1190px">
+        <div style="padding-top: 462px; overflow: hidden; float: left; width: 232px">
+
+        <div class="minboxtitle">
+              <span class="iconStr">H</span><span class="title"><h3>
+              签证常见问题</h3>
+              </span>                 
+         </div>
+
+         <ul class="thisbox stringList">
+          #foreach($item in $tool.GetHelp("HELP_TYPE_QZBL",true,10))
+            <li><a title="$item.title" target="_blank" href="/helps/$item.id&#46;html">
+                 $item.title</a></li>     
+          #end
+         </ul>
+
+
+
+        </div>
+        <div style="width: 950px; overflow: hidden; float: right">
+            <div id="myFocus">
+                <!--焦点图盒子-->
+                <div class="loading">
+                    图片加载中......</div>
+                <div class="pic">
+                    <!--图片列表-->
+                    <ul>
+                        #set ($hdp=$tool.GetBlockData("MK_VISA_SY_HDP")) 
+                        #foreach($block in $hdp.blockData)
+                        <li><a href="$!block.url" target="_blank">
+                            <img src="$!block.cover" height="300" width="950" alt="$!block.title" text="$!block.summary"
+                                thumb="$!block.title" /></a></li>
+                        #end
+                    </ul>
+                </div>
+            </div>
+
+           <div style=" overflow:hidden; padding-top:20px;">
+             <div class="minboxtitle">
+                    <span class="iconStr">热</span><span class="title"><h2>
+                        热门签证产品</h2>
+                    </span>
+                    <span style=" position:absolute; right:0px; padding-right:10px"><a href="/visa/index.html"><h3>更多>></h3></a></span>
+                </div>
+                <div class="thisbox" style="background-color: #f7f7f7;">                    
+                    <div style="padding: 10px 15px 10px 15px">
+                                <div class="minbox">   
+                #set ($hot=$tool.GetBlockData("MK_VISA_SY_HOT")) 
+                #foreach($block in $hot.blockData)
+                <div style="float: left; width: 202px; padding: 0 13px 0 13px; font-size: 13px; font-weight: bold">
+                    <a target="_blank" href="$!block.url" title="$!block.summary">
+                        <img src="$tool.getFileImg($!block.coverserver,$!block.cover,1)" alt="$!block.summary" width="202px" height="128px" border="1px solid #f7f7f7" style="margin-top: 10px;" />
+                            <div style="padding: 13px 0 13px 0">
+                                <span><a href="$!block.url" title="" target="_blank">$!block.title</a></span> 
+                                <span style="color: Red; padding-left: 10px;">￥$!block.price.toString("0")</span>                                
+                           </div>
+                </div>
+                #end
+               
+
+
+
+   </div>     
+             </div>
+                </div>   
+           </div>
+
+            <div style=" overflow:hidden; padding-top:20px;">
+             <div class="minboxtitle">
+                    <span class="iconStr">游</span><span class="title"><h2>
+                        热门旅游签证</h2>
+                    </span>
+                    <span style=" position:absolute; padding-right:10px; right:0px"><a href="/visa/ly/index.html"><h3>更多>></h3></a></span>
+                </div>
+                <div class="thisbox" style="background-color: #f7f7f7;">                    
+                    <div style="padding: 10px 15px 10px 15px">
+                                <div class="minbox">   
+                #set ($hotly=$tool.GetBlockData("MK_VISA_SY_HOT_LY"))
+                #foreach($block in $hotly.blockData)
+                <div style="float: left; width: 202px; padding: 0 13px 0 13px; font-size: 13px; font-weight: bold">
+                    <a target="_blank" href="$!block.url" title="$!block.summary">
+                        <img src="$tool.getFileImg($!block.coverserver,$!block.cover,1)" alt="$!block.summary" width="202px" height="128px" border="1px solid #f7f7f7" style="margin-top: 10px;" />
+                            <div style="padding: 13px 0 13px 0">
+                                <span><a href="$!block.url" title="" target="_blank">$!block.title</a></span> 
+                                <span style="color: Red; padding-left: 10px;">￥$!block.price.toString("0")</span>                                
+                           </div>
+                </div>
+                #end
+               
+
+
+
+   </div>     
+             </div>
+                </div>   
+           </div>
+
+           <div style=" overflow:hidden; padding-top:20px;">
+             <div class="minboxtitle">
+                    <span class="iconStr">商</span><span class="title"><h2>
+                        热门商务签证</h2>
+                    </span>
+                    <span style=" position:absolute; right:0px; padding-right:10px"><a href="/visa/biz/index.html"><h3>更多>></h3></a></span>
+                </div>
+                <div class="thisbox" style="background-color: #f7f7f7;">                    
+                    <div style="padding: 10px 15px 10px 15px">
+                                <div class="minbox">   
+                #set ($hotsw=$tool.GetBlockData("MK_VISA_SY_HOT_SW")) 
+                #foreach($block in $hotsw.blockData)
+                <div style="float: left; width: 202px; padding: 0 13px 0 13px; font-size: 13px; font-weight: bold">
+                    <a target="_blank" href="$!block.url" title="$!block.summary">
+                        <img src="$tool.getFileImg($!block.coverserver,$!block.cover,1)" alt="$!block.summary" width="202px" height="128px" border="1px solid #f7f7f7" style="margin-top: 10px;" />
+                            <div style="padding: 13px 0 13px 0">
+                                <span><a href="$!block.url" title="" target="_blank">$!block.title</a></span> 
+                                <span style="color: Red; padding-left: 10px;">￥$!block.price.toString("0")</span>                                
+                           </div>
+                </div>
+                #end
+               
+
+
+
+   </div>     
+             </div>
+                </div>   
+           </div>
+
+        </div>
+  
+    </div>
+    #parse("pageFoot.htm")
+</body>
+</html>
+<script type="text/javascript">
+    $(function () {
+
+        myFocus.set({
+            id: 'myFocus', //焦点图盒子ID
+            pattern: 'mF_kdui', //风格应用的名称		
+            width: 950, //设置图片区域宽度(像素)
+            height: 300, //设置图片区域高度(像素)
+            txtHeight: 'default'//文字层高度设置(像素),'default'为默认高度，0为隐藏
+        });
+
+        jQuery.XswitchBox();
+    })
+</script>

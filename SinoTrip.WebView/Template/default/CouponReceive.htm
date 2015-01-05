@@ -1,0 +1,148 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>优惠券领取&#45;$SITE.name</title>
+    #include("pageHeadCode.htm")
+    <style type="text/css">
+        .c_input
+        {
+            width: 150px;
+            line-height: 25px;
+            height: 25px;
+            padding-left: 5px;
+        }
+        body
+        {
+            margin: 0 auto;
+        }
+        .bjimg
+        {
+            height: 160px;
+            width: 1200px;
+            overflow: hidden;
+        }
+        .boxlist
+        {
+            padding: 10px 0px 10px 0px;
+        }
+        .numberStr
+        {
+            font-size: 14px;
+            font-weight: bold;
+            -moz-user-select: none;
+            display: inline-block;
+            width: 80px;
+        }
+        .numberInput
+        {
+            height: 45px;
+            width: 240px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            padding: 0px 0px 0px 20px;
+        }
+        .numberBox
+        {
+            width: 340px;
+            height: 60px;
+            overflow: hidden;
+        }
+        .loadnumber
+        {
+            text-align: right;
+            color: #ff6600;
+            padding: 0px;
+        }
+        
+        .boxlist a, .boxlist a:hover
+        {
+            color: #ff6600;
+            text-decoration: underline;
+        }
+    </style>
+    <script type="text/javascript">
+        function changeImg() {
+            var imgSrc = $("#vcode");
+            var src = imgSrc.attr("src");
+            imgSrc.attr("src", chgUrl(src));
+        }
+        //时间戳     
+        //为了使每次生成图片不一致，即不让浏览器读缓存，所以需要加上时间戳     
+        function chgUrl(url) {
+            var timestamp = (new Date()).valueOf();
+            if ((url.indexOf("&") >= 0)) {
+                url = url + "&tamp=" + timestamp;
+            } else {
+                url = url + "?timestamp=" + timestamp;
+            }
+            return url;
+        }
+        function recevieCp() {
+            var code = $("#i_vcode").val();
+            if (!code) {
+                return;
+            }
+            var data = {};
+            data.code = code;
+            var url = "/AJAX/coupon.ashx?action=receive&hashcode=$hashcode"
+            jQuery.Xload();
+            jQuery.ajax({
+                url: url,
+                data: data,
+                type: "POST",
+                success: function (response) {
+                    jQuery.XloadHide();
+                    if (response == 401.1) {
+                        showlogin();
+                        return;
+                    }
+                    if (!response) {
+                        window.location.href = "../UserWeb/Coupon.aspx";
+                        return;
+                    }
+                    $("#errorMsg").html(response);
+                    changeImg();
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    #parse("pageHead.htm")
+    <div style="width: 1200px; overflow: hidden; padding: 10px 0px 10px 0px; margin: 0 auto">
+        <div style="position: absolute">
+            <div style="position: relative; left: 240px; top: 330px; width: 715px; height: 370px;
+                overflow: hidden;">
+                <div style="width: 360px; margin: 0 auto;">
+                    <div class="boxlist">
+                        <span class="numberStr">验&nbsp;证&nbsp;码：</span><input type="text" id="i_vcode" class="numberInput" /></div>
+                    <div class="boxlist numberBox">
+                        <img src="ValidateCode.aspx?font=40&count=5" id="vcode" alt="" width="340px" height="60px" /></div>
+                    <div class="boxlist loadnumber">
+                        <a href="javascript:void(0)" onclick="changeImg()">[看不清楚？换一张]</a>&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                    <div class="boxlist">
+                        <img src="/Skin/default/images/coupon/button.png" style="cursor: pointer"
+                            onclick="recevieCp()" /></div>
+                    <div class="boxlist">
+                        <a href="/">返回首页></a></div>
+                    <div class="boxlist">
+                        如果您的浏览器装有抓图软件导致输入错误，请更换浏览器后重试</div>
+                    <div class="boxlist" id="errorMsg" style="color: Red; font-size: 14px">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bjimg" style="background: url(/Skin/default/images/coupon/bg-1.jpg) no-repeat center;">
+        </div>
+        <div class="bjimg" style="background: url(/Skin/default/images/coupon/bg-2.jpg) no-repeat center;">
+        </div>
+        <div class="bjimg" style="background: url(/Skin/default/images/coupon/bg-3.jpg) no-repeat center;">
+        </div>
+        <div class="bjimg" style="background: url(/Skin/default/images/coupon/bg-4.jpg) no-repeat center;">
+        </div>
+        <div class="bjimg" style="background: url(/Skin/default/images/coupon/bg-5.jpg) no-repeat center;">
+        </div>
+    </div>
+     #parse("pageFoot.htm")
+</body>
+</html>

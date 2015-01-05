@@ -1,0 +1,233 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>荞面旅游网_签证办理_出国签证_签证代办&#45;$SITE.name</title>
+    #include("pageHeadCode.htm")
+</head>
+<body>
+    #set($lefMeun = 1)
+    <!--是否显示左侧菜单,1显示,0隐藏-->
+    #parse("pageHead.htm")
+    <div class="pagebox" style="margin-top: 2px; width: 1190px">
+    <div style="padding-top: 462px; overflow: hidden; float: left; width: 232px">
+
+        <div class="minboxtitle">
+              <span class="iconStr">H</span><span class="title"><h3>
+              签证常见问题</h3>
+              </span>                 
+         </div>
+
+         <ul class="thisbox stringList">
+          #foreach($item in $tool.GetHelp("HELP_TYPE_QZBL",true,10))
+            <li><a title="$item.title" target="_blank" href="/helps/$item.id&#46;html">
+                 $item.title</a></li>     
+          #end
+         </ul>
+
+
+
+        </div>
+        <div style="width: 950px; overflow: hidden; float: right">
+
+
+
+           
+
+            <div style=" overflow:hidden; padding:10px; border:1px solid #eee; text-align:right" class="thisbox" id="searchbox">
+            <a href="/visa/index.html" id="A1"><span class="inputbutton">全部</span></a> #foreach($type in $types) <a item="$type.id"
+                            href="/Mall/Visa/List.aspx?type=$type.id"><span class="inputbutton">$type.name</span></a> #end
+            
+            </div>
+
+
+
+
+              <div style=" overflow:hidden; padding-top:20px;">
+                <div class="minboxtitle">
+                    <span class="iconStr">亚</span><span class="title"><h2>
+                        亚洲签证</h2>
+                    </span>                   
+                </div>
+                <div class="thisbox" style="background-color: #f7f7f7;">                    
+                    <div style="padding: 10px 15px 10px 15px">
+                                <div class="minbox">   
+               #foreach($item in $visa.Get("Asia"))
+                <div style="float: left; width: 202px; padding: 0 13px 0 13px; font-size: 13px; font-weight: bold">
+                    <a target="_blank" href="/visa/$item.id&#46;html" title="$item.name">
+                        <img src="$tool.getFileImg($!item.coverserver,$!item.cover,1)" alt="$!item.name" width="202px" height="128px" border="1px solid #f7f7f7" style="margin-top: 10px;" />
+                            <div style="padding: 13px 0 13px 0">
+                                <span><a href="/visa/$item.id&#46;html" title="$item.name$item.typeName" target="_blank">$tool.NameHtml($item.name,20)</a></span> 
+                                <span style="color: Red; padding-left: 10px;">￥$item.price.ToString("0")</span>                                
+                           </div>
+                </div>
+                #end            
+
+
+
+   </div>     
+             </div>
+                </div>   
+                </div>
+
+                 <div style=" overflow:hidden; padding-top:20px;">
+                <div class="minboxtitle">
+                    <span class="iconStr">欧</span><span class="title"><h2>
+                        欧洲签证</h2>
+                    </span>                   
+                </div>
+                <div class="thisbox" style="background-color: #f7f7f7;">                    
+                    <div style="padding: 10px 15px 10px 15px">
+                                <div class="minbox">   
+               #foreach($item in $visa.Get("Europe"))
+                <div style="float: left; width: 202px; padding: 0 13px 0 13px; font-size: 13px; font-weight: bold">
+                    <a target="_blank" href="/visa/$item.id&#46;html" title="$item.name">
+                        <img src="$tool.getFileImg($!item.coverserver,$!item.cover,1)" alt="$!block.name" width="202px" height="128px" border="1px solid #f7f7f7" style="margin-top: 10px;" />
+                            <div style="padding: 13px 0 13px 0">
+                                <span><a href="/visa/$item.id&#46;html" title="$item.name$item.typeName" target="_blank">$tool.NameHtml($item.name,20)</a></span> 
+                                <span style="color: Red; padding-left: 10px;">￥$item.price.ToString("0")</span>                                
+                           </div>
+                </div>
+                #end            
+
+
+
+   </div>     
+             </div>
+                </div>   
+                </div>
+
+     <div style=" overflow:hidden; padding-top:20px;">
+                <div class="minboxtitle">
+                    <span class="iconStr">非</span><span class="title"><h2>
+                        非洲签证</h2>
+                    </span>                   
+                </div>
+                <div class="thisbox" style="background-color: #f7f7f7;">                    
+                    <div style="padding: 10px 15px 10px 15px">
+                                <div class="minbox">   
+               #foreach($item in $visa.Get("Africa"))
+                <div style="float: left; width: 202px; padding: 0 13px 0 13px; font-size: 13px; font-weight: bold">
+                    <a target="_blank" href="/visa/$item.id&#46;html" title="$item.name">
+                        <img src="$tool.getFileImg($!item.coverserver,$!item.cover,1)" alt="$!block.name" width="202px" height="128px" border="1px solid #f7f7f7" style="margin-top: 10px;" />
+                            <div style="padding: 13px 0 13px 0">
+                                <span><a href="/visa/$item.id&#46;html" title="$item.name$item.typeName" target="_blank">$tool.NameHtml($item.name,20)</a></span> 
+                                <span style="color: Red; padding-left: 10px;">￥$item.price.ToString("0")</span>                                
+                           </div>
+                </div>
+                #end            
+
+
+
+   </div>     
+             </div>
+                </div>   
+                </div>
+
+
+                <div style=" overflow:hidden; padding-top:20px;">
+                <div class="minboxtitle">
+                    <span class="iconStr">北</span><span class="title"><h2>
+                        北美签证</h2>
+                    </span>                   
+                </div>
+                <div class="thisbox" style="background-color: #f7f7f7;">                    
+                    <div style="padding: 10px 15px 10px 15px">
+                                <div class="minbox">   
+               #foreach($item in $visa.Get("North America"))
+                <div style="float: left; width: 202px; padding: 0 13px 0 13px; font-size: 13px; font-weight: bold">
+                    <a target="_blank" href="/visa/$item.id&#46;html" title="$item.name">
+                        <img src="$tool.getFileImg($!item.coverserver,$!item.cover,1)" alt="$!block.name" width="202px" height="128px" border="1px solid #f7f7f7" style="margin-top: 10px;" />
+                            <div style="padding: 13px 0 13px 0">
+                                <span><a href="/visa/$item.id&#46;html" title="$item.name$item.typeName" target="_blank">$tool.NameHtml($item.name,20)</a></span> 
+                                <span style="color: Red; padding-left: 10px;">￥$item.price.ToString("0")</span>                                
+                           </div>
+                </div>
+                #end            
+
+
+
+   </div>     
+             </div>
+                </div>   
+                </div>
+          
+           <div style=" overflow:hidden; padding-top:20px;">
+                <div class="minboxtitle">
+                    <span class="iconStr">南</span><span class="title"><h2>
+                       南美签证</h2>
+                    </span>                   
+                </div>
+                <div class="thisbox" style="background-color: #f7f7f7;">                    
+                    <div style="padding: 10px 15px 10px 15px">
+                                <div class="minbox">   
+               #foreach($item in $visa.Get("South America"))
+                <div style="float: left; width: 202px; padding: 0 13px 0 13px; font-size: 13px; font-weight: bold">
+                    <a target="_blank" href="/visa/$item.id&#46;html" title="$item.name">
+                        <img src="$tool.getFileImg($!item.coverserver,$!item.cover,1)" alt="$!block.name" width="202px" height="128px" border="1px solid #f7f7f7" style="margin-top: 10px;" />
+                            <div style="padding: 13px 0 13px 0">
+                                <span><a href="/visa/$item.id&#46;html" title="$item.name$item.typeName" target="_blank">$tool.NameHtml($item.name,20)</a></span> 
+                                <span style="color: Red; padding-left: 10px;">￥$item.price.ToString("0")</span>                                
+                           </div>
+                </div>
+                #end            
+
+
+
+   </div>     
+             </div>
+                </div>   
+                </div>
+    
+               <div style=" overflow:hidden; padding-top:20px;">
+                <div class="minboxtitle">
+                    <span class="iconStr">洋</span><span class="title"><h2>
+                       大洋洲签证</h2>
+                    </span>                   
+                </div>
+                <div class="thisbox" style="background-color: #f7f7f7;">                    
+                    <div style="padding: 10px 15px 10px 15px">
+                                <div class="minbox">   
+               #foreach($item in $visa.Get("Oceania"))
+                <div style="float: left; width: 202px; padding: 0 13px 0 13px; font-size: 13px; font-weight: bold">
+                    <a target="_blank" href="/visa/$item.id&#46;html" title="$item.name">
+                        <img src="$tool.getFileImg($!item.coverserver,$!item.cover,1)" alt="$!block.name" width="202px" height="128px" border="1px solid #f7f7f7" style="margin-top: 10px;" />
+                            <div style="padding: 13px 0 13px 0">
+                                <span><a href="/visa/$item.id&#46;html" title="$item.name$item.typeName" target="_blank">$tool.NameHtml($item.name,20)</a></span> 
+                                <span style="color: Red; padding-left: 10px;">￥$item.price.ToString("0")</span>                                
+                           </div>
+                </div>
+                #end     
+
+   </div>     
+             </div>
+                </div>   
+                </div>   
+
+        </div>
+    </div>
+     #parse("pageFoot.htm")
+</body>
+</html>
+  <script type="text/javascript">
+      var type = $Type;
+      $(function () {
+
+          $("#searchbox").find(".inputbutton").live("mouseover", function () {
+              $(this).addClass("orange")
+
+          }).live("mouseout", function () {
+              $(this).removeClass("orange")
+          })
+
+          if (type != 0) {
+              $("#searchbox").find("a").each(function (i) {
+                  if ($(this).attr("item") == type) {
+                      $(this).find(".inputbutton").addClass("green")
+                  }
+              })
+          }
+          else {
+              $("#searchbox").find(".inputbutton:first").addClass("green");
+          }
+      });
+    </script>

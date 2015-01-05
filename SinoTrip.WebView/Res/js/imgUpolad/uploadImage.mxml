@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" minWidth="0" minHeight="0" fontSize="12" width="100%" height="100%" backgroundAlpha="0.0" backgroundGradientAlphas="[0.0, 0.0]" backgroundColor="#FFFFFF"
+				 applicationComplete="app()" horizontalScrollPolicy="off" verticalScrollPolicy="off">
+
+	<mx:Script>
+		<![CDATA[
+			import mx.controls.Alert;
+			import mx.controls.Image;
+			import mx.core.UIComponent;
+			import mx.events.FlexEvent;
+			
+			private var allFileSize:Number;
+			private var allFileCount:Number;
+			private var allFileList:Array = new Array();
+			private var allImageList:Array = new Array();
+			private var fileUploadList:FileReferenceList = new FileReferenceList();
+			private var filter:String = "*.jpg;*.png;*.gif";
+			private var miniSize:int = 100;
+			private var miniMargin:int = 10;
+			private var imageIndex:int = 0;
+			private var uploadServerUrl:String = 'http://localhost:8058/upload.aspx';
+			private var uploadFinishSize:Number = 0;
+			private var jsFunction:String = '';
+			
+			private function app():void
+			{
+				divImageList.addEventListener(Event.RESIZE, function(e:Event):void{resetImageList();});
+				if(parameters == null)
+				{
+					return;
+				}
+				var obj:Object = parameters;
+				if (obj["filter"] != null)
+				{
+					filter = obj["filter"];
+				}
+				if (obj["jsFunction"] != null)
+				{
+					jsFunction = obj["jsFunction"];
+				}
+				if (obj["uploadServerUrl"] != null)
+				{
+					uploadServerUrl = obj["uploadServerUrl"];
+				}
+				if (obj["miniSize"] != null)
+				{
+					uploadServerUrl = obj["miniSize"];
+				}
+			}
+			
+			protected function btnSelect_onclick(event:MouseEvent):void
+			{
+				var fileFilter:FileFilter = new FileFilter(filter,filter);
+				fileUploadList.addEventListener(Event.SELECT, file_select);
+				fileUploadList.browse([fileFilter]);
+			}
+						
+			private function file_select(e:Event):void {
+				var bo:Boolean = false;
+				for(var i:int=0; i<fileUploadList.fileList.length; i++)
+				{
+					var newFile:FileReference = fileUploadList.fileList[i];
+					bo = false;
+					for(var j:int=0; j<allFileList.length; j++)
+					{
+						var oldFile:FileReference = allFileList[j];
+						if(newFile.size == oldFile.size && newFile.name == oldFile.name)
+						{
+							bo = true;
+							break;
+						}	
+					}
+					if(!bo)
+					{
+						allFileList.push(newFile);
+					}
+				}
+				allFileSize = 0;
+				allFileCount = allFileList.length;
+				for(i=0; i<allFileCount; i++)
+				{
+					var fileUpload:FileReference = FileReference(allFileList[i]);
+					allFileSize += fileUpload.size;
+				}
+				
+				lblInfo.text = '共' + allFileCount.toString() + '张图片 共' + formatSize(allFileSize);
+				btnSelect.enabled = false;
+				btnUpload.enabled = false;
+				imageIndex = 0;
+				loadImage();
+			}
+			
+			private function loadImage():void
+			{
+				if(imageIndex == allFileCount)
+				{
+					btnUpload.enabled = true;
+					btnSelect.enabled = true;
+					return;
+				}
+				if(imageIndex < allImageList.length)
+				{
+					imageIndex++;
+					loadImage();
+					return;
+				}
+				var fileUpload:FileReference = FileReference(allFileList[imageIndex]);
+				fileUpload.addEventListener(Event.COMPLETE, loadFileData);
+				fileUpload.load();
+			}
+			
+			private function loadFileData(e:Event):void
+			{
+				var loader:Loader=new Loader();
+				loader.contentLoaderInfo.addEventListener(Event.COMPLETE,function(e:Event):void{								
+					var bitmap:Bitmap = Bitmap(e.target.content);
+					var uc:UIComponent = new UIComponent();
+					miniSize += 1;
+					uc.width = miniSize;
+					uc.height = miniSize;
+					uc.graphics.lineStyle(0,0xAAAAAA);
+					uc.graphics.moveTo(0,0);
+					uc.graphics.lineTo(0,miniSize);
+					uc.graphics.lineTo(miniSize,miniSize);
+					uc.graphics.lineTo(miniSize,0);
+					uc.graphics.lineTo(0,0);
+					miniSize -= 1;
+					var image:Image = new Image();
+					image.scaleContent=true;
+					image.autoLoad=true;
+					if(bitmap.width > bitmap.height)
+					{
+						image.width = miniSize;
+						image.height = bitmap.height * miniSize / bitmap.width;
+						image.x = 1;
+						image.y = (miniSize - image.height) / 2 + 1;
+					}
+					else
+					{
+						image.height = miniSize;
+						image.width = bitmap.width * miniSize / bitmap.height;
+						image.x = (miniSize - image.width) / 2 + 1;
+						image.y = 1;
+					}
+					uc.addChild(image);
+					image.source = bitmap;
+					var lineCount:int = Math.floor(divImageList.width / (miniSize + miniMargin));
+					var yCount:int = Math.floor(allImageList.length / lineCount);
+					var xCount:int = allImageList.length % lineCount;
+					uc.x = xCount * (miniMargin + miniSize) + miniMargin;
+					uc.y = yCount * (miniSize + miniMargin) + miniMargin;
+					uc.addEventListener(FlexEvent.CREATION_COMPLETE, function(e:FlexEvent):void{									
+						var uc:UIComponent = UIComponent(e.target);
+						var bd : BitmapData = new BitmapData( uc.width, uc.height ); 
+						var m : Matrix = new Matrix(); 
+						bd.draw( uc, m );
+						var image:Image = Image(uc.getChildAt(0));
+						image.source = new Bitmap(bd);
+						image.x = 0;
+						image.y = 0;
+						image.width = uc.width;
+						image.height = uc.height;
+						uc.addChild(image);							
+						imageIndex++;
+						loadImage();
+					});
+					uc.setStyle("imageIndex", imageIndex);
+					var fileUpload:FileReference = FileReference(allFileList[imageIndex]);
+					var strTooltip:String = '名称：' + fileUpload.name + '\n';
+					strTooltip += '大小：' + formatSize(fileUpload.size) + '\n';
+					strTooltip += '尺寸：' + bitmap.width.toString() + ',' + bitmap.height.toString(); 
+					uc.toolTip = strTooltip;
+					uc.addEventListener(MouseEvent.ROLL_OVER,function(e:MouseEvent):void{
+						if(!btnSelect.enabled)
+						{
+							return;
+						}
+						e.target.addChild(btnDel);
+						btnDel.x = miniSize - btnDel.width - 2;
+						btnDel.y = 3;
+						btnDel.visible = true;
+					});
+					uc.addEventListener(MouseEvent.ROLL_OUT,function(e:MouseEvent):void{
+						btnDel.visible = false;
+					});
+					divImageList.addChild(uc);
+					allImageList.push(uc);
+				});
+				loader.loadBytes(e.target.data);
+				e.target.removeEventListener(Event.COMPLETE, loadFileData);
+			}
+			
+			private function formatSize(size:Number):String
+			{
+				var strReturn:String = "";
+				var tempSize:Number = size * 1.0 * (size < 0 ? -1 : 1);
+				if (tempSize < 1024)
+				{
+					strReturn += formatNumber(tempSize, 2) + "B";
+				}
+				else if (tempSize < 1024 * 1024)
+				{
+					tempSize = tempSize / 1024;
+					strReturn += formatNumber(tempSize, 2) + "K";
+				}
+				else if (tempSize < 1024 * 1024 * 1024)
+				{
+					tempSize = tempSize / 1024 / 1024;
+					strReturn += formatNumber(tempSize, 2) + "M";
+				}
+				else
+				{
+					tempSize = tempSize / 1024 / 1024 / 1024;
+					strReturn += formatNumber(tempSize, 2) + "G";
+				}
+				
+				if (size < 0)
+				{
+					strReturn = "-" + strReturn;
+				}
+				
+				return strReturn;
+			}
+			
+			private function formatNumber(i:Number, j:int):Number
+			{
+				i = i * Math.pow(10, j);
+				i = Math.round(i);
+				i = i / Math.pow(10, j);
+				return i;
+			}
+
+			//删除
+			protected function btnDel_onclick(event:MouseEvent):void
+			{
+				var uc:UIComponent = UIComponent(btnDel.parent);
+				btnDel.visible = false;
+				uc.parent.addChild(btnDel);
+				var index:int = uc.getStyle("imageIndex");
+				var image:Image = Image(uc.getChildAt(0));
+				image.source = null;
+				uc.removeChild(image);
+				image = null;
+				uc.parent.removeChild(uc);
+				uc = null;
+				allImageList[index] = null;
+				allFileList[index] = null;
+				allImageList.splice(index,1);
+				allFileList.splice(index,1);
+				GC();				
+				resetImageList();	
+			}
+			
+			//垃圾回收
+			public function GC():void
+			{
+				try
+				{
+					new LocalConnection().connect( 'foo' );
+					new LocalConnection().connect( 'foo' );
+					System.gc();
+				}
+				catch(e:*){}
+			}
+			
+			private function resetImageList():void
+			{
+				allFileSize = 0;
+				allFileCount = allFileList.length;
+				var lineCount:int = Math.floor(divImageList.width / (miniSize + miniMargin));
+				for(var i:int=0; i<allImageList.length; i++)
+				{
+					var uc:UIComponent = allImageList[i];
+					var yCount:int = Math.floor(i / lineCount);
+					var xCount:int = i % lineCount;
+					uc.x = xCount * (miniMargin + miniSize) + miniMargin;
+					uc.y = yCount * (miniSize + miniMargin) + miniMargin;
+					uc.setStyle("imageIndex", i);
+					allFileSize += allFileList[i].size;
+				}			
+				if(allFileCount == 0)
+				{
+					lblInfo.text = '';
+					btnUpload.enabled = false;
+				}
+				else
+				{
+					lblInfo.text = '共' + allFileCount.toString() + '张图片 共' + formatSize(allFileSize);
+				}
+			}
+
+			//上传
+			protected function btnUpload_onclick(event:MouseEvent):void
+			{
+				if(btnUpload.label == '上 传')
+				{
+					btnUpload.label = '暂 停';
+					btnSelect.enabled = false;
+					imageIndex = 0;
+					uploadFinishSize = 0;
+					uploadImageFile();
+				}
+				else
+				{
+					divImageList.addChild(progressUpload);
+					progressUpload.y = -100;
+					btnUpload.label = '上 传';
+					btnSelect.enabled = true;
+					btnSelect.enabled = true;
+					var fileUpload:FileReference = FileReference(allFileList[imageIndex]);
+					fileUpload.cancel();
+					if(imageIndex > 0)
+					{
+						mx.controls.Alert.show('已成功上传了' + imageIndex + '张图片！');
+						
+						for(var i:int = 0; i<imageIndex; i++)
+						{
+							var uc:UIComponent = allImageList[0];
+							var image:Image = Image(uc.getChildAt(0));
+							image.source = null;
+							uc.removeChild(image);
+							image = null;
+							uc.parent.removeChild(uc);
+							uc = null;
+							allImageList[0] = null;
+							allFileList[0] = null;
+							allImageList.splice(0,1);
+							allFileList.splice(0,1);
+						}
+						GC();
+						resetImageList();
+					}
+				}					
+			}
+			
+			//上传图片
+			private function uploadImageFile():void
+			{
+				var fileUpload:FileReference = FileReference(allFileList[imageIndex]);
+				progressUpload.setProgress(0, fileUpload.size);
+				var uc:UIComponent = allImageList[imageIndex];
+				uc.addChild(progressUpload);
+				progressUpload.x = 0;
+				progressUpload.width = uc.width;
+				progressUpload.y = uc.height - progressUpload.height;
+				fileUpload.addEventListener(Event.COMPLETE, file_complete);
+				fileUpload.addEventListener(IOErrorEvent.IO_ERROR, uploadError);
+				fileUpload.addEventListener(SecurityErrorEvent.SECURITY_ERROR, uploadError);
+				fileUpload.addEventListener(ProgressEvent.PROGRESS, file_progress);
+				var request:URLRequest = new URLRequest(uploadServerUrl);
+				fileUpload.upload(request);
+			}
+			
+			private function uploadError(e:ErrorEvent):void
+			{
+				mx.controls.Alert.show('上传失败！错误原因：' + e.text);
+			}
+			
+			// 上传完毕后的事件
+			private function file_complete(e:Event):void {
+				allImageList[imageIndex].alpha = 0.3;
+				imageIndex++;
+				uploadFinishSize += e.target.size;
+				if(imageIndex < allFileList.length)
+				{
+					uploadImageFile();
+				}
+				else
+				{
+					//上传成功
+					divImageList.addChild(progressUpload);
+					progressUpload.y = -100;
+					lblInfo.text = '上传成功！';
+					btnUpload.label = '上 传';
+					btnUpload.enabled = false;
+					btnSelect.enabled = true;
+					mx.controls.Alert.show('上传成功！');
+					for(var i:int = 0; i<allImageList.length; i++)
+					{
+						var uc:UIComponent = allImageList[i];
+						var image:Image = Image(uc.getChildAt(0));
+						image.source = null;
+						uc.removeChild(image);
+						image = null;
+						uc.parent.removeChild(uc);
+						uc = null;
+						allImageList[i] = null;
+						allFileList[i] = null;
+					}
+					divImageList.removeAllChildren();
+					allImageList = new Array();
+					allFileList = new Array();
+					GC();
+					
+					if(jsFunction != '')
+					{
+						setTimeout(function():void{
+							ExternalInterface.call(jsFunction);
+						}, 500);
+					}
+				}
+			}
+			
+			private function file_progress (e:ProgressEvent):void {
+				progressUpload.setProgress(e.bytesLoaded, e.bytesTotal);
+				var curSize:Number = uploadFinishSize + e.bytesLoaded;
+				lblInfo.text = '正在上传第' + (imageIndex + 1) + '/' + allFileCount + '张图片！已上传：' + Math.floor(curSize / allFileSize * 100) + '% [' + formatSize(curSize) + '/' + formatSize(allFileSize) + ']';
+			}
+		]]>
+	</mx:Script>
+
+	<mx:Button x="10" y="10" label="选择图片..." fontWeight="normal" id="btnSelect" click="btnSelect_onclick(event)"/>
+	<mx:Button x="104" y="10" label="上 传" fontWeight="normal" enabled="false" id="btnUpload" click="btnUpload_onclick(event)"/>
+	<mx:Label x="166" y="12" id="lblInfo"/>
+	<mx:Canvas id="divImageList" verticalScrollPolicy="on" left="10" top="40" bottom="10" right="10" borderStyle="solid" borderColor="#E5E6E6">
+	</mx:Canvas>
+	<mx:Button x="766" y="10" label="×" color="#FF0000" id="btnDel" click="btnDel_onclick(event)" paddingBottom="0" paddingLeft="0" paddingRight="0" paddingTop="0" width="20" height="18" visible="false"/>
+	<mx:ProgressBar x="219" y="-100" label="%3%%" labelPlacement="center" id="progressUpload" fontSize="9" fontWeight="normal" maximum="100" minimum="0"  textAlign="center"/>
+	
+</mx:Application>

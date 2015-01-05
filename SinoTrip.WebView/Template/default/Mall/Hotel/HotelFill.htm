@@ -1,0 +1,456 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>酒店下单&#45;</title>#include("pageHeadCode.htm")
+    <script type="text/javascript" src="/res/js/json2.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=1.1&services=true"></script>
+    <link href="/Skin/Default/style/flight_order.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        .inputContent.note
+        {
+            font-size: 16px;
+            color: #666;
+            font-weight: bold;
+        }
+        #fill_2 span.inputContent
+        {
+            font-size: 14px;
+            color: #666;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    #set($lefMeun = 0)
+    <!--是否显示左侧菜单-->
+    #parse("pageHead.htm")
+    <div class="pagebox">
+        <div style="overflow: hidden;">
+            <a name="flowPath"></a>
+            <!-- <div id="flowPath" class="flowPath step1"></div>   -->
+            <div style="padding: 25px 0px 5px 0px; height: 30px" id="flowPath">
+                <div class="flowStep current">
+                    <div class="stepTitle">
+                        填写</div>
+                </div>
+                <div class="flowStep">
+                    <div class="stepTitle">
+                        核对</div>
+                </div>
+                <div class="flowStep">
+                    <div class="stepTitle">
+                        支付</div>
+                </div>
+                <div class="flowStep">
+                    <div class="stepTitle">
+                        完成</div>
+                </div>
+            </div>
+            <div style="overflow: hidden">
+                <div class="orderbox">
+                    #if($QU.id==0)
+                    <div style="border: 1px solid #eee; background-color: #fffee0; overflow: hidden;
+                        line-height: 32px; padding: 0px 0px 0px 10px; font-weight: bold;" id="orderlogin">
+                        <a href="javascript:void(0)" onclick="showlogin()">登录</a> 后预订更快捷
+                    </div>
+                    #end
+                    <div id="fill_1">
+                        <div style="padding: 5px; margin-top: 5px;" class="thisbox">
+                            <div style="overflow: hidden">
+                                <div class="inputbox">
+                                    <span class="inputTitle">房型名称：</span><span class="inputContent note">$roomRate.RoomTypeName</span>
+                                    <span class="inputTitle note">订单总额：</span><span class="inputContent note" style="color: Red"
+                                        id="AmountPrice">￥</span>
+                                </div>
+                                <div class="inputbox">
+                                    <span class="inputTitle">入住时间：</span><span class="inputContent note">$roomRate.StartDate
+                                        至 $roomRate.EndDate</span>
+                                </div>
+                                <div class="inputbox">
+                                    <span class="inputTitle">最早到店：</span><span class="inputContent"><select id="ArriveEarlyTime">
+                                        <option value="1300" selected="selected">13:00</option>
+                                        <option value="1400">14:00</option>
+                                        <option value="1500">15:00</option>
+                                        <option value="1600">16:00</option>
+                                        <option value="1700">17:00</option>
+                                        <option value="1800">18:00</option>
+                                        <option value="1900">19:00</option>
+                                        <option value="2000">20:00</option>
+                                        <option value="2100">21:00</option>
+                                        <option value="2200">22:00</option>
+                                        <option value="2300">23:00</option>
+                                        <option value="0000">次日0:00</option>
+                                        <option value="0100">次日01:00</option>
+                                        <option value="0200">次日02:00</option>
+                                        <option value="0300">次日03:00</option>
+                                        <option value="0400">次日04:00</option>
+                                        <option value="0500">次日05:00</option>
+                                        <option value="0600">次日06:00</option>
+                                    </select>
+                                    </span>
+                                </div>
+                                <div class="inputbox">
+                                    <span class="inputTitle">最晚到店：</span><span class="inputContent"><select id="ArriveLateTime">
+                                        <option value="1300">13:00</option>
+                                        <option value="1400">14:00</option>
+                                        <option value="1500">15:00</option>
+                                        <option value="1600" selected="selected">16:00</option>
+                                        <option value="1700">17:00</option>
+                                        <option value="1800">18:00</option>
+                                        <option value="1900">19:00</option>
+                                        <option value="2000">20:00</option>
+                                        <option value="2100">21:00</option>
+                                        <option value="2200">22:00</option>
+                                        <option value="2300">23:00</option>
+                                        <option value="0000">次日0:00</option>
+                                        <option value="0100">次日01:00</option>
+                                        <option value="0200">次日02:00</option>
+                                        <option value="0300">次日03:00</option>
+                                        <option value="0400">次日04:00</option>
+                                        <option value="0500">次日05:00</option>
+                                        <option value="0600">次日06:00</option>
+                                    </select>
+                                    </span>
+                                </div>
+                                <div class="inputbox">
+                                    <span class="inputTitle">房间数：</span><span class="inputContent"><select name="roomnumber"
+                                        id="roomnumber" onchange="setUser(this)" price="$price">
+                                        #foreach ($item in $thistool.getroomnumber($roomRate.Quotas))
+                                        <option value="$item">$item间</option>
+                                        #end
+                                    </select>
+                                    </span>
+                                </div>
+                            </div>
+                            <div id="flightUserList">
+                            </div>
+                            <div style="border: 1px solid #eee; background-color: #fffee0; overflow: hidden;
+                                line-height: 32px; padding: 10px; margin-top: 10px; color: Red;">
+                                预定港澳酒店或者类型选择外宾时,旅客姓名必须为英文,姓和名之间用"/"或空格分割,且"/"与空格不能同时存在!
+                            </div>
+                        </div>
+                        <div style="border: 0px solid #eee; overflow: hidden; line-height: 32px; padding: 0px 0px 0px 10px;
+                            font-weight: bold; margin-top: 5px;">
+                            联系人信息:
+                        </div>
+                        <div style="padding: 5px; margin-top: 5px;" class="thisbox" id="ContactUserBox">
+                            <div class="inputbox">
+                                <span class="inputTitle">联系人：</span><span class="inputContent"><input id="username"
+                                    value="$!QU.realname" type="text" name="contactUser" class="checkuser hotleOrder"
+                                    err="请认真填写联系人中文姓名！" checktype="chinese|notempty" /></span><span style="padding: 0px 10px;
+                                        color: Red">必填</span></div>
+                            <div class="inputbox">
+                                <span class="inputTitle">联系手机：</span><span class="inputContent"><input id="usermobile"
+                                    value="$!QU.mobile" type="text" name="contactMobile" class="checkuser hotleOrder"
+                                    err="请认真填写联系人手机！" checktype="mobile|notempty" /></span><span style="padding: 0px 10px;
+                                        color: Red">必填</span><span style="padding-left: 10px; color: #999">用来接收通知消息</span></div>
+                            <div class="inputbox">
+                                <span class="inputTitle">Email：</span><span class="inputContent"><input id="useremail"
+                                    type="text" name="contactMail" class="checkuser hotleOrder" err="联系人邮箱地址格式错误"
+                                    checktype="email" /></span></div>
+                        </div>
+                        <div style="border: 0px solid #eee; overflow: hidden; line-height: 32px; padding: 0px 0px 0px 10px;
+                            font-weight: bold; margin-top: 5px;">
+                            预订取消说明:
+                        </div>
+                        <div style="padding: 0px 10px; line-height: 18px; margin-top: 5px;" class="thisbox">
+                            <p style="color: ">
+                                $!guaranteePolicy.ShortDesc</br>$!guaranteePolicy.PolicyDesc</p>
+                            <p style="color: Red">
+                                $!cancelPolicy.ShortDesc</br>$!cancelPolicy.PolicyDesc</p>
+                        </div>
+                    </div>
+                    <div id="fill_2" style="display: none">
+                    </div>
+                    <div style="overflow: hidden; height: 50px; margin-top: 10px; border-top: 5px solid #eee;
+                        padding: 10px 0px; text-align: center; background-color: #f7f7f7">
+                        <div id="stepButtonL">
+                            <span class="inputbutton" style="width: 100px;">上一步</span> <span class="inputbutton orange"
+                                style="width: 100px;" onclick="setFillStep(true)">下一步</span>
+                        </div>
+                        <div id="stepButtonR" style="display: none">
+                            <span class="inputbutton orange" style="width: 100px;" onclick="setFillStep(false)">
+                                上一步</span> <span class="inputbutton orange" style="width: 100px;" onclick="setFillStep(true)">
+                                    提交订单</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="rightbox">
+                    <div style="border: 1px solid #eee; background-color: #fffee0; overflow: hidden;
+                        line-height: 32px; padding: 10px;" id="orderDetail">
+                        <h2 style="font-family: 微软雅黑; color: #ff6600">
+                            $basicProperty.HotelName</h2>
+                        <div class="">
+                            <span style="color: #666;">房间类型：</span>$roomRate.RoomTypeName</div>
+                        <div class="">
+                            <span style="color: #666;">床铺类型：</span>$roomRate.BedType</div>
+                        <div class="">
+                            <span style="color: #666;">确认类型：</span>$tool.GetHotleAvaiType($roomRate.AvailabilityStatus)</div>
+                        <div class="">
+                            <span style="color: #666;">支付方式：</span>$tool.GetHotlePaymentType($roomRate.Payment)</div>
+                        <div class="">
+                            <span style="color: #666;">房间单价：</span><span style="color: Red; font-family: Arial;
+                                font-size: 14px; font-weight: bold">￥$price</span></div>
+                        <div class="">
+                            <span style="color: #666;">酒店电话：</span>$basicProperty.Tel</div>
+                        <div class="">
+                            <span style="color: #666;">酒店地址：</span>$basicProperty.Address</div>
+                    </div>
+                    <div style="border: 1px solid #eee; background-color: #fefefe; overflow: hidden;
+                        line-height: 32px; padding: 10px; margin-top: 10px;">
+                        <div style="height: 400px; border: 1px solid #eee" id="container">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    #parse("pageFoot.htm")
+    <script type="text/javascript">
+        var fillstep = 1;
+        var RoomStayJson = $RoomStayJson;
+        function LoginReturn(usrjson) {
+            var thisuser = usrjson.result;
+            $("#username").val(thisuser.realname);
+            $("#usermobile").val(thisuser.mobile);
+            $("#orderlogin").hide();
+        }
+
+
+        function setFillStep(isplus) {
+            if (isplus) {
+                switch (fillstep) {
+                    case 1:
+                        if (!setConfirmUser())
+                            return false;
+                        break;
+                    case 2:
+                        SubmitOrder(); //提交订单
+                        return false;
+                }
+            }
+
+            $("#flowPath").find(".flowStep").removeClass("current");
+            if (isplus) {
+                fillstep++
+            } else {
+                fillstep--
+            }
+            $("#flowPath").find(".flowStep").eq(fillstep - 1).addClass("current")
+            if (fillstep == 1) {
+                $("#stepButtonL").show();
+                $("#stepButtonR").hide();
+                $("#fill_1").show();
+                $("#fill_2").hide();
+
+            } else if (fillstep == 2) {
+                $("#stepButtonL").hide();
+                $("#stepButtonR").show();
+                $("#fill_2").show();
+                $("#fill_1").hide();
+            }
+        }
+
+        function setConfirmUser() {
+            try {
+                jQuery.Xcheck(".checkuser");
+            } catch (e) {
+                jQuery.Xmsg({ msg: e.message, button: { name: "确认", btn: function () { e.obj.focus(); } } });
+                return false;
+            }
+            var fillstr = document.getElementById("fill_1").outerHTML;
+            var confirmuserObj = $(fillstr);
+            var fill1 = $("#fill_1").find("div,span,input,select");
+            confirmuserObj.find("div,span,input,select").each(function (i) {
+                $(this).removeAttr("id");
+                var domObject = $(this)[0]; //从jQuery对象中得到原生的DOM对象
+                var tagname = domObject.tagName;
+                if (tagname == "DIV" || tagname == "SPAN")
+                    return;
+                if (tagname == "INPUT" || tagname == "SELECT") {
+                    var _obj = fill1.eq(i);
+                    var _val = _obj.val();
+                    var _parent = $(this).parent();
+                    if (tagname == "INPUT") {
+                        if ($(this).attr("type") == "checkbox") {
+                            if (_obj.attr("checked"))
+                                _val = "是";
+                            else
+                                _val = "不是";
+                        }
+                        $(this).remove();
+                        _parent.html(_val);
+                    } else {
+                        var _str = $(this).find("option[value=" + _val + "]").html();
+                        $(this).remove();
+                        _parent.html(_str);
+                    }
+                }
+            });
+            $("#fill_2").html(confirmuserObj);
+            return true;
+        }
+
+        function setUser(thissearch) {
+
+            var userselect = $(thissearch);
+            var number = userselect.val();
+            var price = userselect.attr("price");
+            $("#AmountPrice").html(parseFloat(parseInt(number) * parseInt(price)).toFixed(2));
+
+            var _str = '<div class="inputbox"><span class="inputTitle">房{0}入住人：</span><span class="inputContent"><input type="text" class="hotleOrder checkuser" name="inname"  err="每个房间至少填写一个宾客姓名<br>预定港澳酒店或者类型选择外宾时</br>旅客姓名必须为英文且姓和名之间用 / 或空格分割</br>且 / 与空格不能同时存在！" checkType="notempty"/></span>';
+            _str += "<span class='inputContent'   style='padding-left:10px'><input type='checkbox' name='foreign'/></span><span class='XoverTip' data='{2}' style=' color:#006cbf; border-bottom:1px dashed #006cbf; line-height:20px;'>外宾？</span>";
+            _str += '<span style="padding:0px 10px;">每个房间至少填写一个宾客姓名</span></div>';
+
+            var _note = '预定港澳酒店或者类型选择外宾时</br>旅客姓名必须为英文且姓和名之间用"/"或空格分割</br>且"/"与空格不能同时存在';
+            var userlists = $("#flightUserList").find(".inputbox");
+            if (userlists.length < number) {
+                for (var i = userlists.length; i < number; i++)
+                    $("#flightUserList").append(_str.format((i + 1), i, _note));
+            }
+            else if (userlists.length > number) {
+                var boxnumber = userlists.length
+                for (var i = boxnumber; i > number; i--)
+                    userlists.eq(i - 1).remove();
+            } else {
+                return;
+            }
+
+        }
+
+        var map = new BMap.Map("container");
+
+        function show_map(map_x, map_y) {
+
+            var point = new BMap.Point(map_x, map_y);
+            var marker = new BMap.Marker(point);
+
+            map.centerAndZoom(point, 17);
+            map.addOverlay(marker);
+
+            function ZoomControl() {
+                // 默认停靠位置和偏移量
+                this.defaultAnchor = BMAP_ANCHOR_BOTTOM_RIGHT;
+                this.defaultOffset = new BMap.Size(10, 10);
+            }
+            function lZoomControl() {
+                // 默认停靠位置和偏移量
+                this.defaultAnchor = BMAP_ANCHOR_BOTTOM_RIGHT;
+                this.defaultOffset = new BMap.Size(10, 10);
+            }
+
+
+        }
+
+        show_map("$basicProperty.Positions.Longitude", "$basicProperty.Positions.Latitude");
+
+        setUser(document.getElementById("roomnumber"));
+
+        function ajaxSubmitOrder(ismember) {
+
+            ///联系人
+            var data = {};
+
+            var Profile = {};
+            Profile.PersonName = $("#username").val();
+            Profile.Mobile = $("#usermobile").val();
+            Profile.Email = $("#useremail").val();
+
+            var ResGuests = new Array();
+
+
+            var inames = $("input[name=inname]");
+            var foreign = $("input[name=foreign]");
+
+            inames.each(function (i) {
+                var ResGuest = {};
+                var GuestProfile = {};
+
+                ResGuest.GuestIndex = i;
+                ResGuest.Type = "GUE";
+                ResGuest.RoomNumber = i + 1;
+                GuestProfile.PersonName = $(this).val();
+                ResGuest.GuestProfile = GuestProfile;
+                ResGuests.push(ResGuest);
+            });
+
+            data.RoomStayJson = JSON.stringify(RoomStayJson);
+            data.Profile = JSON.stringify(Profile);
+            data.ResGuests = JSON.stringify(ResGuests);
+
+            data.hotleRank = "$basicProperty.Rank";
+            data.ArriveEarlyTime = $("#ArriveEarlyTime").val();
+            data.ArriveLateTime = $("#ArriveLateTime").val();
+            jQuery.Xload();
+            var url = "/AJAX/HotleAjax.ashx?action=SubmitOrder";
+            //jQuery.Xload("订单提交中!请稍候");
+            jQuery.ajax({
+                url: url,
+                type: "POST",
+                data: data,
+                success: function (response) {
+                    jQuery.XloadHide();
+                    var json = response.toJson();
+                    if (json.success) {
+                        alert("订单提交成功!请在1小时内完成支付操作，逾期订单将自动取消");
+                        window.location.href = "/UserWeb/HotelOrderItem.aspx?sno=" + json.result.Serialno + "&orderno=" + json.result.OutSign;
+                    }
+                    else {
+                        alert(json.msg);
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    jQuery.XmsgHide();
+                    var _status = XMLHttpRequest.status;
+                    alert("订单提交失败！未知的服务器错误" + _status + " (" + XMLHttpRequest.statusText + ")，请与管理员联系!");
+
+                }
+            });
+
+
+        }
+
+
+        function SubmitOrder() {
+            jQuery.Xload();
+            var url = "/AJAX/User.ashx?action=GetUser"
+            jQuery.Xload();
+            jQuery.ajax({
+                url: url,
+                type: "POST",
+                success: function (response) {
+                    var json = response.toJson();
+                    if (!json.success) {
+                        var data = {};
+                        data.exists = 0;
+                        data.mobile = $("#usermobile").val();
+                        var url = "/AJAX/User.ashx?action=CheckUser";
+                        jQuery.ajax({
+                            url: url,
+                            data: data,
+                            type: "POST",
+                            success: function (response) {
+                                jQuery.XloadHide();
+                                var json = response.toJson();
+                                if (json.success) {
+                                    ajaxSubmitOrder(false);
+                                } else {
+                                    jQuery.Xmsg({ msg: "联系人手机号为已注册会员，请登录后再进行订单提交操作！", button: function () { showlogin(); } });
+                                    return false;
+                                }
+                            }
+                        });
+
+                    }
+                    else {
+                        jQuery.XloadHide();
+                        ajaxSubmitOrder(true);
+                    }
+                }
+            });
+
+        }
+    
+    </script>
+</body>
+</html>

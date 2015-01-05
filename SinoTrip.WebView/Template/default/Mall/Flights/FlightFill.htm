@@ -1,0 +1,1078 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>机票下单&#45;</title>
+    #include("pageHeadCode.htm")
+    <script type="text/javascript" src="/res/js/flights.js"></script>
+    <script type="text/javascript" src="/res/js/json2.js"></script>
+   <link href="/Skin/Default/style/flight_logo.css" rel="stylesheet" type="text/css" />
+   <link href="/Skin/Default/style/flight_order.css" rel="stylesheet" type="text/css" />
+
+   <style type="text/css">
+   .flightUser{ margin:5px; background-color:#f7f7f7}
+   .flightUser .flightUserTitle{padding:5px 10px; position:relative}
+    .flightUser .flightUserTitleNumber{ font-size:16px; padding:0px 10px; font-weight:bold; color:#ff6600}
+    .flightUser .flightUserTitleUsertype{width:60px; text-align:right}
+    .flightUser .inputbox span.inputTitle{ width:80px;}
+    .flightUser .inputbox span.inputContent input[type="text"]{ width:200px}
+    .flightUser .inputbox span.inputContent select{ width:212px}
+   
+   
+   #addressList { padding:0px; margin:0px;}
+   #addressList li{ line-height:30px; list-style:Nonel; font-size:13px; padding-left:20px; }
+   </style>
+</head>
+<body>
+    #set($lefMeun = 0)
+    <!--是否显示左侧菜单-->
+    #parse("pageHead.htm")
+   <div class="pagebox"> 
+   <div style=" overflow:hidden;">
+   <a name="flowPath"></a>
+   <!-- <div id="flowPath" class="flowPath step1"></div>   --> 
+   <div style="padding:25px 0px 5px 0px; height:30px" id="flowPath">    
+   <div class="flowStep current"><div class="stepTitle">填写</div></div>
+   <div class="flowStep"><div class="stepTitle">核对</div></div>
+   <div class="flowStep"><div class="stepTitle">支付</div></div>
+   <div class="flowStep"><div class="stepTitle">完成</div></div>
+   </div>     
+  
+ <div style=" overflow:hidden">
+
+ <div class="orderbox">
+ 
+ #if($QU.id==0)
+ <div style=" border:1px solid #eee; background-color:#fffee0; overflow:hidden; line-height:32px; padding:0px 0px 0px 10px; font-weight:bold;">
+ <a href="javascript:void(0)" onclick="showlogin()" >登录</a> 后预订更快捷
+ </div>
+ #end
+ <div id="fill_1">
+
+ <div style=" padding:5px; margin-top:5px;" class="thisbox" id="flightUserList">
+ 
+</div>
+
+<div style=" text-align:right"><span class="inputbutton green" style="width:100px;" onclick="addUser()">+ 添加乘机人</span></div>
+ 
+  <div style=" border:0px solid #eee; overflow:hidden; line-height:32px; padding:0px 0px 0px 10px; font-weight:bold; margin-top:5px;">
+ 联系人信息:
+ </div>
+<div style=" padding:5px; margin-top:5px;" class="thisbox" id="ContactUserBox">
+ <div class="inputbox"><span class="inputTitle">联系人：</span><span class="inputContent"><input value="$!QU.realname" type="text" name="contactUser" class="checkuser flightorder"  err="请认真填写联系人姓名！" checkType="chinese|notempty"/></span><span style="padding:0px 10px;color:Red">必填</span></div>
+  <div class="inputbox"><span class="inputTitle">联系手机：</span><span class="inputContent"><input value="$!QU.mobile" type="text" id="contactMobile" name="contactMobile" class="checkuser flightorder"  err="请认真填写联系人手机！" checkType="mobile|notempty"/></span><span style="padding:0px 10px;color:Red">必填</span><span style=" padding-left:10px; color:#999">用于接收出票信息</span></div>
+   <div class="inputbox"><span class="inputTitle">Email：</span><span class="inputContent"><input type="text" name="contactMail" class="checkuser flightorder"  err="联系人邮箱地址格式错误" checkType="email"/></span></div>
+</div>
+
+<div style=" border:0px solid #eee; overflow:hidden; line-height:32px; padding:0px 0px 0px 10px; font-weight:bold; margin-top:5px;">
+ <input onclick="settrip(this)" class="flightorder"  type="checkbox" price="20" name="istrip" id="istrip"/>需要报销凭证  (含：行程单等) <span style="color:Red">￥20元</span>
+
+ </div>
+ <div class="thisbox" style="display:none" id="isAddress">
+
+
+ <div style=" background-color:#fefef4; display:none" id="addressAdd">
+    <div class="inputbox"><span class="inputTitle">收件人：</span><span class="inputContent"><input type="text" id="aName" class="addressedit" err="收件人信息不能为空" checkType="chinese|notempty"></span><span style="padding:0px 10px;color:Red">必填</span></div>
+    <div class="inputbox"><span class="inputTitle">手机号码：</span><span class="inputContent"><input type="text" id="aMobile" class="addressedit" err="请认真填写收件人手机号码" checkType="mobile|notempty"></span><span style="padding:0px 10px;color:Red">必填</span></div>
+    <div class="inputbox"><span class="inputTitle">配送地址：</span><span class="inputContent"><input type="text" id="aAddiess" class="addressedit" err="请认真填写配送地址" checkType="notempty"></span><span style="padding:0px 10px;color:Red">必填</span></div>
+    <div class="inputbox"><span class="inputTitle">邮政编码：</span><span class="inputContent"><input type="text" id="aZip"  class="addressedit" err="请认真填写配送邮政编码" ></span></div> 
+    <div class="inputbox "><span class="inputTitle"></span><span class="inputbutton" style="width:100px;" onclick="addAddress()">保存配送地址</span></div>
+  </div>
+
+  <div style=" padding:5px;" id="addressBox">
+  <ul id="addressList"></ul>  
+  <div style=" text-align:right"><span class="inputbutton green" style="width:100px;" onclick="showAddressBox()">添加配送地址</span></div>
+  </div>
+
+  </div>
+
+ </div>
+  <div id="fill_2" style=" display:none">
+  <div id="confirmFlights" class="thisbox" style=" padding:5px; margin-top:5px;">
+  
+  </div>
+  <div style=" border:0px solid #eee; overflow:hidden; line-height:32px; padding:0px 0px 0px 10px; font-weight:bold; margin-top:5px;">
+ 联系人信息:
+ </div>
+<div class="thisbox" style=" padding:5px; margin-top:5px;" id="confirmContactUserBox">
+
+</div>
+
+<div class="thisbox" style=" padding:5px; margin-top:5px;" id="confirmEMS">
+
+</div>
+  </div>
+  <div style=" overflow:hidden; height:50px; margin-top:10px; border-top:5px solid #eee; padding:10px 0px; text-align:center; background-color:#f7f7f7">
+  <div id="stepButtonL">
+  <span class="inputbutton" style="width:100px;">上一步</span>
+  <span class="inputbutton orange" style="width:100px;" onclick="setFillStep(true)">下一步</span>
+  </div>
+  <div id="stepButtonR" style=" display:none">
+  <span class="inputbutton orange" style="width:100px;"onclick="setFillStep(false)">上一步</span>
+  <span class="inputbutton orange" style="width:100px;"onclick="setFillStep(true)">提交订单</span>
+  </div>
+  </div>
+
+</div>
+ <div class="rightbox">
+ <div class="flightbox">
+ <div><span class="timedata">$outdate</span><span class="route">$outdptname － $outarrname</span><span class="routetype">(去程)</span></div>
+  <div><span class="cityname  pubFlights_$outcarrier" id="outcarrierinput">$outcarrier</span><span class="flightno">$outflightno</span>
+  <span class="remarks XoverTip" data="" id="outplantypeinput">$outplanType</span><span>经济舱</span><span class="remarks XoverTip" data="$outtgq">退改说明</span></div>
+  <div><span class="dpttime">$outdpttime</span><span style=" width:20%"></span><span class="arrtime">$outarrtime</span></div>
+  <div><span class="dpt" id="outdptinput">$outdpt</span><span class="pointlogo">&nbsp;</span><span class="arr" id="outarrinput">$outarr</span></div>
+  <div><span>票价</span><span>￥<span class="price">$outprice</span></span><span>（不含税费）</span></div>
+ </div>
+
+#if($flighttype==1)
+ <div class="flightbox">
+ <div><span class="timedata">$indate</span><span class="route">$indptname － $inarrname</span><span class="routetype">(回程)</span></div>
+  <div><span class="cityname  pubFlights_$incarrier" id="incarrierinput">$incarrier</span><span class="flightno">$inflightno</span>
+  <span class="remarks XoverTip" data="" id="inplantypeinput">$inplanType</span><span>经济舱</span><span class="remarks XoverTip" data="$intgq">退改说明</span></div>
+  <div><span class="dpttime">$indpttime</span><span style=" width:20%"></span><span class="arrtime">$inarrtime</span></div>
+  <div><span class="dpt" id="indptinput">$indpt</span><span class="pointlogo">&nbsp;</span><span class="arr" id="inarrinput">$inarr</span></div>
+  <div><span>票价</span><span>￥<span class="price">$inprice</span></span><span>（不含税费）</span></div>
+ </div>
+ #end
+
+ <div style="border:1px solid #eee; background-color:#fffee0; overflow:hidden; line-height:32px; padding:10px; margin-top:10px; " id="orderDetail">
+ 
+
+ <ul class="order_detail_list">
+<li><span class="lefttext hilite">保险：</span><span class="righttext hilite">￥40</span></li>
+ </ul>
+ </div>
+ </div> 
+
+ </div>
+ 
+  </div>
+  </div>
+  
+
+
+
+  #parse("pageFoot.htm")
+     
+  <script type="text/javascript">
+      $(function () {
+          $("#istrip").removeAttr("checked");
+
+      })
+
+      function settrip(trip) {        
+          var _thistrip = $(trip);
+         
+          if (_thistrip.attr("checked")) {
+              $("#isAddress").show();
+          } else {
+              $("#isAddress").hide();
+
+          }
+          setPrice();
+      
+      }
+      
+      
+      var flightnumber = 0;
+      var insurancdData;
+      var loding = 0;
+      var outPriceData;
+      var inPriceData;
+      var flightData = {
+          flighttype: $flighttype,
+          outdate: "$outdate",
+          outycabinPrice: $outycabinPrice,
+          outroute: "$outroute",
+          outcarrier: "$outcarrier",
+          outplanType: "$outplanType",
+          outprice: $outprice,
+          outcode: "$outcode",
+          indate: "$indate",
+          inycabinPrice: $inycabinPrice,
+          inroute: "$inroute",
+          incarrier: "$incarrier",
+          inplanType: "$inplanType",
+          inprice: $inprice,
+          incode: "$incode"
+      }
+
+      var outflightobj = $outflightobj;
+      var outhbsobj = $outhbsobj;
+      //#if($flighttype==1)
+
+      var inflightobj = $inflightobj;
+      var inhbsobj = $inhbsobj;
+
+      //#end
+
+      var lodingnumber = 2;
+
+      var childrenOrder = true;
+
+      var outaindex;
+      var outcindex;
+      var outbindex;
+
+      var inaindex;
+     var incindex;
+     var inbindex;
+
+     var adultnumber = 0;
+        
+
+     var childrennumber = 0;
+       
+
+    var babynumber = 0;
+
+
+
+    var fillstep = 1;
+ 
+
+      $("#outplantypeinput").attr("data", getPlantypeName("$outplanType"));
+      $("#outcarrierinput").html(getAriName("$outcarrier"));
+      $("#outdptinput").html(getAriportName("$outdpt"));
+      $("#outarrinput").html(getAriportName("$outarr"));
+      if (parseInt($flighttype) == 1) {
+          $("#inplantypeinput").attr("data", getPlantypeName("$inplanType"));
+          $("#incarrierinput").html(getAriName("$incarrier"));
+          $("#indptinput").html(getAriportName("$indpt"));
+          $("#inarrinput").html(getAriportName("$inarr"));
+      }
+
+      function LoginReturn(obj) {
+          jQuery.XmsgHide();
+          if (fillstep == 2)
+              setFillStep(true);
+
+      }
+      function delUser(obj) {
+
+          if (flightnumber - 1 == 0)
+              return false;
+          var _this = $(obj)
+          _this.parents(".flightUser:first").remove();
+          flightnumber--
+
+          $("#flightUserList").find(".flightUser").each(function (userindex) {
+              $(this).attr("index", userindex);
+
+              $(this).find(".flightUserTitleNumber:first").html("乘机人" + (userindex + 1));
+
+              $(this).find(".flightuser").each(function () {
+                  $(this).attr("name", ($(this).attr("itemname") + "_" + userindex))
+              
+              })
+
+          })
+
+          setPrice();
+      }
+
+
+      ///更改证件类型
+      function setcardtype(thisobj) {
+          var _this = $(thisobj);
+          var _thisval = _this.val();
+          var _parent = _this.parents(".flightUserItem:first");
+
+          if (_thisval == "NI") {//checkType="notempty"
+              _parent.find("input[itemname=cardcode]").attr("checkType", "notempty|iscard");
+
+              if (_parent.find("input[type=radio][itemname=usertype]:checked").val() != "1") {
+                  _parent.find("input[itemname=birthday]").attr("checkType", "");
+                  _parent.find("div[itemid=isbirthday]").hide();
+              }
+
+          } else {
+              _parent.find("input[itemname=cardcode]").attr("checkType", "notempty")
+              if (_parent.find("input[type=radio][itemname=usertype]:checked").val() != "1") {
+                  _parent.find("input[itemname=birthday]").attr("checkType", "notempty|date");
+                  _parent.find("div[itemid=isbirthday]").show();
+              }
+          }
+      }
+
+
+
+      ///更改乘机人用户类型
+      function editUserType(thisobj) {
+          var _this = $(thisobj);
+          var _thisval = _this.val();
+          if (childrenOrder == true) {
+
+              if (parseInt(_thisval) == 1 || parseInt(_thisval) == 3) {
+
+                  if ($("#flightUserList").find("input[type=radio][itemname=usertype][value=2]:checked").length > 0) {
+                      jQuery.Xmsg("儿童需单独定预订！一个订单内，不能同时存在儿童与成人机票，已经将全部用户人员类型切换至成人");
+                      $("#flightUserList").find("input[type=radio][itemname=usertype]").attr("checked", "");
+                      $("#flightUserList").find("input[type=radio][itemname=usertype][value=1]").attr("checked", "checked");
+
+                      $("#flightUserList").find("input[itemname=birthday]").attr("checkType", "");
+                      $("#flightUserList").find("div[itemid=isbirthday]").hide();
+                  }
+
+              } else {
+                  var _aradio = $("#flightUserList").find("input[type=radio][itemname=usertype][value=1]:checked");
+                  var _bradio = $("#flightUserList").find("input[type=radio][itemname=usertype][value=3]:checked");
+
+                  if (_aradio.length > 0 || _bradio.length > 0) {
+                      jQuery.Xmsg("儿童需单独定预订！一个订单内，不能同时存在儿童与成人机票，已经将全部用户人员类型切换至儿童</br>满2-12周岁的儿童，必须成人陪伴乘机，如果在无成人陪伴乘机的情况下，必须在航班起飞前，提前一周到机场或者是航空公司营业部办理无成人陪伴儿童的手续");
+
+                      $("#flightUserList").find("input[type=radio][itemname=usertype]").attr("checked", "");
+                      $("#flightUserList").find("input[type=radio][itemname=usertype][value=2]").attr("checked", "checked");
+
+                      $("#flightUserList").find("input[itemname=birthday]").each(function () {
+                          var _parent = $(this).parents(".flightUserItem:first");
+                          if (_parent.find("select[itemname=cardtype]").val() != "NI") {
+                              $(this).attr("checkType", "notempty|date");
+                              _parent.find("div[itemid=isbirthday]").show();
+                          }
+                      })
+                  }
+              }
+          } else {
+
+
+              var _parent = _this.parents(".flightUserItem:first");
+
+              if (_thisval != "1" && _parent.find("select[itemname=cardtype]").val() != "NI") {
+
+                  _parent.find("input[itemname=birthday]").attr("checkType", "notempty|date");
+                  _parent.find("div[itemid=isbirthday]").show();
+              } else {
+                  _parent.find("input[itemname=birthday]").attr("checkType", "");
+                  _parent.find("div[itemid=isbirthday]").hide();
+
+              }
+
+          }
+          setPrice();
+      }
+
+
+
+      function addUser() {
+          flightnumber++;
+          var userindex = flightnumber - 1;
+
+          var _s = '<div class="flightUser flightUserItem" index="{0}"><div class="flightUserTitle"><span class="flightUserTitleNumber">乘机人{1}</span><input onchange="editUserType(this)" class="userindex flightorder flightuser" type="radio" value="1" itemname="usertype" name="usertype_{0}" checked="checked"/><span class="flightUserTitleUsertype">成人</span>&nbsp;'
+
+          _s += '<input onchange="editUserType(this)" class="userindex flightorder flightuser" type="radio" value="3" itemname="usertype" name="usertype_{0}"/><span class="flightUserTitleUsertype" >婴儿</span>'
+          
+          if (childrenOrder)
+              _s += '<input onchange="editUserType(this)" class="userindex flightorder flightuser" type="radio" value="2" itemname="usertype" name="usertype_{0}"{2}/><span class="flightUserTitleUsertype">儿童</span><a href="javascript:void(0)" style="padding:0px 10px;color:#0066cc" class="remarks  XoverTip" data="满2-12周岁的儿童，必须成人陪伴乘机，如果在无成人陪伴乘机的情况下，必须在航班起飞前，提前一周到机场或者是航空公司营业部办理无成人陪伴儿童的手续">儿童与成人请分开预订</a>&nbsp;'
+          else
+              _s += '<a href="javascript:void(0)" style="padding:0px 10px;color:#0066cc" class="remarks  XoverTip" data="该仓位不支持订购儿童票！</br>您可以选择以成人身份订购儿童票">关于儿童票</a>'
+        
+          _s += '<a href="javascript:void(0)" onclick="delUser(this)" style=" position:absolute; right:10px">[删除]</a></div>'
+          _s += '<div class="inputbox"><span class="inputTitle">姓名：</span><span class="inputContent"><input class="flightuser flightorder" err="乘机人姓名不能为空" checkType="notempty" itemname="username"  name="username_{0}" type="text"/>';
+          _s += '</span> <span style="padding:0px 10px;color:#666">必填</span><span class="inputTitle">手机：</span><span class="inputContent"><input class="flightuser flightorder" err="乘机人手机号码格式错误" checkType="mobile" itemname="mobile"  name="mobile_{0}" type="text"/></span></div><div class="inputbox"><span class="inputTitle">证件类型：</span>'
+          _s += '<span class="inputContent"><select onchange="setcardtype(this)"  class="flightuser flightorder" itemname="cardtype"  name="cardtype_{0}"><option value="NI">身份证</option><option value="P">护照</option><option value="ID">其它</option></select></span><span style="padding:0px 12px;color:#666">必选</span><span class="inputTitle">证件号：</span>'
+          _s += '<span class="inputContent"><input  class="flightuser flightorder" itemname="cardcode"  name="cardcode_{0}" type="text" err="乘机人证件号码不合法" checkType="notempty|iscard"/></span><span style="padding:0px 10px;color:#666">必填</span></div>'
+          _s += '<div class="inputbox" itemid="isbirthday" style="display:none"><span class="inputTitle">出生日期：</span><span class="inputContent"><input  class="flightuser flightorder" itemname="birthday"  name="birthday_{0}" type="text" err="请输入正确的出生年月日" checkType=""/></span><span style="padding:0px 10px;color:#666">婴儿/儿童必填，如 2014-05-01</span></div>'
+          var _insurancdstr = '<div class="inputbox"><span class="inputTitle">航意险：</span><span class="inputContent"><select class="flightuser" itemname="insurancetype"  name="insurancetype_{4}" itemtype="{0}" price="{1}" onchange="setPrice()"> '
+          _insurancdstr += '<option value="0">0份</option><option value="1" selected="selected">1份</option><option value="2">2份</option><option value="3">3份</option><option value="4">4份</option><option value="5">5份</option></select></span><span style="padding:0px 10px; color:Red">￥{1}<span></span>/份</span><span class="XoverTip" style="padding:0px 10px; color:Blue" data="{2}">{3}</span>'
+          _insurancdstr += '</div>'
+
+          var _insurancdData = insurancdData.insurances;
+
+          for (var i = 0; i < _insurancdData.length; i++) {
+              var _note = _insurancdData[i].insuranceName + ",保险金额" + _insurancdData[i].insuranceEd;
+              _s += _insurancdstr.format(_insurancdData[i].insuranceType, _insurancdData[i].insuranceSettlementPrice, _insurancdData[i].insuranceDescription, _note, userindex)
+          }
+          _s += '</div>'
+
+          var _cdisabled = (childrenOrder == true) ? "" : " disabled";
+
+
+          _s = _s.format(userindex, flightnumber, _cdisabled);
+
+
+          if (childrenOrder) {
+              if ($("#flightUserList").find("input[type=radio][itemname=usertype][value=2]:checked").length > 0) {
+                  _s = $(_s);
+                  _s.find("input[type=radio][itemname=usertype]").attr("checked", "");
+                  _s.find("input[type=radio][itemname=usertype][value=2]").attr("checked", "checked");
+              }
+
+
+          }
+
+
+          $("#flightUserList").append(_s);        
+
+          setPrice();
+      }
+
+      function initialPage() {
+          outaindex = outPriceData.prices.indexOf(function (item) { return (item.passengerType == 1) });
+          outcindex = outPriceData.prices.indexOf(function (item) { return (item.passengerType == 2) });
+          outbindex = outPriceData.prices.indexOf(function (item) { return (item.passengerType == 3) });
+          if (flightData.flighttype == 1) {
+               inaindex = inPriceData.prices.indexOf(function (item) { return (item.passengerType == 1) });
+               incindex = inPriceData.prices.indexOf(function (item) { return (item.passengerType == 2) });
+               inbindex = inPriceData.prices.indexOf(function (item) { return (item.passengerType == 3) });
+
+               if (parseInt(inPriceData.prices[inaindex].jsfPrice) == parseInt(inPriceData.prices[incindex].jsfPrice))
+                   childrenOrder = false;
+          }
+
+          if (parseInt(outPriceData.prices[outaindex].jsfPrice) == parseInt(outPriceData.prices[outcindex].jsfPrice))
+              childrenOrder = false;   
+
+          addUser();
+      }
+
+
+      function showAddressBox() {
+          $("#addressBox").hide();
+          $("#addressAdd").show();
+          $("#addressList").find("input[type=radio]").attr("checked","");
+
+      }
+
+      function addAddress() {
+
+          try {            
+
+              var aaa = jQuery.Xcheck(".addressedit");
+          } catch (e) {
+              jQuery.Xmsg(e.message);
+              return false;
+          }
+
+          var _str = $("#aName").val() + "[" + $("#aMobile").val() + "]&nbsp;&nbsp;" + $("#aAddiess").val() + "&nbsp;邮编：" + $("#aZip").val();
+        _str = '<li><input checked="checked" type="radio" name="addiess" aName="' + $("#aName").val() + '"  aMobile="' + $("#aMobile").val() + '"  aAddiess="' + $("#aAddiess").val() + '"  aZip="' + $("#aZip").val() + '" >' + _str + '</li>'
+        $("#addressList").append(_str);
+        $("#addressBox").show();
+        $("#addressAdd").hide();
+      }
+      
+      function getTicketPrice(type) {
+          var url = "/AJAX/SearchFlight.ashx?action=getticketprice&ts=" + Math.random();
+          var data = {};
+          loding++;
+          if (loding == 1)
+              jQuery.Xload("机票价格验证中...");
+
+          if (type) {
+              data.date = flightData.outdate
+              data.ycabinPrice = flightData.outycabinPrice;
+              data.price = flightData.outprice;
+              data.route = flightData.outroute;
+              data.carrier = flightData.outcarrier;
+              data.code = flightData.outcode;
+              data.planType = flightData.outplanType;
+          } else {
+
+              data.date = flightData.indate
+              data.ycabinPrice = flightData.inycabinPrice;
+              data.price = flightData.inprice;
+              data.route = flightData.inroute;
+              data.carrier = flightData.incarrier;
+              data.code = flightData.incode;
+              data.planType = flightData.inplanType;
+
+          }
+
+          jQuery.ajax({
+              url: url,
+              type: "POST",
+              data: data,
+              success: function (response) {
+                  if (type)
+                      outPriceData = JSON.parse(response);
+                  else
+                      inPriceData = JSON.parse(response);
+                  loding--;
+                  lodingnumber--
+                  if (loding == 0)
+                      jQuery.XloadHide();
+                  if (lodingnumber == 0) {
+                      initialPage();
+
+                  }
+
+              }
+          });
+      }
+
+      function getInsurance() {
+
+          var url = "/AJAX/SearchFlight.ashx?action=getinsurance&ts=" + Math.random();
+          var data = {};
+          loding++;
+          if (loding == 1)
+              jQuery.Xload("机票价格验证中...");
+          jQuery.ajax({
+              url: url,
+              type: "POST",
+              data: data,
+              success: function (response) {
+                  insurancdData = JSON.parse(response);
+                  
+                  loding--;
+                  lodingnumber--
+                  if (loding == 0)
+                      jQuery.XloadHide();
+                  if(lodingnumber==0)
+                      initialPage();
+              }
+          });
+
+
+
+
+      }
+      
+      function setPrice(thisobj) {
+          
+
+          var _s = '<h2 style="position:relative"> 应付金额： <span style=" position:absolute; width:50%; right:0px; text-align:right; font-family:Arial; color:Red; font-size:24px"> ￥{0} </span></h2>';
+          var _u = '<ul class="order_detail_list">';
+          _u += '<li><span class="lefttext hilite">{0}</span><span class="righttext hilite">￥{1} x {2}人</span></li>';
+          _u += '<li><span class="lefttext">{0}票</span><span class="righttext">￥{3}/人</span></li>';
+          _u += '<li><span class="lefttext">机建费</span><span class="righttext">￥{4}/人</span></li>';
+          _u += '<li><span class="lefttext">燃油税</span><span class="righttext">￥{5}/人</span></li></ul>';
+
+          var _i = '<ul class="order_detail_list"><li><span class="lefttext hilite">保险：</span><span class="righttext hilite">￥{0}</span></li></ul>';
+          var _e = '<ul class="order_detail_list"><li><span class="lefttext hilite">凭证快递：</span><span class="righttext hilite">￥{0}</span></li></ul>';
+          var _r = '<ul class="order_detail_list"><li><span class="lefttext hilite">优惠：</span><span class="righttext hilite">- ￥{0}</span></li></ul>';
+
+           adultnumber = 0;
+          var adultprice = 0;
+
+           childrennumber = 0;
+          var childrenprice = 0;
+
+           babynumber = 0;
+          var babyprice = 0;
+
+          var outyh = parseInt(outhbsobj.CommisionPrice) + parseInt(outhbsobj.yhj);
+          var inyh = 0;
+          if (flightData.flighttype == 1)
+              inyh = parseInt(inhbsobj.CommisionPrice) + parseInt(inhbsobj.yhj);
+
+
+          var yh = 0;
+
+          var _insurance = 0;
+
+          var _flightUsers = $("#flightUserList").find(".flightUser");
+
+
+          _flightUsers.each(function (i) {             
+
+              var _uindex = $(this).attr("index");
+              var _utype = parseInt($(this).find("input[name=usertype_" + _uindex + "][type=radio]:checked").val());
+
+              var _iselect = $(this).find("select[name=insurancetype_" + _uindex + "]");
+              if (parseInt(_iselect.val()) > 0) {
+                  var _thisinsurance = (parseInt(_iselect.val()) * parseInt(_iselect.attr("price")));
+                  if (flightData.flighttype == 1)
+                      _thisinsurance = _thisinsurance * 2;
+                  _insurance += _thisinsurance;
+              }
+              if (_utype == 1) {
+                  adultnumber++;
+                  adultprice += (parseInt(outPriceData.prices[outaindex].price) + parseInt(outPriceData.prices[outaindex].jsfPrice) + parseInt(outPriceData.prices[outaindex].taxPrice)); //累加票面价
+                  if (flightData.flighttype == 1) {
+                      adultprice += (parseInt(inPriceData.prices[inaindex].price) + parseInt(inPriceData.prices[inaindex].jsfPrice) + parseInt(inPriceData.prices[inaindex].taxPrice)); //累加票面价
+                  }
+                  yh += (outyh + inyh);
+
+              } else if (_utype == 2 && childrenOrder == true) {
+                  childrennumber++;
+                  childrenprice += (parseInt(outPriceData.prices[outcindex].price) + parseInt(outPriceData.prices[outcindex].jsfPrice) + parseInt(outPriceData.prices[outcindex].taxPrice)); //累加票面价
+                  if (flightData.flighttype == 1) {
+                      childrenprice += (parseInt(inPriceData.prices[outcindex].price) + parseInt(inPriceData.prices[outcindex].jsfPrice) + parseInt(inPriceData.prices[outcindex].taxPrice)); //累加票面价
+                  }
+
+              } else if (_utype == 3) {
+                  babynumber++;
+                  babyprice += (parseInt(outPriceData.prices[outbindex].price) + parseInt(outPriceData.prices[outbindex].jsfPrice) + parseInt(outPriceData.prices[outbindex].taxPrice)); //累加票面价
+                  if (flightData.flighttype == 1) {
+                      babyprice += (parseInt(inPriceData.prices[inbindex].price) + parseInt(inPriceData.prices[inbindex].jsfPrice) + parseInt(inPriceData.prices[inbindex].taxPrice)); //累加票面价
+                  }
+              }
+
+          });
+
+          var _express = 0;
+
+          if ($("#istrip").attr("checked")) {
+
+              _express = parseInt($("#istrip").attr("price"));
+
+          }
+
+          var _prices = adultprice + childrenprice + babyprice + _express + _insurance - yh;          
+
+
+
+          _s = _s.format(_prices);
+
+
+          var _unitPrice = parseInt(outPriceData.prices[outaindex].price) + parseInt(outPriceData.prices[outaindex].jsfPrice) + parseInt(outPriceData.prices[outaindex].taxPrice);
+          var _userPrice = parseInt(outPriceData.prices[outaindex].price);
+          var _jsfprice = parseInt(outPriceData.prices[outaindex].jsfPrice);
+          var _taxPrice = parseInt(outPriceData.prices[outaindex].taxPrice);
+
+          if (flightData.flighttype == 1) {
+              _unitPrice += (parseInt(inPriceData.prices[inaindex].price) + parseInt(inPriceData.prices[inaindex].jsfPrice) + parseInt(inPriceData.prices[inaindex].taxPrice));
+              _userPrice += parseInt(inPriceData.prices[inaindex].price);
+              _jsfprice += parseInt(inPriceData.prices[inaindex].jsfPrice);
+              _taxPrice += parseInt(inPriceData.prices[inaindex].taxPrice);
+          }
+          _s += (_u.format("成人", _unitPrice, adultnumber,_userPrice,  _jsfprice, _taxPrice));
+
+          if (childrenOrder == true) {
+              _unitPrice = parseInt(outPriceData.prices[outcindex].price) + parseInt(outPriceData.prices[outcindex].jsfPrice) + parseInt(outPriceData.prices[outcindex].taxPrice);
+              _userPrice = parseInt(outPriceData.prices[outcindex].price);
+              _jsfprice = parseInt(outPriceData.prices[outcindex].jsfPrice);
+              _taxPrice = parseInt(outPriceData.prices[outcindex].taxPrice);
+
+              if (flightData.flighttype == 1) {
+                  _unitPrice += (parseInt(inPriceData.prices[incindex].price) + parseInt(inPriceData.prices[incindex].jsfPrice) + parseInt(inPriceData.prices[incindex].taxPrice));
+                  _userPrice += parseInt(inPriceData.prices[incindex].price);
+                  _jsfprice += parseInt(inPriceData.prices[incindex].jsfPrice);
+                  _taxPrice += parseInt(inPriceData.prices[incindex].taxPrice);
+              }
+              _s += (_u.format("儿童", _unitPrice, childrennumber, _userPrice, _jsfprice, _taxPrice));
+
+          }
+          _unitPrice = parseInt(outPriceData.prices[outbindex].price) + parseInt(outPriceData.prices[outbindex].jsfPrice) + parseInt(outPriceData.prices[outbindex].taxPrice);
+          _userPrice = parseInt(outPriceData.prices[outbindex].price);
+          _jsfprice = parseInt(outPriceData.prices[outbindex].jsfPrice);
+          _taxPrice = parseInt(outPriceData.prices[outbindex].taxPrice);
+
+          if (flightData.flighttype == 1) {
+              _unitPrice += (parseInt(inPriceData.prices[inbindex].price) + parseInt(inPriceData.prices[inbindex].jsfPrice) + parseInt(inPriceData.prices[inbindex].taxPrice));
+              _userPrice += parseInt(inPriceData.prices[inbindex].price);
+              _jsfprice += parseInt(inPriceData.prices[inbindex].jsfPrice);
+              _taxPrice += parseInt(inPriceData.prices[inbindex].taxPrice);
+          }
+          _s += (_u.format("婴儿", _unitPrice, babynumber, _userPrice, _jsfprice, _taxPrice));
+
+          _s += (_i.format(_insurance));
+          _s += (_e.format(_express));
+          _s += (_r.format(yh));
+
+          $("#orderDetail").html(_s)
+
+      }
+
+      function checkUser() {
+          try {
+              jQuery.Xcheck(".flightorder");
+
+
+              if ($("#istrip").attr("checked") && $("#addressList").find("input[type=radio]:checked").length == 0 && !jQuery.Xcheck(".addressedit")) {
+                 
+                  throw { message: "请选择设置一个报销凭证配送地址！", obj: $("#istrip") }
+              }
+
+          } catch (e) {
+
+              jQuery.Xmsg({ msg: e.message, button: { name: "确认", btn: function () { e.obj.focus(); } } });
+
+             
+              return false;
+
+
+
+          }       
+            return true;
+      }
+
+
+      function ajaxSubmitOrder(ismember) {
+          var OrderRequset = {};
+
+          OrderRequset.dptDate = flightData.outdate;
+
+          if (parseInt($flighttype) == 1)
+              OrderRequset.tripType = 2;
+          else
+              OrderRequset.tripType = 1;
+          if (OrderRequset.tripType == 2)
+              OrderRequset.bakDate = flightData.indate;
+
+          OrderRequset.adultNumber = adultnumber;
+          OrderRequset.chdNumber = childrennumber;
+          OrderRequset.infNumber = babynumber;
+
+          //配送
+          OrderRequset.route = ($("#istrip").attr("checked") == true) ? 1 : 0;
+
+          if (OrderRequset.route == 1) {
+              var _r = $("#addressList").find("input[type=radio]:checked");             
+              if (_r.length > 0) {
+                  OrderRequset.recipient = _r.attr("aname");
+                  OrderRequset.post = _r.attr("azip");
+                  OrderRequset.postPrice = $("#istrip").attr("price");
+                  OrderRequset.rcptAddress = _r.attr("aaddiess");
+              } else {                           
+                  OrderRequset.recipient = $("#aName").val();
+                  OrderRequset.post = $("#aZip").val();
+                  OrderRequset.postPrice = $("#istrip").attr("price");
+                  OrderRequset.rcptAddress = $("#aAddiess").val();
+              }             
+            
+           
+          }
+
+          //联系人
+          OrderRequset.contactName = $("#ContactUserBox").find("input[name=contactUser]").val();
+          OrderRequset.contactMobile = $("#ContactUserBox").find("input[name=contactMobile]").val();
+          OrderRequset.email = $("#ContactUserBox").find("input[name=contactMail]").val();
+          //保险价格;        
+          var _insurancdData = insurancdData.insurances;
+          if(_insurancdData.length>0){
+              OrderRequset.insurancePrice = _insurancdData[0].insuranceSettlementPrice;
+          }
+
+          //航程信息
+          var segments = new Array();
+          var outsegment = {};
+          //var outflightobj = {"Dpt":"HFE","Arr":"PEK","Carrier":"CA","CodeShare":false,"Code":"CA931","DptTime":"0825","ArrTime":"1020","ETicket":true,"Meal":true,"Plantype":"738","Stops":0,"Tax":"110","AirTax":"50","Yprice":"1320","Price":"530.0","LowCode":"V1","LowStatus":"0","LowType":"1","LowZk":"0.4","LowCommisionPrice":"0.0","LowCommision":"0.00%","Lowscgd":"","Lowtpgd":"退票规定:起飞前(含):50%,起飞后:不允许退票; 变更规定:起飞前(含):30%,起飞后:50%; 签转规定:; EI项:","Lowqzgd":"","Lowbzbz":"测试","Lowyhj":"0","Lowzcid":"k141024092029342392","LowCodeName":"经济舱"};
+          // var outhbsobj = {"Code":"V1","Status":"0","Type":"1","Price":530,"Zk":0.4,"CommisionPrice":10.6,"Commision":"2.0%","scgd":"","tpgd":"退票规定:起飞前(含):50%,起飞后:不允许退票; 变更规定:起飞前(含):30%,起飞后:50%; 签转规定:; EI项:","bzbz":"","qzgd":"","yhj":0.07,"CodeName":"经济舱","zcid":"k141024092029342392","zclx":"4","plat":"","zcSfybx":false,"zcmc":""};
+          outsegment.dpt = outflightobj.Dpt;
+          outsegment.arr = outflightobj.Arr;
+          outsegment.dptTime = outflightobj.DptTime;
+          outsegment.arrTime = outflightobj.ArrTime;
+          outsegment.airLine = outflightobj.Code;
+          outsegment.carrier = outflightobj.Carrier;
+          outsegment.planType = outflightobj.Plantype;
+          outsegment.code = outhbsobj.Code;
+          outsegment.privilege = parseInt(outhbsobj.CommisionPrice) + parseInt(outhbsobj.yhj);
+          outsegment.zcid = outhbsobj.zcid;
+          outsegment.zclx = outhbsobj.zclx;
+          outsegment.plat = outhbsobj.plat;
+          segments[0] = outsegment
+
+          if (OrderRequset.tripType == 2) {
+              var intsegment = {};
+              intsegment.dpt = inflightobj.Dpt;
+              intsegment.arr = inflightobj.Arr;
+              intsegment.dptTime = inflightobj.DptTime;
+              intsegment.arrTime = inflightobj.ArrTime;
+              intsegment.airLine = inflightobj.Code;
+              intsegment.carrier = inflightobj.Carrier;
+              intsegment.planType = inflightobj.Plantype;
+              intsegment.code = inhbsobj.Code;
+              intsegment.privilege = parseInt(inhbsobj.CommisionPrice) + parseInt(inhbsobj.yhj);
+              intsegment.zcid = inhbsobj.zcid;
+              intsegment.zclx = inhbsobj.zclx;
+              intsegment.plat = inhbsobj.plat;
+              segments[1] = intsegment
+          }
+
+
+          var passengers = new Array();
+
+
+          $("#flightUserList").find(".flightUser").each(function (i) {
+              var passenger = {};
+              passenger.name = $(this).find("input[name=username_" + i + "]").val();
+              passenger.certificateType = $(this).find("select[name=cardtype_" + i + "]").val();
+              passenger.certificateNumber = CtoH($(this).find("input[name=cardcode_" + i + "]").val());
+              var _utype = $(this).find("input[name=usertype_" + i + "]:checked").val();
+              passenger.passengerType = _utype;
+              passenger.insuranceDeal = $(this).find("select[name=insurancetype_" + i + "]").val();
+              if (passenger.certificateType == "NI")
+                  passenger.csrq = getBirthdatByIdNo(passenger.certificateNumber); //如果是身份证，获取出生年月日
+              else {
+                  if (_utype != "1") {
+                      var _brithdqy = trim(CtoH($(this).find("input[name=birthday_" + i + "]").val())).replace(/\//g, '-').replace(/\、/g, '-');
+
+                      var _brithdqyarray = _brithdqy.split("-");
+
+                      _brithdqy = (_brithdqyarray[0] + "-" + ((parseInt(_brithdqyarray[1]) > 9) ? _brithdqyarray[1] : "0" + parseInt(_brithdqyarray[1])) + "-" + ((parseInt(_brithdqyarray[2]) > 9 )? _brithdqyarray[2] : ("0" + parseInt(_brithdqyarray[2]))));
+                      
+                      passenger.csrq = _brithdqy;
+                  }
+              }
+
+              
+
+
+              var _index = 0;
+              if (_utype == 1)
+                  _index = outaindex
+              else if (_utype == 2)
+                  _index = outcindex
+              else if (_utype == 3)
+                  _index = outbindex
+
+              passenger.price = parseInt(outPriceData.prices[_index].price);
+
+              if (_utype == 1)
+                  passenger.cheap = parseInt(outhbsobj.CommisionPrice) + parseInt(outhbsobj.yhj);
+              else
+                  passenger.cheap = 0;
+
+              passenger.airTax = parseInt(outPriceData.prices[_index].jsfPrice);
+              passenger.tax = parseInt(outPriceData.prices[_index].taxPrice);
+
+              passenger.airTax1 = 0;
+              passenger.tax1 = 0;
+              passenger.price1 = 0;
+              passenger.cheap1 = 0;
+
+              if (OrderRequset.tripType == 2) {
+                  passenger.price1 = parseInt(inPriceData.prices[_index].price);
+
+                  if (_utype == 1)
+                      passenger.cheap1 = parseInt(inhbsobj.CommisionPrice) + parseInt(inhbsobj.yhj);
+                  else
+                      passenger.cheap1 = 0;
+                  passenger.airTax1 = parseInt(inPriceData.prices[_index].jsfPrice);
+                  passenger.tax1 = parseInt(inPriceData.prices[_index].taxPrice);
+              }
+              passengers[i] = passenger;
+
+          });
+
+                
+
+         
+          var url = "/AJAX/SearchFlight.ashx?action=SubmitOrder";
+          var data = {};
+          data.passengers = JSON.stringify(passengers);
+          data.OrderRequset = JSON.stringify(OrderRequset);
+          data.segments = JSON.stringify(segments);
+          jQuery.Xload("订单提交中!请稍候");
+          jQuery.ajax({
+              url: url,
+              type: "POST",
+              data: data,
+              success: function (response) {
+                  jQuery.XloadHide();
+                  var json = response.toJson();
+                  if (json != null && json.resultCode != null && parseInt(json.resultCode) == 1) {
+
+                      alert("订单提交成功!请在1小时内完成支付操作，逾期订单将自动取消");
+                      if (!ismember) {
+                          alert("您已自动成为荞面网会员!用户名为手机：" + OrderRequset.contactMobile + "；默认密码为手机号后6位,请尽快登录修改!");
+                      }
+
+                      window.location.href = "/UserWeb/FlightOrderItem.aspx?orderno=" + json.orderNo;
+                  } else {
+
+                      if (!ismember) {
+                          alert("您已自动成为荞面网会员!用户名为手机：" + OrderRequset.contactMobile + "；默认密码为手机号后6位,请尽快登录修改!");
+                      }
+                      alert("订单提交失败,请重试!");
+                  }
+              },
+              error: function (XMLHttpRequest, textStatus, errorThrown) {
+                  jQuery.XmsgHide();
+                  var _status = XMLHttpRequest.status;                 
+                   alert("订单提交失败！未知的服务器错误" + _status + " (" + XMLHttpRequest.statusText + ")，请与管理员联系!");              
+
+              }
+          });
+      
+      }
+
+
+
+      function SubmitOrder() {
+          jQuery.Xload();
+          var url = "/AJAX/User.ashx?action=GetUser"
+          jQuery.Xload();
+          jQuery.ajax({
+              url: url,
+              type: "POST",
+              success: function (response) {                 
+                  var json = response.toJson();
+                  if (!json.success) {
+                      var data = {};
+                      data.exists = 0;
+                      data.mobile = $("#contactMobile").val();
+                      var url = "/AJAX/User.ashx?action=CheckUser";
+                      jQuery.ajax({
+                          url: url,
+                          data: data,
+                          type: "POST",
+                          success: function (response) {
+                              jQuery.XloadHide();
+                              var json = response.toJson();
+                              if (json.success) {
+                                  ajaxSubmitOrder(false);                                  
+                              } else {
+                                  jQuery.Xmsg({ msg: "联系人手机号为已注册会员，请登录后再进行订单提交操作！", button: function () { showlogin(); } });
+                                  return false;
+                              }
+                          }
+                      });
+
+                  }
+                  else {
+                      jQuery.XloadHide();
+                      ajaxSubmitOrder(true);
+                  }
+              }
+          });
+      
+      }
+      
+      function setConfirmUser() {
+
+
+          //confirmContactUserBox
+
+          var contacttable = $($("#ContactUserBox").html());
+          var contactlists = $("#ContactUserBox").find("input[type=text],select");
+
+          contacttable.find("input[type=text],select").each(function (i) {
+              var _v = contactlists.eq(i).val();
+
+              if ($(this).attr("type") == "text") {
+
+              } else {
+                  _v = $(this).find("option[value=" + _v + "]").html();
+              }
+
+              $(this).after(_v);
+              $(this).remove();
+          });
+
+          $("#confirmContactUserBox").html(contacttable)
+
+          var usertable = $($("#flightUserList").html());
+          var inputlists = $("#flightUserList").find("input[type=text],select");
+
+          usertable.find("input[type=text],select").each(function (i) {
+              var _v = inputlists.eq(i).val();
+              
+              if ($(this).attr("type") == "text") {
+                 
+              } else {
+                  _v = $(this).find("option[value=" + _v + "]").html();
+              }
+
+              $(this).after(_v);
+              $(this).remove();
+          });
+
+          var _flightUserTitle = $("#flightUserList").find(".flightUserTitle");
+          usertable.find(".flightUserTitle").each(function (i) {
+              var _v = _flightUserTitle.eq(i).find("input[type=radio]:checked").val();
+              var _s = "<span class=\"flightUserTitleNumber\">乘机人" + (i + 1) + "</span>";
+              if (parseInt(_v) == 1)
+                  _s += '<span class="flightUserTitleUsertype">成人</span>';
+              else if (parseInt(_v) == 2)
+                  _s += '<span class="flightUserTitleUsertype">儿童</span>';
+              else if (parseInt(_v) == 3)
+                  _s += '<span class="flightUserTitleUsertype">婴儿</span>';
+              else {
+                  jQuery.Xmsg("请选择第" + (i + 1) + "位乘客的用户类型");
+                  return false;
+              }
+              $(this).html(_s);
+          });
+          $("#confirmFlights").html(usertable)
+
+
+          var _ems = "";
+          if ($("#istrip").attr("checked")) {
+              var _r = $("#addressList").find("input[type=radio]:checked");
+             
+              if (_r.length == 0 && !jQuery.Xcheck(".addressedit")) {
+                  jQuery.Xmsg("您选择了快递报销凭证，请保存选择一个收件人信息");
+                  return false;
+              }            
+              if (_r.length != 0) {
+                  _ems += '<div style=" border:0px solid #eee; overflow:hidden; line-height:32px; padding:0px 0px 0px 10px; font-weight:bold; margin-top:5px;"> 需要报销凭证  (含：行程单等)</div>'
+                  _ems += ("<div>&nbsp;&nbsp;收件地址：" + _r.attr("aname") + "[" + _r.attr("amobile") + "]&nbsp;&nbsp;" + _r.attr("aaddiess") + "&nbsp;邮编：" + _r.attr("azip") + "</div>");
+              } else {
+                  _ems += '<div style=" border:0px solid #eee; overflow:hidden; line-height:32px; padding:0px 0px 0px 10px; font-weight:bold; margin-top:5px;"> 需要报销凭证  (含：行程单等)</div>'
+                  _ems += ("<div>&nbsp;&nbsp;收件地址：" + $("#aName").val() + "[" + $("#aMobile").val() + "]&nbsp;&nbsp;" + $("#aAddiess").val() + "&nbsp;邮编：" + $("#aZip").val() + "</div>");
+
+              }
+          }
+          $("#confirmEMS").html(_ems);
+          return true;
+       
+      }
+
+      function setFillStep(isplus, nocheck) {
+          if (isplus && !nocheck) {
+
+              switch (fillstep) {
+                  case 1:
+                      if (!checkUser())
+                          return false; //验证输入                      
+                      if(!setConfirmUser())
+                          return false;
+                      break;
+                  case 2:                     
+                      SubmitOrder(); //提交订单
+                      return false;
+              }
+          }
+
+          $("#flowPath").find(".flowStep").removeClass("current");
+          
+
+          if (isplus) {
+              fillstep++
+          } else {
+              fillstep--
+          }
+
+         
+
+          $("#flowPath").find(".flowStep").eq(fillstep-1).addClass("current")
+
+          
+
+          if (fillstep == 1) {
+              $("#stepButtonL").show();
+              $("#stepButtonR").hide();
+              $("#fill_1").show();
+              $("#fill_2").hide();
+
+          } else if (fillstep == 2) {
+              $("#stepButtonL").hide();
+              $("#stepButtonR").show();
+              $("#fill_2").show();
+              $("#fill_1").hide();
+          }
+
+
+//          if (fillstep <= 3) {
+//              if (fillstep < 3)
+//                  $("#stepButtonR").html("下一步")
+//              else
+//                  $("#stepButtonR").html("提交订单");
+
+//          } else {
+//              fillstep = 3;
+//          }
+      }
+
+
+      getInsurance();
+      getTicketPrice(true);
+      if (flightData.flighttype == 1) {
+          lodingnumber = 3;
+          getTicketPrice(false);
+      }
+     
+
+      if ($("#addressList").find("li").length == 0)
+          showAddressBox();
+     
+      
+
+
+      
+
+  </script>
+</body>
+</html>

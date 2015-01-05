@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>帮助中心&#45;$SITE.name</title>#include("pageHeadCode.htm")
+</head>
+<body>
+    #parse("pageHead.htm") 
+    #set ($result=$tool.GetSonDic("ROOT_HELP_TYPE"))
+    <div class="pagebox">
+        <div style="overflow: hidden; position: relative;">
+            <!--左-->
+            <div style="width: 855px; overflow: hidden; float: left">
+                <div class="boxcontent">
+                    #foreach($help in $result)
+                    <div style="width: 400px; padding: 10px; float: left;">
+                        <span style="color: #666" class="title">
+                            <h3>
+                                $help.name</h3>
+                        </span>
+                        <ul>
+                            #foreach($item in $tool.GetHelp($help.code,true,100))
+                            <li style="line-height: 30px; font-size:14px;"><a title="$item.title" target="_blank" href="/helps/$item.id&#46;html">
+                                $item.title</a></li>
+                            #end
+                        </ul>
+                    </div>
+                    #end
+                </div>
+            </div>
+            <!--右-->
+            <div style="width: 322px; float: right;">
+                <div style="background-color: #f7f7f7;" class="thisbox">
+                    <div style="padding: 10px 15px 10px 15px">
+                        <div class="minbox">
+                            <div class="minboxtitle">
+                                <span class="iconStr">HELP</span><span class="title"><h2>
+                                    小荞帮您出游</h2>
+                                </span>
+                            </div>
+                            <div class="boxcontent">
+                                #foreach($help in $result) <span style="color: #666" class="title">
+                                    <h3>
+                                        $help.name</h3>
+                                </span>
+                                <ul>
+                                    #foreach($item in $tool.GetHelp($help.code,true,5))
+                                    <li style="line-height: 25px"><a title="$item.title" target="_blank" href="/helps/$item.id&#46;html">
+                                        $item.title</a></li>
+                                    #end
+                                </ul>
+                                #end
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--帮助类别-->
+    #parse("pageFoot.htm")
+</body>
+</html>

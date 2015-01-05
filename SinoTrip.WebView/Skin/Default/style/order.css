@@ -1,0 +1,20 @@
+﻿.flowPath{ width:1120px; height:27px; overflow:hidden; background:url(../images/order/orderflowPath.jpg) no-repeat}
+.flowPath.step1{ background-position:0px 0px}
+.flowPath.step2{ background-position:0px -27px}
+.flowPath.step3{ background-position:0px -54px}
+.flowPath.step4{ background-position:0px -81px}
+.flowPath.step5{ background-position:0px -108px}
+.flowPath.step6{ background-position:0px -135px}
+.orderTitle{ font-size:13px; height:30px; line-height:30px; padding-left:20px;background:url(../images/order_icon.gif) no-repeat -216px -25px; color:#ff6600; font-weight:bold; margin-top:10px}
+
+.imgButton{ color:#ffffff; font-size:14px; font-weight:bold; cursor:pointer;width:120px; height:34px; line-height:34px; text-align:center; overflow:hidden;background:url(../images/order_icon.gif) no-repeat 0px -132px;}
+
+.imgButton.orderButton{ float:right}
+.imgButton.orderButton.hidden{ color:#eee;background-position:0px -350px;}
+.userinput{ text-align:center}
+.userinput input[type=text],.userinput select{ width:95%; height:25px; line-height:25px;  padding-left:5px; margin:2px 0px 2px 0px}
+
+.addstitle{ background-color:#f7f7f7; line-height:30px; padding-left:10px}
+.addsbox{line-height:30px; padding-top:10px}
+.addstitle span,.addsbox span{ padding-left:10px; color:#666}
+.orderbuttonbox span.inputbutton{ margin-left:6px;_margin-left:3px;}

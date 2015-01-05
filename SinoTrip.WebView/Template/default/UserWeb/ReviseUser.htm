@@ -1,0 +1,191 @@
+﻿<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="/Skin/default/style/user.css" rel="stylesheet" type="text/css" />
+    #include("pageHeadCode.htm")
+</head>
+<body>
+    #set($lefMeun = 0)
+    <!--是否显示左侧菜单-->
+    #parse("pageHead.htm")
+    <div class="pagebox" style="margin-top: 10px">
+        <div class=" userPageTop">
+            <div class="userPagetitleL">
+            </div>
+            <div class="userPagetitleR">
+            </div>
+        </div>
+        <!--左右分-->
+        <div style="overflow: hidden; border: 1px solid #ccc; border-top: 5px solid #ccc">
+            <div style="width: 255px; overflow: hidden; float: left">
+                <div class="userpageleft">
+                    <div class="user_menu_box">
+                        #include("UserWeb/userMenu.htm")
+                    </div>
+                </div>
+                <div class="userpageleft2">
+                </div>
+            </div>
+            <div style="width: 920px; overflow: hidden; float: right; padding-top: 10px">            
+
+
+                 <div class="minboxtitle">
+                 <span class="iconStr">My</span><span class="title"><h2>基本资料修改</h2></span>
+                  </div>    
+           
+                                             
+          <div style=" overflow:hidden; padding:0px 100px 20px 50px">               
+              <div class="thisbox" style="background-color: #f7f7f7;">                    
+                    <div style="padding: 10px 15px 10px 15px">
+                       <div class="minbox">   
+                        <div style=" padding:20px; overflow:hidden">
+                             <div style="line-height: 25px;">用户名： $!userArgs.username</div>          
+                            <div style="line-height: 25px;">手机号：  $!userArgs.mobile <span style=" padding-left:10px; color:#05a6c8">
+                                 <input type="checkbox" name="editmobile" id="isEditMobile" value="1" class="reviseuser editmobile" onchange="setMobilebox(this)"/>修改重设手机号</span></div>          
+        
+                             </div>
+                          </div> 
+                     </div>
+                </div> 
+
+                <div class="thisbox" style="background-color: #f7f7f7;">                    
+                    <div style="padding: 10px 15px 10px 15px">
+                       <div class="minbox">   
+                        <div style=" padding:20px; overflow:hidden">
+                            
+        <div style="padding: 0px 5px 0px 5px; display:none" id="editmobile">    
+            <div>
+             <div style="line-height: 25px;">新手机号</div>
+                <input type="text" err="请认真填写您要修改的手机号码" title="新的手机号码"  checktype="notempty|mobile" name="mobile"
+                    class="editmobile ruCode" style="width: 280px;" onblur= "CheckUser(this,0,'手机号码已存在')"/>
+                <div class="errstr">
+                </div>
+            </div>
+             <div style="line-height: 25px;">验证码</div>
+            <div>
+                <input type="text" err="验证码不能为空" title="6位数字" checktype="notempty" name="code"
+                    class="editmobile" style="width: 160px;" />
+                    <span style="width: 100px; padding:3px 5px 3px 5px" class="inputbutton" onclick="sendMobileCode('ruCode',0,this)">
+                获取验证码</span>
+                <div class="errstr">
+                </div>
+            </div>
+        </div>
+
+         <div style="padding: 0px 5px 0px 5px">
+            <div style="line-height: 25px;">昵称</div>
+            <div>
+                <input type="text" err="不得大于12小于6个各种字符"  maxL="12" minL="6"  title="昵称" name="nickname"
+                    class="reviseuser editmobile" style="width: 280px;" value="$!userArgs.nickname"/>
+                <div class="errstr"> 
+                </div>
+            </div>
+        </div>
+
+         <div style="padding: 0px 5px 0px 5px">
+            <div style="line-height: 25px;">真实姓名</div>
+            <div>
+                <input type="text" err="真实姓名只能为中文噢"  title="真实姓名" checktype="chinese" name="realname"
+                    class="reviseuser editmobile" style="width: 280px;" value="$!userArgs.realname"/>
+                <div class="errstr"> 
+                </div>
+            </div>
+        </div>
+         <div style="padding: 0px 5px 0px 5px">
+            <div style="line-height: 25px;">性别</div>
+            <div style="  padding:0px 0px 20px 20px">                
+                <span style=" padding-right:10px;"><input type="radio" name="sex" value="0" #if($!userArgs.sex==0)checked="checked"#end class="reviseuser editmobile" />男</span>
+                   <span style=" padding-left:10px"><input type="radio" name="sex" value="1" #if($!userArgs.sex==1)checked="checked"#end class="reviseuser editmobile" />女</span>
+            </div>
+        </div>
+     
+        <div style="padding: 0px 5px 0px 5px">
+            <div style="line-height: 25px;">身份证号</div>
+            <div>
+                <input type="text" err="请填写正确的身份证号码"  title="身份证号码" checktype="idcard" name="idcard"
+                    class="reviseuser editmobile" style="width: 280px;"  value="$!userArgs.idcard"/>
+                <div class="errstr"> 
+                </div>
+            </div>
+        </div>
+
+
+        <div style="padding: 5px;">
+            <span style="width: 260px;" class="inputbutton orange" onclick="reviseuser()">
+                确&nbsp;&nbsp;认&nbsp;&nbsp;修&nbsp;&nbsp;改</span>
+        </div>
+       
+
+                          </div> 
+                          </div>
+                     </div>
+                </div>
+
+
+                  
+                  
+                  </div>
+
+
+            
+                </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+
+        function setMobilebox(obj) {
+            var thisobj = $(obj);
+            if (thisobj.attr("checked"))
+                $("#editmobile").show();
+            else
+                $("#editmobile").hide();
+        }
+        $("#isEditMobile").removeAttr("checked");
+        function reviseuser() {
+           
+            var data = {};
+            try {
+
+                if ($("#isEditMobile").attr("checked")) {
+                    data = jQuery.Xfilled("editmobile");
+                } else {
+
+                    data = jQuery.Xfilled("reviseuser");
+                }
+
+            } catch (e) {
+          
+                jQuery.Xerr(e);
+                return false;
+            }
+
+            var url = "/AJAX/User.ashx?action=ReviseUser"
+            jQuery.Xload();
+            jQuery.ajax({
+                url: url,
+                data: data,
+                type: "POST",
+                success: function (response) {
+                    jQuery.XloadHide();
+                    var json = response.toJson();
+
+                    if (json.success) {
+                        $("#reglogin").Xhide();
+                        jQuery.Xmsg("用户信息修改成功！");
+
+                    } else {
+                        jQuery.Xmsg(json.msg)
+
+                    }
+
+
+                }
+
+            });
+        
+        }
+    
+    </script>
+    #parse("pageFoot.htm")
+</body>
+</html>

@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>安徽中青旅荞面旅游网特价旅游产品</title>
+    #include("pageHeadCode.htm")
+</head>
+<body>
+      #set($lefMeun = 0)
+    <!--是否显示左侧菜单,1显示,0隐藏-->
+    #parse("pageHead.htm")
+    <!--内容-->
+    <style type="text/css">
+    .tejiabox{ width:1190px;  overflow:hidden}
+    
+    
+     .tejiabox ul li
+     {
+          width:33%; 
+          float:left;
+          margin:0px;         padding:0px;         height:370px;         padding:20px 0px 10px 0px;
+         list-style:none;        
+         
+         }
+    
+    
+    
+     .tejiabox ul li a
+     {
+          width:350px; margin:0 auto;
+          height:370px;
+          border:1px solid #eee;
+          -moz-user-select: none;
+        display: inline-block;
+        overflow:hidden
+     }
+   
+      .tejiabox ul li a:hover
+      {
+         border:1px solid #ff6600
+          
+          }
+     
+     .tejiabox ul li div.imgbox
+     {
+          width:350px; margin:0 auto;
+          height:220px;
+          border:1px solid #eee;
+          position:relative
+     }
+     .tejiabox ul li div.namebox
+     {
+         height:100px; border-bottom:1px solid #eee; overflow:hidden; padding:0px 10px 0px 10px; line-height:25px
+     }
+       .tejiabox ul li div.pricebox
+       {
+         background-color:#f7f7f7  ; height:47px; line-height:45px; padding:0px 10px 0px 10px
+       } 
+     
+      
+    
+    </style>
+    <div class="pagebox tejiabox">
+    <ul>
+ #foreach($item in $tool.salePageList(0,0))
+ #set($typename="签证")
+ #if($item.forum == $tool.GetM("PRODUCT_TYPE_GTLY"))
+ #set($typename="跟团游")
+ #end
+ #if($item.forum == $tool.GetM("PRODUCT_TYPE_BZYX"))
+ #set($typename="半自由行")
+ #end
+ 
+ #set($pageurl="/Tour/")
+ #if($item.forum == $tool.GetM("PRODUCT_TYPE_QZ"))
+    #set($pageurl="/visa/")
+ #end
+
+     <li>
+     <a href="$pageurl$item.productid&#46;html" title="$item.title&#65293;$item.summary" target="_blank">    
+     <div class="imgbox">   
+     <div class="tejiaicon"></div>
+     <span class="imglab lab_1" style="left:280px; top:0px">$typename</span>
+     <img alt="$item.productname" src="$tool.getFileImg($item.coverserver,$item.cover,320)" width="350px" height="220px" alt="">
+     </div>  
+     <div class="namebox">
+        <h2 style="line-height:35px">$tool.NameHtml($item.productname,60)</h2>
+        <div style=" line-height:25px; color:#999">$tool.NameHtml($item.summary,100)</div>
+        </div>
+     <div class="pricebox">
+     <span style=" float:left">门市抢购：<span style="text-decoration: line-through; color:#666">￥$item.rrp.toString("0.00")</span></span>
+     <span style=" float:right"><span class="price">￥$item.price.toString("0.00")</span></span>
+     </div>     
+     </a>
+     </li>
+ #end     
+    </ul>
+  </div>
+    #parse("pageFoot.htm")
+</body>
+</html>

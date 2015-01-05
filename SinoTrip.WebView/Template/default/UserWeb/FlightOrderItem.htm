@@ -1,0 +1,424 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>#include("pageHeadCode.htm")
+    <link href="/Skin/default/style/order.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="/skin/default/js/flightOrder.js"></script>
+</head>
+<body>
+    #set($lefMeun = 0)
+    <!--是否显示左侧菜单-->
+    #parse("pageHead.htm")
+    <div id="hdxz" style="display: none; width: 600px">
+        <div class="contentBox">
+            <div class="orderTitle">
+                航段信息</div>
+            <table class="thisbox">
+                <thead>
+                    <tr>
+                        <th>
+                            选择
+                        </th>
+                        <th>
+                            出发城市
+                        </th>
+                        <th>
+                            目的地
+                        </th>
+                        <th>
+                            起飞时间
+                        </th>
+                        <th>
+                            航班号
+                        </th>
+                        <th>
+                            仓位
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="hdxx">
+                </tbody>
+            </table>
+        </div>
+           <div style="text-align: center; padding: 30px;">
+            <a style="width: 100px;" id="btnNextTP" class="inputbutton orange" onclick="NextTP()">下一步</a></div>
+    </div>
+    <div id="userxz" style="display: none; width: 600px">
+        <div class="orderTitle">
+            乘机人信息</div>
+        <table class="thisbox">
+            <thead>
+                <tr>
+                    <th>
+                        选择
+                    </th>
+                    <th>
+                        票号
+                    </th>
+                    <th>
+                        姓名
+                    </th>
+                    <th>
+                        乘客类型
+                    </th>
+                    <th>
+                        证件号码
+                    </th>
+                    <th>
+                        保险
+                    </th>
+                    <th>
+                        机建
+                    </th>
+                    <th>
+                        燃油税
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="tbuserxz">
+            </tbody>
+        </table>
+        <div style="text-align: center; padding: 30px;">
+            <a style="width: 100px;" id="btnTP" class="inputbutton orange">确认退票</a></div>
+    </div>
+    <div style="width: 1200px; margin: 0 auto; margin-top: 10px">
+        <div class="orderPageMiddle">
+            <div style="padding: 40px">
+                <div style="padding: 20px; overflow: hidden; border: 3px solid #ff6600;">
+                    <div style="margin-top: 5px" class="contentBox">
+                        <div style="border: 1px solid #eee" class="thisbox">
+                            <div class="inputbox">
+                                <span class="inputTitle">联系人姓名：</span><span class="inputContent" id="username" style="font-weight: bold"></span>
+                                <span class="inputTitle">联系手机：</span><span class="inputContent" id="usermobile" style="font-weight: bold"></span>
+                                <span class="inputTitle">订单号：</span><span class="inputContent" id="orderno" style="font-weight: bold"></span>
+                                <span class="inputTitle">订单状态：</span><span class="inputContent" id="orderstatus"
+                                    style="font-weight: bold"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contentBox">
+                        <div class="orderTitle">
+                            航段信息</div>
+                        <table class="thisbox">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        出发城市
+                                    </th>
+                                    <th>
+                                        目的地
+                                    </th>
+                                    <th>
+                                        起飞时间
+                                    </th>
+                                    <th>
+                                        航班号
+                                    </th>
+                                    <th>
+                                        仓位
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody id="Tbody1">
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="orderTitle">
+                        乘机人信息</div>
+                    <table class="thisbox">
+                        <thead>
+                            <tr>
+                                <th>
+                                    票号
+                                </th>
+                                <th>
+                                    姓名
+                                </th>
+                                <th>
+                                    乘客类型
+                                </th>
+                                <th>
+                                    证件号码
+                                </th>
+                                <th>
+                                    保险
+                                </th>
+                                <th>
+                                    机建
+                                </th>
+                                <th>
+                                    燃油税
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="userlist">
+                        </tbody>
+                    </table>
+                    <div class="orderTitle">
+                        行程单配送</div>
+                    <div style="margin-top: 5px" class="contentBox">
+                        <div style="border: 1px solid #eee" class="thisbox">
+                            <div class="inputbox">
+                                <span class="inputTitle">收件人：</span><span class="inputContent" id="recipient"></span>
+                                <span class="inputTitle">邮编：</span><span class="inputContent" id="post"></span>
+                                <span class="inputTitle">收件地址：</span><span class="inputContent" id="postaddress"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="inputbox" style="text-align: right">
+                        <span class="inputTitle">机票金额：</span><span class="inputContent" id="jpjg">.</span>
+                        <span class="inputTitle">邮寄费用：</span><span class="inputContent" id="qtje">.</span>
+                        <span class="inputTitle">优惠金额：</span><span class="inputContent" id="yhjg">.</span>
+                        <span class="inputTitle">订单应付：</span><span class="inputContent" id="ddyf" style="font-size: 14px;
+                            font-weight: bold; color: Red">.</span>
+                    </div>
+                    <div style="text-align: center; padding: 30px;" id="paybutton">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="orderPagebottom">
+        </div>
+    </div>
+    <script type="text/javascript">
+        var _type = "$orderno";
+
+        function getOrderItem() {
+
+            var url = "/AJAX/SearchFlight.ashx?action=getorderitem&ts=" + Math.random();
+            var data = {};
+            data.orderno = _type;
+            jQuery.Xload();
+            jQuery.ajax({
+                url: url,
+                type: "POST",
+                data: data,
+                success: function (response) {
+                    jQuery.XloadHide();
+
+                    var json = response.toJson();
+
+                    if (json == null && parseInt(json.resultCode) != 1)
+                        return false;
+                    var tns = ""
+                    if (!!json.tickets.ticketAll) {
+                        tns = json.tickets.ticketAll.ticketNumber.split(',');
+                    }
+                    var _bstr = '';
+
+                    if (parseInt(json.canPay) == 1 && parseInt(json.payStatus) == 0)
+                        _bstr = '<a style="width:100px;" class="inputbutton orange" href="/OrderPay/default.aspx?orderno=' + json.orderNumber + '&type=1" target="_blank">确认支付</a>';
+                    else {
+                        _bstr = '<a style="width:100px;" class="inputbutton disabled">支付</a>';
+                    }
+
+                    if (parseInt(json.orderStatus) == 9 || parseInt(json.orderStatus) == 3) {
+                        getOrderRefundStatus();
+                    }
+                    var jpjg = 0;
+                    var yjfy = 0;
+                    var yhjg = 0;
+                    var ddyf = 0;
+
+                    $("#paybutton").html(_bstr)
+
+                    $("#username").html(json.contactName)
+                    $("#usermobile").html(json.contactMobile)
+                    $("#orderno").html(json.orderNumber)
+                    $("#orderstatus").html(getFlaghtStatus(parseInt(json.orderStatus)))
+
+                    $("#recipient").html(json.recipient);
+                    $("#post").html(json.post);
+                    $("#postaddress").html(json.postaddress);
+
+
+                    var passengers = json.passengers.result;
+
+
+                    var yj = 0;
+
+                    ///订单应付
+                    var paypridce = parseInt(json.yhjg) + parseInt(json.qtje);
+
+
+                    var pstr = "";
+                    var userxzHtml = "";
+
+
+
+                    for (var i = 0; i < passengers.length; i++) {
+                        if (i == 0) {
+                            yj = parseInt(passengers[i].sellingPrice); //优惠金额
+
+                        }
+                        var html = "";
+                        paypridce += parseInt(passengers[i].insurancePrice);
+                        paypridce += parseInt(passengers[i].airportBuildingFee);
+                        paypridce += parseInt(passengers[i].fuelCosts);
+                        userxzHtml += '<tr><td><input name="chkuser" type="checkbox" value="' + passengers[i].passengerId + '" /></td>';
+                        if (tns.length > 0) {
+                            html += "<td>" + tns[i] + "</td>";
+                        }
+                        else
+                            html += '<td align="center">-</td>';
+                        html += "<td>" + passengers[i].passenger + "</td>";
+
+                        var _type = "成人";
+                        if (parseInt(passengers[i].passengerType) == 2)
+                            _type = "儿童";
+                        else if (parseInt(passengers[i].passengerType) == 3)
+                            _type = "婴儿";
+
+                        html += "<td>" + _type + "</td>";
+
+                        html += "<td>" + passengers[i].identificationNumbers + "</td>";
+                        html += "<td>" + passengers[i].insurancePrice + "</td>";
+                        html += "<td>" + passengers[i].airportBuildingFee + "</td>";
+                        html += "<td>" + passengers[i].fuelCosts + "</td>";
+                        userxzHtml += html + "</tr>";
+                        pstr += "<tr>" + html + "</tr>";
+                        //json.orderStatus = 1;
+                        // pstr += "</tr>";
+                    }
+                    $("#userlist").html(pstr)
+                    $("#tbuserxz").html(userxzHtml);
+
+                    //优惠金额
+                    $("#yhjg").html("￥" + parseFloat(yj - paypridce).toFixed(1));
+
+
+                    //邮寄费用
+                    $("#qtje").html("￥" + parseFloat(parseInt(json.qtje)).toFixed(1));
+                    $("#ddyf").html("￥" + parseFloat(parseInt(paypridce)).toFixed(1));
+
+
+                    $("#jpjg").html("￥" + parseFloat(yj - parseInt(json.qtje)).toFixed(1))
+
+                    var segments = json.segments.result;
+                    var HDBM = "";
+                    var sstr = "";
+                    var hdhtml = "";
+                    for (var i = 0; i < segments.length; i++) {
+                        HDBM += segments[i].departureCity + segments[i].arrivalCity + ",";
+                        var html = "";
+                        hdhtml += '<tr><td><input name="chkHD" type="checkbox" value="' + segments[i].segmentId + '" /></td>';
+                        html += "<td>" + segments[i].departureCityName + "[" + segments[i].departureCity + "]</td>";
+                        html += "<td>" + segments[i].arrivalCityName + "[" + segments[i].arrivalCity + "]</td>";
+                        html += "<td>" + segments[i].departureTime + "</td>";
+                        html += "<td>" + segments[i].flightNumber + "</td>";
+                        html += "<td>" + segments[i].cabinName + "[" + segments[i].shippingSpace + "]</td></tr>";
+                        hdhtml += html;
+                        sstr += "<tr>" + html;
+                    }
+
+                    $("#hdxx").html(hdhtml);
+                    $("#Tbody1").html(sstr);
+
+                }
+
+            });
+
+
+        }
+
+        function getOrderRefundStatus() {
+            var url = "/AJAX/SearchFlight.ashx?action=RefundStatus&ts=" + Math.random();
+            var data = {};
+            data.orderno = _type;
+            jQuery.Xload();
+            jQuery.ajax({
+                url: url,
+                type: "POST",
+                data: data,
+                success: function (response) {
+
+                    jQuery.XloadHide();
+                    var json = response.toJson();
+                    if (json.Res.resultCode == "1") {
+                        var count = json.Res.cjrs.length;
+                        if (count > 0) {
+                            for (var i = 0; i < count; i++) {
+                                for (var j = 0; j < json.Res.cjrs[i].hds.length; j++) {
+                                    if (json.Res.cjrs[i].hds[j].tp != "1") {
+                                        $("#paybutton").append('<a style="width:100px; margin-left:20px" class="inputbutton orange" onclick="showWind()">退票</a>');
+                                        return;
+                                    }
+                                }
+
+                            }
+                        }
+                    }
+                    if (json.Res.resultCode == "-1") {
+                        jQuery.Xmsg({ msg: json.Res.message });
+                    }
+                }
+
+            });
+        }
+        if (_type != "" && _type != null) {
+            getOrderItem();
+        }
+        function showWind() {
+            $("#hdxz").Xwindow({ title: '航段选择' });
+        }
+        function NextTP() {
+            var hdstr = "";
+            $("#hdxx").find(":input[name='chkHD']").each(function () {
+                if ($(this).attr("checked")) {
+                    hdstr += $(this).val() + ',';
+                }
+            });
+            if (hdstr == "") {
+                jQuery.Xmsg({ msg: "请选择需要退票的航段！"})
+            }
+            hdstr = hdstr.substring(0, hdstr.length - 1)
+            chooseHD(hdstr);
+        }
+        function chooseHD(flightid) {
+            $("#hdxz").Xhide();
+            $("#userxz").Xwindow({ title: '乘机人选择' });
+
+            $("#btnTP").click(function () {
+                var pgids = "";
+                $("#tbuserxz").find(":input[name='chkuser']").each(function () {
+                    //alert($(this).val());
+                    if ($(this).attr("checked")) {
+                        pgids += $(this).val() + ',';
+                    }
+                });
+                if (pgids == "") {
+                    jQuery.Xmsg({ msg: "请选择需要退票的乘机人！" })
+                }
+                pgids = pgids.substring(0, pgids.length - 1)
+                applyTicketRefund(pgids, flightid);
+            });
+        }
+        function applyTicketRefund(pgid, fids) {
+            var url = "/AJAX/SearchFlight.ashx?action=orderRefund&ts=" + Math.random();
+            var data = {};
+            data.orderNumber = _type;
+            data.passengerid = pgid;
+            data.flightid = fids;
+            jQuery.Xload();
+            jQuery.ajax({
+                url: url,
+                type: "POST",
+                data: data,
+                success: function (response) {
+
+                    jQuery.XloadHide();
+                    var json = response.toJson();
+                    if (json.Res.resultCode == "1") {
+                        jQuery.Xmsg({ msg: "申请退单成功，请耐心等待荞面网客服人员受理业务！", button: function () { window.location.href = "/UserWeb/FlightOrderList.aspx?Type=1" } })
+                    }
+                    if (json.Res.resultCode == "-1") {
+                        jQuery.Xmsg({ msg: json.Res.message })
+                    }
+                }
+
+            });
+        }
+    </script>
+    #parse("pageFoot.htm")
+</body>
+</html>

@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+ <title>$SITE.subtitle&#45;$SITE.name</title>
+    #include("pageHeadCode.htm")
+   
+</head>
+<body>
+ #set($lefMeun = 0) <!--是否显示左侧菜单,1显示,0隐藏-->
+  #parse("pageHead.htm")
+  <div style=" width:800px; margin:0 auto">
+
+  #if ($orderArgs.status==$tool.GetM("ORDER_TOUR_STATUS_YQR")) 
+<div style=" padding:10px; text-align:center">
+<a href="javascript:void(0)" onclick="checkTourOrder()">
+<span style="width:200px;" class="inputbutton green">同意以下合同(协议)内容</span></a>
+ </div>
+ #end
+ 
+  $htstr
+  #if ($orderArgs.status==$tool.GetM("ORDER_TOUR_STATUS_YQR"))
+
+<div style=" padding:10px; text-align:center">
+<a href="javascript:void(0)" onclick="checkTourOrder()">
+<span style="width:200px;" class="inputbutton green">同意以上合同(协议)内容</span>
+</a>
+ </div>
+  #end
+  </div>
+  <script type="text/javascript">
+
+      function checkTourOrder() {
+          var url = "/AJAX/TourOrder.aspx?action=OrderChecked"
+          var data = {};
+          data.id = $orderArgs.erpid
+          data.producttype = $producttype
+          jQuery.Xload();
+          jQuery.ajax({
+              url: url,
+              type: "POST",
+              data:data,
+              success: function (response) {
+                  jQuery.XloadHide();
+                  var json = response.toJson();
+                  if (json.success) {
+                      jQuery.Xmsg({ msg: "合同确认成功，点击确定进行付款操作！", button: function () {
+
+                          window.location.href = "/OrderPay/default.aspx?id=$orderArgs.erpid" 
+                       
+                       } });
+
+                  } else {
+                      if (json.msg = "-1") {
+                          showlogin();
+                      }
+                  }
+              }
+
+          });
+
+      }
+
+
+  </script>
+   #parse("pageFoot.htm")
+</body>
+</html>

@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>#include("pageHeadCode.htm")
+    <link href="/Skin/default/style/user.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="/skin/default/js/flightOrder.js"></script>
+</head>
+<body>
+    #set($lefMeun = 0)
+    <!--是否显示左侧菜单-->
+    #parse("pageHead.htm")
+    <div class="pagebox" style="margin-top: 10px">
+        <div class=" userPageTop">
+            <div class="userPagetitleL">
+            </div>
+            <div class="userPagetitleR">
+            </div>
+        </div>
+        <!--左右分-->
+        <div style="overflow: hidden; border: 1px solid #ccc; border-top: 5px solid #ccc">
+            <div style="width: 255px; overflow: hidden; float: left">
+                <div class="userpageleft">
+                    <div class="user_menu_box">
+                        #include("UserWeb/userMenu.htm")
+                    </div>
+                </div>
+                <div class="userpageleft2">
+                </div>
+            </div>
+            <div style="width: 920px; overflow: hidden; float: right; padding-top: 10px">
+                <div class="minboxtitle">
+                    <span class="iconStr">酒</span><span class="title"><h2>
+                        酒店订单</h2>
+                    </span>
+                </div>
+                <!--资料修改-->
+                <div style="overflow: hidden; margin: 0 auto; width: 890px">
+                    <table class="ordertable" id="Table1">
+                        <thead>
+                            <tr>
+                                <th style="width: 80px;">
+                                    订单号
+                                </th>
+                                <th>
+                                    酒店名称
+                                </th>
+                                <th>
+                                    预定日期
+                                </th>
+                                <th>
+                                    入住日期
+                                </th>
+                                <th>
+                                    人数
+                                </th>
+                                <th>
+                                    状态
+                                </th>
+                                <th>
+                                    操作
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="listEmployeeContent">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+
+
+
+
+        function getOrderList() {
+            var url = "/AJAX/HotleAjax.ashx?action=OrderList&ts=" + Math.random();
+            var data = {};
+            jQuery.Xload();
+            jQuery.ajax({
+                url: url,
+                type: "POST",
+                data: data,
+                success: function (response) {
+                    jQuery.XloadHide();
+
+                    var json = response.toJson();
+
+
+
+                    if (json.success == false) {
+                        window.location.href = "login.aspx";
+
+                    } else {
+
+                        var str = "<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>{5}</td><td>{6}</td></tr>";
+
+
+
+                        var tdstr = "<tr><td colspan=\"7\">没有查询到满足条件的酒店订单数据!</td></tr>"
+
+                        if (json.length > 0)
+                            tdstr = "";
+                        for (var i = 0; i < json.length; i++) {
+
+                            var _url = "<a href=\"HotelOrderItem.aspx?sno=" + json[i].Serialno + "&orderno=" + json[i].OutSign + "\" target=\"_blank\">订单详情</a>";
+
+                            tdstr += str.format(json[i].Serialno, json[i].HotelName, dateFormat("Y/m/d", json[i].BookingDate), dateFormat("Y/m/d", json[i].CheckInDate), json[i].BookingNo, json[i].StatusName, _url);
+
+                        }
+
+                        $("#listEmployeeContent").html(tdstr);
+
+                    }
+                }
+
+            });
+
+        }
+
+
+        getOrderList();
+      
+         
+      
+      
+    </script>
+    #parse("pageFoot.htm")
+</body>
+</html>

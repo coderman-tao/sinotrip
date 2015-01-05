@@ -1,0 +1,149 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="ctl00_head"><title>
+	行程打印 - 荞面网
+</title>	
+	<style type="text/css">		
+		.prcing{ font-size:12px;}		
+	</style>
+	<style type="text/css">
+.border_info{ margin:auto; margin:5px;}
+.border_info td{ border:1px solid #272727; padding:5px;}
+.border_info th{ border:1px solid #000000; padding:5px;}
+.border_info td table{ margin:auto; margin:2px;}
+.border_info td table td{ text-align:center; padding:2px;}
+ body{ font-size:14px; margin:0; padding:0}
+    </style>
+     <style media="print">
+         .Noprint { DISPLAY: none }
+         .PageNext{ PAGE-BREAK-AFTER: always }        
+   </style>
+   
+
+</head>
+<body>
+	<div>
+		
+	
+	</div>
+	
+
+ <div style="color:#000; width:700px; margin:0 auto" class="PageNext">   
+  <div style=" font-size:21px; font-weight:bold; text-align:center; margin:5px">安徽中青旅[荞面旅游网]旅游行程单</div>     
+     <table class="border_info" cellpadding="0" cellspacing="0" border="1" width="700px">
+            <tr>
+                <td  colspan="2">
+                    线路名称： <span id="XLName">$planinfo.name</span>
+                </td>
+            </tr>
+                 <tr id="Tr1" class="tPrice">
+                <td >
+                    集合时间： <span id="Span1">$planinfo.settime</span>
+                </td>
+                <td>
+                    集合地点： <span id="Span2">$planinfo.site</span>
+                </td>
+            </tr>
+                 <tr id="Tr2" class="tPrice">
+                <td >
+                    发团时间： <span id="Span3"> $planinfo.starttime</span>
+                </td>
+                <td>
+                    回团时间： <span id="Span4">$planinfo.endtime</span>
+                </td>
+            </tr>
+			            
+            
+        </table>
+    <table class="border_info" cellpadding="0" cellspacing="0" border="1" width="700px">
+            
+          
+            <tr id="Tr3" class="tPrice">
+                <td align="center" valign="middle" style="font-weight:bold; font-size:16px; width:30px">行程安排</td>
+                <td style=" width:630px">
+                   
+                    #foreach($days in $journeys)
+											<div>
+												<b>第$days.day天：</b>
+
+												 $days.data</br>
+                                                 <span class="journeyicon hotle">住宿：$!days.hotelnote</span> 
+                                #set($meal ="") 
+                                #if ($days.breakfast == 1) 
+                                #set($meal="$meal早餐") 
+                                #end 
+                                #if ($days.lunch == 1) 
+                                #set($meal="$meal 中餐") 
+                                #end 
+                                #if ($days.dinner == 1) 
+                                #set($meal="$meal 晚餐") 
+                                #end 
+                                #if ($meal == "") 
+                                #set($meal = "不含") 
+                                #end 
+                                <span class="journeyicon meal">餐饮：$!meal</span>
+											</div>
+										
+											<hr style="border-top: #999 solid 1px;" size="1" />
+										
+						#end		
+										
+                </td>
+            </tr>
+           
+             
+					<tr><td align="center" valign="middle" style="font-weight:bold; font-size:16px">服务标准</td><td style=" padding:0;">
+					<table class="border_info" cellpadding="0" cellspacing="0" border="0" width="100%" style="border:0px; margin:0">
+							<tr class="pr tr_2">
+								
+								
+								<th >
+									费用包含
+								</th>
+								<th >
+									费用不包含
+								</th>
+							</tr>
+							
+
+									<tr class="intro pr tr_2">
+										
+										<td style=" text-align:left; width:50%;" valign="top">
+											 $planinfo.feecontain										
+											
+										</td>
+										<td style=" text-align:left; width:50%" valign="top">
+											 $planinfo.feenocontain
+                                             </td>
+									</tr>
+						
+								
+</table></td></tr>
+								
+
+            
+			 <tr id="Tr4" class="tPrice pr tr_4" >
+                 <td align="center" valign="middle" style="font-weight:bold; font-size:16px">注意事项</td>
+                <td>
+                   <p><br>  $planinfo.paynote</td>
+
+            </tr>
+            <tr id="Tr6" class="tPrice" >
+                <td align="center" valign="middle" style="font-weight:bold; font-size:16px">游客须知</td>
+                <td>
+                  $planinfo.usernote </td>
+            </tr>
+            <tr>
+             <td  colspan="2" style=" font-weight:bold; text-align:center">
+             400免费客服电话：400-88-51760
+             </td>
+             </tr>
+
+
+
+
+        </table>
+    </div>
+
+</body>
+</html>
