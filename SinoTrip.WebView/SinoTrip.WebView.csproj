@@ -415,7 +415,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Config\Database.config" />
-    <Content Include="App_Config\Eos4.config" />
     <Content Include="App_Config\log4net.config" />
     <Content Include="App_Config\Search\Dictionaries\Dict.dct" />
     <Content Include="App_Config\Setting.config" />
