@@ -104,10 +104,6 @@ namespace SinoTrip.API.Ctrip.SDK
         /// <returns></returns>
         public string GetResult(BaseCallEntity req)
         {
-            HttpWebRequest request = HttpWebRequest.Create(req.RequestUrl) as HttpWebRequest;
-            request.Method = "POST";
-            request.ContentType = "application/xml";
-
             string requestHeader = GetHeadXML(req.RequestType);
             string requestXML = string.Format(requestHeader, req.RequestContent);
             Hashtable ht = new Hashtable();
@@ -115,7 +111,7 @@ namespace SinoTrip.API.Ctrip.SDK
             try
             {
 
-                XmlDocument xd = WebSvcCaller.QuerySoapWebService(req.RequestUrl, "Request", ht);
+                XmlDocument xd = WebSvcCaller.QuerySoapWebService(APIService, "Request", ht);
                 string str = xd.InnerText;
                 str = str.Replace("xmlns", "ctripxmlns");
                 return str;

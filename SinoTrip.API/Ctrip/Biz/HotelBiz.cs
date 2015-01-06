@@ -67,7 +67,7 @@ namespace SinoTrip.API.Ctrip.Biz
             reqXml.Append("</ns:Criteria>");
             reqXml.Append("</ns:OTA_HotelSearchRQ>");
             req.RequestContent = reqXml.ToString();
-            var remote = ConfigurationManager.AppSettings["ctrip_hotel_url"];
+            var remote = ConfigurationManager.AppSettings["ctrip_Api"];
             APICommon apicommon = new APICommon(SID, UID, KEY, remote);
             string repXml = apicommon.GetResult(req);
 
@@ -247,7 +247,7 @@ namespace SinoTrip.API.Ctrip.Biz
             reqXml.Append("</HotelDescriptiveInfos>");
             reqXml.Append("</OTA_HotelDescriptiveInfoRQ>");
             req.RequestContent = reqXml.ToString();
-            var remote = ConfigurationManager.AppSettings["ctrip_hotel_url"];
+            var remote = ConfigurationManager.AppSettings["ctrip_Api"];
             APICommon apicommon = new APICommon(SID, UID, KEY, remote);
             string repXml = apicommon.GetResult(req);
 
@@ -575,7 +575,7 @@ namespace SinoTrip.API.Ctrip.Biz
                 reqXml.Append("</ns:OTA_HotelRatePlanRQ>");
 
                 req.RequestContent = reqXml.ToString();
-                var remote = ConfigurationManager.AppSettings["ctrip_hotel_url"];
+                var remote = ConfigurationManager.AppSettings["ctrip_Api"];
                 APICommon apicommon = new APICommon(SID, UID, KEY, remote);
                 string repXml = apicommon.GetResult(req);
                 //LogHelper.Debug(repXml);
@@ -756,7 +756,7 @@ namespace SinoTrip.API.Ctrip.Biz
             reqXml.Append("</ns:OTA_HotelCacheChangeRQ>");
             req.RequestContent = reqXml.ToString();
 
-            var remote = ConfigurationManager.AppSettings["ctrip_hotel_url"];
+            var remote = ConfigurationManager.AppSettings["ctrip_Api"];
             APICommon apicommon = new APICommon(SID, UID, KEY, remote);
             string repXml = apicommon.GetResult(req);
 
@@ -834,7 +834,7 @@ namespace SinoTrip.API.Ctrip.Biz
 
             req.RequestContent = reqXml.ToString();
 
-            var remote = ConfigurationManager.AppSettings["ctrip_hotel_url"];
+            var remote = ConfigurationManager.AppSettings["ctrip_Api"];
             APICommon apicommon = new APICommon(SID, UID, KEY, remote);
             string repXml = apicommon.GetResult(req);
 

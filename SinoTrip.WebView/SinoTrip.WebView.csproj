@@ -68,6 +68,8 @@
     <Content Include="App_Config\Search\Dictionaries\Synonym.txt" />
     <Content Include="App_Config\Search\Dictionaries\Wildcard.txt" />
     <Content Include="App_Config\Search\PanGu.xml" />
+    <Content Include="Data\Ctrip\gncs.xml" />
+    <Content Include="Default.aspx" />
     <Content Include="head.aspx" />
     <Content Include="Hotel\Default.aspx" />
     <Content Include="Res\js\common.js" />
@@ -382,6 +384,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
     <Compile Include="head.aspx.cs">
       <DependentUpon>head.aspx</DependentUpon>
     </Compile>
@@ -539,6 +548,10 @@
     <Folder Include="Res\js\mf-pattern\img\mF_tbhuabao\.svn\tmp\text-base\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SinoTrip.API\SinoTrip.API.csproj">
+      <Project>{19198779-5bfa-4452-8850-80a699bf91ed}</Project>
+      <Name>SinoTrip.API</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SinoTrip.Cache\SinoTrip.Cache.csproj">
       <Project>{76a7cef3-0cd5-4a61-8fce-c98175c764c3}</Project>
       <Name>SinoTrip.Cache</Name>
