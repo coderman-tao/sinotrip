@@ -44,6 +44,7 @@ namespace SinoTrip.WebView
                     //vt.Put("now", DateTime.Now.ToUnixInt());
                     //vt.Put("SITE", SITE);
                     //vt.Put("LINK", LINK);
+
                     // Vt.Put("LoginReturn", Session[SessionKeys.ReturnUrl].ToString(string.Empty));
                     vt.Put("tool", this);
                 }
