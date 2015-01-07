@@ -89,6 +89,9 @@
     <Compile Include="Ctrip\Model\Hotel\ReturnHeaderInfo.cs" />
     <Compile Include="Ctrip\SDK\APICommon.cs" />
     <Compile Include="Ctrip\SDK\WebSvcCaller.cs" />
+    <Compile Include="LY\Biz\ScenicBiz.cs" />
+    <Compile Include="LY\Model\Province.cs" />
+    <Compile Include="LY\SDK\ApiCommon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -102,6 +105,7 @@
       <Name>SinoTrip.FrameWork</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
