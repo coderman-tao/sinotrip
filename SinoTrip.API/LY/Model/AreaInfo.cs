@@ -10,10 +10,10 @@ namespace SinoTrip.API.LY.Model
     public class provinceList
     {
         [XmlElement("province")]
-        public List<province> Province { get; set; }
+        public List<AreaInfo> Province { get; set; }
     }
     [Serializable]
-    public class province
+    public class AreaInfo
     {
         public string id { get; set; }
         public string name { get; set; }
@@ -24,4 +24,13 @@ namespace SinoTrip.API.LY.Model
         //<enName>AnHui</enName>
         //<prefixLetter>A</prefixLetter>
     }
+    [Serializable]
+    public class cityList
+    {
+        [XmlAttribute]
+        public int totalCount { get; set; }
+        [XmlElement("city")]
+        public List<AreaInfo> Citys { get; set; }
+    }
+
 }

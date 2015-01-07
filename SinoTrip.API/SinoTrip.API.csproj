@@ -90,7 +90,7 @@
     <Compile Include="Ctrip\SDK\APICommon.cs" />
     <Compile Include="Ctrip\SDK\WebSvcCaller.cs" />
     <Compile Include="LY\Biz\ScenicBiz.cs" />
-    <Compile Include="LY\Model\Province.cs" />
+    <Compile Include="LY\Model\AreaInfo.cs" />
     <Compile Include="LY\SDK\ApiCommon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

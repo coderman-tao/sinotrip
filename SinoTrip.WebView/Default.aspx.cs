@@ -23,18 +23,39 @@ namespace SinoTrip.WebView
         private static readonly string KEY = ConfigurationManager.AppSettings["ctripKey"];
         protected void Page_Load(object sender, EventArgs e)
         {
-            StringBuilder sb = new StringBuilder();
-            string rs = new SinoTrip.API.LY.Biz.ScenicBiz().GetProvinceList();
-            XmlDocument doc = new XmlDocument();
-            doc.LoadXml(rs);
-            var str = "<provinceList>" + doc.SelectSingleNode("response/body/provinceList").InnerXml + "</provinceList>";
-            var model = str.XmlToEntity<SinoTrip.API.LY.Model.provinceList>();
-            foreach (var item in model.Province)
-            {
-                sb.Append("INSERT INTO common_area(Parent,Name,English,ABCD,Pinyin,Data) Values(59,'" + item.name + "','" + item.enName + "','" + item.prefixLetter + "','" + item.enName + "'," + item.id + ");");
-            }
+            var biz = new SinoTrip.API.LY.Biz.ScenicBiz();
+            string rs = biz.GetSceneryList(36);
+            //StringBuilder sb = new StringBuilder();
+            //string rs = biz.GetProvinceList();
+            //XmlDocument doc = new XmlDocument();
+            //doc.LoadXml(rs);
+            //var str = "<provinceList>" + doc.SelectSingleNode("response/body/provinceList").InnerXml + "</provinceList>";
+            //var model = str.XmlToEntity<SinoTrip.API.LY.Model.provinceList>();
+            //foreach (var item in model.Province)
+            //{
+            //    try
+            //    {
+            //        string cityStr = biz.GetCityListByProvinceId(item.id.ToInt32(0));
+            //        XmlDocument doc1 = new XmlDocument();
+            //        doc1.LoadXml(cityStr);
+            //        var str1 = "<cityList>" + doc1.SelectSingleNode("response/body/cityList").InnerXml + "</cityList>";
+            //        var model1 = str1.XmlToEntity<SinoTrip.API.LY.Model.cityList>();
+            //        foreach (var item1 in model1.Citys)
+            //        {
+            //            sb.Append("INSERT INTO common_city_outsign(Name,Supply,OutSign,OutData,Status) Values('" + item1.name + "',2,'" + item1.id + "','" + item1.ToJson() + "',0);");
+            //        }
+            //    }
+            //    catch (Exception)
+            //    {
+
+            //        continue;
+            //    }
+
+            //    //sb.Append("INSERT INTO common_area(Parent,Name,English,ABCD,Pinyin,Data) Values(59,'" + item.name + "','" + item.enName + "','" + item.prefixLetter + "','" + item.enName + "'," + item.id + ");");
+            //}
+
             Response.Clear();
-            Response.Write(sb.ToString());
+            Response.Write(rs);
             Response.ContentType = "text/xml";
             Response.End();
         }
@@ -99,6 +120,6 @@ namespace SinoTrip.WebView
             //<Airport />
         }
 
-        
+
     }
 }
