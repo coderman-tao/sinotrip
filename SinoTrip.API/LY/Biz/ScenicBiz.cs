@@ -27,13 +27,36 @@ namespace SinoTrip.API.LY.Biz
             string rs = ApiCommon.GetResult("<provinceId>" + Pid + "</provinceId>", "GetCityListByProvinceId", "http://tcopenapi.17usoft.com/Handlers/General/AdministrativeDivisionsHandler.ashx");
             return rs;
         }
-
-        public string GetSceneryList(int CityId)
+        /// <summary>
+        /// 根据城市获取景点
+        /// </summary>
+        /// <param name="CityId"></param>
+        /// <param name="page"></param>
+        /// <returns></returns>
+        public string GetSceneryList(int CityId, int page)
         {
-            string rs = ApiCommon.GetResult("<clientIp>127.0.0.1</clientIp><pageSize>100</pageSize><cityId>" + CityId + "</cityId>",
+            string rs = ApiCommon.GetResult("<clientIp>127.0.0.1</clientIp><page>" + page + "</page><pageSize>100</pageSize><cityId>" + CityId + "</cityId>",
                 "GetSceneryList", "http://tcopenapi.17usoft.com/handlers/scenery/queryhandler.ashx");
             return rs;
         }
-        //42
+
+        public string GetSceneryDetail(int SceneryId)
+        {
+            string PostData = "<sceneryId>"+SceneryId+"</sceneryId><cs>2</cs>";
+            string rs = ApiCommon.GetResult(PostData, "GetSceneryDetail", "http://tcopenapi.17usoft.com/handlers/scenery/queryhandler.ashx");
+            return rs;
+
+        }
+        /// <summary>
+        /// 获取景点交通信息
+        /// </summary>
+        /// <param name="sceneryId"></param>
+        /// <returns></returns>
+        public string GetSceneryTrafficInfo(int sceneryId)
+        {
+            string PostData = "<sceneryId>" + sceneryId + "</sceneryId>";
+            string rs = ApiCommon.GetResult(PostData, "GetSceneryTrafficInfo", "http://tcopenapi.17usoft.com/handlers/scenery/queryhandler.ashx");
+            return rs;
+        }
     }
 }

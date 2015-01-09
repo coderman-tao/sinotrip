@@ -120,8 +120,8 @@ namespace SinoTrip.FrameWork.Utils
             }
             if (doc.ChildNodes.Count != 1)
                 return null;
-            if (doc.ChildNodes[0].Name.ToLower() != typeof(T).Name.ToLower() + "s")
-                return null;
+            //if (doc.ChildNodes[0].Name.ToLower() != typeof(T).Name.ToLower() + "s")
+            //    return null;
 
             XmlNode node = doc.ChildNodes[0];
 
@@ -129,7 +129,7 @@ namespace SinoTrip.FrameWork.Utils
 
             foreach (XmlNode child in node.ChildNodes)
             {
-                if (child.Name.ToLower() == typeof(T).Name.ToLower())
+                //if (child.Name.ToLower() == typeof(T).Name.ToLower())
                     items.Add(XmlNodeToEntity(child));
             }
 

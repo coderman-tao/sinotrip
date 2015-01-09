@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MySql.Data">
+      <HintPath>..\UsingDlls\MySql.Data.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -39,8 +42,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Common\common_scenery.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SinoTrip.API\SinoTrip.API.csproj">
+      <Project>{19198779-5bfa-4452-8850-80a699bf91ed}</Project>
+      <Name>SinoTrip.API</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SinoTrip.Core\SinoTrip.Core.csproj">
+      <Project>{bba7a3fb-22c2-460a-a82e-171bb98001e2}</Project>
+      <Name>SinoTrip.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SinoTrip.DBCore\SinoTrip.DB.csproj">
+      <Project>{dbd13957-1d76-4b62-940d-f40a86e7add0}</Project>
+      <Name>SinoTrip.DB</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SinoTrip.Entity\SinoTrip.Entity.csproj">
+      <Project>{e232716f-efa0-4dfc-a2dc-e4a340691b8f}</Project>
+      <Name>SinoTrip.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SinoTrip.FrameWork\SinoTrip.FrameWork.csproj">
+      <Project>{ecdfb705-b0e9-43ff-82ae-958af25a1c76}</Project>
+      <Name>SinoTrip.FrameWork</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -33,6 +33,12 @@
     <Reference Include="log4net">
       <HintPath>..\UsingDlls\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="MongoDB">
+      <HintPath>..\UsingDlls\MongoDB.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data">
+      <HintPath>..\UsingDlls\MySql.Data.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -42,8 +48,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DALCore.cs" />
     <Compile Include="LoggerCore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SinoTrip.DBCore\SinoTrip.DB.csproj">
+      <Project>{dbd13957-1d76-4b62-940d-f40a86e7add0}</Project>
+      <Name>SinoTrip.DB</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SinoTrip.FrameWork\SinoTrip.FrameWork.csproj">
+      <Project>{ecdfb705-b0e9-43ff-82ae-958af25a1c76}</Project>
+      <Name>SinoTrip.FrameWork</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
