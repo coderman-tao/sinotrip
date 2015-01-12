@@ -16,6 +16,7 @@ using SinoTrip.FrameWork.Common;
 using SinoTrip.FrameWork.Utils;
 using System.Reflection;
 using System.Data;
+using System.Threading;
 
 namespace SinoTrip.WebView
 {
@@ -26,16 +27,10 @@ namespace SinoTrip.WebView
         private static readonly string KEY = ConfigurationManager.AppSettings["ctripKey"];
         protected void Page_Load(object sender, EventArgs e)
         {
-            var ssssss = new SinoTrip.DAL.Common.common_scenery().GetThemeNames();
-            string sql = "";
-            foreach (var item in ssssss)
-            {
-                sql += "INSERT INTO common_scenery_type(name,OrderNo,status) values('" + item + "',0,0);";
-            }
-            var biz = new SinoTrip.API.LY.Biz.ScenicBiz();
-            string rs = biz.GetCountyListByCityId(42);
+
+            GetJQDP();
             Response.Clear();
-            Response.Write(rs);
+            Response.Write("aaa");
             Response.ContentType = "text/xml";
             Response.End();
         }
@@ -233,6 +228,106 @@ namespace SinoTrip.WebView
 
             }
         }
+
+        void GetJQDP()
+        {
+            var ids = new SinoTrip.DAL.Common.common_scenery().GetIds();
+            foreach (DataRow id in ids.Rows)
+            {
+                try
+                {
+                    var _id = id[0].ToInt32(0);
+                    string postUrl = "http://www.ly.com/Scenery/AjaxHelper/AjaxCall.aspx?action=GetDPList&sort=3&mon=0&type=0&sId=" + _id + "&page=1&tagsulgId=0&isImg=0&sceneryType=20301&iid=0.7431465585250407";
+                    HttpWebRequest request = HttpWebRequest.Create(postUrl) as HttpWebRequest;
+                    request.Method = "Get";
+                    HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                    using (var strem = response.GetResponseStream())
+                    {
+                        StreamReader sr = new StreamReader(strem, Encoding.UTF8);
+                        string ret = sr.ReadToEnd();
+                        DPData ss = ret.JsonDeserialize<DPData>();
+                        sr.Close();
+                        for (int i = 1; i <= ss.ShowList.PageCount; i++)
+                        {
+                            postUrl = "http://www.ly.com/Scenery/AjaxHelper/AjaxCall.aspx?action=GetDPList&sort=3&mon=0&type=0&sId=" + _id + "&page=" + i + "&tagsulgId=0&isImg=0&sceneryType=20301&iid=0.7431465585250407";
+                            HttpWebRequest request1 = HttpWebRequest.Create(postUrl) as HttpWebRequest;
+                            request1.Method = "Get"; ;
+                            HttpWebResponse response1 = (HttpWebResponse)request1.GetResponse();
+                            using (var strem1 = response1.GetResponseStream())
+                            {
+                                StreamReader sr1 = new StreamReader(strem1, Encoding.UTF8);
+                                ret = sr1.ReadToEnd();
+                                DPData dpdata = ret.JsonDeserialize<DPData>();
+                                sr1.Close();
+                                foreach (var item in dpdata.ShowList.DestinationCommentList)
+                                {
+                                    var tempdata = Guid.NewGuid().ToString();
+                                    var m1 = new SinoTrip.Entity.DataBase.Scenery.scenery_comment()
+                                    {
+                                        SceneryId = _id,
+                                        OutSign = _id,
+                                        Rank = DptypeToInt(item.DPType),
+                                        DPTitle = item.DPTitle,
+                                        Comment = item.DPContent,
+                                        Uid = 0,
+                                        UserName = item.DPUser,
+                                        DPService = item.DPService,
+                                        DPShiGouYu = item.DPShiGouYu,
+                                        DPTraffic = item.DPTraffic,
+                                        ServiceScore = item.ServiceScore,
+                                        ServiceGrade = item.ServiceGrade,
+                                        ConvenientScore = item.ConvenientScore,
+                                        ConvenientGrade = item.ConvenientGrade,
+                                        DiscountScore = item.DiscountScore,
+                                        DiscountGrade = item.DiscountGrade,
+                                        DPGanwu = item.DPGanWu,
+                                        DPTime = DateTime.Parse(item.DPTime).ToUnixInt(),
+                                        TempData = tempdata,
+                                        Status = 0
+                                    };
+                                    new SinoTrip.DAL.Scenery.scenery_comment().Add(m1);
+                                    if (item.PicList != null)
+                                    {
+                                        foreach (var pic in item.PicList)
+                                        {
+                                            var m2 = new SinoTrip.Entity.DataBase.Scenery.scenery_comment_img()
+                                            {
+                                                TempData = tempdata,
+                                                ImgUrl = pic.WholePath
+                                            };
+                                            new SinoTrip.DAL.Scenery.scenery_comment_img().Add(m2);
+                                        }
+                                    }
+
+                                }
+                            }
+                            //Thread.Sleep(1000);
+                            
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    continue;
+                }
+                
+            }
+        }
+
+        int DptypeToInt(string DPType)
+        {
+            switch (DPType)
+            {
+                case "好评":
+                    return 1;
+                case "中评":
+                    return 2;
+                case "差评":
+                    return 3;
+                default:
+                    return 1;
+            }
+        }
         [Serializable]
         public class Citys
         {
@@ -248,6 +343,50 @@ namespace SinoTrip.WebView
             //<Airport />
         }
 
-
+        [Serializable]
+        public class DPData
+        {
+            public int state { get; set; }
+            public ShowInfo ShowList { get; set; }
+        }
+        [Serializable]
+        public class ShowInfo
+        {
+            public int TotalNum { get; set; }
+            public int GoodNum { get; set; }
+            public int MidNum { get; set; }
+            public int BadNum { get; set; }
+            public int PageCount { get; set; }
+            public int SceneryId { get; set; }
+            public List<DestinationCommentList> DestinationCommentList { get; set; }
+        }
+        [Serializable]
+        public class DestinationCommentList
+        {
+            //"DestinationCommentList":[{"LittleTool":"自驾车","PicList":null,"IsValid":0,"SerialId":null,"DCJQResponse":"","QueryNum":0,"FromSite":20402,"leve":1}]
+            public string DPUser { get; set; }
+            public string DPType { get; set; }
+            public string DPUserPhoto { get; set; }
+            public string DPTime { get; set; }
+            public int ServiceScore { get; set; }
+            public string ServiceGrade { get; set; }
+            public int ConvenientScore { get; set; }
+            public string ConvenientGrade { get; set; }
+            public int DiscountScore { get; set; }
+            public string DiscountGrade { get; set; }
+            public string DPTitle { get; set; }
+            public string DPContent { get; set; }
+            public string DPService { get; set; }
+            public string DPShiGouYu { get; set; }
+            public string DPTraffic { get; set; }
+            public string DPGanWu { get; set; }
+            public List<PicList> PicList;
+        }
+        [Serializable]
+        public class PicList
+        {
+            // [{"Id":666967,"IsCheckup":1,"Depiction":"","AddTime":"2014-12-3 18:25:00","SimplePath":"2014/12/03/26/201412031825007144113.jpg","WholePath":"http://upload.17u.com/uploadfile/2014/12/03/26/201412031825007144113.jpg"},{"Id":666968,"IsCheckup":1,"Depiction":"","AddTime":"2014-12-3 18:25:06","SimplePath":"2014/12/03/26/20141203182506636177.jpg","WholePath":"http://upload.17u.com/uploadfile/2014/12/03/26/20141203182506636177.jpg"},{"Id":666969,"IsCheckup":1,"Depiction":"","AddTime":"2014-12-3 18:25:17","SimplePath":"2014/12/03/26/20141203182517344702.jpg","WholePath":"http://upload.17u.com/uploadfile/2014/12/03/26/20141203182517344702.jpg"}]
+            public string WholePath { get; set; }
+        }
     }
 }
