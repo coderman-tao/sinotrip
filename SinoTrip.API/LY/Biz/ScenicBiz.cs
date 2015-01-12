@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Xml;
+using SinoTrip.FrameWork.Common;
 
 namespace SinoTrip.API.LY.Biz
 {
@@ -48,7 +50,7 @@ namespace SinoTrip.API.LY.Biz
 
         public string GetSceneryDetail(int SceneryId)
         {
-            string PostData = "<sceneryId>"+SceneryId+"</sceneryId><cs>2</cs>";
+            string PostData = "<sceneryId>" + SceneryId + "</sceneryId><cs>2</cs>";
             string rs = ApiCommon.GetResult(PostData, "GetSceneryDetail", "http://tcopenapi.17usoft.com/handlers/scenery/queryhandler.ashx");
             return rs;
 
@@ -64,5 +66,26 @@ namespace SinoTrip.API.LY.Biz
             string rs = ApiCommon.GetResult(PostData, "GetSceneryTrafficInfo", "http://tcopenapi.17usoft.com/handlers/scenery/queryhandler.ashx");
             return rs;
         }
+
+        /// <summary>
+        /// 获取景区价格
+        /// </summary>
+        /// <param name="showDetail">1、简单 2、详细默认为1</param>
+        /// <param name="ids">可以传入多个逗号分隔，必填。 示例：3440,1360,79,…，一次最多20个</param>
+        /// <returns></returns>
+        public SinoTrip.API.LY.Model.SceneryPrice GetSceneryPrice(int showDetail, List<int> ids)
+        {
+            string sceneryIds = string.Join(",", ids);
+            string PostData = "<showDetail>" + showDetail + "</showDetail><sceneryIds>" + sceneryIds + "</sceneryIds><payType>0</payType>";
+
+            string rs = ApiCommon.GetResult(PostData, "GetSceneryPrice", "http://tcopenapi.17usoft.com/handlers/scenery/queryhandler.ashx");
+           //rs = rs.Replace("&", "&amp;");
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(rs);
+            return doc.SelectSingleNode("response/body").InnerXml.XmlToEntity<SinoTrip.API.LY.Model.SceneryPrice>();
+            //return rs;
+        }
+
+       // public string GetPriceCalendar()
     }
 }
