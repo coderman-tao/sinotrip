@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -40,8 +41,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="AreaCache.cs" />
+    <Compile Include="CacheConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SceneryCache.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SinoTrip.Biz\SinoTrip.Biz.csproj">
+      <Project>{d115d158-d9ec-4bb0-8043-d913c2ea7330}</Project>
+      <Name>SinoTrip.Biz</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SinoTrip.Entity\SinoTrip.Entity.csproj">
+      <Project>{e232716f-efa0-4dfc-a2dc-e4a340691b8f}</Project>
+      <Name>SinoTrip.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SinoTrip.FrameWork\SinoTrip.FrameWork.csproj">
+      <Project>{ecdfb705-b0e9-43ff-82ae-958af25a1c76}</Project>
+      <Name>SinoTrip.FrameWork</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

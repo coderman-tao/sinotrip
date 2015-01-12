@@ -42,7 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\common_area.cs" />
+    <Compile Include="Common\common_city.cs" />
+    <Compile Include="Common\common_city_area.cs" />
     <Compile Include="Common\common_scenery.cs" />
+    <Compile Include="Common\common_scenery_type.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

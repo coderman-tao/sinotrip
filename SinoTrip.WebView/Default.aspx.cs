@@ -26,10 +26,16 @@ namespace SinoTrip.WebView
         private static readonly string KEY = ConfigurationManager.AppSettings["ctripKey"];
         protected void Page_Load(object sender, EventArgs e)
         {
-           
-
+            var ssssss = new SinoTrip.DAL.Common.common_scenery().GetThemeNames();
+            string sql = "";
+            foreach (var item in ssssss)
+            {
+                sql += "INSERT INTO common_scenery_type(name,OrderNo,status) values('" + item + "',0,0);";
+            }
+            var biz = new SinoTrip.API.LY.Biz.ScenicBiz();
+            string rs = biz.GetCountyListByCityId(42);
             Response.Clear();
-            Response.Write("aaa");
+            Response.Write(rs);
             Response.ContentType = "text/xml";
             Response.End();
         }

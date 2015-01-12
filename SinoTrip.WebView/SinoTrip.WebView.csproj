@@ -58,6 +58,9 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="URLRewriter">
+      <HintPath>..\UsingDlls\URLRewriter.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Config\data\MallChannel.xml" />
@@ -189,6 +192,7 @@
     <Content Include="Res\js\swfupload\swfupload.swf" />
     <Content Include="Res\js\swfupload\swfupload_fp9.swf" />
     <Content Include="Res\js\swfupload\upload-btn.png" />
+    <Content Include="Scenic\List.aspx" />
     <Content Include="Skin\Default\images\400.jpg" />
     <Content Include="Skin\Default\images\ahcyts_honor.png" />
     <Content Include="Skin\Default\images\arrow.png" />
@@ -360,6 +364,9 @@
     <Content Include="Template\default\Sale\info_visa.html" />
     <Content Include="Template\default\Sale\order_tour.html" />
     <Content Include="Template\default\Sale\order_visa.html" />
+    <Content Include="Template\default\Scenic\Deafult.html" />
+    <Content Include="Template\default\Scenic\Item.html" />
+    <Content Include="Template\default\Scenic\List.html" />
     <Content Include="Template\default\UserWeb\CheckTourPact.htm" />
     <Content Include="Template\default\UserWeb\coupon.html" />
     <Content Include="Template\default\UserWeb\default.htm" />
@@ -381,7 +388,9 @@
     <Content Include="Template\default\副本 default.htm" />
     <Content Include="Template\default\副本 pageHead.htm" />
     <Content Include="ValidateCode.aspx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Default.aspx.cs">
@@ -393,24 +402,38 @@
     </Compile>
     <Compile Include="head.aspx.cs">
       <DependentUpon>head.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="head.aspx.designer.cs">
       <DependentUpon>head.aspx</DependentUpon>
     </Compile>
     <Compile Include="Hotel\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Hotel\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TemplateBase.cs" />
+    <Compile Include="Scenic\List.aspx.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Scenic\List.aspx.designer.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TemplateBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="ValidateCode.aspx.cs">
       <DependentUpon>ValidateCode.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ValidateCode.aspx.designer.cs">
       <DependentUpon>ValidateCode.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -583,16 +606,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
-          <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>21915</DevelopmentServerPort>
-          <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:21915/</IISUrl>
-          <NTLMAuthentication>False</NTLMAuthentication>
-          <UseCustomServer>False</UseCustomServer>
-          <CustomServerUrl>
-          </CustomServerUrl>
-          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+          <SaveServerSettingsInUserFile>True</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
     </VisualStudio>

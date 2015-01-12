@@ -61,34 +61,7 @@
 	.kfshow{top:0px;left:0px;width:30px;height:130px;background:url(/skin/default/images/mini_kf.png); cursor:pointer}
 	.tq_kf_mini{ width:30px; height:130px; overflow:hidden; }
 	</style>
-<div style=" position:fixed; right:0px; top:200px; width:110px; height:297px; z-index:998" id="kfbox">
-  <div style=" position:absolute;z-index:999"><div style=" position:absolute;" class="kfclose" id="KfEditBox"></div></div>
-  <img id="kfimg" src="http://float2006.tq.cn/staticimg.jsp?version=vip&admiuin=8599773&ltype=0&action=acd&acd=1&type_code=2&onlinepic=http://userfiles.tq.cn/userfiles/upload_221/8599773/1392349096.png&offlinepic=http://userfiles.tq.cn/userfiles/upload_221/8599773/1392349085.png" alt="客服" style=" cursor:pointer;" onclick="openKFWIN()"/>
-  
-  </div>
-			<script type="text/javascript">
-			    function openKFWIN() {
-			        window.open('http://vipwebchat.tq.cn/pageinfo.jsp?version=vip&admiuin=8599773&ltype=0&iscallback=1&page_templete_id=3288&is_message_sms=0&is_send_mail=0&action=acd&acd=1&type_code=2', 'newwindow', 'height=500, width=780, top=0,left=0, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no');
 
-			    }
-			    $(function () {
-			        var kfstr = '<div style=" position:absolute;z-index:999"><div style=" position:absolute;" class="kfclose" id="KfEditBox"></div></div>'
-
-			        $("#KfEditBox").bind("click", function () {
-			            if ($(this).hasClass("kfclose")) {
-			                $(this).removeClass("kfclose").addClass("kfshow");
-			                $("#kfbox").width(30).height(130);
-			                $("#kfimg").hide();
-			            } else {
-			                $(this).removeClass("kfshow").addClass("kfclose");
-			                $("#kfbox").width(110).height(297);
-			                $("#kfimg").show();
-			            }
-
-			        });
-
-			    })
-</script>
 
 
 <script type="text/javascript">

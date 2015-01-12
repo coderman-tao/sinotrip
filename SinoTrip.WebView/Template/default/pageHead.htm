@@ -1,143 +1,200 @@
 <script type="text/javascript">
 
-
-                #if ($lefMeun == 1) 
-                    #set($MeunBox = "black") 
-                    #set($MeunBoxbutton = "none") 
-                    var leftmeun = 1;
-                #elseif ($lefMeun == 2) 
-                    #set($MeunBoxbutton = "black") 
-                    #set($MeunBox = "none")                      
-                    var leftmeun =0;
+                #if ($lefMeun == 1)
+                    #set($MeunBox = "black")
+                    #set($MeunBoxbutton = "none")
+    var leftmeun = 1;
+                #elseif ($lefMeun == 2)
+                    #set($MeunBoxbutton = "black")
+                    #set($MeunBox = "none")
+    var leftmeun =0;
                 #else
-                 #set($MeunBoxbutton = "none") 
-                     #set($MeunBox = "none")                      
-                       var leftmeun =0;
-                   
+                 #set($MeunBoxbutton = "none")
+                     #set($MeunBox = "none")
+    var leftmeun =0;
+
                  #end
 
 
 
 </script>
-<style type="text/css">
 
- .leftmenubuttomboxbj
- {
-     
-      position:absolute; width:45px; height:365px;  top:0px; left:-45px; line-height:18px;
-     border:1px solid #eee;
-     -webkit-border-radius:  25px 0px 0px 25px;
-       -moz-border-radius: 25px 0px 0px 25px;       
-       background-color:#008fff;
-		z-index:990;cursor:pointer
-		
-     
-     }
-    
-.leftmenubuttombox
-{   
-     position:absolute; width:45px; height:255px;top:0px; left:-45px;
-     background:Url(/skin/default/images/leftmenubj.png) no-repeat center 70px;
-     color:#ffffff; padding-top:110px; text-align:center; line-height:32px; font-size:large; font-weight:normal; 
-     cursor:pointer;z-index:991;
+<style type="text/css">
+    .leftmenubuttomboxbj {
+        position: absolute;
+        width: 45px;
+        height: 365px;
+        top: 0px;
+        left: -45px;
+        line-height: 18px;
+        border: 1px solid #eee;
+        -webkit-border-radius: 25px 0px 0px 25px;
+        -moz-border-radius: 25px 0px 0px 25px;
+        background-color: #008fff;
+        z-index: 990;
+        cursor: pointer;
     }
 
+    .leftmenubuttombox {
+        position: absolute;
+        width: 45px;
+        height: 255px;
+        top: 0px;
+        left: -45px;
+        background: Url(/skin/default/images/leftmenubj.png) no-repeat center 70px;
+        color: #ffffff;
+        padding-top: 110px;
+        text-align: center;
+        line-height: 32px;
+        font-size: large;
+        font-weight: normal;
+        cursor: pointer;
+        z-index: 991;
+    }
 
+    .sb-l {
+        float: left;
+        border: 1px solid #fc7821;
+        background: #fff;
+        border-radius: 5px 0 0 5px;
+        height: 18px;
+        line-height: 16px;
+        width: 528px;
+        padding: 10px 15px;
+        overflow: hidden;
+    }
+
+    .sb-l-box {
+        float: left;
+        margin-top: 30px;
+    }
+
+    .search-box {
+        float: left;
+        width: 670px;
+        height: 95px;
+        text-align: center;
+    }
+
+    .sb-bto {
+        float: right;
+        width: 110px;
+        height: 40px;
+        font-size: 20px;
+        font-family: microsoft yahei;
+        text-align: center;
+        line-height: 40px;
+        background: #fc7821;
+        color: #fff;
+        border-radius: 0 5px 5px 0;
+        margin-top: 30px;
+    }
+
+    .sb-l input {
+        border: 0;
+        color: #ccc;
+        font-size: 16px;
+        font-family: microsoft yahei;
+        width: 100%;
+        height: 30px;
+        line-height: 30px;
+        width: 100%;
+        margin-top: -6px;
+    }
 </style>
 <script src="/Skin/Default/js/pageHead.js" type="text/javascript"></script>
-
-    <div class="page_top_title">
-        <div class="pagebox" id="page_member_login">
-          #if ($QU.id>0)
+<div class="page_top_title">
+    <div class="pagebox" id="page_member_login">
+        #if ($QU.id>0)
         <div class="pagebox">
             <div style="width: 105px; padding-left: 10px; float: left">
-                <a href="javascript:void(0)"> 荞面</a></div>
+                <a href="javascript:void(0)"> 荞面</a>
+            </div>
             <div style="width: 300px; padding-left: 10px; float: left">
                 <span>您好<span style="color: Red">$!QU.username </span>，欢迎光临荞面旅游网 </span>
             </div>
             <div style="width: 200px; padding-left: 10px; float: right">
-                <span> <a href="http://www.qiaomian.com" onclick="window.external.addFavorite(this.href,this.title);return false;" title="荞面旅游网-安徽中青旅旗下电子商务平台" rel="sidebar">收藏我们</a></span> <span class="titleicon line"><a
-                    href="/help">帮助中心</a></span>
+                <span> <a href="http://www.qiaomian.com" onclick="window.external.addFavorite(this.href,this.title);return false;" title="荞面旅游网-安徽中青旅旗下电子商务平台" rel="sidebar">收藏我们</a></span> <span class="titleicon line">
+                    <a href="/help">帮助中心</a>
+                </span>
             </div>
             <div style="width: 400px; padding-left: 10px; float: right;">
                 <span class="titleicon line"><a href="/UserWeb/logout.aspx">退出 </a></span><span class="titleicon myqm">
-                    <a href="/UserWeb/default.aspx">我的荞面 </a></span><span class="titleicon myorder"><a href="/UserWeb/TourOrderList.aspx">我的订单</a></span></div>
-        </div>
-         #else
-        <div class="pagebox">
-            <div style="width: 105px; padding-left: 10px; float: left">
-                <a href="javascript:void(0)">荞面</a></div>
-            <div style="width: 300px; padding-left: 10px; float: left">
-                <span>您好，欢迎光临荞面旅游网</span></div>
-            <div style="width: 200px; padding-left: 10px; float: right">
-                <span>
-                <a href="http://www.qiaomian.com" onclick="window.external.addFavorite(this.href,this.title);return false;" title="荞面旅游网-安徽中青旅旗下电子商务平台" rel="sidebar">收藏我们</a>
-               
-                
-                </span> <span class="titleicon line"><a
-                    href="/help">帮助中心</a></span></div>
-            <div style="width: 400px; padding-left: 10px; float: right;">
-                <span><a href="/UserWeb/Register.aspx">注册</a></span> <span class="titleicon line"><a
-                    href="/UserWeb/login.aspx">登录</a></span> <span class="titleicon myqm"><a href="/UserWeb/default.aspx">
-                        我的荞面</a></span> 
-                        <span class="titleicon myorder"><a href="/UserWeb/TourOrderList.aspx">我的订单</a></span></div>
-        </div>
-         #end
-          
-        </div>
-    </div>
-    <div class="pagebox">
-        <div class="page_top_logo_box">
-            <div class="page_logo">
-               <a href="/"> <img src="/Skin/default/images/logo.jpg" alt="荞面旅游网" /></a></div>
-            <div class="page_top_400_box">
-                <div class="page_top_searchbox">
-                    <div class="page_top_search">
-                        <div class="page_top_search_content">
-                        <form method="post" name="searchInputform"></form>
-                            <input type="text" id="searchInput" title="可输入产品关键字/产品编号" class="curr"/>
-
-                            <div class="page_top_search_button " style=" cursor:pointer" onclick="SubmitPageTopSearch()">
-                            </div>
-                        </div>
-                        <div class="searchLabel">
-                            热门旅游： <a href="/Abroad/0-0-0-316-0-0.html" target="_blank" title="">邮轮</a> 
-                            <a href="/Abroad/0-305-355-0-0-0.html" target="_blank" title="">
-                                美国</a> <a href="/Abroad/0-303-347-0-0-0.html" target="_blank" title="">迪拜</a> 
-                                <a href="/Abroad/0-308-374-0-0-0.html" target="_blank" title="">
-                                    马尔代夫</a> <a href="/Abroad/0-307-363-0-0-0.html" target="_blank" title="">台湾</a> 
-                                    <a href="/Abroad/0-301-309-0-0-0.html" target="_blank"
-                                        title="">韩国</a> <a href="/Abroad/0-301-311-0-0-0.html" target="_blank" title="">日本</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="page_400box">
-                    <img src="/Skin/default/images/400.jpg" alt="统一客服电话：4008851760" />
-                </div>
+                    <a href="/UserWeb/default.aspx">我的荞面 </a>
+                </span><span class="titleicon myorder"><a href="/UserWeb/TourOrderList.aspx">我的订单</a></span>
             </div>
         </div>
-    </div>
-    <div class="page_nav_box_1">
+        #else
         <div class="pagebox">
-          
+            <div style="width: 105px; padding-left: 10px; float: left">
+                <a href="http://www.cartrip.cc">驾驴旅游网</a>
+            </div>
+            <div style="width: 300px; padding-left: 10px; float: left">
+                <span>您好，欢迎光临驾驴旅游网</span>
+            </div>
+            <div style="width: 200px; padding-left: 10px; float: right">
+                <span>
+                    <a href="http://www.qiaomian.com" onclick="window.external.addFavorite(this.href,this.title);return false;" title="荞面旅游网-安徽中青旅旗下电子商务平台" rel="sidebar">收藏我们</a>
 
-                <!-- <a class="menubuttom" id="leftmenubuttom" href="javascript:void(0)">推荐旅游产品目的地</a>-->
-                
-                <div id="page_nav_list">
-                  <span class="navline"></span><a href="/" class="iscurr">网站首页</a>
-                 #foreach($menu in $tool.GetMenu("MALL_MENU_ZDH"))
-                    <span class="navline">|</span><a href="$menu.url">$menu.text</a>
-                 #end
-                 <a href="/userweb/default.aspx" class="loginbutton">&nbsp;</a>
-                </div>  
 
-                <div style=" width:1190px; margin:0 auto;">
+                </span> <span class="titleicon line">
+                    <a href="/help">帮助中心</a>
+                </span>
+            </div>
+            <div style="width: 400px; padding-left: 10px; float: right;">
+                <span><a href="/UserWeb/Register.aspx">注册</a></span> <span class="titleicon line">
+                    <a href="/UserWeb/login.aspx">登录</a>
+                </span> <span class="titleicon myqm">
+                    <a href="/UserWeb/default.aspx">
+                        我的荞面
+                    </a>
+                </span>
+                <span class="titleicon myorder"><a href="/UserWeb/TourOrderList.aspx">我的订单</a></span>
+            </div>
+        </div>
+        #end
 
-                <div style=" position:absolute; z-index:990">
+    </div>
+</div>
+<div class="pagebox">
+    <div class="page_top_logo_box">
+        <div class="page_logo">
+            <a href="/"> <img src="http://hotel.cartrip.cc/public/www/default/images/logo.png" alt="门票预订-驾驴" /></a>
+        </div>
+        <div class="search-box">
+            <div class="sb-l-box">
+                <div class="sb-l">
+                    <input type="text" id="txtScenicValue" value="景区名|城市">
+                </div>
+                <div class="cityout" id="hotCitys" style="display: none;"></div>
+                <div id="scenlInfo_list"></div>
+                <div class="errMasBorder" id="scenicMasErr1" style="margin-left: 162px; display: none;">
+                    <span class="lefSpan"></span>
+                    <span class="rgtSpan">景区名|城市</span>
+                </div>
+            </div>
+            <a href="javascript:;" class="sb-bto">探索</a>
+        </div>
 
+    </div>
+</div>
+<div class="page_nav_box_1">
+    <div class="pagebox">
+
+        <!-- <a class="menubuttom" id="leftmenubuttom" href="javascript:void(0)">推荐旅游产品目的地</a>-->
+
+        <div id="page_nav_list">
+            <span class="navline"></span><a href="/" class="iscurr">网站首页</a>
+            #foreach($menu in $tool.GetMenu("MALL_MENU_ZDH"))
+            <span class="navline">|</span><a href="$menu.url">$menu.text</a>
+            #end
+            <a href="/userweb/default.aspx" class="loginbutton">&nbsp;</a>
+        </div>
+        <div style=" width:1190px; margin:0 auto;">
+            <div style=" position:absolute; z-index:990">
                 <div id="leftmenubuttom" style=" position:absolute;display:$MeunBoxbutton">
-               <div class="leftmenubuttomboxbj"></div>
-               <h2 class="leftmenubuttombox">全</br>部</br>旅</br>游</br>分</br>类</h2>              
+                    <div class="leftmenubuttomboxbj"></div>
+                    <h2 class="leftmenubuttombox">全</br>部</br>旅</br>游</br>分</br>类</h2>
                 </div>
                 <div class="thisbox leftmenu" id="jd_menubox" style=" display:$MeunBox">
                     <div class="menuItem Itemfirst">
@@ -145,628 +202,643 @@
                             <div class="left_menuname">合肥周边旅游</div>
                             <div class="left_menulable">
                                 <a href="javascript:void(0)">城市</a><a href="javascript:void(0)">古镇</a><a href="javascript:void(0)">乐园</a>
-                                <a href="javascript:void(0)">名山胜水</a></div>
+                                <a href="javascript:void(0)">名山胜水</a>
+                            </div>
                         </div>
-                        <div class="jd_counetbox" style=" padding:20px; width:600px">     
-                        <div class="leftMenuSearch">                  
-                  <div style=" position:absolute">
-                <div class="keytypebox">行程天数：
-                </div>              
-               </div>                    
-                     <a href="/domestic/0-0-0-0-0-0.html?minday=1&maxday=1">一日游</a>
-                         <a href="/domestic/0-0-0-0-0-0.html?minday=2&maxday=2">二日游</a>
-                         <a href="/domestic/0-0-0-0-0-0.html?minday=3&maxday=3">三日游</a>
-                         <a href="/domestic/0-0-0-0-0-0.html?minday=4&maxday=999">三日以上</a>
-                              </div>
-                        <div class="leftMenuSearch">                  
-                  <div style=" position:absolute">
-                <div class="keytypebox">热门景点：
-                </div>              
-               </div>                    
-                 <a href="/domestic/0-242-287-0-0-0.html">黄山</a> 
-                 <a href="/domestic/0-242-288-0-0-0.html">九华山</a>  
-                 <a href="/domestic/0-244-155-0-0-0.html">青岛</a>  
-                  <a href="/domestic/0-244-164-0-0-0.html">日照</a>     
-                 <a href="/domestic/0-242-294-0-0-0.html">方特一期</a> 
-                   <a href="/domestic/0-242-295-0-0-0.html">方特二期</a>   
-                  <a href=" /domestic/0-262-281-0-0-0.html">千岛湖</a>  
-                 <a href="/domestic/0-242-296-0-0-0.html">西递宏村</a>
-                  <a href="/domestic/0-242-289-0-0-0.html">天柱山</a> 
-                   <a href="/domestic/0-242-292-0-0-0.html">彩虹瀑布</a>   
-                   <a href="/domestic/0-242-298-0-0-0.html">齐云山</a>
-                   <a href="/domestic/0-242-290-0-0-0.html">牯牛降</a>
-                   <a href="/domestic/0-242-291-0-0-0.html">天堂寨</a>            
-                   <a href="/domestic/0-244-153-0-0-0.html">泰山</a>
-                   <a href="/productSearch.html?keyword=%u660E%u5802%u5C71">明堂山</a>
-                   <a href="/domestic/0-262-272-0-0-0.html">宿迁项王故里</a>
-                   <a href="/domestic/0-262-269-0-0-0.html">扬州</a>
-                   <a href="/productSearch.html?keyword=%u676D%u5DDE">杭州</a>
-                   <a href="/domestic/0-262-275-0-0-0.html">西湖</a>
-                   <a href="/domestic/0-262-276-0-0-0.html">西溪湿地</a>
-                   <a href="/domestic/0-262-285-0-0-0.html">桐庐</a>
-                   <a href="/domestic/0-262-284-0-0-0.html">安吉</a>                         
-                </div>                         
-                         <div class="leftMenuSearch">                  
-                  <div style=" position:absolute">
-                <div class="keytypebox">古镇水乡：
-                </div>              
-               </div>
-               <a href="/domestic/0-262-265-0-0-0.html">周庄</a>
-               <a href="/domestic/0-262-277-0-0-0.html">乌镇</a>
-               <a href="/productSearch.html?keyword=%u897F%u6805">西栅</a>               
-               <a href="/domestic/0-262-280-0-0-0.html">西塘</a> 
-                 <a href="/domestic/0-242-296-0-0-0.html">宏村</a>
-                 <a href="/domestic/0-242-296-0-0-0.html">西递</a>
-                  <a href="/domestic/0-262-279-0-0-0.html">南浔古镇</a>
-                 <a href="/domestic/0-262-267-0-0-0.html">甪直</a>
-                 <a href="/productSearch.html?keyword=%u6728%u6E0E">木渎古镇</a>
-                  <a href="/productSearch.html?keyword=%u5448%u574E">呈坎</a>                
-                  <a href="/productSearch.html?keyword=%u53F0%u513F%u5E84">台儿庄古城</a>  
-                  </div>
-                         <div class="leftMenuSearch">                  
-                  <div style=" position:absolute">
-                <div class="keytypebox">主题乐园：
-                </div>              
-               </div>                    
-                 <a href="/domestic/0-242-294-0-0-0.html">方特欢乐世界</a>               
-                  <a href="/domestic/0-242-295-0-0-0.html">方特梦幻王国</a> 
-                  <a href="/productSearch.html?keyword=%u65B9%u7279%u6C34%u4E0A%u4E16%u754C">方特水上世界</a>         
-                  <a href="/domestic/0-262-270-0-0-0.html">常州恐龙园</a>
-                  <a href="/domestic/0-262-278-0-0-0.html">宋城</a>
-                  <a href="/domestic/0-262-283-0-0-0.html">天目湖</a>
-                  <a href="/domestic/0-262-270-0-0-0.html">动漫嬉戏谷</a>
-                  <a href="/domestic/0-262-282-0-0-0.html">横店影视城</a>
-                  <a href="/productSearch.html?keyword=%u68A6%u5E7B%u8C37">梦幻谷</a>
-                   <a href="/productSearch.html?keyword=%u4E09%u56FD%u57CE">三国城</a>
-                   <a href="/productSearch.html?keyword=%u6B22%u4E50%u8C37">欢乐谷</a>
-                   </div>  
-                        <div class="leftMenuSearch">                  
-                  <div style=" position:absolute">
-                <div class="keytypebox">夏日漂流：
-                </div>              
-               </div>                    
-                  <a href="/productSearch.html?keyword=%u5929%u6C34%u6DA7">天水涧</a>
-                   <a href="/productSearch.html?keyword=%u5939%u6EAA%u6CB3">夹溪河</a>
-                    <a href="/productSearch.html?keyword=%u602A%u6F6D%u6F02%u6D41">怪潭漂流</a>
-                     <a href="/productSearch.html?keyword=%u79CB%u6D66%u6CB3%u6F02%u6D41">秋浦河漂流</a>
-                      <a href="/domestic/0-242-290-0-0-0.html">牯牛降</a>                      
-                      <a href="/productSearch.html?keyword=%u5929%u76EE%u6EAA">天目溪</a>
-                      <a href="/productSearch.html?keyword=%u91D1%u4E09%u89D2%u6F02%u6D41">金三角漂流</a>
-                      <a href="/productSearch.html?keyword=%u5B54%u96C0%u6CB3%u6F02%u6D41">孔雀河漂流</a>
-                     <a href="/domestic/0-242-292-0-0-0.html">彩虹瀑布</a>
+                        <div class="jd_counetbox" style=" padding:20px; width:600px">
+                            <div class="leftMenuSearch">
+                                <div style=" position:absolute">
+                                    <div class="keytypebox">
+                                        行程天数：
+                                    </div>
+                                </div>
+                                <a href="/domestic/0-0-0-0-0-0.html?minday=1&maxday=1">一日游</a>
+                                <a href="/domestic/0-0-0-0-0-0.html?minday=2&maxday=2">二日游</a>
+                                <a href="/domestic/0-0-0-0-0-0.html?minday=3&maxday=3">三日游</a>
+                                <a href="/domestic/0-0-0-0-0-0.html?minday=4&maxday=999">三日以上</a>
+                            </div>
+                            <div class="leftMenuSearch">
+                                <div style=" position:absolute">
+                                    <div class="keytypebox">
+                                        热门景点：
+                                    </div>
+                                </div>
+                                <a href="/domestic/0-242-287-0-0-0.html">黄山</a>
+                                <a href="/domestic/0-242-288-0-0-0.html">九华山</a>
+                                <a href="/domestic/0-244-155-0-0-0.html">青岛</a>
+                                <a href="/domestic/0-244-164-0-0-0.html">日照</a>
+                                <a href="/domestic/0-242-294-0-0-0.html">方特一期</a>
+                                <a href="/domestic/0-242-295-0-0-0.html">方特二期</a>
+                                <a href=" /domestic/0-262-281-0-0-0.html">千岛湖</a>
+                                <a href="/domestic/0-242-296-0-0-0.html">西递宏村</a>
+                                <a href="/domestic/0-242-289-0-0-0.html">天柱山</a>
+                                <a href="/domestic/0-242-292-0-0-0.html">彩虹瀑布</a>
+                                <a href="/domestic/0-242-298-0-0-0.html">齐云山</a>
+                                <a href="/domestic/0-242-290-0-0-0.html">牯牛降</a>
+                                <a href="/domestic/0-242-291-0-0-0.html">天堂寨</a>
+                                <a href="/domestic/0-244-153-0-0-0.html">泰山</a>
+                                <a href="/productSearch.html?keyword=%u660E%u5802%u5C71">明堂山</a>
+                                <a href="/domestic/0-262-272-0-0-0.html">宿迁项王故里</a>
+                                <a href="/domestic/0-262-269-0-0-0.html">扬州</a>
+                                <a href="/productSearch.html?keyword=%u676D%u5DDE">杭州</a>
+                                <a href="/domestic/0-262-275-0-0-0.html">西湖</a>
+                                <a href="/domestic/0-262-276-0-0-0.html">西溪湿地</a>
+                                <a href="/domestic/0-262-285-0-0-0.html">桐庐</a>
+                                <a href="/domestic/0-262-284-0-0-0.html">安吉</a>
+                            </div>
+                            <div class="leftMenuSearch">
+                                <div style=" position:absolute">
+                                    <div class="keytypebox">
+                                        古镇水乡：
+                                    </div>
+                                </div>
+                                <a href="/domestic/0-262-265-0-0-0.html">周庄</a>
+                                <a href="/domestic/0-262-277-0-0-0.html">乌镇</a>
+                                <a href="/productSearch.html?keyword=%u897F%u6805">西栅</a>
+                                <a href="/domestic/0-262-280-0-0-0.html">西塘</a>
+                                <a href="/domestic/0-242-296-0-0-0.html">宏村</a>
+                                <a href="/domestic/0-242-296-0-0-0.html">西递</a>
+                                <a href="/domestic/0-262-279-0-0-0.html">南浔古镇</a>
+                                <a href="/domestic/0-262-267-0-0-0.html">甪直</a>
+                                <a href="/productSearch.html?keyword=%u6728%u6E0E">木渎古镇</a>
+                                <a href="/productSearch.html?keyword=%u5448%u574E">呈坎</a>
+                                <a href="/productSearch.html?keyword=%u53F0%u513F%u5E84">台儿庄古城</a>
+                            </div>
+                            <div class="leftMenuSearch">
+                                <div style=" position:absolute">
+                                    <div class="keytypebox">
+                                        主题乐园：
+                                    </div>
+                                </div>
+                                <a href="/domestic/0-242-294-0-0-0.html">方特欢乐世界</a>
+                                <a href="/domestic/0-242-295-0-0-0.html">方特梦幻王国</a>
+                                <a href="/productSearch.html?keyword=%u65B9%u7279%u6C34%u4E0A%u4E16%u754C">方特水上世界</a>
+                                <a href="/domestic/0-262-270-0-0-0.html">常州恐龙园</a>
+                                <a href="/domestic/0-262-278-0-0-0.html">宋城</a>
+                                <a href="/domestic/0-262-283-0-0-0.html">天目湖</a>
+                                <a href="/domestic/0-262-270-0-0-0.html">动漫嬉戏谷</a>
+                                <a href="/domestic/0-262-282-0-0-0.html">横店影视城</a>
+                                <a href="/productSearch.html?keyword=%u68A6%u5E7B%u8C37">梦幻谷</a>
+                                <a href="/productSearch.html?keyword=%u4E09%u56FD%u57CE">三国城</a>
+                                <a href="/productSearch.html?keyword=%u6B22%u4E50%u8C37">欢乐谷</a>
+                            </div>
+                            <div class="leftMenuSearch">
+                                <div style=" position:absolute">
+                                    <div class="keytypebox">
+                                        夏日漂流：
+                                    </div>
+                                </div>
+                                <a href="/productSearch.html?keyword=%u5929%u6C34%u6DA7">天水涧</a>
+                                <a href="/productSearch.html?keyword=%u5939%u6EAA%u6CB3">夹溪河</a>
+                                <a href="/productSearch.html?keyword=%u602A%u6F6D%u6F02%u6D41">怪潭漂流</a>
+                                <a href="/productSearch.html?keyword=%u79CB%u6D66%u6CB3%u6F02%u6D41">秋浦河漂流</a>
+                                <a href="/domestic/0-242-290-0-0-0.html">牯牛降</a>
+                                <a href="/productSearch.html?keyword=%u5929%u76EE%u6EAA">天目溪</a>
+                                <a href="/productSearch.html?keyword=%u91D1%u4E09%u89D2%u6F02%u6D41">金三角漂流</a>
+                                <a href="/productSearch.html?keyword=%u5B54%u96C0%u6CB3%u6F02%u6D41">孔雀河漂流</a>
+                                <a href="/domestic/0-242-292-0-0-0.html">彩虹瀑布</a>
 
-
-
-                 </div>
-                    </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="menuItem">
-                        <div class="jd_counetbox" style=" padding:20px; width:920px">   
-                             <div class="leftMenuSearch twoColunm">                  
-                              <div style=" position:absolute">
-                            <div class="keytypebox"><a href="/domestic/0-229-0-0-0-0.html">海南:</a></div>              
-                           </div> 
+                        <div class="jd_counetbox" style=" padding:20px; width:920px">
+                            <div class="leftMenuSearch twoColunm">
+                                <div style=" position:absolute">
+                                    <div class="keytypebox"><a href="/domestic/0-229-0-0-0-0.html">海南:</a></div>
+                                </div>
                                 <a href="/domestic/0-229-76-0-0-0.html">三亚</a>
                                 <a href="/domestic/0-229-78-0-0-0.html">海口</a>
-                               <a href="/domestic/0-229-92-0-0-0.html">蜈支洲岛</a>
-                              <a href="/domestic/0-229-90-0-0-0.html">亚龙湾</a>                
-                              <a href="/domestic/0-229-91-0-0-0.html">天涯海角</a>                                
-                             </div>
-                             <div class="leftMenuSearch twoColunm">                  
-                              <div style=" position:absolute">
-                            <div class="keytypebox"> <a href="/domestic/0-230-0-0-0-0.html">云南:</a>
-                            </div>              
-                           </div>                    
-                              <a href="/domestic/0-230-93-0-0-0.html">丽江</a>
-                              <a href="/domestic/0-230-94-0-0-0.html">香格里拉</a>
-                              <a href="/domestic/0-230-103-0-0-0.html">西双版纳</a>  
-                              <a href="/domestic/0-230-106-0-0-0.html">腾冲、瑞丽</a>
-                               <a href="/domestic/0-230-96-0-0-0.html">大理</a>
-                             </div>
-                             <div class="leftMenuSearch twoColunm">                 
-                              <div style=" position:absolute">
-                            <div class="keytypebox"> <a href="/domestic/0-231-0-0-0-0.html">贵州:</a>
-                            </div>              
-                           </div>                    
-                             <a href="/domestic/0-231-218-0-0-0.html">黄果树</a>               
-                  <a href="/domestic/0-231-219-0-0-0.html">遵义</a>               
-                  <a href="/domestic/0-231-220-0-0-0.html">花溪</a>               
-                  <a href="/domestic/0-231-221-0-0-0.html">苗寨</a>               
-                  <a href="/domestic/0-231-222-0-0-0.html">赤水</a>        
-
-                             </div>
-                             <div class="leftMenuSearch twoColunm">                  
-                              <div style=" position:absolute">
-                            <div class="keytypebox">  <a href="/domestic/0-232-0-0-0-0.html">广西:</a>
-                            </div>              
-                           </div>                    
-                              <a href="/domestic/0-232-126-0-0-0.html">桂林</a>
-                               <a href="/domestic/0-232-134-0-0-0.html">漓江</a>        
-                  <a href="/domestic/0-232-128-0-0-0.html">阳朔</a>  
-                  <a href="/domestic/0-232-131-0-0-0.html">南宁</a>  
-                  <a href="/domestic/0-232-133-0-0-0.html">巴马</a>
-                  <a href="/domestic/0-232-137-0-0-0.html">涠洲岛</a>   
-                             </div>
-                              <div class="leftMenuSearch twoColunm">               
-                              <div style=" position:absolute">
-                            <div class="keytypebox"><a href="/domestic/0-234-0-0-0-0.html">福建:</a>
-                            </div>              
-                           </div>                    
-                    <a href="/domestic/0-234-107-0-0-0.html">厦门</a>               
-                  <a href="/domestic/0-234-108-0-0-0.html">永定土楼</a>               
-                  <a href="/domestic/0-234-109-0-0-0.html">鼓浪屿</a>  
-                  <a href="/domestic/0-234-111-0-0-0.html">武夷山</a>  
-                  <a href="/domestic/0-234-115-0-0-0.html">集美</a>              
-                  
-                             </div>
-
-                             <div class="leftMenuSearch twoColunm">                 
-                              <div style=" position:absolute">
-                            <div class="keytypebox"><a href="/domestic/0-235-0-0-0-0.html">江西:</a>
-                            </div>              
-                           </div>                    
-                               <a href="/domestic/0-235-225-0-0-0.html">庐山</a>
-                <a href="/domestic/0-235-226-0-0-0.html">景德镇</a>               
-                  <a href="/domestic/0-235-227-0-0-0.html">三清山</a>               
-                  <a href="/domestic/0-235-228-0-0-0.html">龙虎山</a>   
-                             </div>
-
-                              <div class="leftMenuSearch twoColunm">               
-                              <div style=" position:absolute">
-                            <div class="keytypebox"><a href="/domestic/0-236-0-0-0-0.html">重庆:</a>
-                            </div>              
-                           </div>                    
-                              <a href="/domestic/0-236-150-0-0-0.html">重庆</a>
-                                <a href="/domestic/0-236-151-0-0-0.html">武隆</a> 
-                                  <a href="/domestic/0-236-151-0-0-0.html">大足石刻</a>                  
-                                 <a href="/domestic/0-236-152-0-0-0.html">仙女山</a>                          
-                                
-                             </div>
-
-                              <div class="leftMenuSearch twoColunm">                 
-                              <div style=" position:absolute">
-                            <div class="keytypebox"><a href="/domestic/0-237-0-0-0-0.html">湖南:</a>
-                            </div>              
-                           </div>                    
-                              <a href="/domestic/0-237-165-0-0-0.html">张家界</a>               
-                            <a href="/domestic/0-237-166-0-0-0.html">长沙</a>               
-                             <a href="/domestic/0-237-167-0-0-0.html">韶山</a>               
-                            <a href="/domestic/0-237-168-0-0-0.html">凤凰</a>   
-                             </div>
-                             <div class="leftMenuSearch twoColunm">                   
-                              <div style=" position:absolute">
-                            <div class="keytypebox"><a href="/domestic/0-238-0-0-0-0.html">湖北:</a>
-                            </div>              
-                           </div>                   
-                            
-                  <a href="/domestic/0-238-171-0-0-0.html">长江三峡</a>
-
-                   <a href="/domestic/0-238-170-0-0-0.html">小三峡</a>
-               
-                  <a href="/domestic/0-238-172-0-0-0.html">武当山</a>
-               
-                  <a href="/domestic/0-238-173-0-0-0.html">神农架</a>
-               
-                  <a href="/domestic/0-238-174-0-0-0.html">黄鹤楼</a>   
-                             </div>                             
-
-                              <div class="leftMenuSearch twoColunm">                   
-                              <div style=" position:absolute">
-                            <div class="keytypebox"><a href="/domestic/0-243-0-0-0-0.html">河南:</a>
-                            </div>              
-                           </div>                    
-                              <a href="/domestic/0-243-185-0-0-0.html">云台山</a>               
-                  <a href="/domestic/0-243-186-0-0-0.html">少林寺</a>               
-                  <a href="/domestic/0-243-187-0-0-0.html">龙门石窟</a>               
-                  <a href="/domestic/0-243-188-0-0-0.html">洛阳、开封</a>                              
-                                
-                             </div>
-
-                             <div class="leftMenuSearch twoColunm">             
-                              <div style=" position:absolute">
-                            <div class="keytypebox"><a href="/domestic/0-244-0-0-0-0.html">山东:</a>
-                            </div>              
-                           </div>                    
-                               <a href="/domestic/0-244-153-0-0-0.html">泰山一地</a>
-               
-                  <a href="/domestic/0-244-154-0-0-0.html">大连</a>               
-                  <a href="/domestic/0-244-155-0-0-0.html">青岛</a>               
-                  <a href="/domestic/0-244-156-0-0-0.html">泰山</a> 
-                  <a href="/domestic/0-244-159-0-0-0.html">蓬莱</a>   
-                  <a href="/domestic/0-244-163-0-0-0.html">枣庄台儿庄</a>              
-                 
-                             </div>
-
-                             <div class="leftMenuSearch twoColunm">              
-                              <div style=" position:absolute">
-                            <div class="keytypebox"><a href="/domestic/0-247-0-0-0-0.html">陕西:</a>
-                            </div>              
-                           </div>                    
-                                <a href="/domestic/0-247-175-0-0-0.html">西安</a>               
-                                <a href="/domestic/0-247-176-0-0-0.html">法门寺</a>               
-                                <a href="/domestic/0-247-177-0-0-0.html">华山</a>               
-                                 <a href="/domestic/0-247-178-0-0-0.html">兵马俑</a>               
-                                <a href="/domestic/0-247-179-0-0-0.html">壶口瀑布</a></div>
-
-                              <div class="leftMenuSearch twoColunm">               
-                              <div style=" position:absolute">
-                            <div class="keytypebox"><a href="/domestic/0-248-0-0-0-0.html">山西:</a></div>              
-                           </div>
-                               <a href="/domestic/0-248-180-0-0-0.html">五台山</a>               
-                              <a href="/domestic/0-248-181-0-0-0.html">平遥古城</a>               
-                              <a href="/domestic/0-248-182-0-0-0.html">乔家大院</a>               
-                              <a href="/domestic/0-248-183-0-0-0.html">云冈石窟</a>
+                                <a href="/domestic/0-229-92-0-0-0.html">蜈支洲岛</a>
+                                <a href="/domestic/0-229-90-0-0-0.html">亚龙湾</a>
+                                <a href="/domestic/0-229-91-0-0-0.html">天涯海角</a>
                             </div>
-                  
-                              <div class="leftMenuSearch twoColunm">                   
-                              <div style=" position:absolute">
-                            <div class="keytypebox"><a href="/domestic/0-249-0-0-0-0.html">四川</a>
-                            </div>              
-                           </div>                    
-                              <a href="/domestic/0-249-138-0-0-0.html">成都</a>               
-                  <a href="/domestic/0-249-139-0-0-0.html">九寨沟</a>               
-                  <a href="/domestic/0-249-140-0-0-0.html">黄龙</a>               
-                  <a href="/domestic/0-249-141-0-0-0.html">峨眉</a> 
-                  <a href="/domestic/0-249-145-0-0-0.html">稻城亚丁</a>            
-                  </div>
+                            <div class="leftMenuSearch twoColunm">
+                                <div style=" position:absolute">
+                                    <div class="keytypebox">
+                                        <a href="/domestic/0-230-0-0-0-0.html">云南:</a>
+                                    </div>
+                                </div>
+                                <a href="/domestic/0-230-93-0-0-0.html">丽江</a>
+                                <a href="/domestic/0-230-94-0-0-0.html">香格里拉</a>
+                                <a href="/domestic/0-230-103-0-0-0.html">西双版纳</a>
+                                <a href="/domestic/0-230-106-0-0-0.html">腾冲、瑞丽</a>
+                                <a href="/domestic/0-230-96-0-0-0.html">大理</a>
+                            </div>
+                            <div class="leftMenuSearch twoColunm">
+                                <div style=" position:absolute">
+                                    <div class="keytypebox">
+                                        <a href="/domestic/0-231-0-0-0-0.html">贵州:</a>
+                                    </div>
+                                </div>
+                                <a href="/domestic/0-231-218-0-0-0.html">黄果树</a>
+                                <a href="/domestic/0-231-219-0-0-0.html">遵义</a>
+                                <a href="/domestic/0-231-220-0-0-0.html">花溪</a>
+                                <a href="/domestic/0-231-221-0-0-0.html">苗寨</a>
+                                <a href="/domestic/0-231-222-0-0-0.html">赤水</a>
+                            </div>
+                            <div class="leftMenuSearch twoColunm">
+                                <div style=" position:absolute">
+                                    <div class="keytypebox">
+                                        <a href="/domestic/0-232-0-0-0-0.html">广西:</a>
+                                    </div>
+                                </div>
+                                <a href="/domestic/0-232-126-0-0-0.html">桂林</a>
+                                <a href="/domestic/0-232-134-0-0-0.html">漓江</a>
+                                <a href="/domestic/0-232-128-0-0-0.html">阳朔</a>
+                                <a href="/domestic/0-232-131-0-0-0.html">南宁</a>
+                                <a href="/domestic/0-232-133-0-0-0.html">巴马</a>
+                                <a href="/domestic/0-232-137-0-0-0.html">涠洲岛</a>
+                            </div>
+                            <div class="leftMenuSearch twoColunm">
+                                <div style=" position:absolute">
+                                    <div class="keytypebox">
+                                        <a href="/domestic/0-234-0-0-0-0.html">福建:</a>
+                                    </div>
+                                </div>
+                                <a href="/domestic/0-234-107-0-0-0.html">厦门</a>
+                                <a href="/domestic/0-234-108-0-0-0.html">永定土楼</a>
+                                <a href="/domestic/0-234-109-0-0-0.html">鼓浪屿</a>
+                                <a href="/domestic/0-234-111-0-0-0.html">武夷山</a>
+                                <a href="/domestic/0-234-115-0-0-0.html">集美</a>
 
-                              <div class="leftMenuSearch twoColunm">                
-                              <div style=" position:absolute">
-                            <div class="keytypebox"><a href="/domestic/0-253-0-0-0-0.html">西藏:</a>
-                            </div>              
-                           </div>                    
-                              <a href="/domestic/0-253-204-0-0-0.html">拉萨</a>               
-                  <a href="/domestic/0-253-205-0-0-0.html">布达拉宫</a>
-               
-                  <a href="/domestic/0-253-206-0-0-0.html">林芝</a>
-               
-                  <a href="/domestic/0-253-207-0-0-0.html">日喀则</a>
-               
-                  <a href="/domestic/0-253-208-0-0-0.html">纳木错</a>   
-                             </div>
+                            </div>
+                            <div class="leftMenuSearch twoColunm">
+                                <div style=" position:absolute">
+                                    <div class="keytypebox">
+                                        <a href="/domestic/0-235-0-0-0-0.html">江西:</a>
+                                    </div>
+                                </div>
+                                <a href="/domestic/0-235-225-0-0-0.html">庐山</a>
+                                <a href="/domestic/0-235-226-0-0-0.html">景德镇</a>
+                                <a href="/domestic/0-235-227-0-0-0.html">三清山</a>
+                                <a href="/domestic/0-235-228-0-0-0.html">龙虎山</a>
+                            </div>
+                            <div class="leftMenuSearch twoColunm">
+                                <div style=" position:absolute">
+                                    <div class="keytypebox">
+                                        <a href="/domestic/0-236-0-0-0-0.html">重庆:</a>
+                                    </div>
+                                </div>
+                                <a href="/domestic/0-236-150-0-0-0.html">重庆</a>
+                                <a href="/domestic/0-236-151-0-0-0.html">武隆</a>
+                                <a href="/domestic/0-236-151-0-0-0.html">大足石刻</a>
+                                <a href="/domestic/0-236-152-0-0-0.html">仙女山</a>
 
-                             <div class="leftMenuSearch twoColunm">          
-                              <div style=" position:absolute">
-                            <div class="keytypebox"><a href="/domestic/0-254-0-0-0-0.html">新疆:</a>
-                            </div>              
-                           </div>                    
-                               <a href="/domestic/0-254-198-0-0-0.html">乌鲁木齐</a>               
-                  <a href="/domestic/0-254-199-0-0-0.html">天山天池</a>
-               
-                  <a href="/domestic/0-254-200-0-0-0.html">吐鲁番</a>
-               
-                  <a href="/domestic/0-254-201-0-0-0.html">伊犁</a>
-                             </div>
+                            </div>
+                            <div class="leftMenuSearch twoColunm">
+                                <div style=" position:absolute">
+                                    <div class="keytypebox">
+                                        <a href="/domestic/0-237-0-0-0-0.html">湖南:</a>
+                                    </div>
+                                </div>
+                                <a href="/domestic/0-237-165-0-0-0.html">张家界</a>
+                                <a href="/domestic/0-237-166-0-0-0.html">长沙</a>
+                                <a href="/domestic/0-237-167-0-0-0.html">韶山</a>
+                                <a href="/domestic/0-237-168-0-0-0.html">凤凰</a>
+                            </div>
+                            <div class="leftMenuSearch twoColunm">
+                                <div style=" position:absolute">
+                                    <div class="keytypebox">
+                                        <a href="/domestic/0-238-0-0-0-0.html">湖北:</a>
+                                    </div>
+                                </div>
 
-                              <div class="leftMenuSearch twoColunm">               
-                              <div style=" position:absolute">
-                            <div class="keytypebox"><a href="/domestic/0-255-0-0-0-0.html">内蒙古:</a>
-                            </div>              
-                           </div>                    
-                               <a href="/domestic/0-255-223-0-0-0.html">希拉穆仁草原</a>               
-                  <a href="/domestic/0-255-224-0-0-0.html">呼伦贝尔草原</a></div>
+                                <a href="/domestic/0-238-171-0-0-0.html">长江三峡</a>
+                                <a href="/domestic/0-238-170-0-0-0.html">小三峡</a>
 
-                  <div class="leftMenuSearch twoColunm">               
-                              <div style=" position:absolute">
-                            <div class="keytypebox"><a href="/domestic/0-261-0-0-0-0.html">东北:</a>
-                            </div>              
-                           </div>                    
-                                    <a href="/domestic/0-261-189-0-0-0.html">亚布力</a>               
-                  <a href="/domestic/0-261-190-0-0-0.html">哈尔滨</a>
-               
-                  <a href="/domestic/0-261-191-0-0-0.html">雪乡</a>    
-               
-                  <a href="/domestic/0-261-193-0-0-0.html">长白山</a>               
-               
-                  <a href="/domestic/0-261-196-0-0-0.html">海参崴</a>
-                             </div>
-                              <div class="leftMenuSearch twoColunm">            
-                              <div style=" position:absolute">
-                            <div class="keytypebox"><a href="/domestic/0-259-0-0-0-0.html">北京:</a>
-                            </div>              
-                           </div>                    
-                                               
-                  <a href="/domestic/0-259-119-0-0-0.html">承德</a>                  
-                  <a href="/domestic/0-259-122-0-0-0.html">天安门</a>               
-                  <a href="/domestic/0-259-123-0-0-0.html">长城</a>               
-                  <a href="/domestic/0-259-124-0-0-0.html">故宫</a>               
-                  <a href="/domestic/0-259-125-0-0-0.html">颐和园</a>   
-                             </div>
-                                                          
+                                <a href="/domestic/0-238-172-0-0-0.html">武当山</a>
 
-                              
+                                <a href="/domestic/0-238-173-0-0-0.html">神农架</a>
 
-                             
+                                <a href="/domestic/0-238-174-0-0-0.html">黄鹤楼</a>
+                            </div>
+                            <div class="leftMenuSearch twoColunm">
+                                <div style=" position:absolute">
+                                    <div class="keytypebox">
+                                        <a href="/domestic/0-243-0-0-0-0.html">河南:</a>
+                                    </div>
+                                </div>
+                                <a href="/domestic/0-243-185-0-0-0.html">云台山</a>
+                                <a href="/domestic/0-243-186-0-0-0.html">少林寺</a>
+                                <a href="/domestic/0-243-187-0-0-0.html">龙门石窟</a>
+                                <a href="/domestic/0-243-188-0-0-0.html">洛阳、开封</a>
+
+                            </div>
+                            <div class="leftMenuSearch twoColunm">
+                                <div style=" position:absolute">
+                                    <div class="keytypebox">
+                                        <a href="/domestic/0-244-0-0-0-0.html">山东:</a>
+                                    </div>
+                                </div>
+                                <a href="/domestic/0-244-153-0-0-0.html">泰山一地</a>
+
+                                <a href="/domestic/0-244-154-0-0-0.html">大连</a>
+                                <a href="/domestic/0-244-155-0-0-0.html">青岛</a>
+                                <a href="/domestic/0-244-156-0-0-0.html">泰山</a>
+                                <a href="/domestic/0-244-159-0-0-0.html">蓬莱</a>
+                                <a href="/domestic/0-244-163-0-0-0.html">枣庄台儿庄</a>
+
+                            </div>
+                            <div class="leftMenuSearch twoColunm">
+                                <div style=" position:absolute">
+                                    <div class="keytypebox">
+                                        <a href="/domestic/0-247-0-0-0-0.html">陕西:</a>
+                                    </div>
+                                </div>
+                                <a href="/domestic/0-247-175-0-0-0.html">西安</a>
+                                <a href="/domestic/0-247-176-0-0-0.html">法门寺</a>
+                                <a href="/domestic/0-247-177-0-0-0.html">华山</a>
+                                <a href="/domestic/0-247-178-0-0-0.html">兵马俑</a>
+                                <a href="/domestic/0-247-179-0-0-0.html">壶口瀑布</a>
+                            </div>
+                            <div class="leftMenuSearch twoColunm">
+                                <div style=" position:absolute">
+                                    <div class="keytypebox"><a href="/domestic/0-248-0-0-0-0.html">山西:</a></div>
+                                </div>
+                                <a href="/domestic/0-248-180-0-0-0.html">五台山</a>
+                                <a href="/domestic/0-248-181-0-0-0.html">平遥古城</a>
+                                <a href="/domestic/0-248-182-0-0-0.html">乔家大院</a>
+                                <a href="/domestic/0-248-183-0-0-0.html">云冈石窟</a>
+                            </div>
+
+                            <div class="leftMenuSearch twoColunm">
+                                <div style=" position:absolute">
+                                    <div class="keytypebox">
+                                        <a href="/domestic/0-249-0-0-0-0.html">四川</a>
+                                    </div>
+                                </div>
+                                <a href="/domestic/0-249-138-0-0-0.html">成都</a>
+                                <a href="/domestic/0-249-139-0-0-0.html">九寨沟</a>
+                                <a href="/domestic/0-249-140-0-0-0.html">黄龙</a>
+                                <a href="/domestic/0-249-141-0-0-0.html">峨眉</a>
+                                <a href="/domestic/0-249-145-0-0-0.html">稻城亚丁</a>
+                            </div>
+                            <div class="leftMenuSearch twoColunm">
+                                <div style=" position:absolute">
+                                    <div class="keytypebox">
+                                        <a href="/domestic/0-253-0-0-0-0.html">西藏:</a>
+                                    </div>
+                                </div>
+                                <a href="/domestic/0-253-204-0-0-0.html">拉萨</a>
+                                <a href="/domestic/0-253-205-0-0-0.html">布达拉宫</a>
+
+                                <a href="/domestic/0-253-206-0-0-0.html">林芝</a>
+
+                                <a href="/domestic/0-253-207-0-0-0.html">日喀则</a>
+
+                                <a href="/domestic/0-253-208-0-0-0.html">纳木错</a>
+                            </div>
+                            <div class="leftMenuSearch twoColunm">
+                                <div style=" position:absolute">
+                                    <div class="keytypebox">
+                                        <a href="/domestic/0-254-0-0-0-0.html">新疆:</a>
+                                    </div>
+                                </div>
+                                <a href="/domestic/0-254-198-0-0-0.html">乌鲁木齐</a>
+                                <a href="/domestic/0-254-199-0-0-0.html">天山天池</a>
+
+                                <a href="/domestic/0-254-200-0-0-0.html">吐鲁番</a>
+
+                                <a href="/domestic/0-254-201-0-0-0.html">伊犁</a>
+                            </div>
+                            <div class="leftMenuSearch twoColunm">
+                                <div style=" position:absolute">
+                                    <div class="keytypebox">
+                                        <a href="/domestic/0-255-0-0-0-0.html">内蒙古:</a>
+                                    </div>
+                                </div>
+                                <a href="/domestic/0-255-223-0-0-0.html">希拉穆仁草原</a>
+                                <a href="/domestic/0-255-224-0-0-0.html">呼伦贝尔草原</a>
+                            </div>
+                            <div class="leftMenuSearch twoColunm">
+                                <div style=" position:absolute">
+                                    <div class="keytypebox">
+                                        <a href="/domestic/0-261-0-0-0-0.html">东北:</a>
+                                    </div>
+                                </div>
+                                <a href="/domestic/0-261-189-0-0-0.html">亚布力</a>
+                                <a href="/domestic/0-261-190-0-0-0.html">哈尔滨</a>
+
+                                <a href="/domestic/0-261-191-0-0-0.html">雪乡</a>
+
+                                <a href="/domestic/0-261-193-0-0-0.html">长白山</a>
+
+                                <a href="/domestic/0-261-196-0-0-0.html">海参崴</a>
+                            </div>
+                            <div class="leftMenuSearch twoColunm">
+                                <div style=" position:absolute">
+                                    <div class="keytypebox">
+                                        <a href="/domestic/0-259-0-0-0-0.html">北京:</a>
+                                    </div>
+                                </div>
+
+                                <a href="/domestic/0-259-119-0-0-0.html">承德</a>
+                                <a href="/domestic/0-259-122-0-0-0.html">天安门</a>
+                                <a href="/domestic/0-259-123-0-0-0.html">长城</a>
+                                <a href="/domestic/0-259-124-0-0-0.html">故宫</a>
+                                <a href="/domestic/0-259-125-0-0-0.html">颐和园</a>
+                            </div>
 
 
-             </div>
 
-                 <div class="left_menutitle">
-                            <div class="left_menuname index0">
-                                国内旅游</div>
-                            <div class="left_menulable">
-                               <a href="javascript:void(0)">海南</a><a href="javascript:void(0)">云南</a><a href="javascript:void(0)">福建</a><a href="javascript:void(0)">北京</a></div>
+
                         </div>
-
-        </div>        
+                        <div class="left_menutitle">
+                            <div class="left_menuname index0">
+                                国内旅游
+                            </div>
+                            <div class="left_menulable">
+                                <a href="javascript:void(0)">海南</a><a href="javascript:void(0)">云南</a><a href="javascript:void(0)">福建</a><a href="javascript:void(0)">北京</a>
+                            </div>
+                        </div>
+                    </div>
                     <div class="menuItem">
                         <div class="left_menutitle">
                             <div class="left_menuname index6">
-                                香港&nbsp;&nbsp;澳门&nbsp;&nbsp;台湾</div>
-                            <div class="left_menulable">
-                               <a href="javascript:void(0)">香港</a><a href="javascript:void(0)">澳门</a><a href="javascript:void(0)">台湾</a></div>
-                        </div>
-
-                       <div class="jd_counetbox" style="height:300px">
-                         <div class="menucounet index6" style=" height:260px;">
-                                <div class="leftMenuSearch">                  
-                              <div style=" position:absolute">
-                            <div class="keytypebox"><a href="/Abroad/0-307-363-0-0-0.html">台湾:</a></div>              
-                           </div> 
-                                <a href="/productSearch.html?keyword=%u53F0%u5317">台北</a>
-
-                                <a href="/productSearch.html?keyword=%u9AD8%u96C4">高雄</a>
-
-                                <a href="/productSearch.html?keyword=%u53F0%u5317%u6545%u5BAB%u535A%u7269%u9662">台北故宫博物馆</a>
-
-                                <a href="/productSearch.html?keyword=%u58EB%u6797%u591C%u5E02">士林夜市</a>
-
-                                <a href="/productSearch.html?keyword=%u57A6%u4E01">垦丁</a>
-                                                        
-                            </div>      
-                                <div class="leftMenuSearch">                  
-                              <div style=" position:absolute">
-                            <div class="keytypebox">港澳:</div>              
-                           </div> 
-                                <a href="/Abroad/0-307-361-0-0-0.html">香港</a>
-                                <a href="/Abroad/0-307-361-0-0-0.html?keyword=%u6D77%u6D0B%u516C%u56ED">海洋公园</a>
-                               <a href="/Abroad/0-307-361-0-0-0.html?keyword=%u8FEA%u58EB%u5C3C">迪士尼</a>
-                                <a href="/Abroad/0-307-361-0-0-0.html?keyword=%u5A01%u5C3C%u65AF">威尼斯人</a>
-                                <a href="/Abroad/0-307-361-0-0-0.html?keyword=%u592A%u5E73%u5C71">太平山</a>
-                                <a href="/Abroad/0-307-362-0-0-0.html">澳门</a>   
-                            </div>     
+                                香港&nbsp;&nbsp;澳门&nbsp;&nbsp;台湾
                             </div>
-                                             
-                       </div>
+                            <div class="left_menulable">
+                                <a href="javascript:void(0)">香港</a><a href="javascript:void(0)">澳门</a><a href="javascript:void(0)">台湾</a>
+                            </div>
+                        </div>
+                        <div class="jd_counetbox" style="height:300px">
+                            <div class="menucounet index6" style=" height:260px;">
+                                <div class="leftMenuSearch">
+                                    <div style=" position:absolute">
+                                        <div class="keytypebox"><a href="/Abroad/0-307-363-0-0-0.html">台湾:</a></div>
+                                    </div>
+                                    <a href="/productSearch.html?keyword=%u53F0%u5317">台北</a>
+                                    <a href="/productSearch.html?keyword=%u9AD8%u96C4">高雄</a>
+                                    <a href="/productSearch.html?keyword=%u53F0%u5317%u6545%u5BAB%u535A%u7269%u9662">台北故宫博物馆</a>
+                                    <a href="/productSearch.html?keyword=%u58EB%u6797%u591C%u5E02">士林夜市</a>
+                                    <a href="/productSearch.html?keyword=%u57A6%u4E01">垦丁</a>
+
+                                </div>
+                                <div class="leftMenuSearch">
+                                    <div style=" position:absolute">
+                                        <div class="keytypebox">港澳:</div>
+                                    </div>
+                                    <a href="/Abroad/0-307-361-0-0-0.html">香港</a>
+                                    <a href="/Abroad/0-307-361-0-0-0.html?keyword=%u6D77%u6D0B%u516C%u56ED">海洋公园</a>
+                                    <a href="/Abroad/0-307-361-0-0-0.html?keyword=%u8FEA%u58EB%u5C3C">迪士尼</a>
+                                    <a href="/Abroad/0-307-361-0-0-0.html?keyword=%u5A01%u5C3C%u65AF">威尼斯人</a>
+                                    <a href="/Abroad/0-307-361-0-0-0.html?keyword=%u592A%u5E73%u5C71">太平山</a>
+                                    <a href="/Abroad/0-307-362-0-0-0.html">澳门</a>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
                     <div class="menuItem">
                         <div class="left_menutitle">
                             <div class="left_menuname index1">
-                                海岛旅游</div>
-                            <div class="left_menulable">
-                                <a href="javascript:void(0)">普吉</a><a href="javascript:void(0)">马尔代夫</a><a href="javascript:void(0)">马尔代夫</a></div>
-                        </div>
-
-                     <div class="jd_counetbox index1" style=" height:300px">  
-                      <div class="menucounet index1" style=" height:260px;">
-                        <div class="leftMenuSearch">                  
-                              <div style=" position:absolute">
-                            <div class="keytypebox">热门海岛:</div>              
-                           </div> 
-                 <a href="/Abroad/0-308-364-0-0-0.html">普吉岛</a>
-                <a href="/Abroad/0-308-365-0-0-0.html">苏梅岛</a>
-                <a href="/Abroad/0-308-366-0-0-0.html">巴厘岛</a>
-                <a href="/Abroad/0-308-367-0-0-0.html">济州岛</a>
-                <a href="/Abroad/0-308-368-0-0-0.html">天宁岛</a>
-                <a href="/Abroad/0-308-369-0-0-0.html">塞班岛</a>
-                <a href="/Abroad/0-308-370-0-0-0.html">沙巴</a>
-                <a href="/Abroad/0-308-371-0-0-0.html">宿雾薄荷岛</a>
-                <a href="/Abroad/0-308-372-0-0-0.html">长滩岛</a>
-                <a href="/Abroad/0-308-373-0-0-0.html">毛里求斯</a>
-                <a href="/Abroad/0-308-374-0-0-0.html">马尔代夫</a>
-                <a href="/Abroad/0-308-375-0-0-0.html">塞舌尔</a>   
+                                海岛旅游
                             </div>
-                        <div class="leftMenuSearch">                  
-                              <div style=" position:absolute">
-                            <div class="keytypebox">住宿标准:</div>              
-                           </div> 
-                            <a href="/Abroad/0-308-0-0-0-47.html">四星</a>
-                            <a href="/Abroad/0-308-0-0-0-48.html">五星</a>
-                            <a href="/Abroad/0-308-0-0-0-49.html">普通酒店</a>
-                            <a href="/Abroad/0-308-0-0-0-50.html">经济酒店</a>
-                            <a href="/Abroad/0-308-0-0-0-51.html">舒适酒店</a>
-                            <a href="/Abroad/0-308-0-0-0-52.html">高档酒店</a>
-                            <a href="/Abroad/0-308-0-0-0-53.html">豪华酒店</a>
-                            <a href="/Abroad/0-308-0-0-0-54.html">精品客栈</a>
-                            <a href="/Abroad/0-308-0-0-0-55.html">公寓式酒店</a>
-                            <a href="/Abroad/0-308-0-0-0-57.html">豪华别墅</a> 
-                            </div>                                                    
+                            <div class="left_menulable">
+                                <a href="javascript:void(0)">普吉</a><a href="javascript:void(0)">马尔代夫</a><a href="javascript:void(0)">马尔代夫</a>
+                            </div>
                         </div>
-
-                         </div>
+                        <div class="jd_counetbox index1" style=" height:300px">
+                            <div class="menucounet index1" style=" height:260px;">
+                                <div class="leftMenuSearch">
+                                    <div style=" position:absolute">
+                                        <div class="keytypebox">热门海岛:</div>
+                                    </div>
+                                    <a href="/Abroad/0-308-364-0-0-0.html">普吉岛</a>
+                                    <a href="/Abroad/0-308-365-0-0-0.html">苏梅岛</a>
+                                    <a href="/Abroad/0-308-366-0-0-0.html">巴厘岛</a>
+                                    <a href="/Abroad/0-308-367-0-0-0.html">济州岛</a>
+                                    <a href="/Abroad/0-308-368-0-0-0.html">天宁岛</a>
+                                    <a href="/Abroad/0-308-369-0-0-0.html">塞班岛</a>
+                                    <a href="/Abroad/0-308-370-0-0-0.html">沙巴</a>
+                                    <a href="/Abroad/0-308-371-0-0-0.html">宿雾薄荷岛</a>
+                                    <a href="/Abroad/0-308-372-0-0-0.html">长滩岛</a>
+                                    <a href="/Abroad/0-308-373-0-0-0.html">毛里求斯</a>
+                                    <a href="/Abroad/0-308-374-0-0-0.html">马尔代夫</a>
+                                    <a href="/Abroad/0-308-375-0-0-0.html">塞舌尔</a>
+                                </div>
+                                <div class="leftMenuSearch">
+                                    <div style=" position:absolute">
+                                        <div class="keytypebox">住宿标准:</div>
+                                    </div>
+                                    <a href="/Abroad/0-308-0-0-0-47.html">四星</a>
+                                    <a href="/Abroad/0-308-0-0-0-48.html">五星</a>
+                                    <a href="/Abroad/0-308-0-0-0-49.html">普通酒店</a>
+                                    <a href="/Abroad/0-308-0-0-0-50.html">经济酒店</a>
+                                    <a href="/Abroad/0-308-0-0-0-51.html">舒适酒店</a>
+                                    <a href="/Abroad/0-308-0-0-0-52.html">高档酒店</a>
+                                    <a href="/Abroad/0-308-0-0-0-53.html">豪华酒店</a>
+                                    <a href="/Abroad/0-308-0-0-0-54.html">精品客栈</a>
+                                    <a href="/Abroad/0-308-0-0-0-55.html">公寓式酒店</a>
+                                    <a href="/Abroad/0-308-0-0-0-57.html">豪华别墅</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="menuItem">
                         <div class="left_menutitle">
                             <div class="left_menuname index4">
-                                韩国&nbsp;&nbsp;日本</div>
+                                韩国&nbsp;&nbsp;日本
+                            </div>
                             <div class="left_menulable">
-                               <a href="javascript:void(0)">东京</a><a href="javascript:void(0)">大阪</a><a href="javascript:void(0)">北海道</a><a href="javascript:void(0)">首尔</a><a href="javascript:void(0)">济州岛</a></div>
+                                <a href="javascript:void(0)">东京</a><a href="javascript:void(0)">大阪</a><a href="javascript:void(0)">北海道</a><a href="javascript:void(0)">首尔</a><a href="javascript:void(0)">济州岛</a>
+                            </div>
                         </div>
                         <div class="jd_counetbox" style="height:300px; top:-100px">
-                         <div class="menucounet index4" style=" height:260px;">
-                        <div class="leftMenuSearch">                  
-                              <div style=" position:absolute">
-                            <div class="keytypebox">韩国:</div>              
-                           </div><a href="/Abroad/0-301-310-0-0-0.html">首尔一地</a>
-                            <a href="/Abroad/0-301-309-0-0-0.html">首尔+济州岛</a>
-                            <a href="productSearch.html?keyword=%u666F%u798F%u5BAB">景福宫</a>                           
-                            </div>
-                        <div class="leftMenuSearch">                  
-                              <div style=" position:absolute">
-                            <div class="keytypebox"><a href="/Abroad/0-301-311-0-0-0.html">日本:</a></div>              
-                           </div><a href="/Abroad/0-301-311-0-0-0.html?keyword=%u672C%u5DDE">本州</a>
-                           <a href="/Abroad/0-301-311-0-0-0.html?keyword=%u4E1C%u4EAC">东京</a>
-                           <a href="/Abroad/0-301-311-0-0-0.html?keyword=%u5927%u962A">大阪</a>
-                           <a href="/Abroad/0-301-311-0-0-0.html?keyword=%u5317%u6D77%u9053">北海道</a>
-                           <a href="/Abroad/0-301-311-0-0-0.html?keyword=%u540D%u53E4%u5C4B">名古屋</a>
-                           <a href="/Abroad/0-301-311-0-0-0.html?keyword=%u4EAC%u90FD">京都</a>
-                           <a href="/Abroad/0-301-311-0-0-0.html?keyword=%u5BCC%u58EB%u5C71">富士山</a> 
-                           <a href="/Abroad/0-301-311-0-0-0.html?keyword=%u51B2%u7EF3">冲绳</a>         
-                            </div>                
-                                     
-                   </div>
+                            <div class="menucounet index4" style=" height:260px;">
+                                <div class="leftMenuSearch">
+                                    <div style=" position:absolute">
+                                        <div class="keytypebox">韩国:</div>
+                                    </div><a href="/Abroad/0-301-310-0-0-0.html">首尔一地</a>
+                                    <a href="/Abroad/0-301-309-0-0-0.html">首尔+济州岛</a>
+                                    <a href="productSearch.html?keyword=%u666F%u798F%u5BAB">景福宫</a>
+                                </div>
+                                <div class="leftMenuSearch">
+                                    <div style=" position:absolute">
+                                        <div class="keytypebox"><a href="/Abroad/0-301-311-0-0-0.html">日本:</a></div>
+                                    </div><a href="/Abroad/0-301-311-0-0-0.html?keyword=%u672C%u5DDE">本州</a>
+                                    <a href="/Abroad/0-301-311-0-0-0.html?keyword=%u4E1C%u4EAC">东京</a>
+                                    <a href="/Abroad/0-301-311-0-0-0.html?keyword=%u5927%u962A">大阪</a>
+                                    <a href="/Abroad/0-301-311-0-0-0.html?keyword=%u5317%u6D77%u9053">北海道</a>
+                                    <a href="/Abroad/0-301-311-0-0-0.html?keyword=%u540D%u53E4%u5C4B">名古屋</a>
+                                    <a href="/Abroad/0-301-311-0-0-0.html?keyword=%u4EAC%u90FD">京都</a>
+                                    <a href="/Abroad/0-301-311-0-0-0.html?keyword=%u5BCC%u58EB%u5C71">富士山</a>
+                                    <a href="/Abroad/0-301-311-0-0-0.html?keyword=%u51B2%u7EF3">冲绳</a>
+                                </div>
 
-                         </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="menuItem">
                         <div class="left_menutitle">
                             <div class="left_menuname index5">
-                                泰国&nbsp;&nbsp;东南亚&nbsp;&nbsp;南亚</div>
+                                泰国&nbsp;&nbsp;东南亚&nbsp;&nbsp;南亚
+                            </div>
                             <div class="left_menulable">
-                                <a href="javascript:void(0)">巴厘岛</a><a href="javascript:void(0)">曼谷</a><a href="javascript:void(0)">普吉岛</a><a href="javascript:void(0)">塞班岛</a></div>
+                                <a href="javascript:void(0)">巴厘岛</a><a href="javascript:void(0)">曼谷</a><a href="javascript:void(0)">普吉岛</a><a href="javascript:void(0)">塞班岛</a>
+                            </div>
                         </div>
                         <div class="jd_counetbox" style="height:340px; top:-150px">
-                          <div class="menucounet index5" style=" height:300px;">
-                                <div class="leftMenuSearch">                  
-                              <div style=" position:absolute">
-                            <div class="keytypebox"><a href="/Abroad/0-301-313-0-0-0.html">泰国:</a></div>              
-                           </div><a href="/Abroad/0-301-313-0-0-0.html">曼谷+芭提雅</a>
-                               <a href="/Abroad/0-308-364-0-0-0.html">普吉岛</a>
-                               <a href="/Abroad/0-301-315-0-0-0.html">苏梅岛</a>
-                               <a href="/Abroad/0-301-316-0-0-0.html">清迈</a>                             
-                            </div>
-                                <div class="leftMenuSearch">                  
-                              <div style=" position:absolute">
-                            <div class="keytypebox"><a href="/Abroad/0-301-317-0-0-0.html">新加坡:</a></div>              
-                           </div><a href="/Abroad/0-301-317-0-0-0.html?keyword=%u5723%u6DD8%u6C99">圣淘沙</a>
-                                <a href="/Abroad/0-301-317-0-0-0.html?keyword=%u73AF%u7403%u5F71%u57CE">环球影城</a>
-                                  <a href="/Abroad/0-301-317-0-0-0.html?keyword=%u6C11%u4E39%u5C9B">民州岛</a>
-                                 <a href="/Abroad/0-301-317-0-0-0.html?keyword=%u65B0%u5C71">新山</a>                     
-                            </div>
-                           
-         <div class="leftMenuSearch">                  
-                              <div style=" position:absolute">
-                            <div class="keytypebox">东南亚:</div>              
-                           </div><a href="/Abroad/0-301-312-0-0-0.html">朝鲜</a>  
-                  <a href="/Abroad/0-301-319-0-0-0.html">越南</a>               
-                  <a href="/Abroad/0-301-320-0-0-0.html">柬埔寨吴哥窟</a>               
-                  <a href="/Abroad/0-301-321-0-0-0.html">印度尼西亚</a>               
-                  <a href="/Abroad/0-301-322-0-0-0.html">巴厘岛</a>               
-                  <a href="/Abroad/0-301-323-0-0-0.html">印度</a>               
-                  <a href="/Abroad/0-301-324-0-0-0.html">菲律宾</a>               
-                  <a href="/Abroad/0-301-325-0-0-0.html">长滩岛</a>               
-                  <a href="/Abroad/0-301-326-0-0-0.html">宿雾薄荷岛</a>               
-                  <a href="/Abroad/0-301-327-0-0-0.html">文莱</a>               
-                  <a href="/Abroad/0-301-328-0-0-0.html">尼泊尔</a>               
-                  <a href="/Abroad/0-301-329-0-0-0.html">天宁岛</a>               
-                  <a href="/Abroad/0-301-330-0-0-0.html">塞班岛</a>               
-                  <a href="/Abroad/0-301-331-0-0-0.html">马尔代夫</a>               
-                  <a href="/Abroad/0-301-332-0-0-0.html">斯里兰卡</a>
+                            <div class="menucounet index5" style=" height:300px;">
+                                <div class="leftMenuSearch">
+                                    <div style=" position:absolute">
+                                        <div class="keytypebox"><a href="/Abroad/0-301-313-0-0-0.html">泰国:</a></div>
+                                    </div><a href="/Abroad/0-301-313-0-0-0.html">曼谷+芭提雅</a>
+                                    <a href="/Abroad/0-308-364-0-0-0.html">普吉岛</a>
+                                    <a href="/Abroad/0-301-315-0-0-0.html">苏梅岛</a>
+                                    <a href="/Abroad/0-301-316-0-0-0.html">清迈</a>
+                                </div>
+                                <div class="leftMenuSearch">
+                                    <div style=" position:absolute">
+                                        <div class="keytypebox"><a href="/Abroad/0-301-317-0-0-0.html">新加坡:</a></div>
+                                    </div><a href="/Abroad/0-301-317-0-0-0.html?keyword=%u5723%u6DD8%u6C99">圣淘沙</a>
+                                    <a href="/Abroad/0-301-317-0-0-0.html?keyword=%u73AF%u7403%u5F71%u57CE">环球影城</a>
+                                    <a href="/Abroad/0-301-317-0-0-0.html?keyword=%u6C11%u4E39%u5C9B">民州岛</a>
+                                    <a href="/Abroad/0-301-317-0-0-0.html?keyword=%u65B0%u5C71">新山</a>
+                                </div>
 
+                                <div class="leftMenuSearch">
+                                    <div style=" position:absolute">
+                                        <div class="keytypebox">东南亚:</div>
+                                    </div><a href="/Abroad/0-301-312-0-0-0.html">朝鲜</a>
+                                    <a href="/Abroad/0-301-319-0-0-0.html">越南</a>
+                                    <a href="/Abroad/0-301-320-0-0-0.html">柬埔寨吴哥窟</a>
+                                    <a href="/Abroad/0-301-321-0-0-0.html">印度尼西亚</a>
+                                    <a href="/Abroad/0-301-322-0-0-0.html">巴厘岛</a>
+                                    <a href="/Abroad/0-301-323-0-0-0.html">印度</a>
+                                    <a href="/Abroad/0-301-324-0-0-0.html">菲律宾</a>
+                                    <a href="/Abroad/0-301-325-0-0-0.html">长滩岛</a>
+                                    <a href="/Abroad/0-301-326-0-0-0.html">宿雾薄荷岛</a>
+                                    <a href="/Abroad/0-301-327-0-0-0.html">文莱</a>
+                                    <a href="/Abroad/0-301-328-0-0-0.html">尼泊尔</a>
+                                    <a href="/Abroad/0-301-329-0-0-0.html">天宁岛</a>
+                                    <a href="/Abroad/0-301-330-0-0-0.html">塞班岛</a>
+                                    <a href="/Abroad/0-301-331-0-0-0.html">马尔代夫</a>
+                                    <a href="/Abroad/0-301-332-0-0-0.html">斯里兰卡</a>
+                                </div>
                             </div>
-                           </div>
-                           </div>
+                        </div>
                     </div>
                     <div class="menuItem">
-
                         <div class="left_menutitle">
                             <div class="left_menuname index2">
-                                欧州</div>
-                            <div class="left_menulable">
-                               <a href="javascript:void(0)">英国</a><a href="javascript:void(0)">奥地利</a><a href="javascript:void(0)">德国</a><a href="javascript:void(0)">法国</a><a href="javascript:void(0)">瑞士</a></div>
-                        </div>
-
-                        <div class="jd_counetbox index2" style="height:300px; top:-150px">
-                         <div class="menucounet index2" style=" height:260px;">
-                        <div class="leftMenuSearch">                  
-                              <div style=" position:absolute">
-                     <div class="keytypebox"></div></div>              
-                    <a href="/Abroad/0-302-333-0-0-0.html">北欧四国（挪威\瑞典\丹麦\芬兰）</a>
-                    <a href="/Abroad/0-302-334-0-0-0.html">东欧五国（匈牙利\斯洛伐克\捷克\奥地利\德国）</a>   
-                                     
+                                欧州
                             </div>
-                        
-                        <div class="leftMenuSearch">                  
-                              <div style=" position:absolute">
-                   <div class="keytypebox">热门国家:</div>  </div>
-                  <a href="/Abroad/0-302-335-0-0-0.html">西班牙+葡萄牙</a>
-                  <a href="/Abroad/0-302-336-0-0-0.html">英国+爱尔兰</a>
-                  <a href="/Abroad/0-302-337-0-0-0.html">法国</a>               
-                  <a href="/Abroad/0-302-338-0-0-0.html">意大利</a>               
-                  <a href="/Abroad/0-302-339-0-0-0.html">瑞士</a>               
-                  <a href="/Abroad/0-302-340-0-0-0.html">荷兰</a>               
-                  <a href="/Abroad/0-302-341-0-0-0.html">希腊</a>               
-                  <a href="/Abroad/0-302-342-0-0-0.html">比利时</a>               
-                  <a href="/Abroad/0-302-343-0-0-0.html">俄罗斯</a>
-                            
+                            <div class="left_menulable">
+                                <a href="javascript:void(0)">英国</a><a href="javascript:void(0)">奥地利</a><a href="javascript:void(0)">德国</a><a href="javascript:void(0)">法国</a><a href="javascript:void(0)">瑞士</a>
+                            </div>
                         </div>
-                        </div>
+                        <div class="jd_counetbox index2" style="height:300px; top:-150px">
+                            <div class="menucounet index2" style=" height:260px;">
+                                <div class="leftMenuSearch">
+                                    <div style=" position:absolute">
+                                        <div class="keytypebox"></div>
+                                    </div>
+                                    <a href="/Abroad/0-302-333-0-0-0.html">北欧四国（挪威\瑞典\丹麦\芬兰）</a>
+                                    <a href="/Abroad/0-302-334-0-0-0.html">东欧五国（匈牙利\斯洛伐克\捷克\奥地利\德国）</a>
 
+                                </div>
+
+                                <div class="leftMenuSearch">
+                                    <div style=" position:absolute">
+                                        <div class="keytypebox">热门国家:</div>
+                                    </div>
+                                    <a href="/Abroad/0-302-335-0-0-0.html">西班牙+葡萄牙</a>
+                                    <a href="/Abroad/0-302-336-0-0-0.html">英国+爱尔兰</a>
+                                    <a href="/Abroad/0-302-337-0-0-0.html">法国</a>
+                                    <a href="/Abroad/0-302-338-0-0-0.html">意大利</a>
+                                    <a href="/Abroad/0-302-339-0-0-0.html">瑞士</a>
+                                    <a href="/Abroad/0-302-340-0-0-0.html">荷兰</a>
+                                    <a href="/Abroad/0-302-341-0-0-0.html">希腊</a>
+                                    <a href="/Abroad/0-302-342-0-0-0.html">比利时</a>
+                                    <a href="/Abroad/0-302-343-0-0-0.html">俄罗斯</a>
+
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                      </div>     
                     <div class="menuItem">
                         <div class="left_menutitle">
                             <div class="left_menuname index7">
-                                澳洲&nbsp;&nbsp;中东非洲</div>
-
+                                澳洲&nbsp;&nbsp;中东非洲
+                            </div>
                             <div class="left_menulable">
-                                <a href="javascript:void(0)">澳大利亚</a><a href="javascript:void(0)">斐济</a><a href="javascript:void(0)">毛里求斯</a><a href="javascript:void(0)">迪拜</a></div>
+                                <a href="javascript:void(0)">澳大利亚</a><a href="javascript:void(0)">斐济</a><a href="javascript:void(0)">毛里求斯</a><a href="javascript:void(0)">迪拜</a>
+                            </div>
                         </div>
                         <div class="jd_counetbox" style="height:300px; top:-150px">
-                        <div class="menucounet index7" style=" height:260px;">
-                       <div class="leftMenuSearch">                  
-                              <div style=" position:absolute">
-                   <div class="keytypebox">中东非州:</div>  </div>
-                    <a href="/Abroad/0-303-344-0-0-0.html">毛里求斯</a>               
-                  <a href="/Abroad/0-303-345-0-0-0.html">塞舌尔</a>
-                   <a href="/Abroad/0-303-346-0-0-0.html">南非</a>               
-                  <a href="/Abroad/0-303-347-0-0-0.html">阿联酋（迪拜）</a>               
-                  <a href="/Abroad/0-303-348-0-0-0.html">埃及</a>               
-                  <a href="/Abroad/0-303-349-0-0-0.html">土耳其</a>               
-                  <a href="/Abroad/0-303-350-0-0-0.html">肯尼亚</a>
-                            
-                        </div>      
-                      <div class="leftMenuSearch">                  
-                              <div style=" position:absolute">
-                   <div class="keytypebox">澳州:</div>  </div>
-<a href="/Abroad/0-306-358-0-0-0.html">澳大利亚</a>
-<a href="/Abroad/0-306-359-0-0-0.html">新西兰</a>
-<a href="/Abroad/0-306-360-0-0-0.html">斐济</a>
-                            
-                        </div> 
+                            <div class="menucounet index7" style=" height:260px;">
+                                <div class="leftMenuSearch">
+                                    <div style=" position:absolute">
+                                        <div class="keytypebox">中东非州:</div>
+                                    </div>
+                                    <a href="/Abroad/0-303-344-0-0-0.html">毛里求斯</a>
+                                    <a href="/Abroad/0-303-345-0-0-0.html">塞舌尔</a>
+                                    <a href="/Abroad/0-303-346-0-0-0.html">南非</a>
+                                    <a href="/Abroad/0-303-347-0-0-0.html">阿联酋（迪拜）</a>
+                                    <a href="/Abroad/0-303-348-0-0-0.html">埃及</a>
+                                    <a href="/Abroad/0-303-349-0-0-0.html">土耳其</a>
+                                    <a href="/Abroad/0-303-350-0-0-0.html">肯尼亚</a>
+
+                                </div>
+                                <div class="leftMenuSearch">
+                                    <div style=" position:absolute">
+                                        <div class="keytypebox">澳州:</div>
+                                    </div>
+                                    <a href="/Abroad/0-306-358-0-0-0.html">澳大利亚</a>
+                                    <a href="/Abroad/0-306-359-0-0-0.html">新西兰</a>
+                                    <a href="/Abroad/0-306-360-0-0-0.html">斐济</a>
+
+                                </div>
                             </div>
-                            </div>
+                        </div>
                     </div>
                     <div class="menuItem">
                         <div class="left_menutitle">
                             <div class="left_menuname index3">
-                                美洲</div>
-                            <div class="left_menulable">
-                                <a href="javascript:void(0)">夏威夷</a><a href="javascript:void(0)">加拿大</a><a href="javascript:void(0)">美国</a><a href="javascript:void(0)">阿根迁</a></div>
-                        </div>
-
-                        <div class="jd_counetbox" style="height:300px; top:-150px">                      
-                              <div class="menucounet index3" style=" height:260px;">
-                            <div class="leftMenuSearch">                  
-                              <div style=" position:absolute">
-                   <div class="keytypebox">南美州:</div>  </div>
-                    <a href="/Abroad/0-304-351-0-0-0.html">巴西</a>
-                    <a href="/Abroad/0-304-352-0-0-0.html">智利</a>
-                    <a href="/Abroad/0-304-353-0-0-0.html">秘鲁</a>
-                    <a href="/Abroad/0-304-354-0-0-0.html">阿根廷</a>                            
-                        </div> 
-                            <div class="leftMenuSearch">                  
-                              <div style=" position:absolute">
-                   <div class="keytypebox">北美州:</div>  </div>
-<a href="/Abroad/0-305-355-0-0-0.html">美国</a>
-<a href="/Abroad/0-305-355-0-0-0.html?keyword=%u590F%u5A01%u5937">夏威夷</a>
-<a href="/Abroad/0-305-355-0-0-0.html?keyword=%u897F%u6D77%u5CB8">东西海岸</a>
-<a href="/Abroad/0-305-356-0-0-0.html">加拿大</a>
-<a href="/Abroad/0-305-357-0-0-0.html">墨西哥</a>                         
-                        </div>    
-                        </div>
-                       </div>                        
+                                美洲
                             </div>
+                            <div class="left_menulable">
+                                <a href="javascript:void(0)">夏威夷</a><a href="javascript:void(0)">加拿大</a><a href="javascript:void(0)">美国</a><a href="javascript:void(0)">阿根迁</a>
+                            </div>
+                        </div>
+                        <div class="jd_counetbox" style="height:300px; top:-150px">
+                            <div class="menucounet index3" style=" height:260px;">
+                                <div class="leftMenuSearch">
+                                    <div style=" position:absolute">
+                                        <div class="keytypebox">南美州:</div>
+                                    </div>
+                                    <a href="/Abroad/0-304-351-0-0-0.html">巴西</a>
+                                    <a href="/Abroad/0-304-352-0-0-0.html">智利</a>
+                                    <a href="/Abroad/0-304-353-0-0-0.html">秘鲁</a>
+                                    <a href="/Abroad/0-304-354-0-0-0.html">阿根廷</a>
+                                </div>
+                                <div class="leftMenuSearch">
+                                    <div style=" position:absolute">
+                                        <div class="keytypebox">北美州:</div>
+                                    </div>
+                                    <a href="/Abroad/0-305-355-0-0-0.html">美国</a>
+                                    <a href="/Abroad/0-305-355-0-0-0.html?keyword=%u590F%u5A01%u5937">夏威夷</a>
+                                    <a href="/Abroad/0-305-355-0-0-0.html?keyword=%u897F%u6D77%u5CB8">东西海岸</a>
+                                    <a href="/Abroad/0-305-356-0-0-0.html">加拿大</a>
+                                    <a href="/Abroad/0-305-357-0-0-0.html">墨西哥</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                
-                </div>
+            </div>
 
-
-               <!--  <div class="meunextend">
-                    <a href="/help/">帮助</a> | <a href="http://www.51760.cn" target="_blank">中青旅官网</a> </div>  | <a href="#">攻略</a>--> 
-               
-         
         </div>
-    </div>  
-    
+
+        <!--  <div class="meunextend">
+             <a href="/help/">帮助</a> | <a href="http://www.51760.cn" target="_blank">中青旅官网</a> </div>  | <a href="#">攻略</a>-->
+
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    $("#txtScenicValue").bind("blur",function(){$(this).val("景区名|城市");}).bind("click",function(){$(this).val("");});
+</script>

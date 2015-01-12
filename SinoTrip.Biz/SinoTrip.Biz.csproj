@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SinoTrip.Biz</RootNamespace>
     <AssemblyName>SinoTrip.Biz</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -39,8 +40,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Common\AreaBiz.cs" />
+    <Compile Include="SceneryBiz.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SinoTrip.DAL\SinoTrip.DAL.csproj">
+      <Project>{c045ecf2-a06a-4f76-9910-f7b91c6c5385}</Project>
+      <Name>SinoTrip.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SinoTrip.Entity\SinoTrip.Entity.csproj">
+      <Project>{e232716f-efa0-4dfc-a2dc-e4a340691b8f}</Project>
+      <Name>SinoTrip.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SinoTrip.FrameWork\SinoTrip.FrameWork.csproj">
+      <Project>{ecdfb705-b0e9-43ff-82ae-958af25a1c76}</Project>
+      <Name>SinoTrip.FrameWork</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

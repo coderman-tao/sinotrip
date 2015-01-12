@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Web.UI;
 
-namespace SinoTrip.Cache
+namespace SinoTrip.WebBase
 {
-    public class Class1
+    public class ScenicBase:Page
     {
     }
 }

@@ -10,7 +10,7 @@ using SinoTrip.WebBase;
 
 namespace SinoTrip.WebView
 {
-    public class TemplateBase : HotelBase
+    public class TemplateBase : BasePage
     {
         private string templatePath;
         /// <summary>

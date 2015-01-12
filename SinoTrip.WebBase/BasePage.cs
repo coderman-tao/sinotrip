@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Web.UI;
 
-namespace SinoTrip.Biz
+namespace SinoTrip.WebBase
 {
-    public class Class1
+    public class BasePage : Page
     {
     }
 }

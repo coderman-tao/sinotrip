@@ -10,8 +10,7 @@ namespace SinoTrip.WebView.Hotel
     public partial class Default : TemplateBase
     {
         protected void Page_Load(object sender, EventArgs e)
-        {
-
+        {;
         }
     }
 }

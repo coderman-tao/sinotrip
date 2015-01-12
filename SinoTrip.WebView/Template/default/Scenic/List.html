@@ -1,0 +1,223 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>景区门票预订_巢湖旅游景点大全_景点门票_驾驴旅游网</title>
+    #include("pageHeadCode.htm")
+    <link href="/Skin/default/style/tourlist.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    #parse("pageHead.htm")
+    <div class="pagebox">
+        <div class="pageWay">
+            您的位置：<a href="/" title="驾驴旅游网门票预定">首页</a> > <span title="$tool.GetSetting($tourType).name旅游报价">门票预订</span>
+        </div>
+    </div>
+
+    <div class="pagebox">
+        <div style="overflow: hidden; position: relative;">
+            <!--左-->
+            <div style="width: 855px; overflow: hidden; float: left">
+                <div class="thisbox" id="searchKeyList">
+                    <div class="searchbox showbox" item="areaType">
+                        <div style=" position:absolute">
+                            <div class="keytypebox">
+                                所在省份：
+                            </div>
+                            <div class="keyButtonbox">
+                                <span class="inputbutton keywordbutton" name="morebutton">- 收起</span>
+                            </div>
+                        </div>
+                        <a class="allkeyword" href="/Scenic/0&#45;0&#45;0&#45;$type&#45;$price&#45;$grade&#46;html">全部</a>
+                        <!--<a class="current" href="">安徽</a>-->
+                        #foreach($area in $Area)
+                        #if ($area.ItemId==$provice)
+                        <a class="current" href="javascript:void(0)">$area.Name</a>
+                        #else
+                        <a href="/Scenic/$area.ItemId&#45;$city&#45;$county&#45;$type&#45;$price&#45;$grade&#46;html">$area.Name</a>
+                        #end
+                        
+                        #end
+                    </div>
+
+                    <div class="searchbox showbox" item="areaplay">
+                        <div style=" position:absolute">
+                            <div class="keytypebox">
+                                所在城市：
+                            </div>
+                            <div class="keyButtonbox">
+                                <span class="inputbutton keywordbutton">- 收起</span>
+                            </div>
+                        </div>
+                        <a class="allkeyword" href="/Scenic/$provice&#45;0&#45;0&#45;$type&#45;$price&#45;$grade&#46;html">全部</a>
+                        #foreach($CItem in $City)
+                        #if ($CItem.ItemId==$city)
+                        <a class="current" href="javascript:void(0)">$CItem.Name</a>
+                        #else
+                        <a href="/Scenic/$provice&#45;$CItem.ItemId&#45;$county&#45;$type&#45;$price&#45;$grade&#46;html">$CItem.Name</a>
+                        #end
+                        <!--<a href="$provice&#45;$city&#45;$county&#45;$type&#45;$price&#45;$grade&#46;html">$area.Name</a>-->
+                        #end
+                    </div>
+
+
+                    <div class="searchbox showbox" item="tratype">
+                        <div style=" position:absolute">
+                            <div class="keytypebox">
+                                所在区域：
+                            </div>
+                            <div class="keyButtonbox">
+                                <span class="inputbutton keywordbutton">- 收起</span>
+                            </div>
+                        </div>
+                        <a class="allkeyword" href="$provice&#45;$city&#45;0&#45;$type&#45;$price&#45;$grade&#46;html">全部</a>
+                        #foreach($CArea in $CityArea)
+                        #if ($CArea.ItemId==$county)
+                        <a class="current" href="javascript:void(0)">$CArea.Name</a>
+                        #else
+                        <a href="/Scenic/$provice&#45;$city&#45;$CArea.ItemId&#45;$type&#45;$price&#45;$grade&#46;html">$CArea.Name</a>
+                        #end
+                        #end
+                    </div>
+
+                    <div class="searchbox showbox" item="journeyType">
+                        <div style=" position:absolute">
+                            <div class="keytypebox">
+                                主题分类：
+                            </div>
+                            <div class="keyButtonbox">
+                                <span class="inputbutton keywordbutton">- 收起</span>
+                            </div>
+                        </div>
+                        <a class="allkeyword" href="$provice&#45;$city&#45;$county&#45;0&#45;$price&#45;$grade&#46;html">全部</a>
+                        #foreach($TItem in $TypeData)
+                        #if ($TItem.ItemId==$type)
+                        <a class="current" href="javascript:void(0)">$TItem.Name</a>
+                        #else
+                        <a href="/Scenic/$provice&#45;$city&#45;$county&#45;$TItem.ItemId&#45;$price&#45;$grade&#46;html">$TItem.Name</a>
+                        #end
+                        <!--<a href="$provice&#45;$city&#45;$county&#45;$type&#45;$price&#45;$grade&#46;html">$area.Name</a>-->
+                        #end
+                    </div>
+                    <div class="searchbox" item="hotleType">
+                        <div style=" position:absolute">
+                            <div class="keytypebox">
+                                门票价格：
+                            </div>
+                        </div>
+                        <a class="allkeyword" href="$provice&#45;$city&#45;$county&#45;$type&#45;0&#45;$grade&#46;html">全部</a>
+                        <a class="current" href="">0-50</a>
+                        <a href="">50-100</a>
+                        <a href="">100-200</a>
+                        <a href="">200以上</a>
+                    </div>
+                    <div class="searchbox">
+                        <div style=" position:absolute">
+                            <div class="keytypebox">
+                                景区等级：
+                            </div>
+                        </div>
+                        <a class="allkeyword" href="$provice&#45;$city&#45;$county&#45;$type&#45;$price&#45;0&#46;html">全部</a>
+                        <a class="current" href="">AAAAA</a>
+                        <a href="">AAAA</a>
+                        <a href="">AAA</a>
+                        <a href="">AA</a>
+                    </div>
+                </div>
+
+                <div class="thisbox">
+                    <div style=" height:35px; line-height:35px; background-color:#f7f7f7"></div>
+
+                    <div class="tourlist" id="product_tourlist">
+
+                        <div class="tourbox">
+                            <div class="imgbox">
+                                <span class="imglab gtyIcon"></span>
+
+                                <a href="/Tour/$item.id&#46;html" target="_blank" title="在线预订$item.title">
+                                    <img width="238px" src="$tool.getFileImg($item.coverserver,$item.cover,320)" />
+                                </a>
+                            </div>
+
+                            <div class="tourcounet">
+                                <div class="touritem">
+                                    <a href="/Tour/$item.id&#46;html" target="_blank" title="$item.title"><h3>测试名称</h3></a>
+                                    <div style=" height:30px">$tool.NameHtml($item.describe,70)</div>
+
+                                    <div>特色：111</div>
+                                    <div>出发日期：2222</div>
+                                    <div class="tourlistDis">
+                                        <span class="discountBox couponetitle"><span class="discountname">券</span>优惠券</span>
+                                        <span class="discountBox couponetitle"><span class="discountname">减</span>下单立减</span>
+                                    </div>
+                                </div>
+                                <div class="pricebox">
+                                    <div class="price">200</div>
+                                    <div>市场价：<span style="text-decoration: line-through; color:#666">250</span></div>
+                                    <div style="padding-top:30px">
+                                        <a href="/Tour/$item.id&#46;html" target="_blank" title="在线预订$item.title">
+                                            <span class="inputbutton orange" style=" width:100px">立即预订</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                    </div>
+
+                </div>
+
+                <div class="pageList">
+
+                </div>
+
+            </div>
+             </div>
+            <!--右-->
+            <div style="width: 322px; float: right;">
+                <div style="background-color: #f7f7f7;" class="thisbox">
+                    <div style="padding: 10px 15px 10px 15px">
+                        <div class="minbox">
+                            <div class="minboxtitle">
+                                <span class="iconStr">特</span><span class="title"><h2>特价产品推荐</h2></span>
+                            </div>
+                            <div class="boxcontent">
+                                <div class="contentlist">
+                                    <div class="imgbox">
+                                        <a href="$pageurl$item.productid&#46;html" title="$item.title&#65293;$item.summary" target="_blank">
+                                            <img alt="$item.productname" src="" width="270px" height="165px" alt="$item.productname">
+                                        </a>
+                                    </div>
+                                    <div class="namenote">
+                                        <a class="namebox" href="$pageurl$item.productid&#46;html" title="$item.title&#65293;$item.summary" target="_blank">
+                                            <span class="productname">测试数据</span>200
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    #parse("pageFoot.htm")
+</body>
+</html>
+<script type="text/javascript">
+    $("#searchKeyList").find(".keywordbutton").bind("click", function () {
+        var pitem = $(this).parents(".searchbox");
+        if (pitem.data("isShow")) {
+            pitem.removeClass("showbox");
+            pitem.data("isShow", false)
+            $(this).html("┼ 展开")
+        } else {
+
+            pitem.addClass("showbox");
+            pitem.data("isShow", true)
+            $(this).html("- 收起")
+        }
+    });
+</script>

@@ -9,7 +9,7 @@ using SinoTrip.DB;
 using SinoTrip.FrameWork.Common;
 
 
-namespace cartrip.Core
+namespace SinoTrip.Core
 {
     public abstract class DALCore
     {

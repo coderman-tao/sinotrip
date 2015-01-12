@@ -1,4 +1,4 @@
-﻿using cartrip.Core;
+﻿using SinoTrip.Core;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -104,6 +104,26 @@ namespace SinoTrip.DAL.Common
             {
                 return false;
             }
+        }
+
+        public List<string> GetThemeNames()
+        {
+            string sql = "select DISTINCT ThemeName from common_scenery where LENGTH(ThemeName)>0";
+            var dt = DALCore.GetSMDB().Query(sql).Tables[0];
+            List<string> rs = new List<string>();
+            if (dt.Rows.Count > 0)
+            {
+                foreach (DataRow row in dt.Rows)
+                {
+                    string[] s = row[0].ToString().Split('|');
+                    foreach (var _s in s)
+                    {
+                        if (!string.IsNullOrEmpty(_s)&&!rs.Contains(_s))
+                            rs.Add(_s);
+                    }
+                }
+            }
+            return rs;
         }
     }
 }

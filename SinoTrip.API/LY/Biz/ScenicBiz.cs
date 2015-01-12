@@ -27,6 +27,12 @@ namespace SinoTrip.API.LY.Biz
             string rs = ApiCommon.GetResult("<provinceId>" + Pid + "</provinceId>", "GetCityListByProvinceId", "http://tcopenapi.17usoft.com/Handlers/General/AdministrativeDivisionsHandler.ashx");
             return rs;
         }
+
+        public string GetCountyListByCityId(int cid)
+        {
+            string rs = ApiCommon.GetResult("<cityId>" + cid + "</cityId>", "GetCountyListByCityId", "http://tcopenapi.17usoft.com/Handlers/General/AdministrativeDivisionsHandler.ashx");
+            return rs;
+        }
         /// <summary>
         /// 根据城市获取景点
         /// </summary>
