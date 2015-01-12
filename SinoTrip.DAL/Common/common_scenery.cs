@@ -73,7 +73,7 @@ namespace SinoTrip.DAL.Common
 
         public DataTable GetIds()
         {
-            string sql = "SELECT OutSign FROM common_scenery_outsign";
+            string sql = "SELECT OutSign FROM common_scenery_outsign where OutSign not in (42,70,79,86,93,102,104,111,112,122,142,159,163,178,181,186,191,194,206,212)";
             return DALCore.GetSMDB().Query(sql).Tables[0];
         }
 
