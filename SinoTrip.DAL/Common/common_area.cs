@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using SinoTrip.FrameWork.Common;
+using SinoTrip.Entity.ViewModel;
 
 namespace SinoTrip.DAL.Common
 {
@@ -13,12 +14,13 @@ namespace SinoTrip.DAL.Common
        /// </summary>
        /// <param name="model"></param>
        /// <returns></returns>
-        public List<Entity.DataBase.Common.common_area> GetList(Entity.DataBase.Common.common_area model)
+       public List<ViewArea> GetList(ViewArea model)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select ItemId,Parent,Name,English,ABCD,Suoxie,Pinyin,Data,Status ");
-            strSql.Append(" FROM common_area WHERE Status=0");
-            return DALCore.GetSMDB().Query(strSql.ToString()).Tables[0].ToList<Entity.DataBase.Common.common_area>();
+            strSql.Append("select A.OutSign,A.Supply,B.ItemId,B.Parent,B.Name,B.English,B.ABCD,B.Suoxie,B.Pinyin,B.Data,B.Status ");
+            strSql.Append(" from common_area_outsign AS A LEFT JOIN common_area AS B ON A.AreaId=B.ItemId");
+            strSql.Append(" WHERE B.Status=0");
+            return DALCore.GetSMDB().Query(strSql.ToString()).Tables[0].ToList<ViewArea>();
         }
     }
 }

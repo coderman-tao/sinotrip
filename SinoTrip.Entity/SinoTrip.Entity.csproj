@@ -49,6 +49,9 @@
     <Compile Include="DataBase\Scenery\scenery_comment.cs" />
     <Compile Include="DataBase\Scenery\scenery_comment_img.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\ViewArea.cs" />
+    <Compile Include="ViewModel\ViewCity.cs" />
+    <Compile Include="ViewModel\ViewCityArea.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

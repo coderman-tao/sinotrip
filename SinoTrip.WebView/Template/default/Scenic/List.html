@@ -34,7 +34,7 @@
                         #if ($area.ItemId==$provice)
                         <a class="current" href="javascript:void(0)">$area.Name</a>
                         #else
-                        <a href="/Scenic/$area.ItemId&#45;$city&#45;$county&#45;$type&#45;$price&#45;$grade&#46;html">$area.Name</a>
+                        <a href="/Scenic/$area.ItemId&#45;0&#45;0&#45;$type&#45;$price&#45;$grade&#46;html">$area.Name</a>
                         #end
                         
                         #end
@@ -54,7 +54,7 @@
                         #if ($CItem.ItemId==$city)
                         <a class="current" href="javascript:void(0)">$CItem.Name</a>
                         #else
-                        <a href="/Scenic/$provice&#45;$CItem.ItemId&#45;$county&#45;$type&#45;$price&#45;$grade&#46;html">$CItem.Name</a>
+                        <a href="/Scenic/$provice&#45;$CItem.ItemId&#45;0&#45;$type&#45;$price&#45;$grade&#46;html">$CItem.Name</a>
                         #end
                         <!--<a href="$provice&#45;$city&#45;$county&#45;$type&#45;$price&#45;$grade&#46;html">$area.Name</a>-->
                         #end
@@ -129,20 +129,20 @@
                     <div style=" height:35px; line-height:35px; background-color:#f7f7f7"></div>
 
                     <div class="tourlist" id="product_tourlist">
-
+                        #foreach($sitem in $Scenery.Scenerys)
                         <div class="tourbox">
                             <div class="imgbox">
                                 <span class="imglab gtyIcon"></span>
 
                                 <a href="/Tour/$item.id&#46;html" target="_blank" title="在线预订$item.title">
-                                    <img width="238px" src="$tool.getFileImg($item.coverserver,$item.cover,320)" />
+                                    <img width="238px" height="170px" src="$Scenery.imgbaseURL/$sitem.imgPath" />
                                 </a>
                             </div>
 
                             <div class="tourcounet">
                                 <div class="touritem">
-                                    <a href="/Tour/$item.id&#46;html" target="_blank" title="$item.title"><h3>测试名称</h3></a>
-                                    <div style=" height:30px">$tool.NameHtml($item.describe,70)</div>
+                                    <a href="/Tour/$item.id&#46;html" target="_blank" title="$item.title"><h3>$sitem.sceneryName</h3></a>
+                                    <div style=" height:30px">$sitem.scenerySummary</div>
 
                                     <div>特色：111</div>
                                     <div>出发日期：2222</div>
@@ -162,7 +162,10 @@
                                 </div>
                             </div>
 
-                    </div>
+                        </div>
+                        #end
+
+                       
 
                 </div>
 

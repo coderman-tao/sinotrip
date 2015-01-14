@@ -32,6 +32,14 @@ namespace SinoTrip.API.LY.Model
         [XmlElement("city")]
         public List<AreaInfo> Citys { get; set; }
     }
+     [Serializable]
+    public class countyList
+    {
+        [XmlAttribute]
+        public int totalCount { get; set; }
+        [XmlElement("county")]
+        public List<AreaInfo> Citys { get; set; }
+    }
 
     //<sceneryList page="1" pageSize="100" totalPage="1" totalCount="19" imgbaseURL="http://upload.17u.com/uploadfile/scenerypic_common/134_100/">
     [Serializable]
@@ -48,7 +56,7 @@ namespace SinoTrip.API.LY.Model
         [XmlAttribute]
         public string imgbaseURL { get; set; }
         [XmlElement("scenery")]
-        public List<scenery> Scenerys;
+        public List<scenery> Scenerys { get; set; }
     }
     [Serializable]
     public class scenery

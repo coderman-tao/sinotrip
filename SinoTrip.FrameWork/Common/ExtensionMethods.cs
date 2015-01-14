@@ -70,10 +70,19 @@ namespace SinoTrip.FrameWork.Common
 
         public static decimal ToDecimal(this object obj)
         {
-            if (obj == null || DBNull.Value == obj)
-                return 0M;
+            try
+            {
+                if (obj == null || DBNull.Value == obj)
+                    return 0M;
 
-            return Convert.ToDecimal(obj);
+                return Convert.ToDecimal(obj);
+            }
+            catch (Exception)
+            {
+
+                return 0M;
+            }
+           
         }
 
         public static decimal ToDecimal(this object obj, string format)

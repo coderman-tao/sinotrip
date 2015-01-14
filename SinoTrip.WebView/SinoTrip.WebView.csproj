@@ -393,6 +393,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ajax\Scenery\GetInfo.ashx.cs">
+      <DependentUpon>GetInfo.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -510,6 +513,7 @@
     <Content Include="Res\js\mf-pattern\img\mF_tbhuabao\.svn\entries" />
     <Content Include="Res\js\mf-pattern\img\mF_tbhuabao\.svn\prop-base\btn-bg.gif.svn-base" />
     <Content Include="Res\js\mf-pattern\img\mF_tbhuabao\.svn\text-base\btn-bg.gif.svn-base" />
+    <Content Include="Ajax\Scenery\GetInfo.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

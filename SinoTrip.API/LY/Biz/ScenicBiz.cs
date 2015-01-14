@@ -5,6 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 using SinoTrip.FrameWork.Common;
+using SinoTrip.API.LY.Model;
+using System.Reflection;
+using SinoTrip.FrameWork.Utils;
 
 namespace SinoTrip.API.LY.Biz
 {
@@ -48,6 +51,29 @@ namespace SinoTrip.API.LY.Biz
             return rs;
         }
 
+        /// <summary>
+        /// 查询景点列表
+        /// </summary>
+        /// <param name="pq"></param>
+        /// <returns></returns>
+        public sceneryList QueryScenery(QueryScenery pq)
+        {
+            string request = "";
+            FieldInfo[] fInfos = typeof(QueryScenery).GetFields();
+            foreach (var f in fInfos)
+            {
+                //if(typeof(f).is)
+                if (f.GetValue(pq) != null)
+                {
+                    request += "<" + f.Name + ">" + f.GetValue(pq) + "</" + f.Name + ">";
+                }
+            }
+            string rs = ApiCommon.GetResult(request, "GetSceneryList", "http://tcopenapi.17usoft.com/handlers/scenery/queryhandler.ashx").Replace("&", "&amp;");
+            rs = GetJQRs(rs);
+            var model = rs.XmlToEntity<sceneryList>();
+            return model;
+        }
+
         public string GetSceneryDetail(int SceneryId)
         {
             string PostData = "<sceneryId>" + SceneryId + "</sceneryId><cs>2</cs>";
@@ -79,13 +105,43 @@ namespace SinoTrip.API.LY.Biz
             string PostData = "<showDetail>" + showDetail + "</showDetail><sceneryIds>" + sceneryIds + "</sceneryIds><payType>0</payType>";
 
             string rs = ApiCommon.GetResult(PostData, "GetSceneryPrice", "http://tcopenapi.17usoft.com/handlers/scenery/queryhandler.ashx");
-           //rs = rs.Replace("&", "&amp;");
+            //rs = rs.Replace("&", "&amp;");
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(rs);
             return doc.SelectSingleNode("response/body").InnerXml.XmlToEntity<SinoTrip.API.LY.Model.SceneryPrice>();
             //return rs;
         }
 
-       // public string GetPriceCalendar()
+        string GetJQRs(string str)
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(str);
+            XmlNodeList sceneryNames = doc.GetElementsByTagName("sceneryName");
+            foreach (XmlElement a in sceneryNames)
+            {
+                a.InnerXml = a.InnerText;
+
+            }
+            XmlNodeList imgPaths = doc.GetElementsByTagName("imgPath");
+            foreach (XmlElement a in imgPaths)
+            {
+                a.InnerXml = a.InnerText;
+
+            }
+            XmlNodeList sceneryAddress = doc.GetElementsByTagName("sceneryAddress");
+            foreach (XmlElement a in sceneryAddress)
+            {
+                a.InnerXml = a.InnerText;
+
+            }
+            XmlNodeList scenerySummary = doc.GetElementsByTagName("scenerySummary");
+            foreach (XmlElement a in scenerySummary)
+            {
+                a.InnerXml = a.InnerText;
+
+            }
+            return doc.SelectSingleNode("response/body").InnerXml;
+        }
+        // public string GetPriceCalendar()
     }
 }

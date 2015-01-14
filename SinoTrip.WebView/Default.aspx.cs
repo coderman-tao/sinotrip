@@ -17,6 +17,7 @@ using SinoTrip.FrameWork.Utils;
 using System.Reflection;
 using System.Data;
 using System.Threading;
+using SinoTrip.Cache;
 
 namespace SinoTrip.WebView
 {
@@ -27,12 +28,69 @@ namespace SinoTrip.WebView
         private static readonly string KEY = ConfigurationManager.AppSettings["ctripKey"];
         protected void Page_Load(object sender, EventArgs e)
         {
-
-            GetJQDP();
+            //GetCountyListByCityId();
+            //GetJQDeatil();
+            //var biz = new SinoTrip.API.LY.Biz.ScenicBiz();
+            //var rsssss = biz.QueryScenery(new SinoTrip.API.LY.Model.QueryScenery() { provinceId = 2, cityId = 45, page = 1, pageSize = 10 });
+            //List<int> ids = new List<int>();
+            //ids.Add(24351);
+            //var model = biz.GetSceneryPrice(2, ids);
+            //GetJQDP();
             Response.Clear();
-            Response.Write("aaa");
+            Response.Write("");
             Response.ContentType = "text/xml";
             Response.End();
+        }
+
+        void GetCountyListByCityId()
+        {
+            var biz = new SinoTrip.API.LY.Biz.ScenicBiz();
+            var _id = 1452;
+            if (_id > 0)
+            {
+                try
+                {
+                    string rs = biz.GetCountyListByCityId(_id).Replace("&", "&amp;");
+                    XmlDocument doc = new XmlDocument();
+                    doc.LoadXml(rs);
+                    var Node = doc.SelectSingleNode("response/body");
+                    XmlNodeList nodeList = Node.ChildNodes[0].ChildNodes;
+                    foreach (XmlElement item in nodeList)
+                    {
+                        foreach (XmlElement i in item.ChildNodes)
+                        {
+                            i.InnerXml = i.InnerText;
+                        }
+
+                    }
+                    var model = Node.InnerXml.XmlToEntity<SinoTrip.API.LY.Model.countyList>();
+
+                    foreach (var item in model.Citys)
+                    {
+                        var a = new SinoTrip.Entity.DataBase.Common.common_city_area()
+                        {
+                            Name = item.name,
+                            English = item.enName,
+                            ABCD = item.prefixLetter,
+                            CityID = 1452,
+                            CityName = "三沙市",
+                            Status = item.id.ToInt32(0)
+                        };
+                        new SinoTrip.DAL.Common.common_city_area().Add(a);
+                    }
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+
+            }
+            //var cityData = AreaCache.GetCityCache(0, "", true);
+            //foreach (var city in cityData)
+            //{
+               
+            //}
         }
 
         void CtripJQ()
@@ -302,7 +360,7 @@ namespace SinoTrip.WebView
                                 }
                             }
                             //Thread.Sleep(1000);
-                            
+
                         }
                     }
                 }
@@ -310,8 +368,13 @@ namespace SinoTrip.WebView
                 {
                     continue;
                 }
-                
+
             }
+        }
+
+        void GetJQItem()
+        {
+
         }
 
         int DptypeToInt(string DPType)
