@@ -28,6 +28,10 @@ namespace SinoTrip.WebView
         private static readonly string KEY = ConfigurationManager.AppSettings["ctripKey"];
         protected void Page_Load(object sender, EventArgs e)
         {
+            var biz = new SinoTrip.API.LY.Biz.ScenicBiz();
+            var ids = new SinoTrip.DAL.Common.common_scenery().GetIds();
+
+            string rs = biz.GetSceneryDetail(5035);
             //GetCountyListByCityId();
             //GetJQDeatil();
             //var biz = new SinoTrip.API.LY.Biz.ScenicBiz();
