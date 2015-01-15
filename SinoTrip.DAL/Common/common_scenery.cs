@@ -7,6 +7,7 @@ using System.Text;
 using SinoTrip.Core;
 using SinoTrip.FrameWork.Common;
 using System.Data;
+using SinoTrip.Entity.ViewModel;
 
 namespace SinoTrip.DAL.Common
 {
@@ -19,13 +20,14 @@ namespace SinoTrip.DAL.Common
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into common_scenery(");
-            strSql.Append("Name,Address,Summary,Cover,CityId,CityName,CountyId,CountyName,Grade,ThemeName,Lat,Lng,Intro,BuyNotie,Alias,Traffic,NearId,Status)");
+            strSql.Append("Name,Address,Summary,TypeId,Cover,CityId,CityName,CountyId,CountyName,Grade,ThemeName,Lat,Lng,Intro,BuyNotie,Alias,Traffic,NearId,Status)");
             strSql.Append(" values (");
-            strSql.Append("@Name,@Address,@Summary,@Cover,@CityId,@CityName,@CountyId,@CountyName,@Grade,@ThemeName,@Lat,@Lng,@Intro,@BuyNotie,@Alias,@Traffic,@NearId,@Status)");
+            strSql.Append("@Name,@Address,@Summary,@TypeId,@Cover,@CityId,@CityName,@CountyId,@CountyName,@Grade,@ThemeName,@Lat,@Lng,@Intro,@BuyNotie,@Alias,@Traffic,@NearId,@Status)");
             MySqlParameter[] parameters = {
 					new MySqlParameter("@Name", MySqlDbType.VarChar,255),
 					new MySqlParameter("@Address", MySqlDbType.Text),
 					new MySqlParameter("@Summary", MySqlDbType.Text),
+					new MySqlParameter("@TypeId", MySqlDbType.Int32,11),
 					new MySqlParameter("@Cover", MySqlDbType.VarChar,2000),
 					new MySqlParameter("@CityId", MySqlDbType.Int32,11),
 					new MySqlParameter("@CityName", MySqlDbType.VarChar,255),
@@ -44,21 +46,22 @@ namespace SinoTrip.DAL.Common
             parameters[0].Value = model.Name;
             parameters[1].Value = model.Address;
             parameters[2].Value = model.Summary;
-            parameters[3].Value = model.Cover;
-            parameters[4].Value = model.CityId;
-            parameters[5].Value = model.CityName;
-            parameters[6].Value = model.CountyId;
-            parameters[7].Value = model.CountyName;
-            parameters[8].Value = model.Grade;
-            parameters[9].Value = model.ThemeName;
-            parameters[10].Value = model.Lat;
-            parameters[11].Value = model.Lng;
-            parameters[12].Value = model.Intro;
-            parameters[13].Value = model.BuyNotie;
-            parameters[14].Value = model.Alias;
-            parameters[15].Value = model.Traffic;
-            parameters[16].Value = model.NearId;
-            parameters[17].Value = model.Status;
+            parameters[3].Value = model.TypeId;
+            parameters[4].Value = model.Cover;
+            parameters[5].Value = model.CityId;
+            parameters[6].Value = model.CityName;
+            parameters[7].Value = model.CountyId;
+            parameters[8].Value = model.CountyName;
+            parameters[9].Value = model.Grade;
+            parameters[10].Value = model.ThemeName;
+            parameters[11].Value = model.Lat;
+            parameters[12].Value = model.Lng;
+            parameters[13].Value = model.Intro;
+            parameters[14].Value = model.BuyNotie;
+            parameters[15].Value = model.Alias;
+            parameters[16].Value = model.Traffic;
+            parameters[17].Value = model.NearId;
+            parameters[18].Value = model.Status;
 
             int rows = DALCore.GetSMDB().ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)
@@ -69,6 +72,20 @@ namespace SinoTrip.DAL.Common
             {
                 return false;
             }
+        }
+
+        /// <summary>
+        /// 查询所有景点信息
+        /// </summary>
+        /// <param name="pq"></param>
+        /// <returns></returns>
+        public List<ViewScenery> QueryAll()
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("SELECT A.OutSign,A.Supply,B.ItemId,B.Name,B.Address,B.Summary,B.TypeId,B.Cover,B.CityId,B.CityName,");
+            strSql.Append("B.CountyId,B.CountyName,B.Grade,B.ThemeName,B.Lat,B.Lng,B.Intro,B.BuyNotie,B.Alias,B.Traffic,B.NearId,B.Status from common_scenery_outsign as A ");
+            strSql.Append("LEFT JOIN common_scenery as B ON A.SceneryId=B.ItemId WHERE B.Status=0");
+            return DALCore.GetSMDB().Query(strSql.ToString()).Tables[0].ToList<ViewScenery>();
         }
 
         public DataTable GetIds()

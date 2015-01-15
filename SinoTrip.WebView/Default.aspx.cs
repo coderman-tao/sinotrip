@@ -28,17 +28,15 @@ namespace SinoTrip.WebView
         private static readonly string KEY = ConfigurationManager.AppSettings["ctripKey"];
         protected void Page_Load(object sender, EventArgs e)
         {
-            var biz = new SinoTrip.API.LY.Biz.ScenicBiz();
-            var ids = new SinoTrip.DAL.Common.common_scenery().GetIds();
+           // var ids = new SinoTrip.DAL.Common.common_scenery().GetIds();
 
-            string rs = biz.GetSceneryDetail(5035);
             //GetCountyListByCityId();
             //GetJQDeatil();
-            //var biz = new SinoTrip.API.LY.Biz.ScenicBiz();
+            var biz = new SinoTrip.API.LY.Biz.ScenicBiz();
             //var rsssss = biz.QueryScenery(new SinoTrip.API.LY.Model.QueryScenery() { provinceId = 2, cityId = 45, page = 1, pageSize = 10 });
-            //List<int> ids = new List<int>();
-            //ids.Add(24351);
-            //var model = biz.GetSceneryPrice(2, ids);
+            List<int> ids = new List<int>();
+            ids.Add(5305);
+            var model = biz.GetSceneryPrice(2, ids);
             //GetJQDP();
             Response.Clear();
             Response.Write("");

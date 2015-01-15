@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>景区门票预订_巢湖旅游景点大全_景点门票_驾驴旅游网</title>
     #include("pageHeadCode.htm")
-    <link href="/Skin/default/style/tourlist.css" rel="stylesheet" type="text/css" />
+    <link href="/Skin/default/style/SceneryList.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
     #parse("pageHead.htm")
@@ -13,7 +13,6 @@
             您的位置：<a href="/" title="驾驴旅游网门票预定">首页</a> > <span title="$tool.GetSetting($tourType).name旅游报价">门票预订</span>
         </div>
     </div>
-
     <div class="pagebox">
         <div style="overflow: hidden; position: relative;">
             <!--左-->
@@ -36,10 +35,9 @@
                         #else
                         <a href="/Scenic/$area.ItemId&#45;0&#45;0&#45;$type&#45;$price&#45;$grade&#46;html">$area.Name</a>
                         #end
-                        
+
                         #end
                     </div>
-
                     <div class="searchbox showbox" item="areaplay">
                         <div style=" position:absolute">
                             <div class="keytypebox">
@@ -60,7 +58,6 @@
                         #end
                     </div>
 
-
                     <div class="searchbox showbox" item="tratype">
                         <div style=" position:absolute">
                             <div class="keytypebox">
@@ -79,7 +76,6 @@
                         #end
                         #end
                     </div>
-
                     <div class="searchbox showbox" item="journeyType">
                         <div style=" position:absolute">
                             <div class="keytypebox">
@@ -124,57 +120,48 @@
                         <a href="">AA</a>
                     </div>
                 </div>
-
                 <div class="thisbox">
                     <div style=" height:35px; line-height:35px; background-color:#f7f7f7"></div>
-
                     <div class="tourlist" id="product_tourlist">
                         #foreach($sitem in $Scenery.Scenerys)
-                        <div class="tourbox">
+                        <div class="tourbox" value="$sitem.sceneryId">
                             <div class="imgbox">
-                                <span class="imglab gtyIcon"></span>
-
-                                <a href="/Tour/$item.id&#46;html" target="_blank" title="在线预订$item.title">
-                                    <img width="238px" height="170px" src="$Scenery.imgbaseURL/$sitem.imgPath" />
+                                <a href="/Tour/$item.id&#46;html" target="_blank" title="在线预订$sitem.sceneryName">
+                                    <img width="160px" height="120px" src="$Scenery.imgbaseURL/$sitem.imgPath" />
                                 </a>
                             </div>
-
                             <div class="tourcounet">
                                 <div class="touritem">
-                                    <a href="/Tour/$item.id&#46;html" target="_blank" title="$item.title"><h3>$sitem.sceneryName</h3></a>
-                                    <div style=" height:30px">$sitem.scenerySummary</div>
-
-                                    <div>特色：111</div>
-                                    <div>出发日期：2222</div>
-                                    <div class="tourlistDis">
+                                    <a href="/Tour/$item.id&#46;html" target="_blank" title="$sitem.scenerySummary">
+                                    <h3>$sitem.sceneryName&nbsp;&nbsp;($sitem.provinceName#if($sitem.cityName!=$sitem.provinceName)·$sitem.cityName #end)</h3></a>
+                                    <div>地址：$sitem.sceneryAddress&nbsp;&nbsp;&nbsp;&nbsp;<a class="mapbtn" href="javascript:void(0)" onclick="alert('经度：$sitem.lon,纬度：$sitem.lat')">查看地图</a></div>
+                                    <div>景区等级：$sitem.gradeId</div>
+                                    <div>有$sitem.commentCount位网友曾点评过</div>
+                                    <!--<div class="tourlistDis">
                                         <span class="discountBox couponetitle"><span class="discountname">券</span>优惠券</span>
                                         <span class="discountBox couponetitle"><span class="discountname">减</span>下单立减</span>
-                                    </div>
+                                    </div>-->
                                 </div>
                                 <div class="pricebox">
-                                    <div class="price">200</div>
-                                    <div>市场价：<span style="text-decoration: line-through; color:#666">250</span></div>
-                                    <div style="padding-top:30px">
+                                    <div class="price">¥$sitem.amountAdv</div>
+                                    <div>门市价：<span style="text-decoration: line-through; color:#666">¥$sitem.amount</span></div>
+                                    <div style="padding-top:15px">
                                         <a href="/Tour/$item.id&#46;html" target="_blank" title="在线预订$item.title">
                                             <span class="inputbutton orange" style=" width:100px">立即预订</span>
                                         </a>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                         #end
 
-                       
 
+
+                    </div>
+                    <div class="pageList">
+                    </div>
                 </div>
-
-                <div class="pageList">
-
-                </div>
-
             </div>
-             </div>
             <!--右-->
             <div style="width: 322px; float: right;">
                 <div style="background-color: #f7f7f7;" class="thisbox">
@@ -199,8 +186,6 @@
                             </div>
                         </div>
                     </div>
-
-
 
                 </div>
             </div>

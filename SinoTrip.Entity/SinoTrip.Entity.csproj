@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseEntity.cs" />
     <Compile Include="DataBase\Common\common_area.cs" />
     <Compile Include="DataBase\Common\common_city.cs" />
     <Compile Include="DataBase\Common\common_city_area.cs" />
@@ -52,6 +53,7 @@
     <Compile Include="ViewModel\ViewArea.cs" />
     <Compile Include="ViewModel\ViewCity.cs" />
     <Compile Include="ViewModel\ViewCityArea.cs" />
+    <Compile Include="ViewModel\ViewScenery.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

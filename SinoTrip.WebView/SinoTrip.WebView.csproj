@@ -326,6 +326,7 @@
     <Content Include="Skin\Default\style\hotle.css" />
     <Content Include="Skin\Default\style\hotleitem.css" />
     <Content Include="Skin\Default\style\order.css" />
+    <Content Include="Skin\Default\style\SceneryList.css" />
     <Content Include="Skin\Default\style\style.css" />
     <Content Include="Skin\Default\style\touritem.css" />
     <Content Include="Skin\Default\style\tourlist.css" />

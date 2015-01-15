@@ -1,4 +1,5 @@
-﻿using SinoTrip.FrameWork.IO;
+﻿using SinoTrip.Entity.ViewModel;
+using SinoTrip.FrameWork.IO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,7 +44,54 @@ namespace SinoTrip.Cache
             {
                 result = result.Where(item => item.Name == Name).ToList();
             }
-            return result.OrderBy(item=>item.OrderNo).ToList();
+            return result.OrderBy(item => item.OrderNo).ToList();
+        }
+
+        /// <summary>
+        /// 设置区域缓存
+        /// </summary>
+        /// <returns></returns>
+        public static List<ViewScenery> SetSceneryCache()
+        {
+            var data = new SinoTrip.Biz.SceneryBiz().QueryAllSecery();
+            FileCache.SetCache("SeceryCache", data, "scenery");
+            return data;
+        }
+
+        public static List<ViewScenery> GetSceneryCache(int id, string proviceName, int cityId, int countyId, int typeId, string grade, string name)
+        {
+            var result = FileCache.ReadCache("SeceryCache", DateTime.MinValue, "scenery") as List<ViewScenery>;
+            if (result == null)
+            {
+                result = SetSceneryCache();
+            }
+            if (id > 0)
+            {
+                result = result.Where(item => item.ItemId == id).ToList();
+                return result;
+            }
+            if (!string.IsNullOrEmpty(proviceName))
+            {
+                var cids = AreaCache.GetCityCache(0, proviceName, true).Select(item => item.ItemId).ToList();
+                result = result.Where(item => cids.Contains(item.CityId)).ToList();
+            }
+            if (cityId > 0)
+            {
+                result = result.Where(item => item.CityId == cityId).ToList();
+            }
+            if (countyId > 0)
+            {
+                result = result.Where(item => item.CountyId == countyId).ToList();
+            }
+            if (typeId > 0)
+            {
+                result = result.Where(item => item.TypeId == typeId).ToList();
+            }
+            if (!string.IsNullOrEmpty(name))
+            {
+                result = result.Where(item => item.Name.Contains(name) || name.Contains(item.Name) || item.Alias.Contains(name) || item.CityName.Contains(name) || name.Contains(item.CityName)).ToList();
+            }
+            return result;
         }
     }
 }

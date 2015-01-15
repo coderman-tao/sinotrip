@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace SinoTrip.Entity.DataBase.Common
 {
     [Serializable]
-    public partial class common_scenery
+    public partial class common_scenery : BaseEntity
     {
         public common_scenery()
         { }
@@ -16,8 +16,9 @@ namespace SinoTrip.Entity.DataBase.Common
         private string _name;
         private string _address;
         private string _summary;
+        private int _typeid;
         private string _cover;
-        private int? _cityid;
+        private int _cityid;
         private string _cityname;
         private int? _countyid;
         private string _countyname;
@@ -66,6 +67,14 @@ namespace SinoTrip.Entity.DataBase.Common
         /// <summary>
         /// 
         /// </summary>
+        public int TypeId
+        {
+            get { return _typeid; }
+            set { _typeid = value; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
         public string Cover
         {
             set { _cover = value; }
@@ -74,7 +83,7 @@ namespace SinoTrip.Entity.DataBase.Common
         /// <summary>
         /// 
         /// </summary>
-        public int? CityId
+        public int CityId
         {
             set { _cityid = value; }
             get { return _cityid; }

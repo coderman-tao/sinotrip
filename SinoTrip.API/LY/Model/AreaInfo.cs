@@ -217,7 +217,7 @@ namespace SinoTrip.API.LY.Model
             set;
         }
         /// <summary> 
-        /// amount
+        /// 门市价
         /// </summary> 
         public string amount
         {
@@ -225,7 +225,7 @@ namespace SinoTrip.API.LY.Model
             set;
         }
         /// <summary> 
-        /// amountAdv
+        /// 同程价
         /// </summary> 
         public string amountAdv
         {

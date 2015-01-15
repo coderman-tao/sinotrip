@@ -23,3 +23,6 @@ C:\Users\taolinse\Source\Repos\sinotrip\SinoTrip.WebView\bin\SinoTrip.Core.pdb
 C:\Users\taolinse\Source\Repos\sinotrip\SinoTrip.WebView\bin\SinoTrip.DAL.pdb
 C:\Users\taolinse\Source\Repos\sinotrip\SinoTrip.WebView\bin\SinoTrip.Entity.pdb
 C:\Users\taolinse\Source\Repos\sinotrip\SinoTrip.WebView\bin\SinoTrip.DBCore.pdb
+C:\Users\taolinse\Source\Repos\sinotrip\SinoTrip.WebView\bin\URLRewriter.dll
+C:\Users\taolinse\Source\Repos\sinotrip\SinoTrip.WebView\bin\SinoTrip.Biz.dll
+C:\Users\taolinse\Source\Repos\sinotrip\SinoTrip.WebView\bin\SinoTrip.Biz.pdb
