@@ -1,0 +1,13 @@
+C:\Users\taolinse\Source\Repos\sinotrip\SinoTrip.Core\bin\Debug\SinoTrip.Core.dll
+C:\Users\taolinse\Source\Repos\sinotrip\SinoTrip.Core\bin\Debug\SinoTrip.Core.pdb
+C:\Users\taolinse\Source\Repos\sinotrip\SinoTrip.Core\bin\Debug\log4net.dll
+C:\Users\taolinse\Source\Repos\sinotrip\SinoTrip.Core\bin\Debug\MongoDB.dll
+C:\Users\taolinse\Source\Repos\sinotrip\SinoTrip.Core\bin\Debug\MySql.Data.dll
+C:\Users\taolinse\Source\Repos\sinotrip\SinoTrip.Core\bin\Debug\SinoTrip.DBCore.dll
+C:\Users\taolinse\Source\Repos\sinotrip\SinoTrip.Core\bin\Debug\SinoTrip.FrameWork.dll
+C:\Users\taolinse\Source\Repos\sinotrip\SinoTrip.Core\bin\Debug\NVelocity.dll
+C:\Users\taolinse\Source\Repos\sinotrip\SinoTrip.Core\bin\Debug\SinoTrip.DBCore.pdb
+C:\Users\taolinse\Source\Repos\sinotrip\SinoTrip.Core\bin\Debug\SinoTrip.FrameWork.pdb
+C:\Users\taolinse\Source\Repos\sinotrip\SinoTrip.Core\obj\Debug\SinoTrip.Core.csprojResolveAssemblyReference.cache
+C:\Users\taolinse\Source\Repos\sinotrip\SinoTrip.Core\obj\Debug\SinoTrip.Core.dll
+C:\Users\taolinse\Source\Repos\sinotrip\SinoTrip.Core\obj\Debug\SinoTrip.Core.pdb

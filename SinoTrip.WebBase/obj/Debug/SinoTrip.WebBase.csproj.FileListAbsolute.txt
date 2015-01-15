@@ -1,0 +1,6 @@
+C:\Users\taolinse\Source\Repos\sinotrip\SinoTrip.WebBase\bin\Debug\SinoTrip.WebBase.dll
+C:\Users\taolinse\Source\Repos\sinotrip\SinoTrip.WebBase\bin\Debug\SinoTrip.WebBase.pdb
+C:\Users\taolinse\Source\Repos\sinotrip\SinoTrip.WebBase\obj\Debug\SinoTrip.WebBase.dll
+C:\Users\taolinse\Source\Repos\sinotrip\SinoTrip.WebBase\obj\Debug\SinoTrip.WebBase.pdb
+C:\Users\taolinse\Source\Repos\sinotrip\SinoTrip.WebBase\bin\Debug\NVelocity.dll
+C:\Users\taolinse\Source\Repos\sinotrip\SinoTrip.WebBase\obj\Debug\SinoTrip.WebBase.csprojResolveAssemblyReference.cache

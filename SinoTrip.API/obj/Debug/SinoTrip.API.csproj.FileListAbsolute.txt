@@ -1,0 +1,8 @@
+C:\Users\taolinse\Source\Repos\sinotrip\SinoTrip.API\bin\Debug\SinoTrip.API.dll
+C:\Users\taolinse\Source\Repos\sinotrip\SinoTrip.API\bin\Debug\SinoTrip.API.pdb
+C:\Users\taolinse\Source\Repos\sinotrip\SinoTrip.API\bin\Debug\SinoTrip.FrameWork.dll
+C:\Users\taolinse\Source\Repos\sinotrip\SinoTrip.API\bin\Debug\NVelocity.dll
+C:\Users\taolinse\Source\Repos\sinotrip\SinoTrip.API\bin\Debug\SinoTrip.FrameWork.pdb
+C:\Users\taolinse\Source\Repos\sinotrip\SinoTrip.API\obj\Debug\SinoTrip.API.csprojResolveAssemblyReference.cache
+C:\Users\taolinse\Source\Repos\sinotrip\SinoTrip.API\obj\Debug\SinoTrip.API.dll
+C:\Users\taolinse\Source\Repos\sinotrip\SinoTrip.API\obj\Debug\SinoTrip.API.pdb

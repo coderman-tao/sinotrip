@@ -41,7 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AreaCache.cs">
+    <Compile Include="AreaCache1.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="CacheConfig.cs">

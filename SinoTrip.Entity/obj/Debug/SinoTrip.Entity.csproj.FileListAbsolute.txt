@@ -1,0 +1,4 @@
+C:\Users\taolinse\Source\Repos\sinotrip\SinoTrip.Entity\bin\Debug\SinoTrip.Entity.dll
+C:\Users\taolinse\Source\Repos\sinotrip\SinoTrip.Entity\bin\Debug\SinoTrip.Entity.pdb
+C:\Users\taolinse\Source\Repos\sinotrip\SinoTrip.Entity\obj\Debug\SinoTrip.Entity.dll
+C:\Users\taolinse\Source\Repos\sinotrip\SinoTrip.Entity\obj\Debug\SinoTrip.Entity.pdb

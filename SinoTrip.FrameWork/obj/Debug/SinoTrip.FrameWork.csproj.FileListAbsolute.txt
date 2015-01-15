@@ -1,0 +1,5 @@
+C:\Users\taolinse\Source\Repos\sinotrip\SinoTrip.FrameWork\bin\Debug\SinoTrip.FrameWork.dll
+C:\Users\taolinse\Source\Repos\sinotrip\SinoTrip.FrameWork\bin\Debug\SinoTrip.FrameWork.pdb
+C:\Users\taolinse\Source\Repos\sinotrip\SinoTrip.FrameWork\bin\Debug\NVelocity.dll
+C:\Users\taolinse\Source\Repos\sinotrip\SinoTrip.FrameWork\obj\Debug\SinoTrip.FrameWork.dll
+C:\Users\taolinse\Source\Repos\sinotrip\SinoTrip.FrameWork\obj\Debug\SinoTrip.FrameWork.pdb
