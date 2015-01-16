@@ -253,6 +253,7 @@
     <Content Include="Skin\Default\images\order_icon.gif" />
     <Content Include="Skin\Default\images\pay_icon.png" />
     <Content Include="Skin\Default\images\product_imglab.png" />
+    <Content Include="Skin\Default\images\Scenery\pic_list_6.png" />
     <Content Include="Skin\Default\images\search.png" />
     <Content Include="Skin\Default\images\tab_bj.jpg" />
     <Content Include="Skin\Default\images\tab_line.jpg" />

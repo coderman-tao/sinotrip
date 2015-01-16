@@ -20,6 +20,9 @@ namespace SinoTrip.WebView.Ajax.Scenery
                 case "List":
                     List(context);
                     break;
+                case "GetPrice":
+                    GetPrice(context);
+                    break;
             }
         }
 
@@ -31,6 +34,26 @@ namespace SinoTrip.WebView.Ajax.Scenery
             context.Response.Write(rs.ToJson());
         }
 
+        void GetPrice(HttpContext context)
+        {
+            var biz = new SinoTrip.API.LY.Biz.ScenicBiz();
+            var idStr = context.Request.QueryString["ids"];
+            string[] _ids = idStr.Split(',');
+            
+            List<int> ids = new List<int>();
+
+            foreach (var id in _ids)
+            {
+                var i = id.ToInt32(0);
+                if(i>0)
+                {
+                    ids.Add(i);
+                }
+            }
+           
+            var model = biz.GetSceneryPrice(2, ids);
+            context.Response.Write(model.ToJson());
+        }
         public bool IsReusable
         {
             get

@@ -217,7 +217,7 @@ namespace SinoTrip.FrameWork.Common
             return "{'result':" + rs + ",'total':" + total + "}";
         }
 
-        public static string ToExtFormJson(this object obj)
+        public static string ToFlagJson(this object obj)
         {
             string data = ToJson(obj);
             return "{success:true,data:" + data + "}";

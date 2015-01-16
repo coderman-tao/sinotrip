@@ -21,6 +21,7 @@ namespace SinoTrip.WebView.Scenic
         int type = 0;
         int grade = 0;
         int price = 0;
+        int page = 1;
         protected void Page_Load(object sender, EventArgs e)
         {
             areaId = Context.Request["provice"].ToInt32(0);
@@ -29,27 +30,38 @@ namespace SinoTrip.WebView.Scenic
             type = Context.Request["type"].ToInt32(0);
             grade = Context.Request["grade"].ToInt32(0);
             price = Context.Request["price"].ToInt32(0);
-
+            page = Context.Request["page"].ToInt32(1);
             QueryScenery pq = new QueryScenery();
             pq.page = 1;
             pq.pageSize = 10;
             pq.cs = 2;
-
+            pq.sortType = "3";
+            if (grade > 0)
+                pq.gradeId = grade;
+            if (page > 0)
+            {
+                pq.page = page;
+            }
+            if (price > 0)
+                pq = GetPriceRange(pq);
+            if (type > 0)
+                pq.themeId = type;
             var areaData = new List<ViewArea>();
             var cityArea = new List<ViewCityArea>();
             if (areaId > 0)
             {
                 areaData = AreaCache.GetAreaCache(areaId, 0, "");
                 areaName = areaData.FirstOrDefault(item => item.ItemId == areaId).Name;
+                pq.provinceId = areaData.FirstOrDefault().OutSign.ToInt32(0);
             }
             else
             {
                 areaData = AreaCache.GetAreaCache(0, 0, "");
             }
-            pq.provinceId = areaData.FirstOrDefault().OutSign.ToInt32(0);
+            // pq.provinceId = areaData.FirstOrDefault().OutSign.ToInt32(0);
             if (cityId > 0)
             {
-                if (areaId==0)
+                if (areaId == 0)
                 {
                     areaId = areaData.FirstOrDefault(r => r.Name == (AreaCache.GetCityCache(cityId, "", true).FirstOrDefault().Province)).ItemId;
                 }
@@ -69,7 +81,7 @@ namespace SinoTrip.WebView.Scenic
             }
             if (county > 0)
             {
-                var countyData=cityArea.FirstOrDefault(item=>item.ItemId==county);
+                var countyData = cityArea.FirstOrDefault(item => item.ItemId == county);
                 if (areaId == 0)
                 {
                     areaId = areaData.FirstOrDefault(r => r.Name == (AreaCache.GetCityCache(countyData.CityID.ToInt32(0), "", true).FirstOrDefault().Province)).ItemId;
@@ -78,9 +90,9 @@ namespace SinoTrip.WebView.Scenic
                 {
                     cityId = AreaCache.GetCityCache(countyData.CityID.ToInt32(0), "", true).FirstOrDefault().ItemId;
                 }
-                pq.countryId = countyData.OutSign.ToInt32(0);
+                 pq.countryId = countyData.OutSign.ToInt32(0);
             }
-            var typeData = SceneryCache.GetTypeCache(0, "");
+            var typeData = SceneryCache.GetTypeCache(0, "").OrderBy(item=>item.OrderNo).ToList();
 
             var data = new ScenicBiz().QueryScenery(pq);
 
@@ -89,7 +101,7 @@ namespace SinoTrip.WebView.Scenic
             Vt.Put("CityArea", cityArea);
             Vt.Put("Area", areaData);
             Vt.Put("City", cityData);
-
+            Vt.Put("page", page);
             Vt.Put("provice", areaId);
             Vt.Put("city", cityId);
             Vt.Put("county", county);
@@ -97,6 +109,36 @@ namespace SinoTrip.WebView.Scenic
             Vt.Put("price", price);
             Vt.Put("grade", grade);
             Vt.Display("Scenic/List.html");
+        }
+
+        QueryScenery GetPriceRange(QueryScenery pq)
+        {
+            switch (price)
+            {
+                case 1:
+                    pq.priceRange = "0,50";
+                    break;
+                case 2:
+                    pq.priceRange = "50,100";
+                    break;
+                case 3:
+                    pq.priceRange = "100,200";
+                    break;
+                case 4:
+                    pq.priceRange = "200," + Int32.MaxValue;
+                    break;
+            }
+            return pq;
+        }
+
+        string GetGrade(int grade)
+        {
+            string rs = "";
+            for (int i = 0; i < grade; i++)
+            {
+                rs += "A";
+            }
+            return rs;
         }
     }
 }

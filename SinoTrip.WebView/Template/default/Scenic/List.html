@@ -5,6 +5,12 @@
     <title>景区门票预订_巢湖旅游景点大全_景点门票_驾驴旅游网</title>
     #include("pageHeadCode.htm")
     <link href="/Skin/default/style/SceneryList.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=1.1&services=true"></script>
+    <script type="text/javascript">
+        var ids = "";
+        var markers = new Array();
+    </script>
+
 </head>
 <body>
     #parse("pageHead.htm")
@@ -16,7 +22,7 @@
     <div class="pagebox">
         <div style="overflow: hidden; position: relative;">
             <!--左-->
-            <div style="width: 855px; overflow: hidden; float: left">
+            <div style="width: 877px; overflow: hidden; float: left">
                 <div class="thisbox" id="searchKeyList">
                     <div class="searchbox showbox" item="areaType">
                         <div style=" position:absolute">
@@ -27,13 +33,13 @@
                                 <span class="inputbutton keywordbutton" name="morebutton">- 收起</span>
                             </div>
                         </div>
-                        <a class="allkeyword" href="/Scenic/0&#45;0&#45;0&#45;$type&#45;$price&#45;$grade&#46;html">全部</a>
+                        <a class="allkeyword" href="/Scenic/0&#45;0&#45;0&#45;$type&#45;$price&#45;$grade&#45;1&#46;html">全部</a>
                         <!--<a class="current" href="">安徽</a>-->
                         #foreach($area in $Area)
                         #if ($area.ItemId==$provice)
                         <a class="current" href="javascript:void(0)">$area.Name</a>
                         #else
-                        <a href="/Scenic/$area.ItemId&#45;0&#45;0&#45;$type&#45;$price&#45;$grade&#46;html">$area.Name</a>
+                        <a href="/Scenic/$area.ItemId&#45;0&#45;0&#45;$type&#45;$price&#45;$grade&#45;1&#46;html">$area.Name</a>
                         #end
 
                         #end
@@ -47,14 +53,14 @@
                                 <span class="inputbutton keywordbutton">- 收起</span>
                             </div>
                         </div>
-                        <a class="allkeyword" href="/Scenic/$provice&#45;0&#45;0&#45;$type&#45;$price&#45;$grade&#46;html">全部</a>
+                        <a class="allkeyword" href="/Scenic/$provice&#45;0&#45;0&#45;$type&#45;$price&#45;$grade&#45;1&#46;html">全部</a>
                         #foreach($CItem in $City)
                         #if ($CItem.ItemId==$city)
                         <a class="current" href="javascript:void(0)">$CItem.Name</a>
                         #else
-                        <a href="/Scenic/$provice&#45;$CItem.ItemId&#45;0&#45;$type&#45;$price&#45;$grade&#46;html">$CItem.Name</a>
+                        <a href="/Scenic/$provice&#45;$CItem.ItemId&#45;0&#45;$type&#45;$price&#45;$grade&#45;1&#46;html">$CItem.Name</a>
                         #end
-                        <!--<a href="$provice&#45;$city&#45;$county&#45;$type&#45;$price&#45;$grade&#46;html">$area.Name</a>-->
+                        <!--<a href="$provice&#45;$city&#45;$county&#45;$type&#45;$price&#45;$grade&#45;1&#46;html">$area.Name</a>-->
                         #end
                     </div>
 
@@ -67,12 +73,12 @@
                                 <span class="inputbutton keywordbutton">- 收起</span>
                             </div>
                         </div>
-                        <a class="allkeyword" href="$provice&#45;$city&#45;0&#45;$type&#45;$price&#45;$grade&#46;html">全部</a>
+                        <a class="allkeyword" href="$provice&#45;$city&#45;0&#45;$type&#45;$price&#45;$grade&#45;1&#46;html">全部</a>
                         #foreach($CArea in $CityArea)
                         #if ($CArea.ItemId==$county)
                         <a class="current" href="javascript:void(0)">$CArea.Name</a>
                         #else
-                        <a href="/Scenic/$provice&#45;$city&#45;$CArea.ItemId&#45;$type&#45;$price&#45;$grade&#46;html">$CArea.Name</a>
+                        <a href="/Scenic/$provice&#45;$city&#45;$CArea.ItemId&#45;$type&#45;$price&#45;$grade&#45;1&#46;html">$CArea.Name</a>
                         #end
                         #end
                     </div>
@@ -85,14 +91,14 @@
                                 <span class="inputbutton keywordbutton">- 收起</span>
                             </div>
                         </div>
-                        <a class="allkeyword" href="$provice&#45;$city&#45;$county&#45;0&#45;$price&#45;$grade&#46;html">全部</a>
+                        <a class="allkeyword" href="$provice&#45;$city&#45;$county&#45;0&#45;$price&#45;$grade&#45;1&#46;html">全部</a>
                         #foreach($TItem in $TypeData)
-                        #if ($TItem.ItemId==$type)
+                        #if ($TItem.OrderNo==$type)
                         <a class="current" href="javascript:void(0)">$TItem.Name</a>
                         #else
-                        <a href="/Scenic/$provice&#45;$city&#45;$county&#45;$TItem.ItemId&#45;$price&#45;$grade&#46;html">$TItem.Name</a>
+                        <a href="/Scenic/$provice&#45;$city&#45;$county&#45;$TItem.OrderNo&#45;$price&#45;$grade&#45;1&#46;html">$TItem.Name</a>
                         #end
-                        <!--<a href="$provice&#45;$city&#45;$county&#45;$type&#45;$price&#45;$grade&#46;html">$area.Name</a>-->
+                        <!--<a href="$provice&#45;$city&#45;$county&#45;$type&#45;$price&#45;$grade&#45;1&#46;html">$area.Name</a>-->
                         #end
                     </div>
                     <div class="searchbox" item="hotleType">
@@ -101,11 +107,11 @@
                                 门票价格：
                             </div>
                         </div>
-                        <a class="allkeyword" href="$provice&#45;$city&#45;$county&#45;$type&#45;0&#45;$grade&#46;html">全部</a>
-                        <a class="current" href="">0-50</a>
-                        <a href="">50-100</a>
-                        <a href="">100-200</a>
-                        <a href="">200以上</a>
+                        <a class="allkeyword" href="$provice&#45;$city&#45;$county&#45;$type&#45;0&#45;$grade&#45;1&#46;html">全部</a>
+                        <a class="#if($price==1)current#end" href="$provice&#45;$city&#45;$county&#45;$type&#45;1&#45;$grade&#45;1&#46;html">0-50</a>
+                        <a class="#if($price==2)current#end" href="$provice&#45;$city&#45;$county&#45;$type&#45;2&#45;$grade&#45;1&#46;html">50-100</a>
+                        <a class="#if($price==3)current#end" href="$provice&#45;$city&#45;$county&#45;$type&#45;3&#45;$grade&#45;1&#46;html">100-200</a>
+                        <a class="#if($price==4)current#end" href="$provice&#45;$city&#45;$county&#45;$type&#45;4&#45;$grade&#45;1&#46;html">200以上</a>
                     </div>
                     <div class="searchbox">
                         <div style=" position:absolute">
@@ -113,30 +119,43 @@
                                 景区等级：
                             </div>
                         </div>
-                        <a class="allkeyword" href="$provice&#45;$city&#45;$county&#45;$type&#45;$price&#45;0&#46;html">全部</a>
-                        <a class="current" href="">AAAAA</a>
-                        <a href="">AAAA</a>
-                        <a href="">AAA</a>
-                        <a href="">AA</a>
+                        <a class="allkeyword" href="$provice&#45;$city&#45;$county&#45;$type&#45;$price&#45;0&#45;1&#46;html">全部</a>
+                        <a class="#if($grade==5)current#end" href="$provice&#45;$city&#45;$county&#45;$type&#45;$price&#45;5&#45;1&#46;html">AAAAA</a>
+                        <a class="#if($grade==4)current#end" href="$provice&#45;$city&#45;$county&#45;$type&#45;$price&#45;4&#45;1&#46;html">AAAA</a>
+                        <a class="#if($grade==3)current#end" href="$provice&#45;$city&#45;$county&#45;$type&#45;$price&#45;3&#45;1&#46;html">AAA</a>
+                        <a class="#if($grade==2)current#end" href="$provice&#45;$city&#45;$county&#45;$type&#45;$price&#45;2&#45;1&#46;html">AA</a>
+                        <a class="#if($grade==1)current#end" href="$provice&#45;$city&#45;$county&#45;$type&#45;$price&#45;1&#45;1&#46;html">A</a>
                     </div>
                 </div>
                 <div class="thisbox">
-                    <div style=" height:35px; line-height:35px; background-color:#f7f7f7"></div>
                     <div class="tourlist" id="product_tourlist">
                         #foreach($sitem in $Scenery.Scenerys)
+                        <script type="text/javascript">
+                            ids += $sitem.sceneryId + ",";
+                            var obj = {};
+                            obj.lon = $sitem.lon;
+                            obj.lat = $sitem.lat;
+                            obj.sceneryName = '$sitem.sceneryName';
+                            obj.sceneryAddress = '$sitem.sceneryAddress';
+                            obj.sceneryId = $sitem.sceneryId;
+                            markers.push(obj);
+
+                            //addlogo($sitem.lon, $sitem.lat, '$sitem.sceneryName', '$sitem.sceneryAddress', $sitem.sceneryId)
+                        </script>
                         <div class="tourbox" value="$sitem.sceneryId">
                             <div class="imgbox">
-                                <a href="/Tour/$item.id&#46;html" target="_blank" title="在线预订$sitem.sceneryName">
+                                <a href="/Tour/$item.id&#45;1&#46;html" target="_blank" title="$sitem.sceneryName">
                                     <img width="160px" height="120px" src="$Scenery.imgbaseURL/$sitem.imgPath" />
                                 </a>
                             </div>
                             <div class="tourcounet">
                                 <div class="touritem">
-                                    <a href="/Tour/$item.id&#46;html" target="_blank" title="$sitem.scenerySummary">
-                                    <h3>$sitem.sceneryName&nbsp;&nbsp;($sitem.provinceName#if($sitem.cityName!=$sitem.provinceName)·$sitem.cityName #end)</h3></a>
+                                    <a href="/Tour/$item.id&#45;1&#46;html" target="_blank" title="$sitem.scenerySummary">
+                                        <h3>$sitem.sceneryName&nbsp;&nbsp;($sitem.provinceName#if($sitem.cityName!=$sitem.provinceName)·$sitem.cityName #end)</h3>
+                                    </a>
                                     <div>地址：$sitem.sceneryAddress&nbsp;&nbsp;&nbsp;&nbsp;<a class="mapbtn" href="javascript:void(0)" onclick="alert('经度：$sitem.lon,纬度：$sitem.lat')">查看地图</a></div>
                                     <div>景区等级：$sitem.gradeId</div>
-                                    <div>有$sitem.commentCount位网友曾点评过</div>
+                                    <div>有<a href="" style="color:#005bb5">$sitem.commentCount</a>位网友曾点评过</div>
                                     <!--<div class="tourlistDis">
                                         <span class="discountBox couponetitle"><span class="discountname">券</span>优惠券</span>
                                         <span class="discountBox couponetitle"><span class="discountname">减</span>下单立减</span>
@@ -146,11 +165,32 @@
                                     <div class="price">¥$sitem.amountAdv</div>
                                     <div>门市价：<span style="text-decoration: line-through; color:#666">¥$sitem.amount</span></div>
                                     <div style="padding-top:15px">
-                                        <a href="/Tour/$item.id&#46;html" target="_blank" title="在线预订$item.title">
-                                            <span class="inputbutton orange" style=" width:100px">立即预订</span>
+                                        <a href="/Tour/$item.id&#45;1&#46;html" target="_blank" title="在线预订$item.title">
+                                            <span class="inputbutton green" style=" width:60px">查看详情</span>
                                         </a>
                                     </div>
                                 </div>
+                            </div>
+                            <div style="clear:both"></div>
+                            <div class="s_tab" style=" border-bottom: 1px #8ab923 solid;">
+                                <ul class="tab_nav">
+                                    <li class="tab_li">
+                                        <a class="current" href="javascript:;">门票列表</a>
+                                        <!--<a href="javascript:;">周末游</a>
+                                        <a href="javascript:;">附近酒店</a>
+                                        <a href="javascript:;">一日游</a>-->
+                                    </li>
+                                    <li class="listBt_box">
+                                        <span class="msprice">门市价</span>
+                                        <span class="tcprice">驾驴价</span>
+                                        <!--<span class="favorable">优惠</span>-->
+                                        <span class="payment">支付方式</span>
+                                        <span class="operate">操作</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div id="priceBox_$sitem.sceneryId" class="s_tab">
+                                <div style="color:red;text-align:center">暂无信息，请查看详情获取</div>
                             </div>
                         </div>
                         #end
@@ -159,37 +199,50 @@
 
                     </div>
                     <div class="pageList">
+                        $tool.getPageList("<a class='{0}' href='/Scenic/$provice&#45;$city&#45;$county&#45;$type&#45;$price&#45;$grade&#45;{1}&#46;html'>{2}</a>","current",6,$page,10,$Scenery.totalCount)
                     </div>
                 </div>
             </div>
             <!--右-->
-            <div style="width: 322px; float: right;">
+            <div style="width: 300px; float: right;">
                 <div style="background-color: #f7f7f7;" class="thisbox">
                     <div style="padding: 10px 15px 10px 15px">
                         <div class="minbox">
                             <div class="minboxtitle">
-                                <span class="iconStr">特</span><span class="title"><h2>特价产品推荐</h2></span>
+                                <span class="iconStr">理</span><span class="title"><h2>选择驾驴的理由</h2></span>
                             </div>
                             <div class="boxcontent">
-                                <div class="contentlist">
-                                    <div class="imgbox">
-                                        <a href="$pageurl$item.productid&#46;html" title="$item.title&#65293;$item.summary" target="_blank">
-                                            <img alt="$item.productname" src="" width="270px" height="165px" alt="$item.productname">
-                                        </a>
-                                    </div>
-                                    <div class="namenote">
-                                        <a class="namebox" href="$pageurl$item.productid&#46;html" title="$item.title&#65293;$item.summary" target="_blank">
-                                            <span class="productname">测试数据</span>200
-                                        </a>
-                                    </div>
+                                <div class="contentlist" style="line-height:40px">
+                                    <h3 style="color:#ff6600; font-weight:400">1、20000余种景点门票供您挑选</h3>
+                                    <h3 style="color:#ff6600; font-weight:400">
+                                        2、超过1050万游客的真是点评
+                                    </h3>
+                                    <h3 style="color:#ff6600; font-weight:400">
+                                        3、完美的游记攻略助你出游更加方便
+                                    </h3>
+                                    <h3 style="color:#ff6600; font-weight:400">
+                                        4、自助游，深度游一站解决
+                                    </h3>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                 </div>
+                <div style="background-color: #f7f7f7;" class="thisbox">
+                    <script type="text/javascript">
+                        /*300*250，创建于2013-4-2*/
+                        var cpro_id = "u1251136";
+                    </script>
+                    <script src="http://cpro.baidustatic.com/cpro/ui/c.js" type="text/javascript"></script>
+                </div>
+
+                <div style=" overflow:hidden">
+                    <div style="width:298px;float:left;height:400px;border:1px solid gray; " id="container"></div>
+                </div>
             </div>
         </div>
+    </div>
     </div>
     #parse("pageFoot.htm")
 </body>
@@ -208,4 +261,83 @@
             $(this).html("- 收起")
         }
     });
+    var url = "/AJAX/Scenery/GetInfo.ashx?method=GetPrice&ids=" + ids;
+    jQuery.ajax({
+        url: url,
+        traditional: true,
+        type: "POST",
+        success: function (response) {
+            jQuery.XloadHide();
+            var json = response.toJson();
+            for (var i = 0; i < json.scenery.length; i++) {
+                var _price = json.scenery[i].policy;
+                if (!!_price && !!_price.Policys) {
+                    if (_price.Policys.length > 0) {
+                        $("#priceBox_" + json.scenery[i].sceneryId).html("");
+                        for (var j = 0; j < _price.Policys.length; j++) {
+                            var html = ' <div style="border-bottom: 1px #ddd dashed;"><div id="price_' + json.scenery[i].sceneryId + '_' + _price.Policys[j].policyId + '"><ul class="tab_nav tab_navHover" style="height:35px;">';
+                            var html1 = '<div class="divReamrk_box" id="remark_' + json.scenery[i].sceneryId + '_' + _price.Policys[j].policyId + '">';
+                            html += '<li class="name_li">[' + _price.Policys[j].ticketName.InnerXml + ']<a onclick="showDetail(' + json.scenery[i].sceneryId + ',' + _price.Policys[j].policyId + ')" href="javascript:void(0)" style="color:#005bb5">' + _price.Policys[j].policyName.InnerXml + '</a></li>' +
+                            '<li class="listBt_box">' +
+                            '<span class="msprice">¥' + _price.Policys[j].price + '</span>' +
+                            '<span class="tcprice"><span class="b-orange">¥' + _price.Policys[j].tcPrice + '</span></span>' +
+                            '<span class="payment"><span class="a-tip">' + GetModelName(_price.Policys[j].pMode) + '</span></span>' +
+                            '<span class="operate" style="height:23px;line-height:23px;"><a class="bookbtn" target="_blank" href="/scenery/sceneryOrder.aspx?sceneryId=5305&amp;ticketId=119734">预订</a></span>' +
+                            '</li>';
+                            html1 += ' <b>包含项目：</b>' + _price.Policys[j].containItems + '<br /><b>预订说明：</b>' + _price.Policys[j].remark.InnerXml + '</div>';
+                            html += "</ul></div>" + html1 + "</div>";
+
+                            $("#priceBox_" + json.scenery[i].sceneryId).append(html);
+                        }
+                    }
+
+                }
+            }
+        }
+
+    });
+    function GetModelName(paymode) {
+        if (paymode == 0)
+            return "景区现付";
+        else if (paymode == 1)
+            return "在线支付";
+        else
+            return "其他支付"
+    }
+    function showDetail(sid, pid) {
+        var remark = $("#remark_" + sid + "_" + pid);
+        if (remark.is(":hidden")) {
+            $(".divReamrk_box").hide();
+            remark.show();    //如果元素为隐藏,则将它显现
+        } else {
+            remark.hide();     //如果元素为显现,则将其隐藏
+        }
+        //$("#remark_" + sid).show();
+    }
+
+    var map = new BMap.Map("container");
+    var point = new BMap.Point(116.404015, 39.912733);
+    map.centerAndZoom(point, 5);
+    map.addControl(new BMap.NavigationControl());
+
+    function addlogo(lon, lat, name, address, sceneryid) {
+        var opts = {
+            width: 200 // 信息窗口宽度
+        }
+        var sContent = "<div><h4 style='margin:0 0 5px 0;padding:0.2em 0'>" + name + "</h4></div>"
+        + "<a href=\"/scenery/" + sceneryid + ".html\" target=\"_blank\"><div>地址：" + address + "</div></a>"
+        var point = new BMap.Point(lon, lat);
+        var marker = new BMap.Marker(point);
+        var infoWindow = new BMap.InfoWindow(sContent, opts);  // 创建信息窗口对象
+
+        map.addOverlay(marker);
+        marker.addEventListener("click", function () {
+            this.openInfoWindow(infoWindow);
+            infoWindow.redraw();
+        });
+    }
+    for (var i = 0; i < markers.length; i++) {
+        var obj = markers[i];
+        addlogo(obj.lon, obj.lat, obj.sceneryName, obj.sceneryAddress, obj.sceneryId);
+    }
 </script>

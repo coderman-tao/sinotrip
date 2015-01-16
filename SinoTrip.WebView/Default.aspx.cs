@@ -35,8 +35,8 @@ namespace SinoTrip.WebView
             var biz = new SinoTrip.API.LY.Biz.ScenicBiz();
             //var rsssss = biz.QueryScenery(new SinoTrip.API.LY.Model.QueryScenery() { provinceId = 2, cityId = 45, page = 1, pageSize = 10 });
             List<int> ids = new List<int>();
-            ids.Add(5305);
-            var model = biz.GetSceneryPrice(2, ids);
+            ids.Add(26737);
+            var model = biz.GetSceneryPrice(3, ids);
             //GetJQDP();
             Response.Clear();
             Response.Write("");

@@ -59,7 +59,7 @@ namespace SinoTrip.WebView
 
             // return string.Format(a, 1);
             var pageStr = string.Empty;
-            var thispage = page + 1;
+            var thispage = page;
             int pagecount = count / pagesize;
             if (count % pagesize > 0)
                 pagecount++;
@@ -91,13 +91,13 @@ namespace SinoTrip.WebView
                 var curren = string.Empty;
                 if (i == thispage)
                     curren = currentClass;
-                pageStr += string.Format(data, new object[] { curren, i - 1, i });
+                pageStr += string.Format(data, new object[] { curren, i, i });
             }
 
             if (endpage < pagecount)
             {
 
-                var endpagestr = string.Format(data, new object[] { string.Empty, pagecount - 1, pagecount });
+                var endpagestr = string.Format(data, new object[] { string.Empty, pagecount, pagecount });
 
                 if (endpage < pagecount - 1)
                     pageStr += ("......" + endpagestr);
