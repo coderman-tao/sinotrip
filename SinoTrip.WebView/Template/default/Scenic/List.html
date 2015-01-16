@@ -2,15 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>景区门票预订_巢湖旅游景点大全_景点门票_驾驴旅游网</title>
+    <title>$!araename$!cityname$!countyname景区门票预订_$!araename$!cityname$!countyname旅游景点大全_景点门票_驾驴旅游网</title>
     #include("pageHeadCode.htm")
     <link href="/Skin/default/style/SceneryList.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="http://api.map.baidu.com/api?v=1.1&services=true"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=13a035f5778a2a6f92c1cc2239c717ef"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
+    <link rel="stylesheet" href="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.css" />
     <script type="text/javascript">
         var ids = "";
         var markers = new Array();
     </script>
-
 </head>
 <body>
     #parse("pageHead.htm")
@@ -63,7 +64,6 @@
                         <!--<a href="$provice&#45;$city&#45;$county&#45;$type&#45;$price&#45;$grade&#45;1&#46;html">$area.Name</a>-->
                         #end
                     </div>
-
                     <div class="searchbox showbox" item="tratype">
                         <div style=" position:absolute">
                             <div class="keytypebox">
@@ -153,7 +153,10 @@
                                     <a href="/Tour/$item.id&#45;1&#46;html" target="_blank" title="$sitem.scenerySummary">
                                         <h3>$sitem.sceneryName&nbsp;&nbsp;($sitem.provinceName#if($sitem.cityName!=$sitem.provinceName)·$sitem.cityName #end)</h3>
                                     </a>
-                                    <div>地址：$sitem.sceneryAddress&nbsp;&nbsp;&nbsp;&nbsp;<a class="mapbtn" href="javascript:void(0)" onclick="alert('经度：$sitem.lon,纬度：$sitem.lat')">查看地图</a></div>
+                                    <div>
+                                        地址：$sitem.sceneryAddress&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <a class="mapbtn" href="javascript:void(0)" onclick="showMap($sitem.lon,$sitem.lat,'$sitem.sceneryName','$sitem.sceneryAddress','$Scenery.imgbaseURL/$sitem.imgPath')">查看地图</a>
+                                    </div>
                                     <div>景区等级：$sitem.gradeId</div>
                                     <div>有<a href="" style="color:#005bb5">$sitem.commentCount</a>位网友曾点评过</div>
                                     <!--<div class="tourlistDis">
@@ -227,7 +230,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
                 <div style="background-color: #f7f7f7;" class="thisbox">
                     <script type="text/javascript">
@@ -236,7 +238,6 @@
                     </script>
                     <script src="http://cpro.baidustatic.com/cpro/ui/c.js" type="text/javascript"></script>
                 </div>
-
                 <div style=" overflow:hidden">
                     <div style="width:298px;float:left;height:400px;border:1px solid gray; " id="container"></div>
                 </div>
@@ -339,5 +340,48 @@
     for (var i = 0; i < markers.length; i++) {
         var obj = markers[i];
         addlogo(obj.lon, obj.lat, obj.sceneryName, obj.sceneryAddress, obj.sceneryId);
+    }
+
+
+    function showMap(lon, lat, name, address, cover) {
+        //var bmap_Info = document.getElementById("bmap_Info");
+        //if (!!bmap_Info) {
+        //    bmap_Info.parentNode.removeChild(bmap_Info);
+        //}
+        var div = document.createElement("div");
+        div.style.width = "900px";
+        div.style.height = "500px";
+        div.id = "bmap_Info";
+        $("body").append(div);
+        var map1 = new BMap.Map('bmap_Info');
+        var poi = new BMap.Point(lon, lat);
+        map1.centerAndZoom(poi, 16);
+        map1.enableScrollWheelZoom();
+
+        var content = '<div style="margin:0;line-height:20px;padding:2px;">' +
+                        '<img src="' + cover + '" alt="" style="float:right;zoom:1;overflow:hidden;width:100px;height:100px;margin-left:3px;"/>' +
+                        '地址：' + address +
+                      '</div>';
+
+        //创建检索信息窗口对象
+        var searchInfoWindow = null;
+        searchInfoWindow = new BMapLib.SearchInfoWindow(map1, content, {
+            title: name,      //标题
+            width: 290,             //宽度
+            height: 105,              //高度
+            panel: "panel",         //检索结果面板
+            enableAutoPan: true,     //自动平移
+            searchTypes: [
+				BMAPLIB_TAB_TO_HERE,  //到这里去
+				BMAPLIB_TAB_FROM_HERE //从这里出发
+            ]
+        });
+        var marker = new BMap.Marker(poi); //创建marker对象
+        marker.addEventListener("click", function (e) {
+            searchInfoWindow.open(marker);
+        })
+        map1.addControl(new BMap.NavigationControl());
+        map1.addOverlay(marker); //在地图中添加marker
+        $("#bmap_Info").Xwindow({ title: '交通信息', isdestory: true });
     }
 </script>

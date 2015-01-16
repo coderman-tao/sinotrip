@@ -1,10 +1,395 @@
-﻿<!DOCTYPE html>
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title></title>
+    <title>特价酒店预订&#45;$SITE.name</title>
+    #include("pageHeadCode.htm")
+    <link href="/Skin/default/style/sceneryitem.css" rel="stylesheet" type="text/css" />
+
+    <style type="text/css">
+        .hotellist a {
+            -moz-user-select: none;
+            display: inline-block;
+            margin-top: 10px;
+            border-bottom: 1px dashed #999;
+        }
+
+            .hotellist a:hover {
+                background-color: #d9f3ff;
+            }
+
+            .hotellist a span {
+                -moz-user-select: none;
+                display: inline-block;
+            }
+
+                .hotellist a span.hotelname {
+                    width: 100%;
+                    height: 38px;
+                    padding-top: 5px;
+                    overflow: hidden;
+                    line-height: 16px;
+                    font-size: 13px;
+                    font-weight: bold;
+                    font-family: 微软雅黑;
+                }
+
+                .hotellist a span.price {
+                    width: 200px;
+                    text-align: right;
+                    color: Red;
+                    font-size: 14px;
+                    font-family: 微软雅黑;
+                    font-weight: bolder;
+                }
+    </style>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=13a035f5778a2a6f92c1cc2239c717ef"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
+    <link rel="stylesheet" href="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.css" />
+
 </head>
 <body>
+    #parse("pageHead.htm")
+
+    <div class="pagebox">
+        <div class="pageWay">
+            您的位置：<a href="/" title="驾驴旅游网门票预定">首页</a> > <span title="景区门票">景区门票</span>
+        </div>
+    </div>
+
+    <div class="pagebox">
+        <div style="overflow: hidden; position: relative;">
+            <div style="width: 900px; overflow: hidden; float: left">
+
+                <div class="thisbox" style=" overflow:hidden">
+
+                    <div style=" overflow:hidden;line-height:25px; padding:5px 0px 5px 10px">
+                        <div>
+                            <span style=" line-height:35px; color:#ff6600; font-size:18px; font-weight:bold; font-family:微软雅黑">$!Info.Name</span>
+                            &nbsp;&nbsp;景区等级：<span style="color:#ff6600;">$!Info.Grade</span>
+                            <span>&nbsp;&nbsp;地址：$!Info.Address</span>
+                        </div>
+
+                        #set($images = $thistool.getHotleImages($roomStay.BasicPropertys.Images,7,""))
+
+                        <div style=" position:relative; width:850px; height:250px; overflow:hidden">
+
+                            <div style="position:absolute; top:0px; left:0px; width:300px; height:250px;">
+                                <div style=" padding:2px; width:296px; height:246px; overflow:hidden">
+                                    <img src=" http://media.sohoto.com/market/images/hotelimages$images.get_item(0).URL" style="width:300px; height:250px;" />
+                                </div>
+                            </div>
+
+                            <div style="position:absolute; top:0px; left:300px; width:150px; height:125px;">
+                                <div style=" padding:2px; width:146px; height:121px; overflow:hidden">
+                                    <img src=" http://media.sohoto.com/market/images/hotelimages$images.get_item(1).URL" style="width:150px; height:125px;" />
+                                </div>
+                            </div>
+
+                            <div style="position:absolute; top:0px; left:450px; width:200px; height:125px;">
+                                <div style=" padding:2px; width:196px; height:121px; overflow:hidden">
+                                    <img src=" http://media.sohoto.com/market/images/hotelimages$images.get_item(2).URL" style="width:200px; height:125px;" />
+                                </div>
+                            </div>
+
+                            <div style="position:absolute; top:0px; left:650px; width:200px; height:125px;">
+                                <div style=" padding:2px; width:196px; height:121px; overflow:hidden">
+                                    <img src=" http://media.sohoto.com/market/images/hotelimages$images.get_item(3).URL" style="width:200px; height:125px;" />
+                                </div>
+                            </div>
+
+                            <div style="position:absolute; top:125px; left:300px; width:200px; height:125px;">
+                                <div style=" padding:2px; width:196px; height:121px; overflow:hidden">
+                                    <img src=" http://media.sohoto.com/market/images/hotelimages$images.get_item(4).URL" style="width:200px; height:125px;" />
+                                </div>
+                            </div>
+
+                            <div style="position:absolute; top:125px; left:500px; width:200px; height:125px;">
+                                <div style=" padding:2px; width:196px; height:121px; overflow:hidden">
+                                    <img src=" http://media.sohoto.com/market/images/hotelimages$images.get_item(5).URL" style="width:200px; height:125px;" />
+                                </div>
+                            </div>
+
+                            <div style=";position:absolute; top:125px; left:700px; width:150px; height:125px;">
+                                <div style=" padding:2px; width:146px; height:121px; overflow:hidden">
+                                    <img src=" http://media.sohoto.com/market/images/hotelimages$images.get_item(6).URL" style=" width:150px; height:125px;" />
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <div id="tournoteTab" style=" position:relative">
+                    <div class="divTab" id="tournotelist">
+                        <a class="current" href="#priceBox">景点门票</a>
+                        <a href="#buynotebox">预定须知</a>
+                        <a href="#introbox" class=" ">景点简介</a>
+                        <a href="#trafficbox" class=" ">地址交通</a>
+                        <a href="#dpbox" class=" ">游客点评</a>
+                        <a href="#youjibox" class=" ">游记攻略</a>
+                        <a href="#hotelbox" class=" ">附近酒店</a>
+                    </div>
+                </div>
+                <div id="contentList">
+                    <!--类型 String类型。SGT:景观， TRA:交通信息， POR:地标 String类型-->
+                    <div class="thisbox">
+                        <div style=" height:35px; line-height:35px; background-color:#f7f7f7"></div>
+                        <table class="hotleitem_table">
+                            <thead>
+                                <tr>
+                                    <th style=" text-align:center; width:120px">房型</th>
+                                    <th style=" width:1px"></th>
+                                    <th style=" width:110px">床型</th>
+                                    <th style=" width:170px">早餐</th>
+                                    <th style=" width:80px">宽带</th>
+                                    <th style=" width:80px"></th>
+                                    <th>日均价</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                #foreach($item in $roomStay.RoomTypes)
+                                <tr>
+                                    <td class="hometype">
+                                        #set($_url = $thistool.getHotleImg($roomStay.BasicPropertys.Images,$item.RoomTypeCode))
+
+                                        #if($_url=="$_url")
+                                        <div style=" padding:5px; line-height:18px; width:100px; MaxHeight:80px; overflow:hidden" class="XoverTip" data="
+                                            <p>$!item.RoomDescription</p><img src='http://media.sohoto.com/market/images/hotelimages$_url' style='width:360px' />">
+                                            <img style=" height:60px; width:100px" src="http://media.sohoto.com/market/images/hotelimages$_url" />
+                                            <div style=" color:#006cbf">$!item.RoomTypeName</div>
+                                        </div>
+                                        #else
+                                        <div style=" color:#006cbf" class="XoverTip" data="<p>$!item.RoomDescription</p>">$!item.RoomTypeName</div>
+                                        #end
+                                    </td>
+
+                                    <td colspan="7" class="hometypebox" valign="top">
+                                        <table>
+
+                                            #foreach($rows in $thistool.getHotleRoomRates($roomRates,$item.RoomTypeCode))
+
+                                            <tr class="typelist">
+                                                <td><span data="$rows.RoomTypeDesc" class="XoverTip" style=" color:#006cbf; text-align:center">$!rows.BedType</span></td>
+                                                <td style=" width:170px"><span>$!rows.RatePlanName</span></td>
+                                                <td style=" width:80px"><span>#if($rows.Internet=="Y")免费宽带#elseif($rows.Internet=="N")无网络#esle上网收费#end</span></td>
+                                                <td style=" width:80px; text-align:right;">
+                                                    <!-- $rows.Payment  $rows.AvailabilityStatus $rows.Quantity-->
+                                                    <span class="yhbox $rows.Payment">
+                                                        #if($rows.Payment=="T")
+                                                        酒店现付
+                                                        #elseif($rows.Payment=="S")
+                                                        在线支付
+                                                        #else
+                                                        在线预付
+                                                        #end
+                                                    </span>
+                                                </td>
+                                                <td class="price">￥$tool.GetHotlePrice($roomStay.BasicPropertys.Rank,$rows,$rows.Rates)</td>
+                                                <td>
+
+                                                    #if($rows.AvailabilityStatus=="noavail"||($rows.Payment=="S" && $rows.Quantity==0))
+                                                    <a href="javascript:" class="inputbutton" style="width:50px;">已满房</a>
+                                                    #else
+                                                    #if($rows.Payment=="T")
+                                                    <a href="javascript:" onclick="postHotleFillPage('$inDate','$outDate','$rows.HotelCode','$rows.Payment','$rows.RatePlanCode','$rows.RoomTypeCode')" class="inputbutton green" style="width:50px;">预约</a>
+                                                    #else
+                                                    <a href="javascript:" onclick="postHotleFillPage('$inDate','$outDate','$rows.HotelCode','$rows.Payment','$rows.RatePlanCode','$rows.RoomTypeCode')" class="inputbutton orange" style="width:50px;">预订</a>
+                                                    #end
+                                                    #end
+                                                </td>
+
+                                            </tr>
+                                            #end
+                                        </table>
+                                    </td>
+                                </tr>
+                                #end
+                            </tbody>
+                        </table>
+                    </div>
+
+
+
+                    <div class="thisbox" id="buynotebox">
+                        <div style=" padding:10px; line-height:20px">
+                            <h2 style=" line-height:35px; font-family:微软雅黑; color:#ff6600">预定须知</h2>
+                            <div style="overflow:hidden">
+                                $!Info.BuyNotie
+                            </div>
+                        </div>
+                    </div>
+                    <div class="thisbox" id="introbox">
+                        <div style=" padding:10px; line-height:20px">
+                            <h2 style=" line-height:35px; font-family:微软雅黑; color:#ff6600">景点简介</h2>
+                            <div style="overflow:hidden">
+                                $!Info.Intro
+                            </div>
+                        </div>
+                    </div>
+                    <div class="thisbox" id="trafficbox">
+                        <div style=" padding:10px; line-height:20px">
+                            <h2 style=" line-height:35px; font-family:微软雅黑; color:#ff6600">地址交通</h2>
+                            <div style="overflow:hidden">
+                                <div style="width:860px;height:400px;border:1px solid gray; padding:5px;" id="container"></div>
+                                <div class="strbox"><b>地址交通:</b><p style="line-height:20px;">$!Info.Traffic</p></div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="thisbox" id="dpbox">
+                        <div style=" padding:10px; line-height:20px">
+                            <h2 style=" line-height:35px; font-family:微软雅黑; color:#ff6600">游客点评</h2>
+                        </div>
+
+                    </div>
+                    <div class="thisbox" id="youjibox">
+                        <div style=" padding:10px; line-height:20px">
+                            <h2 style=" line-height:35px; font-family:微软雅黑; color:#ff6600">游记攻略</h2>
+                        </div>
+
+                    </div>
+                    <div class="thisbox" id="hotelbox">
+                        <div style=" padding:10px; line-height:20px">
+                            <h2 style=" line-height:35px; font-family:微软雅黑; color:#ff6600">附近酒店</h2>
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+            </div>
+            <!--右-->
+            <div style="width: 322px; float: right;">
+                <div style=" overflow:hidden; padding-top:10px; height:auto" class="hotellist ">
+                    #foreach($item in $tool.getResultHotels($citycode,5))
+                    <a href="/Hotel/$item.BasicPropertys.CityCode/$inDate/$outDate/$item.BasicPropertys.HotelCode&#46;html" target="_blank" title="在线预订$item.BasicPropertys.HotelName$item.BasicPropertys.HotelEnglishName">
+                        <img onerror="this.src='/res/images/noHotelImg.jpg'" alt="$item.BasicPropertys.HotelName$item.BasicPropertys.HotelEnglishName" height="240" width="320" src="$tool.getHotleImg($item.BasicPropertys.Images)" />
+                        <span class="hotelname" style="width:320px;">$item.BasicPropertys.HotelName</span>
+                        <span style=" width:220px" title="$tool.getstarlevel($item.BasicPropertys.Rank)" class="starlevel  price h$item.BasicPropertys.Rank" style="">
+                            ￥#if($item.BasicPropertys.FlagS)
+                            $tool.GetHotlePrice($item.BasicPropertys.Rank,"S",$item.BasicPropertys.MinRate)
+                            #else
+                            $tool.GetHotlePrice($item.BasicPropertys.Rank,"T",$item.BasicPropertys.MinRate)
+                            #end
+                        </span>
+                    </a>
+                    #end
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        function postHotleFillPage(indata, outdata, hotlecode, paymnet, rateplancode, roomtypecode) {
+
+            $("#fill_indata").val(indata);
+            $("#fill_outdata").val(outdata);
+            $("#fill_hotlecode").val(hotlecode);
+            $("#fill_paymnet").val(paymnet);
+            $("#fill_rateplancode").val(rateplancode);
+            $("#fill_roomtypecode").val(roomtypecode);
+            document.postHotleFill.submit();
+        }
+
+
+        function editdata() {
+            var indate = $("#editindate").val();
+            var outdate = $("#editoutdate").val();
+
+            var citycode = "$roomStay.BasicPropertys.CityCode";
+            var HotelCode = "$roomStay.BasicPropertys.HotelCode";
+
+            var _url = "/Hotel/" + citycode + "/{0}/{1}/" + HotelCode + ".html"
+
+            document.hotleListSubmit.action = _url.format(indate, outdate)
+            document.hotleListSubmit.submit()
+        }
+
+
+
+        var map = new BMap.Map("container");
+
+        function show_map(map_x, map_y) {
+            var content = '<div style="margin:0;line-height:20px;padding:2px;">' +
+                       '<img src="$Info.Cover" alt="" style="float:right;zoom:1;overflow:hidden;width:100px;height:100px;margin-left:3px;"/>' +
+                       '地址：$Info.Address' +
+                     '</div>';
+            //创建检索信息窗口对象
+            var searchInfoWindow = null;
+            searchInfoWindow = new BMapLib.SearchInfoWindow(map, content, {
+                title: name,      //标题
+                width: 290,             //宽度
+                height: 105,              //高度
+                panel: "panel",         //检索结果面板
+                enableAutoPan: true,     //自动平移
+                searchTypes: [
+                    BMAPLIB_TAB_TO_HERE,  //到这里去
+                    BMAPLIB_TAB_FROM_HERE //从这里出发
+                ]
+            });
+            var point = new BMap.Point(map_x, map_y);
+            var marker = new BMap.Marker(point);
+            map.centerAndZoom(point, 15);
+            map.enableScrollWheelZoom();
+            map.addControl(new BMap.NavigationControl());
+            map.addOverlay(marker);
+            marker.addEventListener("click", function (e) {
+                searchInfoWindow.open(marker);
+            })
+            function ZoomControl() {
+                // 默认停靠位置和偏移量
+                this.defaultAnchor = BMAP_ANCHOR_BOTTOM_RIGHT;
+                this.defaultOffset = new BMap.Size(10, 10);
+            }
+            function lZoomControl() {
+                // 默认停靠位置和偏移量
+                this.defaultAnchor = BMAP_ANCHOR_BOTTOM_RIGHT;
+                this.defaultOffset = new BMap.Size(10, 10);
+            }
+
+
+        }
+        show_map("$Info.Lng", "$Info.Lat");
+        function setNoteTab() {
+            var t = $("#tournoteTab");
+            var offset = t.offset();
+            var ws = $(window).scrollTop()
+            if (ws > offset.top) {
+                $("#tournotelist").addClass("isPosition").css({ left: offset.left, width: t.width() });
+            } else {
+                $("#tournotelist").removeClass("isPosition");
+            }
+
+            var _thisindex = 0;
+            $("#contentList").find(".thisbox").each(function (i) {
+                if (ws > $(this).offset().top - 40)
+                    _thisindex = i;
+            })
+            $("#tournotelist").find("a").removeClass("current").eq(_thisindex).addClass("current")
+
+        }
+        var tournotelist = $("#tournotelist").find("a");
+        tournotelist.click(function () {
+            tournotelist.removeClass("current");
+            $(this).addClass("current");
+            // setNoteTab();
+        }).hover(function () { $(this).addClass("over") }, function () { $(this).removeClass("over") })
+        setNoteTab();
+        $(window).scroll(function () {
+            setNoteTab();
+
+        });
+        $(window).resize(function () {
+            setNoteTab();
+        })
+    </script>
+    #parse("pageFoot.htm")
 
 </body>
 </html>

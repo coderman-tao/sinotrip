@@ -139,7 +139,7 @@ function trim(str) {
 
 
 
-function CtoH(str) { 
+function CtoH(str) {
     var result = "";
     for (var i = 0; i < str.length; i++) {
         if (str.charCodeAt(i) == 12288) {
@@ -151,7 +151,7 @@ function CtoH(str) {
         else result += String.fromCharCode(str.charCodeAt(i));
     }
     return result;
-} 
+}
 /*****************************************时间格式化*******************************************************/
 
 function getLocalTime(tickets) {
@@ -166,13 +166,13 @@ function getLocalTime(tickets) {
 */
 function dateFormat(format, timestamp) {
     var a, jsdate = ((timestamp) ? new Date(timestamp * 1000) : new Date());
-        var pad = function (n, c) {
-            if ((n = n + "").length < c) {
-                return new Array(++c - n.length).join("0") + n;
-            } else {
-                return n;
-            }
-        };
+    var pad = function (n, c) {
+        if ((n = n + "").length < c) {
+            return new Array(++c - n.length).join("0") + n;
+        } else {
+            return n;
+        }
+    };
     var txt_weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     var txt_ordin = { 1: "st", 2: "nd", 3: "rd", 21: "st", 22: "nd", 23: "rd", 31: "st" };
     var txt_months = ["", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -332,7 +332,7 @@ Date.prototype.Format = function (formatStr) {
     str = str.replace(/s|S/g, this.getSeconds());
 
     return str;
-}  
+}
 
 
 //度假旅游订单状态TOUR_ORDER_STATUS
@@ -451,7 +451,8 @@ _this.timespan = opt.timespan ? parseInt(opt.timespan, 13) : 5000; //滚动的�
             opacity: 0.5, //透明度
             color: "#999999", //遮罩层颜色
             title: "",
-            close: true
+            close: true,
+            isdestory: false,
         }
         $.extend(objs, obj);
         var thisobj = $(this);
@@ -473,6 +474,9 @@ _this.timespan = opt.timespan ? parseInt(opt.timespan, 13) : 5000; //滚动的�
 
         if (objs.close) {
             _winobj.find(".iconbtn").show().find(".close").one("click", function () {
+                if (objs.isdestory) {
+                    _winobj.remove();
+                }
                 thisobj.Xhide();
             })
         } else {
@@ -509,7 +513,7 @@ _this.timespan = opt.timespan ? parseInt(opt.timespan, 13) : 5000; //滚动的�
             _str = "非法的输入项";
         for (var i = 0; i < cts.length; i++) {
             if (cts[i] == null || cts[i] == "")
-                continue;          
+                continue;
 
             var regu = validateRegExp[cts[i]]
             var re = new RegExp(regu);
@@ -521,8 +525,8 @@ _this.timespan = opt.timespan ? parseInt(opt.timespan, 13) : 5000; //滚动的�
 
             if (cts[i] == "iscard") {
                 if (!IdCardValidate(_v))
-                    throw { message: _str, obj: $(this) }                   
-            }else if (_v.search(re) == -1) {
+                    throw { message: _str, obj: $(this) }
+            } else if (_v.search(re) == -1) {
 
                 throw { message: _str, obj: $(this) }
             }
@@ -766,7 +770,7 @@ jQuery.extend({
 
 
 ///设置DOM的闪动
-function setShine(domobj,classname,sleep,number) {
+function setShine(domobj, classname, sleep, number) {
     var _number = number;
 
     setTimeout(function () {
@@ -775,7 +779,7 @@ function setShine(domobj,classname,sleep,number) {
             domobj.removeClass(classname)
             _number--;
             if (_number > 0)
-                setShine(domobj, classname, sleep, _number) 
+                setShine(domobj, classname, sleep, _number)
             else
                 domobj.addClass(classname);
 
@@ -830,7 +834,7 @@ String.prototype.format = function (args) {
                     return "";
                 }
                 else {
-                    var reg = new RegExp("({[" + i + "]})", "g");   
+                    var reg = new RegExp("({[" + i + "]})", "g");
                     result = result.replace(reg, arguments[i]);
 
                 }
@@ -841,7 +845,7 @@ String.prototype.format = function (args) {
     else {
         return this;
     }
-} 
+}
 ///对像数组indexOf
 Array.prototype.indexOf = function (item, start, end, error) {
     if (!start || start < 0)
@@ -864,8 +868,8 @@ Array.prototype.indexOf = function (item, start, end, error) {
     return error;
 };
 
-String.prototype.toJson = function(){
-   return eval("("+this+")");
+String.prototype.toJson = function () {
+    return eval("(" + this + ")");
 }
 
 
@@ -925,7 +929,7 @@ $(function () {
 function Timeing(seconds, str, str1, buttonObj) {
 
     var s = seconds;
-    
+
 
     var ts = function () {
         if (s > 0) {
@@ -955,7 +959,7 @@ function sendMobileCode(classname, exists, button) {
     try {
         data = jQuery.Xfilled(classname);
     } catch (e) {
-      
+
         jQuery.Xerr(e);
         return false;
     }
@@ -999,23 +1003,23 @@ function sendMobileCode(classname, exists, button) {
 
 
 function CheckUser(obj, exists, str) {
-  var thisobj = $(obj)
+    var thisobj = $(obj)
     var data = {};
     try {
         thisobj.Xcheck();
     } catch (e) {
-        jQuery.Xerr(e);        
+        jQuery.Xerr(e);
         return false;
     }
 
     data[thisobj.attr("name")] = thisobj.val();
     data.exists = exists;
-    var url = "/AJAX/User.ashx?action=CheckUser";   
+    var url = "/AJAX/User.ashx?action=CheckUser";
     jQuery.ajax({
         url: url,
         data: data,
         type: "POST",
-        success: function (response) {            
+        success: function (response) {
             var json = response.toJson();
             if (json.success) {
             } else {
@@ -1023,59 +1027,59 @@ function CheckUser(obj, exists, str) {
             }
         }
     });
-    }
+}
 
 
 
 
 /*用户登录-注册-密码找回*/
-    function resetPass(classname) {
+function resetPass(classname) {
 
-        var data = {};
-        try {
-            data = jQuery.Xfilled(classname);
-            var p;
-            var passobj = $("." + classname + "[type=password]");
-            passobj.each(function () {
-                if (p == null)
-                    p = $(this).val();
-                if (p != $(this).val()) {
-                    p = null;
-                    return false;
-                }
-            });
-            if (p == null) {
-                jQuery.Xerr({ obj: passobj, message: "两次密码输入不相同!" });
-                return;
+    var data = {};
+    try {
+        data = jQuery.Xfilled(classname);
+        var p;
+        var passobj = $("." + classname + "[type=password]");
+        passobj.each(function () {
+            if (p == null)
+                p = $(this).val();
+            if (p != $(this).val()) {
+                p = null;
+                return false;
             }
-
-        } catch (e) {
-            jQuery.Xerr(e);
-            return false;
-        }
-        var url = "/AJAX/User.ashx?action=ResetPW"
-        jQuery.Xload();
-        jQuery.ajax({
-            url: url,
-            data: data,
-            type: "POST",
-            success: function (response) {
-                jQuery.XloadHide();
-                var json = response.toJson();
-                if (json.success) {
-                    jQuery.Xmsg({ msg: "密码重置成功！返回登录页进行登录！", button: function () { window.location.href = "login.aspx" } });
-                } else {
-                    jQuery.Xmsg(json.msg)
-
-                }
-
-
-            }
-
         });
+        if (p == null) {
+            jQuery.Xerr({ obj: passobj, message: "两次密码输入不相同!" });
+            return;
+        }
+
+    } catch (e) {
+        jQuery.Xerr(e);
+        return false;
     }
+    var url = "/AJAX/User.ashx?action=ResetPW"
+    jQuery.Xload();
+    jQuery.ajax({
+        url: url,
+        data: data,
+        type: "POST",
+        success: function (response) {
+            jQuery.XloadHide();
+            var json = response.toJson();
+            if (json.success) {
+                jQuery.Xmsg({ msg: "密码重置成功！返回登录页进行登录！", button: function () { window.location.href = "login.aspx" } });
+            } else {
+                jQuery.Xmsg(json.msg)
+
+            }
+
+
+        }
+
+    });
+}
 ///注册
-function ajaxReg(classname,isUnite) {
+function ajaxReg(classname, isUnite) {
     var data = {};
     try {
         data = jQuery.Xfilled(classname);
@@ -1128,7 +1132,7 @@ function ajaxLogin(classname) {
         jQuery.Xerr(e);
         return false;
     }
-    
+
     var url = "/AJAX/User.ashx?action=Login"
     jQuery.Xload();
     jQuery.ajax({
@@ -1161,17 +1165,17 @@ var isPageLogin = false;
 var isQ = true;
 function showlogin() {
     $("#reglogin").Xwindow({ title: '您尚未登录' });
-     try {
-         if (isQ) {
-             QcLoad("qqLoginBtn");
-             isQ = false;
-         }
+    try {
+        if (isQ) {
+            QcLoad("qqLoginBtn");
+            isQ = false;
+        }
 
     } catch (e) {
-      
+
         return false;
-    } 
-  
+    }
+
 }
 
 function QcLoad(btnid) {
@@ -1201,9 +1205,9 @@ function QcLoad(btnid) {
 
 );
 }
-function showBindUnite(figure, nickname,obj) {
+function showBindUnite(figure, nickname, obj) {
     $("#BindUniteBox").Xwindow({ title: '帐号绑定' });
-    $("#BindUnitMsg").html(nickname + "，只差一步，完成登录设置<a href='javascript:void()' onclick='"+obj.btn+"' > 退出</a>");
+    $("#BindUnitMsg").html(nickname + "，只差一步，完成登录设置<a href='javascript:void()' onclick='" + obj.btn + "' > 退出</a>");
     $("#BindUnitMsg").css('background', 'url(' + figure + ') no-repeat 10px center');
     $("#BindUniteBox").data("UniteData", obj);
 
@@ -1223,7 +1227,7 @@ function BindUnite(classname) {
         jQuery.Xerr(e);
         return false;
     }
-    $.each($("#BindUniteBox").data("UniteData"), function (key, value) {       
+    $.each($("#BindUniteBox").data("UniteData"), function (key, value) {
         data[key] = value
     });
 
@@ -1236,7 +1240,7 @@ function BindUnite(classname) {
             jQuery.XloadHide();
             var json = response.toJson();
             if (json.success) {
-                $("#BindUniteBox").Xhide();               
+                $("#BindUniteBox").Xhide();
                 if (typeof (LoginReturn) == "function") {
                     LoginReturn(json);
                 }
@@ -1253,7 +1257,7 @@ function BindUnite(classname) {
 }
 
 ///qq联合登录
-function checkQL(figure, nickname, openId, accessToken) {    
+function checkQL(figure, nickname, openId, accessToken) {
     //alert(figure + " + " + nickname + " + " + openId + " + " + accessToken)
     var url = "/AJAX/User.ashx?action=UniteLogin"
     var data = {};
@@ -1274,8 +1278,8 @@ function checkQL(figure, nickname, openId, accessToken) {
                     LoginReturn(json);
                 }
             } else {
-                showBindUnite(figure, nickname, { qid: openId, qtoken: accessToken, btn:"QC.Login.signOut()"});
-                
+                showBindUnite(figure, nickname, { qid: openId, qtoken: accessToken, btn: "QC.Login.signOut()" });
+
             }
         }
 
@@ -1289,7 +1293,7 @@ $(function () {
     $("#f_select_tab").find(".f_select_tabitem").bind("click", function () {
         $("#f_select_tab").find(".f_select_tabitem").removeClass("current");
         $(this).addClass("current");
-        $("#isDomestic").val($(this).attr("data"));    
+        $("#isDomestic").val($(this).attr("data"));
         $("#DomesticFlightCity").hide();
         $("#inFlightCity").hide();
     })
@@ -1307,71 +1311,71 @@ $(function () {
 
 function searchFlightPage(classname) {
 
-   var _data = "";
+    var _data = "";
 
 
-   var flighttype = $("#searchFlightPageBox").find("input[name=flighttype]:checked").val();
+    var flighttype = $("#searchFlightPageBox").find("input[name=flighttype]:checked").val();
 
-   var isDomestic = $("#searchFlightPageBox").find("input[name=isDomestic]").val();
+    var isDomestic = $("#searchFlightPageBox").find("input[name=isDomestic]").val();
 
-   _data += "&flighttype=" + flighttype;
-   _data += "&isDomestic=" + isDomestic;
+    _data += "&flighttype=" + flighttype;
+    _data += "&isDomestic=" + isDomestic;
 
-   var $homecity = $("#searchFlightPageBox").find("input[name=homecity]");
-   if ($homecity.val() == null || $homecity.val() == "" || $homecity.attr("title") == $homecity.val()) {
-       $homecity.focus();
-       return false;
-   }
+    var $homecity = $("#searchFlightPageBox").find("input[name=homecity]");
+    if ($homecity.val() == null || $homecity.val() == "" || $homecity.attr("title") == $homecity.val()) {
+        $homecity.focus();
+        return false;
+    }
 
-   var homecity = $homecity.attr("data").split("|");
-   _data += "&homename=" + homecity[0];
-   _data += "&homecity=" + homecity[1];
+    var homecity = $homecity.attr("data").split("|");
+    _data += "&homename=" + homecity[0];
+    _data += "&homecity=" + homecity[1];
 
-   var $destcity = $("#searchFlightPageBox").find("input[name=destcity]");
-   if ($destcity.val() == null || $destcity.val() == "" || $destcity.attr("title") == $destcity.val() || $destcity.val() == $homecity.val()) {
-       $destcity.focus();
-       return false;
-   }
-
-  
-
-   var destcity = $destcity.attr("data").split("|");
-   _data += "&destname=" + destcity[0];
-   _data += "&destcity=" + destcity[1];
-
-   var $staredata = $("#searchFlightPageBox").find("input[name=staredata]");
-   if ($staredata.val() == null || $staredata.val() == "" || $staredata.attr("title") == $staredata.val()) {
-       jQuery.Xmsg("请选择出发时间!");
-       return false;
-   }
-  
-
-   var $backdate = $("#searchFlightPageBox").find("input[name=backdate]");
-   if (flighttype == "1" && ($backdate.val() == null || $backdate.val() == "" || $backdate.attr("title") == $backdate.val())) {      
-       jQuery.Xmsg("请选择回程时间!");
-       return false;
-   }
-  
-   var staredata = $staredata.val();
-   var backdate = $backdate.val();
-
-   _data += "&staredata=" + staredata;
-   _data += "&backdate=" + backdate;
+    var $destcity = $("#searchFlightPageBox").find("input[name=destcity]");
+    if ($destcity.val() == null || $destcity.val() == "" || $destcity.attr("title") == $destcity.val() || $destcity.val() == $homecity.val()) {
+        $destcity.focus();
+        return false;
+    }
 
 
-   if (flighttype == "1" && new Date(backdate) <= new Date(staredata)) {
-       jQuery.Xmsg("回程时间必须大于出发时间!");       
-       return false;
-   }  
 
-   if (!!_data) {
-       _data = _data.substr(1);
-       var url = "/Mall/Flights/SearchResult.aspx?" + _data;
-       document.flightSearchForm.action = url;
-       document.flightSearchForm.submit();
-   }
+    var destcity = $destcity.attr("data").split("|");
+    _data += "&destname=" + destcity[0];
+    _data += "&destcity=" + destcity[1];
 
-  
+    var $staredata = $("#searchFlightPageBox").find("input[name=staredata]");
+    if ($staredata.val() == null || $staredata.val() == "" || $staredata.attr("title") == $staredata.val()) {
+        jQuery.Xmsg("请选择出发时间!");
+        return false;
+    }
+
+
+    var $backdate = $("#searchFlightPageBox").find("input[name=backdate]");
+    if (flighttype == "1" && ($backdate.val() == null || $backdate.val() == "" || $backdate.attr("title") == $backdate.val())) {
+        jQuery.Xmsg("请选择回程时间!");
+        return false;
+    }
+
+    var staredata = $staredata.val();
+    var backdate = $backdate.val();
+
+    _data += "&staredata=" + staredata;
+    _data += "&backdate=" + backdate;
+
+
+    if (flighttype == "1" && new Date(backdate) <= new Date(staredata)) {
+        jQuery.Xmsg("回程时间必须大于出发时间!");
+        return false;
+    }
+
+    if (!!_data) {
+        _data = _data.substr(1);
+        var url = "/Mall/Flights/SearchResult.aspx?" + _data;
+        document.flightSearchForm.action = url;
+        document.flightSearchForm.submit();
+    }
+
+
 }
 
 function ladingLand(citycode, landlist) {
@@ -1391,7 +1395,7 @@ function ladingLand(citycode, landlist) {
             var lands = ["BUSINESS", "HOSPITAL", "PAVILIONHALL", "SCENICSPOTS", "SUBWAY", "UNIVERSITY", "TRAINAIR"];
 
 
-           
+
             for (var i = 0; i < lands.length; i++) {
                 var astr = "";
                 var index = json.indexOf(function (item) { return (lands[i] == item.AreaCode) });
@@ -1423,7 +1427,7 @@ function ladingLand(citycode, landlist) {
 }
 
 
-function showHotelCity(isDomestic, thisdom,inputhidden,landlist) {
+function showHotelCity(isDomestic, thisdom, inputhidden, landlist) {
     var $this = $(thisdom);
     var _offset = $this.offset();
 
@@ -1498,9 +1502,9 @@ function showFlightCity(isDomestic, thisdom) {
 
     var $citybox;
 
-    isDomestic = (isDomestic == null || isDomestic=="0") ? 0 : 1;
+    isDomestic = (isDomestic == null || isDomestic == "0") ? 0 : 1;
 
-    $citybox = (isDomestic == 0) ? $('#DomesticFlightCity') : $('#inFlightCity'); 
+    $citybox = (isDomestic == 0) ? $('#DomesticFlightCity') : $('#inFlightCity');
 
 
     $citybox.show();
@@ -1510,7 +1514,7 @@ function showFlightCity(isDomestic, thisdom) {
     var isSet = $citybox.data("isSet");
     if (!isSet || isSet == null) {
         $citybox.hover(function () {
-            $(this).show();  
+            $(this).show();
         }, function () {
             $(this).hide();
             $this.blur();
@@ -1521,7 +1525,7 @@ function showFlightCity(isDomestic, thisdom) {
         })
         var _tabs = $citybox.find(".f_citytabList").find("a");
 
-        var _cityboxStr = "";      
+        var _cityboxStr = "";
         var _data = (isDomestic == 0) ? flights_domesticCity : flights_city;
 
         _tabs.each(function () {
@@ -1531,7 +1535,7 @@ function showFlightCity(isDomestic, thisdom) {
                 return;
             _cityboxStr += "<li>";
             for (var i = 0; i < _objs.length; i++) {
-                _cityboxStr += "<a href=\"javascript:void(0)\" code=\""+_objs[i].code+"\">" + _objs[i].name + "</a>";
+                _cityboxStr += "<a href=\"javascript:void(0)\" code=\"" + _objs[i].code + "\">" + _objs[i].name + "</a>";
             }
             _cityboxStr += "</li>";
 
@@ -1551,12 +1555,12 @@ function showFlightCity(isDomestic, thisdom) {
             $citybox.data("inputdemo").val($(this).html()).attr("data", $(this).html() + "|" + $(this).attr("code")).blur();
             $citybox.hide();
         })
-        $citybox.data("isSet",true);
+        $citybox.data("isSet", true);
     }
 
 }
 
 
 
- 
+
 
