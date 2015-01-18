@@ -142,6 +142,24 @@ namespace SinoTrip.API.LY.Biz
             }
             return doc.SelectSingleNode("response/body").InnerXml;
         }
+
+        /// <summary>
+        /// 获取景点图片
+        /// </summary>
+        /// <param name="SceneryId"></param>
+        /// <returns></returns>
+        public string GetSceneryImageList(int SceneryId, int page, int pageSize)
+        {
+            string PostData = "<sceneryId>" + SceneryId + "</sceneryId>";
+            string rs = ApiCommon.GetResult(PostData, "GetSceneryImageList", "http://tcopenapi.17usoft.com/handlers/scenery/queryhandler.ashx");
+            if (!string.IsNullOrEmpty(rs))
+            {
+                XmlDocument doc = new XmlDocument();
+                doc.LoadXml(rs);
+                return "<body>" + doc.SelectSingleNode("response/body").InnerXml + "</body>";
+            }
+            return rs;
+        }
         // public string GetPriceCalendar()
     }
 }

@@ -18,6 +18,8 @@ using System.Reflection;
 using System.Data;
 using System.Threading;
 using SinoTrip.Cache;
+using SinoTrip.Entity.ViewModel;
+using SinoTrip.Core;
 
 namespace SinoTrip.WebView
 {
@@ -28,15 +30,90 @@ namespace SinoTrip.WebView
         private static readonly string KEY = ConfigurationManager.AppSettings["ctripKey"];
         protected void Page_Load(object sender, EventArgs e)
         {
-           // var ids = new SinoTrip.DAL.Common.common_scenery().GetIds();
+            //var dal = new SinoTrip.DAL.Common.common_scenery_img();
+            //var data = SceneryCache.GetSceneryCache(0, "", 0, 0, 0, "", "");
+            //var data1 = data.Where(item => item.ItemId > 390).ToList();
+            //string vpath = "Upload/Scenery/Images/";
+            //string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, vpath);
+            //DirectoryInfo d = new DirectoryInfo(path);
+            //DirectoryInfo[] dis = d.GetDirectories();
+            //foreach (DirectoryInfo di in dis)
+            //{
+            //    var _id = di.Name.ToInt32(0);
+            //    if (_id > 390)
+            //    {
+            //        DirectoryInfo[] dis1 = di.GetDirectories();
+            //        foreach (var item in dis1)
+            //        {
+            //            FileInfo[] fis = item.GetFiles();
+            //            if (fis.Count() <= 0)
+            //                continue;
+            //            var defaultf = fis.Where(f => f.Name.ToLower() == "350_263.jpg").FirstOrDefault();
+            //            if (defaultf != null)
+            //            {
+            //                var imgmodel = new SinoTrip.Entity.DataBase.Common.common_scenery_img();
+            //                imgmodel.Width = 350;
+            //                imgmodel.Height = 263;
+            //                imgmodel.SceneryId = _id;
+            //                imgmodel.Folder = "/" + vpath + _id + "/" + item.Name + "/";
+            //                imgmodel.Cover = "/" + vpath + _id + "/" + item.Name + "/" + defaultf.Name;
+            //                imgmodel.Status = 0;
+            //                imgmodel.CreateTime = DateTime.Now.ToUnixInt();
+            //                dal.Add(imgmodel);
+            //            }
+            //            else
+            //            {
+            //                var imgmodel = new SinoTrip.Entity.DataBase.Common.common_scenery_img();
+            //                imgmodel.Width = 350;
+            //                imgmodel.Height = 263;
+            //                imgmodel.SceneryId = _id;
+            //                imgmodel.Folder = "/" + vpath + _id + "/" + item.Name + "/";
+            //                imgmodel.Cover = "/" + vpath + _id + "/" + item.Name + "/" + fis[0].Name;
+            //                imgmodel.Status = 0;
+            //                imgmodel.CreateTime = DateTime.Now.ToUnixInt();
+            //                dal.Add(imgmodel);
+            //            }
+            //        }
 
-            //GetCountyListByCityId();
-            //GetJQDeatil();
-            var biz = new SinoTrip.API.LY.Biz.ScenicBiz();
+
+            //    }
+                //a.Add(di.Name);
+            //    Console.WriteLine(di.Name);
+
+
+            //}
+            //Thread.Sleep(2000);
+            //var dal = new SinoTrip.DAL.Common.common_scenery_img();
+            //while (true)
+            //{
+            //    if (_c == (4416 - 404))
+            //    {
+            //        foreach (var item in modelAll)
+            //        {
+            //            dal.Add(item);
+
+            //        }
+            //        _c = 0;
+            //    }
+
+            //}
+            //Dictionary<int, int> SizeInfo = new Dictionary<int, int>();
+            //foreach (var image in model.extInfoOfImageList.sizeCodeList)
+            //{
+            //    if (!string.IsNullOrEmpty(image.sizeInfo))
+            //    {
+            //        var _index = image.sizeInfo.IndexOf("_");
+            //        int width = image.sizeInfo.Substring(0, _index).ToInt32(0);
+            //        int height = image.sizeInfo.Substring(_index + 1).ToInt32(0);
+            //        SizeInfo.Add(width, height);
+            //    }
+            //}
+
+
             //var rsssss = biz.QueryScenery(new SinoTrip.API.LY.Model.QueryScenery() { provinceId = 2, cityId = 45, page = 1, pageSize = 10 });
-            List<int> ids = new List<int>();
-            ids.Add(26737);
-            var model = biz.GetSceneryPrice(3, ids);
+            // List<int> ids = new List<int>();
+            //ids.Add(26737);
+            //var model = biz.GetSceneryPrice(3, ids);
             //GetJQDP();
             Response.Clear();
             Response.Write("");
@@ -91,7 +168,7 @@ namespace SinoTrip.WebView
             //var cityData = AreaCache.GetCityCache(0, "", true);
             //foreach (var city in cityData)
             //{
-               
+
             //}
         }
 
@@ -373,6 +450,105 @@ namespace SinoTrip.WebView
 
             }
         }
+
+        void GetJQImage()
+        {
+            var biz = new SinoTrip.API.LY.Biz.ScenicBiz();
+            var data = SceneryCache.GetSceneryCache(0, "", 0, 0, 0, "", "",string.Empty);
+            var data1 = data.Where(item => item.ItemId > 390).ToList();
+            for (int i = 0; i < 21; i++)
+            {
+                var _data = data1.Where(item => item.ItemId > 390 + (i * 200) && item.ItemId <= 590 + (i * 200)).ToList();
+                if (_data.Count > 0)
+                {
+                    Thread th1 = new Thread(delegate()
+                    {
+                        AddJQImg(_data);
+                    });
+                    th1.IsBackground = true;
+                    th1.Start();
+                }
+            }
+
+        }
+        List<SinoTrip.Entity.DataBase.Common.common_scenery_img> modelAll = new List<SinoTrip.Entity.DataBase.Common.common_scenery_img>();
+        List<SinoTrip.API.LY.Model.imageRs> tcimgModels = new List<API.LY.Model.imageRs>();
+
+        private static object obj = new object();
+        private static int _c = 0;
+        public void AddJQImg(List<ViewScenery> data)
+        {
+            var biz = new SinoTrip.API.LY.Biz.ScenicBiz();
+
+            foreach (var outitem in data)
+            {
+                var imgrs = biz.GetSceneryImageList(outitem.OutSign.ToInt32(0), 1, 10);
+                var model = new SinoTrip.API.LY.Model.imageRs();
+                lock (obj)
+                {
+                    _c++;
+                    model = imgrs.XmlToEntity<SinoTrip.API.LY.Model.imageRs>();
+                }
+                if (model == null || model.imageList == null || model.extInfoOfImageList == null)
+                    continue;
+
+                tcimgModels.Add(model);
+
+                foreach (var item in model.imageList.images)
+                {
+                    try
+                    {
+                        string gpath = Guid.NewGuid().ToString();
+
+                        string vpath = "Upload/Scenery/Images/" + outitem.ItemId + "/" + gpath + "/";
+                        string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, vpath);
+                        if (!Directory.Exists(path))
+                        {
+                            Directory.CreateDirectory(path);
+                        }
+                        foreach (var image in model.extInfoOfImageList.sizeCodeList)
+                        {
+                            if (!string.IsNullOrEmpty(image.sizeInfo))
+                            {
+                                var _index = image.sizeInfo.IndexOf("_");
+                                int width = image.sizeInfo.Substring(0, _index).ToInt32(0);
+                                int height = image.sizeInfo.Substring(_index + 1).ToInt32(0);
+                                var url = model.extInfoOfImageList.imageBaseUrl + image.sizeInfo + "/" + item.imagePath.InnerXml;
+
+                                System.Net.WebClient web = new System.Net.WebClient();
+
+                                int nPos = url.LastIndexOf('.');
+                                string FileName = url.Substring(nPos + 1);
+                                web.DownloadFile(url, path + image.sizeInfo + "." + FileName);
+
+                                if (image.isDefault == "True")
+                                {
+                                    var imgmodel = new SinoTrip.Entity.DataBase.Common.common_scenery_img();
+                                    imgmodel.Width = width;
+                                    imgmodel.Height = height;
+                                    imgmodel.SceneryId = outitem.ItemId;
+                                    imgmodel.Folder = "/" + vpath;
+                                    imgmodel.Cover = "/" + vpath + image.sizeInfo + "." + FileName;
+                                    imgmodel.Status = 0;
+                                    imgmodel.CreateTime = DateTime.Now.ToUnixInt();
+                                    modelAll.Add(imgmodel);
+                                    //dal.Add(imgmodel);
+                                }
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        LoggerCore.Error(ex.Message, ex);
+                        continue;
+                    }
+
+
+                }
+            }
+        }
+
+
 
         void GetJQItem()
         {

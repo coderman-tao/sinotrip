@@ -95,6 +95,8 @@
     <Compile Include="LY\Model\SceneryPrice.cs" />
     <Compile Include="LY\SDK\ApiCommon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Zhunar\Model\Header.cs" />
+    <Compile Include="Zhunar\Model\Hotel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Ctrip\Template\OTA_HotelSearchRQ.xml">
@@ -102,6 +104,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SinoTrip.Core\SinoTrip.Core.csproj">
+      <Project>{bba7a3fb-22c2-460a-a82e-171bb98001e2}</Project>
+      <Name>SinoTrip.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SinoTrip.FrameWork\SinoTrip.FrameWork.csproj">
       <Project>{ecdfb705-b0e9-43ff-82ae-958af25a1c76}</Project>
       <Name>SinoTrip.FrameWork</Name>

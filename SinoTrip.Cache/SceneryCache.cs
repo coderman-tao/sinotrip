@@ -58,7 +58,7 @@ namespace SinoTrip.Cache
             return data;
         }
 
-        public static List<ViewScenery> GetSceneryCache(int id, string proviceName, int cityId, int countyId, int typeId, string grade, string name)
+        public static List<ViewScenery> GetSceneryCache(int id, string proviceName, int cityId, int countyId, int typeId, string grade, string name,string outSign)
         {
             var result = FileCache.ReadCache("SeceryCache", DateTime.MinValue, "scenery") as List<ViewScenery>;
             if (result == null)
@@ -90,6 +90,10 @@ namespace SinoTrip.Cache
             if (!string.IsNullOrEmpty(name))
             {
                 result = result.Where(item => item.Name.Contains(name) || name.Contains(item.Name) || item.Alias.Contains(name) || item.CityName.Contains(name) || name.Contains(item.CityName)).ToList();
+            }
+            if (!string.IsNullOrEmpty(outSign))
+            {
+                result = result.Where(item => item.OutSign == outSign).ToList();
             }
             return result;
         }

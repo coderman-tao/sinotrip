@@ -6,7 +6,7 @@ using System.Text;
 namespace SinoTrip.Entity.DataBase.Scenery
 {
     [Serializable]
-    public partial class scenery_comment
+    public partial class scenery_comment:BaseEntity
     {
         public scenery_comment()
         { }

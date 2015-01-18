@@ -3,6 +3,8 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>$!araename$!cityname$!countyname景区门票预订_$!araename$!cityname$!countyname旅游景点大全_景点门票_驾驴旅游网</title>
+    <meta name='keywords' content='旅游景点大全,景点百科,$!araename$!cityname$!countyname景区门票预订,景点门票' />
+    <meta name='description' content='$!araename$!cityname$!countyname景点大全和景点百科。驾驴旅游网提供$!araename$!cityname$!countyname区域特价门票预订，无需在线支付，解除您一切后顾之忧。' />
     #include("pageHeadCode.htm")
     <link href="/Skin/default/style/SceneryList.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=13a035f5778a2a6f92c1cc2239c717ef"></script>
@@ -144,13 +146,13 @@
                         </script>
                         <div class="tourbox" value="$sitem.sceneryId">
                             <div class="imgbox">
-                                <a href="/Tour/$item.id&#45;1&#46;html" target="_blank" title="$sitem.sceneryName">
+                                <a href="/Scenic/Item0&#45;$sitem.sceneryId&#46;html" target="_blank" title="$sitem.sceneryName">
                                     <img width="160px" height="120px" src="$Scenery.imgbaseURL/$sitem.imgPath" />
                                 </a>
                             </div>
                             <div class="tourcounet">
                                 <div class="touritem">
-                                    <a href="/Tour/$item.id&#45;1&#46;html" target="_blank" title="$sitem.scenerySummary">
+                                    <a href="/Scenic/Item0&#45;$sitem.sceneryId&#46;html" target="_blank" title="$sitem.scenerySummary">
                                         <h3>$sitem.sceneryName&nbsp;&nbsp;($sitem.provinceName#if($sitem.cityName!=$sitem.provinceName)·$sitem.cityName #end)</h3>
                                     </a>
                                     <div>
@@ -158,7 +160,7 @@
                                         <a class="mapbtn" href="javascript:void(0)" onclick="showMap($sitem.lon,$sitem.lat,'$sitem.sceneryName','$sitem.sceneryAddress','$Scenery.imgbaseURL/$sitem.imgPath')">查看地图</a>
                                     </div>
                                     <div>景区等级：$sitem.gradeId</div>
-                                    <div>有<a href="" style="color:#005bb5">$sitem.commentCount</a>位网友曾点评过</div>
+                                    <div>有<a href="/Scenic/Item0&#45;$sitem.sceneryId&#46;html#dpbox" target="_blank" style="color:#005bb5">$sitem.commentCount</a>位网友曾点评过</div>
                                     <!--<div class="tourlistDis">
                                         <span class="discountBox couponetitle"><span class="discountname">券</span>优惠券</span>
                                         <span class="discountBox couponetitle"><span class="discountname">减</span>下单立减</span>
@@ -168,7 +170,7 @@
                                     <div class="price">¥$sitem.amountAdv</div>
                                     <div>门市价：<span style="text-decoration: line-through; color:#666">¥$sitem.amount</span></div>
                                     <div style="padding-top:15px">
-                                        <a href="/Tour/$item.id&#45;1&#46;html" target="_blank" title="在线预订$item.title">
+                                        <a href="/Scenic/Item0&#45;$sitem.sceneryId&#46;html" target="_blank" title="在线预订$item.title">
                                             <span class="inputbutton green" style=" width:60px">查看详情</span>
                                         </a>
                                     </div>

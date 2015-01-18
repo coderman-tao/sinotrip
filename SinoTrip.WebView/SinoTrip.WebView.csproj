@@ -398,6 +398,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ajax\Hotel\GetHotel.ashx.cs">
+      <DependentUpon>GetHotel.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Ajax\Scenery\GetInfo.ashx.cs">
       <DependentUpon>GetInfo.ashx</DependentUpon>
     </Compile>
@@ -526,6 +529,7 @@
     <Content Include="Res\js\mf-pattern\img\mF_tbhuabao\.svn\prop-base\btn-bg.gif.svn-base" />
     <Content Include="Res\js\mf-pattern\img\mF_tbhuabao\.svn\text-base\btn-bg.gif.svn-base" />
     <Content Include="Ajax\Scenery\GetInfo.ashx" />
+    <Content Include="Ajax\Hotel\GetHotel.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -590,9 +594,17 @@
       <Project>{19198779-5bfa-4452-8850-80a699bf91ed}</Project>
       <Name>SinoTrip.API</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SinoTrip.Biz\SinoTrip.Biz.csproj">
+      <Project>{d115d158-d9ec-4bb0-8043-d913c2ea7330}</Project>
+      <Name>SinoTrip.Biz</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SinoTrip.Cache\SinoTrip.Cache.csproj">
       <Project>{76a7cef3-0cd5-4a61-8fce-c98175c764c3}</Project>
       <Name>SinoTrip.Cache</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SinoTrip.Core\SinoTrip.Core.csproj">
+      <Project>{bba7a3fb-22c2-460a-a82e-171bb98001e2}</Project>
+      <Name>SinoTrip.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\SinoTrip.DAL\SinoTrip.DAL.csproj">
       <Project>{c045ecf2-a06a-4f76-9910-f7b91c6c5385}</Project>

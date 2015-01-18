@@ -45,6 +45,7 @@
     <Compile Include="DataBase\Common\common_city.cs" />
     <Compile Include="DataBase\Common\common_city_area.cs" />
     <Compile Include="DataBase\Common\common_scenery.cs" />
+    <Compile Include="DataBase\Common\common_scenery_img.cs" />
     <Compile Include="DataBase\Common\common_scenery_type.cs" />
     <Compile Include="DataBase\Hotel\hotel_chain.cs" />
     <Compile Include="DataBase\Scenery\scenery_comment.cs" />

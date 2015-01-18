@@ -4,10 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using SinoTrip.FrameWork.Common;
 
 namespace SinoTrip.DAL.Scenery
 {
-   public class scenery_comment
+    public class scenery_comment
     {
         /// <summary>
         /// 增加一条数据
@@ -70,6 +71,24 @@ namespace SinoTrip.DAL.Scenery
             {
                 return false;
             }
+        }
+
+
+        /// <summary>
+        /// 获得数据列表
+        /// </summary>
+        public List<SinoTrip.Entity.DataBase.Scenery.scenery_comment> GetList(int SceneryId, int page, int pageSize, out int total)
+        {
+            if (SceneryId <= 0 || pageSize > 1000)
+            {
+                total = 0;
+                return null;
+            }
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select ItemId,SceneryId,OutSign,Rank,DPTitle,Comment,Uid,UserName,DPService,DPShiGouYu,DPTraffic,ServiceScore,ServiceGrade,ConvenientScore,ConvenientGrade,DiscountScore,DiscountGrade,DPGanwu,DPTime,TempData,Status ");
+            strSql.Append(" FROM scenery_comment ");
+            strSql.Append(" WHERE SceneryId=" + SceneryId);
+            return DALCore.SimplePageQuery(strSql.ToString(), page * pageSize, (page + 1) * pageSize, "DPTime", true, out total, DALCore.GetSMDB(), null).ToList<SinoTrip.Entity.DataBase.Scenery.scenery_comment>();
         }
     }
 }

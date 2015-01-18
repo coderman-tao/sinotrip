@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SinoTrip.Core;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -216,9 +217,10 @@ namespace SinoTrip.API.LY.SDK
 
                 return result;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                LoggerCore.Error(ex.Message, ex);
+                return string.Empty;
             }
             finally
             {

@@ -1,7 +1,9 @@
 ﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>特价酒店预订&#45;$SITE.name</title>
+    <title>$!Info.Name门票预定_$!Info.Name门票价格_$!Info.Name游客点评_$!Info.Name交通信息_景点百科_驾驴旅游网</title>
+    <meta name='keywords' content='$!Info.Name门票、$!Info.Name门票价格、$!Info.Name点评、$!Info.Name交通、$!Info.Name百科、$!Info.Name' />
+    <meta name='description' content='$!Info.Name怎么玩?$!Info.Name门票怎么预订？$!Info.Name景点百科。驾驴旅游网提供$!Info.Name特价门票预订，无需在线支付，解除您一切后顾之忧。' />
     #include("pageHeadCode.htm")
     <link href="/Skin/default/style/sceneryitem.css" rel="stylesheet" type="text/css" />
 
@@ -14,7 +16,7 @@
         }
 
             .hotellist a:hover {
-                background-color: #d9f3ff;
+                background-color: #fff4d9;
             }
 
             .hotellist a span {
@@ -23,23 +25,12 @@
             }
 
                 .hotellist a span.hotelname {
-                    width: 100%;
-                    height: 38px;
+                    width:280px;
+                    height: 30px;
+                    line-height: 30px;
                     padding-top: 5px;
                     overflow: hidden;
-                    line-height: 16px;
-                    font-size: 13px;
-                    font-weight: bold;
                     font-family: 微软雅黑;
-                }
-
-                .hotellist a span.price {
-                    width: 200px;
-                    text-align: right;
-                    color: Red;
-                    font-size: 14px;
-                    font-family: 微软雅黑;
-                    font-weight: bolder;
                 }
     </style>
     <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=13a035f5778a2a6f92c1cc2239c717ef"></script>
@@ -69,49 +60,47 @@
                             <span>&nbsp;&nbsp;地址：$!Info.Address</span>
                         </div>
 
-                        #set($images = $thistool.getHotleImages($roomStay.BasicPropertys.Images,7,""))
-
                         <div style=" position:relative; width:850px; height:250px; overflow:hidden">
 
                             <div style="position:absolute; top:0px; left:0px; width:300px; height:250px;">
                                 <div style=" padding:2px; width:296px; height:246px; overflow:hidden">
-                                    <img src=" http://media.sohoto.com/market/images/hotelimages$images.get_item(0).URL" style="width:300px; height:250px;" />
+                                    <img src="$Imgs.get_item(0).Cover" style="width:300px; height:250px;" alt="$!Info.Name" />
                                 </div>
                             </div>
 
                             <div style="position:absolute; top:0px; left:300px; width:150px; height:125px;">
                                 <div style=" padding:2px; width:146px; height:121px; overflow:hidden">
-                                    <img src=" http://media.sohoto.com/market/images/hotelimages$images.get_item(1).URL" style="width:150px; height:125px;" />
+                                    <img src="$!Imgs.get_item(1).Cover" style="width:150px; height:125px;" alt="$!Info.Name" />
                                 </div>
                             </div>
 
                             <div style="position:absolute; top:0px; left:450px; width:200px; height:125px;">
                                 <div style=" padding:2px; width:196px; height:121px; overflow:hidden">
-                                    <img src=" http://media.sohoto.com/market/images/hotelimages$images.get_item(2).URL" style="width:200px; height:125px;" />
+                                    <img src="$!Imgs.get_item(2).Cover" style="width:200px; height:125px;" alt="$!Info.Name" />
                                 </div>
                             </div>
 
                             <div style="position:absolute; top:0px; left:650px; width:200px; height:125px;">
                                 <div style=" padding:2px; width:196px; height:121px; overflow:hidden">
-                                    <img src=" http://media.sohoto.com/market/images/hotelimages$images.get_item(3).URL" style="width:200px; height:125px;" />
+                                    <img src="$!Imgs.get_item(3).Cover" style="width:200px; height:125px;" alt="$!Info.Name" />
                                 </div>
                             </div>
 
                             <div style="position:absolute; top:125px; left:300px; width:200px; height:125px;">
                                 <div style=" padding:2px; width:196px; height:121px; overflow:hidden">
-                                    <img src=" http://media.sohoto.com/market/images/hotelimages$images.get_item(4).URL" style="width:200px; height:125px;" />
+                                    <img src="$!Imgs.get_item(4).Cover" style="width:200px; height:125px;" alt="$!Info.Name" />
                                 </div>
                             </div>
 
                             <div style="position:absolute; top:125px; left:500px; width:200px; height:125px;">
                                 <div style=" padding:2px; width:196px; height:121px; overflow:hidden">
-                                    <img src=" http://media.sohoto.com/market/images/hotelimages$images.get_item(5).URL" style="width:200px; height:125px;" />
+                                    <img src="$!Imgs.get_item(5).Cover" style="width:200px; height:125px;" alt="$!Info.Name" />
                                 </div>
                             </div>
 
                             <div style=";position:absolute; top:125px; left:700px; width:150px; height:125px;">
                                 <div style=" padding:2px; width:146px; height:121px; overflow:hidden">
-                                    <img src=" http://media.sohoto.com/market/images/hotelimages$images.get_item(6).URL" style=" width:150px; height:125px;" />
+                                    <img src="$!Imgs.get_item(6).Cover" style=" width:150px; height:125px;" alt="$!Info.Name" />
                                 </div>
                             </div>
 
@@ -251,11 +240,10 @@
                         </div>
 
                     </div>
-                    <div class="thisbox" id="hotelbox">
+                    <div class="thisbox hotellist" id="hotelbox">
                         <div style=" padding:10px; line-height:20px">
                             <h2 style=" line-height:35px; font-family:微软雅黑; color:#ff6600">附近酒店</h2>
                         </div>
-
                     </div>
                 </div>
 
@@ -387,7 +375,59 @@
         });
         $(window).resize(function () {
             setNoteTab();
-        })
+        });
+        var url = "/AJAX/Hotel/GetHotel.ashx?method=List&page=1&pagesize=9&lat=$Info.Lat&lng=$Info.Lng";
+        jQuery.ajax({
+            url: url,
+            traditional: true,
+            type: "POST",
+            success: function (response) {
+                jQuery.XloadHide();
+                var json = response.toJson();
+                //http://hotel.cartrip.cc/hotelinfo/117983/
+                for (var i = 0; i < json.reqdata.length; i++) {
+                    var item = json.reqdata[i];
+                    if (parseInt(item.min_jiage) == 0) {
+                        item.min_jiage = '今日无房';
+                    }
+                    else {
+                        item.min_jiage = "¥" + item.min_jiage
+                    }
+                    var html = '<div style="overflow:hidden;width:280px;float:left;padding:5px">' +
+                            '<a href="http://hotel.cartrip.cc/hotelinfo/' + item.ID + '/" target="_blank" title="在线预订' + item.HotelName + '">' +
+                            '<img alt="' + item.HotelName + '" height="180px" width="280px" src="' + item.Picture + '" />' +
+                            '<span class="hotelname">' + item.HotelName + '<span style="float:right;padding-right:30px;font-size:16px;" title="' + item.content + '" class="price">' +
+                               item.min_jiage + '</span></a></div>';
+                    $("#hotelbox").append(html);
+                }
+
+                //for (var i = 0; i < json.scenery.length; i++) {
+                //    var _price = json.scenery[i].policy;
+                //    if (!!_price && !!_price.Policys) {
+                //        if (_price.Policys.length > 0) {
+                //            $("#priceBox_" + json.scenery[i].sceneryId).html("");
+                //            for (var j = 0; j < _price.Policys.length; j++) {
+                //                var html = ' <div style="border-bottom: 1px #ddd dashed;"><div id="price_' + json.scenery[i].sceneryId + '_' + _price.Policys[j].policyId + '"><ul class="tab_nav tab_navHover" style="height:35px;">';
+                //                var html1 = '<div class="divReamrk_box" id="remark_' + json.scenery[i].sceneryId + '_' + _price.Policys[j].policyId + '">';
+                //                html += '<li class="name_li">[' + _price.Policys[j].ticketName.InnerXml + ']<a onclick="showDetail(' + json.scenery[i].sceneryId + ',' + _price.Policys[j].policyId + ')" href="javascript:void(0)" style="color:#005bb5">' + _price.Policys[j].policyName.InnerXml + '</a></li>' +
+                //                '<li class="listBt_box">' +
+                //                '<span class="msprice">¥' + _price.Policys[j].price + '</span>' +
+                //                '<span class="tcprice"><span class="b-orange">¥' + _price.Policys[j].tcPrice + '</span></span>' +
+                //                '<span class="payment"><span class="a-tip">' + GetModelName(_price.Policys[j].pMode) + '</span></span>' +
+                //                '<span class="operate" style="height:23px;line-height:23px;"><a class="bookbtn" target="_blank" href="/scenery/sceneryOrder.aspx?sceneryId=5305&amp;ticketId=119734">预订</a></span>' +
+                //                '</li>';
+                //                html1 += ' <b>包含项目：</b>' + _price.Policys[j].containItems + '<br /><b>预订说明：</b>' + _price.Policys[j].remark.InnerXml + '</div>';
+                //                html += "</ul></div>" + html1 + "</div>";
+
+                //                $("#priceBox_" + json.scenery[i].sceneryId).append(html);
+                //            }
+                //        }
+
+                //    }
+                //}
+            }
+
+        });
     </script>
     #parse("pageFoot.htm")
 

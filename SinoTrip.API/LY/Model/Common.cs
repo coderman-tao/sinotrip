@@ -1,7 +1,9 @@
-﻿using System;
+﻿using SinoTrip.FrameWork.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace SinoTrip.API.LY.Model
 {
@@ -49,4 +51,54 @@ namespace SinoTrip.API.LY.Model
         /// </summary>
         public int? cs;
     }
+    [Serializable, XmlRoot("body")]
+    public class imageRs
+    {
+        public imageList imageList;
+
+        public extInfoOfImageListData extInfoOfImageList;
+    }
+
+    [Serializable]
+    public class imageList
+    {
+        [XmlAttribute]
+        public int page { get; set; }
+        [XmlAttribute]
+        public int pageSize { get; set; }
+        [XmlAttribute]
+        public int totalPage { get; set; }
+        [XmlAttribute]
+        public int totalCount { get; set; }
+        [XmlElement("image")]
+        public List<image> images { get; set; }
+
+        [Serializable]
+        public class image
+        {
+            public CDATA imagePath { set; get; }
+        }
+
+
+    }
+    [Serializable]
+    public class extInfoOfImageListData
+    {
+        public string imageBaseUrl { get; set; }
+
+        public List<sizeCode> sizeCodeList { get; set; }
+        public class sizeCode
+        {
+            [XmlAttribute]
+            public int size { get; set; }
+            [XmlAttribute]
+            public string isDefault { get; set; }
+
+            [XmlText]
+            public string sizeInfo { get; set; }
+        }
+    }
+
+
+
 }
