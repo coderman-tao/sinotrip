@@ -43,13 +43,11 @@ namespace SinoTrip.WebView.Scenic
                     }
                     if (imgs.Count < 7)
                     {
-                        for (int i = 0; i < 7 - imgs.Count; i++)
+                        for (int i = 0; i <= 7 - imgs.Count; i++)
                         {
                             imgs.Add(new SinoTrip.Entity.DataBase.Common.common_scenery_img() { Cover = "http://www.cartrip.cc/data/attachment/block/61/61b23c840791af8254616892874ddc88.jpg" });
                         }
                     }
-                    int total;
-                    var cms = new SinoTrip.Biz.SceneryBiz().GetCommentList(id, 0, 10, out total);
                     Vt.Put("Imgs", imgs);
                     Vt.Put("Info", Info);
                 }

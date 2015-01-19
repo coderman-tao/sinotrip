@@ -14,14 +14,21 @@ namespace SinoTrip.Core
     public abstract class DALCore
     {
         /// <summary>
-        /// 荞面Sqlserver主库连接
+        /// 主库连接
         /// </summary>
         /// <returns></returns>
         public static DbMySQL GetSMDB()
         {
             return DBEnum.MySQLMaster();
         }
-
+        /// <summary>
+        /// DZ库连接
+        /// </summary>
+        /// <returns></returns>
+        public static DbMySQL GetDZDB()
+        {
+            return DBEnum.MySQLDZ();
+        }
         /// <summary>
         /// 查询列表并返回总数
         /// </summary>
@@ -32,14 +39,14 @@ namespace SinoTrip.Core
         /// <param name="isdesc">降序true,升序false</param>
         /// <param name="Total">总数</param>
         /// <returns></returns>
-        public static DataTable SimplePageQuery(string sql, int start, int limit, string orderBy, bool isdesc, out int Total, DbMySQL db, MySqlParameter[] parames)
+        public static DataTable SimplePageQuery(string sql, int page, int size, string orderBy, bool isdesc, out int Total, DbMySQL db, MySqlParameter[] parames)
         {
             if (string.IsNullOrEmpty(sql))
             {
                 Total = -1;
                 return null;
             }
-            if ((start <= 0 && limit <= 0))
+            if ((page < 0 && size <= 0))
             {
                 Total = -1;
                 return null;
@@ -63,7 +70,7 @@ namespace SinoTrip.Core
             //        strSql.Append(" DESC");
             //}
             //strSql.Append(")AS Row, T.*  from (");
-            strSql.AppendFormat(" LIMIT {0},{1}", start, start + limit);
+            strSql.AppendFormat(" LIMIT {0},{1}", page, size);
             //strSql.Append(")T ) TT");
             //strSql.AppendFormat(" WHERE TT.Row> {0} and  TT.Row<={1}", start, start + limit);
             strSqlCount.Append("select COUNT(*) FROM (" + sql + ") as t");

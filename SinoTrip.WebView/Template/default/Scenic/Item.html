@@ -25,7 +25,7 @@
             }
 
                 .hotellist a span.hotelname {
-                    width:280px;
+                    width: 280px;
                     height: 30px;
                     line-height: 30px;
                     padding-top: 5px;
@@ -115,7 +115,7 @@
                         <a href="#buynotebox">预定须知</a>
                         <a href="#introbox" class=" ">景点简介</a>
                         <a href="#trafficbox" class=" ">地址交通</a>
-                        <a href="#dpbox" class=" ">游客点评</a>
+                        <a href="#dpbox" class=" "><i id="dp_count" style="font-size:10px; color:red;"></i>&nbsp;游客点评</a>
                         <a href="#youjibox" class=" ">游记攻略</a>
                         <a href="#hotelbox" class=" ">附近酒店</a>
                     </div>
@@ -232,13 +232,18 @@
                         <div style=" padding:10px; line-height:20px">
                             <h2 style=" line-height:35px; font-family:微软雅黑; color:#ff6600">游客点评</h2>
                         </div>
+                        <div id="comment_list">
+                        </div>
+                        <div id="pageList" class="pageList">
 
+                        </div>
                     </div>
                     <div class="thisbox" id="youjibox">
                         <div style=" padding:10px; line-height:20px">
                             <h2 style=" line-height:35px; font-family:微软雅黑; color:#ff6600">游记攻略</h2>
                         </div>
-
+                        <div id="YJ_List">
+                        </div>
                     </div>
                     <div class="thisbox hotellist" id="hotelbox">
                         <div style=" padding:10px; line-height:20px">
@@ -376,9 +381,85 @@
         $(window).resize(function () {
             setNoteTab();
         });
-        var url = "/AJAX/Hotel/GetHotel.ashx?method=List&page=1&pagesize=9&lat=$Info.Lat&lng=$Info.Lng";
+        GetCommentList(0);
+        function GetCommentList(page) {
+            jQuery.ajax({
+                url: "/AJAX/Scenery/GetInfo.ashx?method=GetComment&page=" + page + "&pageSize=6&id=$!Info.ItemId",
+                traditional: true,
+                type: "POST",
+                success: function (response) {
+                    jQuery.XloadHide();
+                    var json = response.toJson();
+                    if (json.length > 0) {
+                        $("#dp_count").html(json[0].Total);
+                        var pageCount = Math.round(json[0].Total / 6) + 1;
+                        var pageHtml = "";
+                        var currentHtml = '<a class="current" href="javascript:void(0)" onclick=" GetCommentList(' + page + ') ">' + (page + 1) + '</a>';
+                        if (page >= 8) {
+                            if ((page + 1) < pageCount) {
+                                pageHtml += '<a href="javascript:void(0)" onclick=" GetCommentList(0) ">1</a>......';
+                                pageHtml += '<a href="javascript:void(0)" onclick=" GetCommentList(' + (page - 2) + ') ">' + (page - 2) + '</a>';
+                                pageHtml += '<a href="javascript:void(0)" onclick=" GetCommentList(' + (page - 1) + ') ">' + (page - 1) + '</a>';
+                                pageHtml += '<a href="javascript:void(0)" onclick=" GetCommentList(' + page + ') ">' + page + '</a>';
+                                pageHtml += currentHtml;
+                                pageHtml += '<a href="javascript:void(0)" onclick=" GetCommentList(' + (page + 2) + ') ">' + (page + 2) + '</a>';
+                                pageHtml += '<a href="javascript:void(0)" onclick="GetCommentList(' + (page + 3) + ') ">' + (page + 3) + '</a>';
+                                pageHtml += '<a href="javascript:void(0)" onclick=" GetCommentList(' + (page + 4) + ')">' + (page + 4) + '</a>';
+                                pageHtml = pageHtml + '......' + '<a href="javascript:void(0)" onclick="GetCommentList(' + (pageCount - 1) + ')">' + pageCount + '</a>';
+                            }
+                            else {
+                                pageHtml += '<a href="javascript:void(0)" onclick=" GetCommentList(0) ">1</a>......';
+                                for (var i = 9; i > 0; i--) {
+                                    pageHtml += '<a href="javascript:void(0)" onclick=" GetCommentList(' + (pageCount - i) + ') ">' + (pageCount - i) + '</a>';
+                                }
+                                pageHtml += currentHtml;
+                            }
+                        }
+                        if (page < 8) {
+                            for (var i = 0; i < 9; i++) {
+                                if (i == page) {
+                                    pageHtml += currentHtml;
+                                    continue;
+                                }
+                                pageHtml += '<a href="javascript:void(0)" onclick=" GetCommentList(' + i + ') ">' + (i + 1) + '</a>';
+                            }
+                            if (pageCount > (page + 1)) {
+                                pageHtml = pageHtml + '......' + '<a href="javascript:void(0)" onclick="GetCommentList(' + (pageCount - 1) + ')">' + pageCount + '</a>';
+                            }
+                        }
+                        $("#pageList").html(pageHtml);
+                    }
+                    $("#comment_list").html("");
+                    for (var i = 0; i < json.length; i++) {
+                        var item = json[i];
+                        var rank = "好评";
+                        if (item.Rank == 2)
+                            rank = "中评";
+                        if (item.Rank == 3)
+                            rank = "差评";
+                        if (item.DPGanwu.length == 0) {
+                            item.DPGanwu = '真的很不错';
+                        }
+                        var html = '<div class="comment"><div class="comment_left">' +
+                                        '<div><span>游客' + item.UserName + '</span></div>' +
+                        '<div style="padding-top:5px"><span style="color:red; font-weight:bold">' + rank + '</span></div>' +
+                        '<div style="padding-top:5px">' + dateFormat("Y-m-d", item.DPTime) + '</div></div>' +
+                        '<div class="comment_right">服务：<span>' + item.ServiceGrade + '</span>&nbsp;&nbsp;&nbsp;&nbsp;' +
+                        '便捷：<span>' + item.DPTraffic + '</span>&nbsp;&nbsp;&nbsp;&nbsp;' +
+                         '食购娱：<span>' + item.DPShiGouYu + '</span>&nbsp;&nbsp;&nbsp;&nbsp;' +
+                        '优惠：<span>' + item.DiscountGrade + '</span>&nbsp;&nbsp;&nbsp;&nbsp;<br />' +
+                        '<div class="commenttitle">' + item.DPTitle + '</div>' +
+                        '<div class="commentcontent">' + item.Comment + '</div>' +
+                        ' <div class="commentGanwu"><span>旅行感悟：</span>' + item.DPGanwu + '</div>' +
+                         '</div></div>';
+                        $("#comment_list").append(html);
+                    }
+                }
+
+            });
+        }
         jQuery.ajax({
-            url: url,
+            url: "/AJAX/Hotel/GetHotel.ashx?method=List&page=1&pagesize=9&lat=$Info.Lat&lng=$Info.Lng",
             traditional: true,
             type: "POST",
             success: function (response) {
@@ -400,31 +481,22 @@
                                item.min_jiage + '</span></a></div>';
                     $("#hotelbox").append(html);
                 }
+            }
 
-                //for (var i = 0; i < json.scenery.length; i++) {
-                //    var _price = json.scenery[i].policy;
-                //    if (!!_price && !!_price.Policys) {
-                //        if (_price.Policys.length > 0) {
-                //            $("#priceBox_" + json.scenery[i].sceneryId).html("");
-                //            for (var j = 0; j < _price.Policys.length; j++) {
-                //                var html = ' <div style="border-bottom: 1px #ddd dashed;"><div id="price_' + json.scenery[i].sceneryId + '_' + _price.Policys[j].policyId + '"><ul class="tab_nav tab_navHover" style="height:35px;">';
-                //                var html1 = '<div class="divReamrk_box" id="remark_' + json.scenery[i].sceneryId + '_' + _price.Policys[j].policyId + '">';
-                //                html += '<li class="name_li">[' + _price.Policys[j].ticketName.InnerXml + ']<a onclick="showDetail(' + json.scenery[i].sceneryId + ',' + _price.Policys[j].policyId + ')" href="javascript:void(0)" style="color:#005bb5">' + _price.Policys[j].policyName.InnerXml + '</a></li>' +
-                //                '<li class="listBt_box">' +
-                //                '<span class="msprice">¥' + _price.Policys[j].price + '</span>' +
-                //                '<span class="tcprice"><span class="b-orange">¥' + _price.Policys[j].tcPrice + '</span></span>' +
-                //                '<span class="payment"><span class="a-tip">' + GetModelName(_price.Policys[j].pMode) + '</span></span>' +
-                //                '<span class="operate" style="height:23px;line-height:23px;"><a class="bookbtn" target="_blank" href="/scenery/sceneryOrder.aspx?sceneryId=5305&amp;ticketId=119734">预订</a></span>' +
-                //                '</li>';
-                //                html1 += ' <b>包含项目：</b>' + _price.Policys[j].containItems + '<br /><b>预订说明：</b>' + _price.Policys[j].remark.InnerXml + '</div>';
-                //                html += "</ul></div>" + html1 + "</div>";
+        });
 
-                //                $("#priceBox_" + json.scenery[i].sceneryId).append(html);
-                //            }
-                //        }
-
-                //    }
-                //}
+        jQuery.ajax({
+            url: "/AJAX/Scenery/GetInfo.ashx?method=GetYJ&tag=$!Info.CityName",
+            type: "POST",
+            success: function (response) {
+                jQuery.XloadHide();
+                var json = response.toJson();
+                var html = "";
+                for (var i = 0; i < json.length; i++) {
+                    html += '<a href="http://www.cartrip.cc/thread-' + json[i].tid + '-1-1.html" target="_blank"><div style="padding:10px; font-size:13px;color:#ff6600;border-bottom:1px #ddd dashed">' + json[i].subject +
+                    ' <i style="float:right;padding-right:10px;font-size:12px;">' + json[i].author + '发表于:' + dateFormat("Y-m-d", json[i].dateline) + '</i></div></a>';
+                }
+                $("#YJ_List").html(html);
             }
 
         });

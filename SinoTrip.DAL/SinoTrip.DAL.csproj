@@ -49,6 +49,7 @@
     <Compile Include="Common\common_scenery_img.cs" />
     <Compile Include="Common\common_scenery_type.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scenery\QueryDZPost.cs" />
     <Compile Include="Scenery\scenery_comment.cs" />
     <Compile Include="Scenery\scenery_comment_img.cs" />
   </ItemGroup>

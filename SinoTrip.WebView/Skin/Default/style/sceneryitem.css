@@ -186,3 +186,41 @@ h4 {
 .intro_information dd p {
     padding-bottom: 10px;
 }
+
+.comment {
+    padding: 10px;
+    border-bottom: 1px #ddd dashed;
+    overflow: hidden;
+}
+
+    .comment .comment_left {
+        width: 120px;
+        float: left;
+        line-height: 20px;
+        text-align: center;
+    }
+
+    .comment .comment_right {
+        width: 688px;
+        float: right;
+        line-height: 20px;
+        padding-left: 50px;
+    }
+
+    .comment .commenttitle {
+        font-weight: bold;
+        padding: 5px;
+        margin-left: 30px;
+    }
+
+    .comment .commentGanwu {
+    }
+
+    .comment .commentcontent {
+        padding: 5px;
+        margin-left: 40px;
+    }
+
+    .comment span {
+        color: #ff6600;
+    }

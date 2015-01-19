@@ -18,5 +18,14 @@ namespace SinoTrip.DB
             string connectionString = ConfigurationManager.ConnectionStrings["cartrip"].ConnectionString;
             return new DbMySQL(connectionString);
         }
+        /// <summary>
+        /// 论坛数据库
+        /// </summary>
+        /// <returns></returns>
+        public static DbMySQL MySQLDZ()
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["cartrip_dz"].ConnectionString;
+            return new DbMySQL(connectionString);
+        }
     }
 }

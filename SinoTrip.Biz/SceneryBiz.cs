@@ -47,5 +47,15 @@ namespace SinoTrip.Biz
 
             return new DAL.Scenery.scenery_comment().GetList(SceneryId, page, pageSize, out total);
         }
+
+        public string GetPostByTag(string tag)
+        {
+            if (string.IsNullOrEmpty(tag))
+            {
+                return string.Empty;
+            }
+            return new DAL.Scenery.QueryDZPost().GetPostByTag(tag);
+
+        }
     }
 }

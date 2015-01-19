@@ -88,7 +88,7 @@ namespace SinoTrip.DAL.Scenery
             strSql.Append("select ItemId,SceneryId,OutSign,Rank,DPTitle,Comment,Uid,UserName,DPService,DPShiGouYu,DPTraffic,ServiceScore,ServiceGrade,ConvenientScore,ConvenientGrade,DiscountScore,DiscountGrade,DPGanwu,DPTime,TempData,Status ");
             strSql.Append(" FROM scenery_comment ");
             strSql.Append(" WHERE SceneryId=" + SceneryId);
-            return DALCore.SimplePageQuery(strSql.ToString(), page * pageSize, (page + 1) * pageSize, "DPTime", true, out total, DALCore.GetSMDB(), null).ToList<SinoTrip.Entity.DataBase.Scenery.scenery_comment>();
+            return DALCore.SimplePageQuery(strSql.ToString(), page, pageSize, "DPTime", true, out total, DALCore.GetSMDB(), null).ToList<SinoTrip.Entity.DataBase.Scenery.scenery_comment>();
         }
     }
 }
