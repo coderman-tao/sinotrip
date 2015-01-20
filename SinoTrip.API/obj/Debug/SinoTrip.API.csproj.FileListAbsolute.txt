@@ -20,3 +20,11 @@ C:\Users\coderman\Source\Repos\sinotrip\SinoTrip.API\bin\Debug\MySql.Data.dll
 C:\Users\coderman\Source\Repos\sinotrip\SinoTrip.API\bin\Debug\log4net.dll
 C:\Users\coderman\Source\Repos\sinotrip\SinoTrip.API\bin\Debug\SinoTrip.Core.pdb
 C:\Users\coderman\Source\Repos\sinotrip\SinoTrip.API\bin\Debug\SinoTrip.DBCore.pdb
+C:\Users\taolinse\Source\Repos\sinotrip\SinoTrip.API\bin\Debug\MySql.Data.dll
+C:\Users\taolinse\Source\Repos\sinotrip\SinoTrip.API\bin\Debug\SinoTrip.Core.dll
+C:\Users\taolinse\Source\Repos\sinotrip\SinoTrip.API\bin\Debug\SinoTrip.DBCore.dll
+C:\Users\taolinse\Source\Repos\sinotrip\SinoTrip.API\bin\Debug\log4net.dll
+C:\Users\taolinse\Source\Repos\sinotrip\SinoTrip.API\bin\Debug\SinoTrip.Core.pdb
+C:\Users\taolinse\Source\Repos\sinotrip\SinoTrip.API\bin\Debug\SinoTrip.DBCore.pdb
+C:\Users\taolinse\Source\Repos\sinotrip\SinoTrip.API\bin\Debug\SinoTrip.Entity.dll
+C:\Users\taolinse\Source\Repos\sinotrip\SinoTrip.API\bin\Debug\SinoTrip.Entity.pdb

@@ -11,6 +11,36 @@ namespace SinoTrip.DB
 {
     public class DbMySQL
     {
+        public class DbEntity
+        {
+            public DbEntity() { }
+            public DbEntity(string sql, MySqlParameter[] parameters)
+            {
+                Value = parameters;
+                Sql = sql;
+            }
+
+            private string sql;
+            /// <summary>
+            /// SQL语句
+            /// </summary>
+            public string Sql
+            {
+                get { return sql; }
+                set { sql = value; }
+            }
+            private MySqlParameter[] value;
+            /// <summary>
+            /// 参数值
+            /// </summary>
+            public MySqlParameter[] Value
+            {
+                get { return this.value; }
+                set { this.value = value; }
+            }
+
+
+        }
         //数据库连接字符串(web.config来配置)，可以动态更改connectionString支持多数据库.		
         public static string connectionString;
         public DbMySQL()
@@ -437,7 +467,40 @@ namespace SinoTrip.DB
                 }
             }
         }
-
+        /// <summary>
+        /// 批量执行SQL
+        /// </summary>
+        /// <param name="SQLStringList"></param>
+        /// <returns></returns>
+        public int BatchExcuteSql(List<DbEntity> SQLStringList)
+        {
+            int val = 0;
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                conn.Open();
+                using (MySqlTransaction trans = conn.BeginTransaction())
+                {
+                    MySqlCommand cmd = new MySqlCommand();
+                    try
+                    {
+                        //循环
+                        foreach (var myDE in SQLStringList)
+                        {
+                            PrepareCommand(cmd, conn, trans, myDE.Sql, myDE.Value);
+                            val += cmd.ExecuteNonQuery();
+                            cmd.Parameters.Clear();
+                        }
+                        trans.Commit();
+                    }
+                    catch
+                    {
+                        trans.Rollback();
+                        throw;
+                    }
+                }
+            }
+            return val;
+        }
 
         /// <summary>
         /// 执行多条SQL语句，实现数据库事务。

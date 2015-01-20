@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 
 namespace SinoTrip.API.LY.Model
 {
-    
+
     [Serializable, XmlRoot("sceneryList")]
     public class SceneryPrice
     {
@@ -245,6 +245,49 @@ namespace SinoTrip.API.LY.Model
                     public CDATA nContent { set; get; }
                 }
             }
+
+        }
+    }
+
+
+    [Serializable, XmlRoot("sceneryList")]
+    public class NearByScenerys
+    {
+        [XmlAttribute]
+        public int page { get; set; }
+        [XmlAttribute]
+        public int pageSize { get; set; }
+        [XmlAttribute]
+        public int totalPage { get; set; }
+        [XmlAttribute]
+        public int totalCount { get; set; }
+        [XmlAttribute]
+        public string imgbaseURL { get; set; }
+        [XmlElement("scenery")]
+        public List<Item> Items { get; set; }
+
+        [Serializable]
+        public class Item
+        {
+            public int id { get; set; }
+            public string name { get; set; }
+            public decimal amount { get; set; }
+            public string grade { get; set; }
+            public CDATA adress { get; set; }
+            public decimal amountAdvice { get; set; }
+            public CDATA imgpath { get; set; }
+            public decimal distance { get; set; }
+//            <adress>
+//- <![CDATA[ 安徽省黄山市黄山区汤口镇山岔村
+//  ]]> 
+//  </adress>
+//  <amountAdvice>49.00</amountAdvice> 
+//- <imgpath>
+//- <![CDATA[ 2014/05/27/2/201405271538368361196.jpg
+//  ]]> 
+//  </imgpath>
+//  <distance>9800382.5209505</distance> 
+//  </scenery>
 
         }
     }

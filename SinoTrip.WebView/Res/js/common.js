@@ -876,14 +876,14 @@ String.prototype.toJson = function () {
 /*********************************************全局用户相关***************************************/
 
 
-var _cardtype = '<option value="">请选择</option><option value="' + M.CARD_TYPE_IDCARD + '">身份证</option>'
+//var _cardtype = '<option value="">请选择</option><option value="' + M.CARD_TYPE_IDCARD + '">身份证</option>'
 
-_cardtype += '<option value="' + M.CARD_TYPE_OFFICER + '">军官证</option>'
+//_cardtype += '<option value="' + M.CARD_TYPE_OFFICER + '">军官证</option>'
 
-_cardtype += '<option value="' + M.CARD_TYPE_PASSPORT + '">护照</option>'
+//_cardtype += '<option value="' + M.CARD_TYPE_PASSPORT + '">护照</option>'
 
-_cardtype += '<option value="' + M.CARD_TYPE_HVPS + '">回乡证</option>'
-_cardtype += '<option value="' + M.CARD_TYPE_OTHER + '">其它证件</option>'
+//_cardtype += '<option value="' + M.CARD_TYPE_HVPS + '">回乡证</option>'
+//_cardtype += '<option value="' + M.CARD_TYPE_OTHER + '">其它证件</option>'
 $(function () {
     $(".isNumber").keyup(function () {
 

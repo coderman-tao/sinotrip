@@ -90,7 +90,7 @@ namespace SinoTrip.DAL.Common
 
         public DataTable GetIds()
         {
-            string sql = "SELECT OutSign FROM common_scenery_outsign where OutSign not in (42,70,79,86,93,102,104,111,112,122,142,159,163,178,181,186,191,194,206,212)";
+            string sql = "SELECT SceneryId, OutSign FROM common_scenery_outsign where ItemId>4801";
             return DALCore.GetSMDB().Query(sql).Tables[0];
         }
 
@@ -177,18 +177,20 @@ namespace SinoTrip.DAL.Common
             strSql.Append("update common_scenery set ");
             strSql.Append("Intro=@Intro,");
             strSql.Append("BuyNotie=@BuyNotie,");
+            strSql.Append("Alias=@Alias,");
             strSql.Append("Traffic=@Traffic");
             strSql.Append(" where ItemId=@ItemId");
             MySqlParameter[] parameters = {
 					new MySqlParameter("@Intro", MySqlDbType.Text),
 					new MySqlParameter("@BuyNotie", MySqlDbType.Text),
+                    new MySqlParameter("@Alias", MySqlDbType.Text),
                     new MySqlParameter("@Traffic", MySqlDbType.Text),
 					new MySqlParameter("@ItemId", MySqlDbType.Int32,11)};
             parameters[0].Value = model.Intro;
             parameters[1].Value = model.BuyNotie;
-            parameters[2].Value = model.Traffic;
-            parameters[3].Value = model.ItemId;
-
+            parameters[2].Value = model.Alias;
+            parameters[3].Value = model.Traffic;
+            parameters[4].Value = model.ItemId;
             int rows = DALCore.GetSMDB().ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)
             {
@@ -241,7 +243,7 @@ namespace SinoTrip.DAL.Common
                     string[] s = row[0].ToString().Split('|');
                     foreach (var _s in s)
                     {
-                        if (!string.IsNullOrEmpty(_s)&&!rs.Contains(_s))
+                        if (!string.IsNullOrEmpty(_s) && !rs.Contains(_s))
                             rs.Add(_s);
                     }
                 }

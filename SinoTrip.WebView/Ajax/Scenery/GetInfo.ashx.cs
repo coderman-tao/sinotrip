@@ -29,6 +29,9 @@ namespace SinoTrip.WebView.Ajax.Scenery
                 case "GetYJ":
                     GetYJ(context);
                     break;
+                case "GetNearBy":
+                    GetNearBy(context);
+                    break;
             }
         }
 
@@ -85,6 +88,15 @@ namespace SinoTrip.WebView.Ajax.Scenery
             if (string.IsNullOrEmpty(tag))
                 return;
             context.Response.Write(new SinoTrip.Biz.SceneryBiz().GetPostByTag(tag));
+        }
+
+        void GetNearBy(HttpContext context)
+        {
+            int id = context.Request["SceneryId"].ToInt32(0);
+            int page = context.Request["page"].ToInt32(0);
+            int pageSize = context.Request["pageSize"].ToInt32(0);
+            var model = new SinoTrip.API.LY.Biz.ScenicBiz().GetNearbyScenery(id, page, pageSize);
+            context.Response.Write(model.ToJson());
         }
         public bool IsReusable
         {

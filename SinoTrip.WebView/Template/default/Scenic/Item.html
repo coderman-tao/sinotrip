@@ -6,7 +6,6 @@
     <meta name='description' content='$!Info.Name怎么玩?$!Info.Name门票怎么预订？$!Info.Name景点百科。驾驴旅游网提供$!Info.Name特价门票预订，无需在线支付，解除您一切后顾之忧。' />
     #include("pageHeadCode.htm")
     <link href="/Skin/default/style/sceneryitem.css" rel="stylesheet" type="text/css" />
-
     <style type="text/css">
         .hotellist a {
             -moz-user-select: none;
@@ -36,7 +35,6 @@
     <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=13a035f5778a2a6f92c1cc2239c717ef"></script>
     <script type="text/javascript" src="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
     <link rel="stylesheet" href="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.css" />
-
 </head>
 <body>
     #parse("pageHead.htm")
@@ -46,68 +44,54 @@
             您的位置：<a href="/" title="驾驴旅游网门票预定">首页</a> > <span title="景区门票">景区门票</span>
         </div>
     </div>
-
     <div class="pagebox">
         <div style="overflow: hidden; position: relative;">
-            <div style="width: 900px; overflow: hidden; float: left">
-
+            <div style="width: 880px; overflow: hidden; float: left">
                 <div class="thisbox" style=" overflow:hidden">
-
                     <div style=" overflow:hidden;line-height:25px; padding:5px 0px 5px 10px">
                         <div>
                             <span style=" line-height:35px; color:#ff6600; font-size:18px; font-weight:bold; font-family:微软雅黑">$!Info.Name</span>
                             &nbsp;&nbsp;景区等级：<span style="color:#ff6600;">$!Info.Grade</span>
                             <span>&nbsp;&nbsp;地址：$!Info.Address</span>
                         </div>
-
                         <div style=" position:relative; width:850px; height:250px; overflow:hidden">
-
                             <div style="position:absolute; top:0px; left:0px; width:300px; height:250px;">
                                 <div style=" padding:2px; width:296px; height:246px; overflow:hidden">
                                     <img src="$Imgs.get_item(0).Cover" style="width:300px; height:250px;" alt="$!Info.Name" />
                                 </div>
                             </div>
-
                             <div style="position:absolute; top:0px; left:300px; width:150px; height:125px;">
                                 <div style=" padding:2px; width:146px; height:121px; overflow:hidden">
                                     <img src="$!Imgs.get_item(1).Cover" style="width:150px; height:125px;" alt="$!Info.Name" />
                                 </div>
                             </div>
-
                             <div style="position:absolute; top:0px; left:450px; width:200px; height:125px;">
                                 <div style=" padding:2px; width:196px; height:121px; overflow:hidden">
                                     <img src="$!Imgs.get_item(2).Cover" style="width:200px; height:125px;" alt="$!Info.Name" />
                                 </div>
                             </div>
-
                             <div style="position:absolute; top:0px; left:650px; width:200px; height:125px;">
                                 <div style=" padding:2px; width:196px; height:121px; overflow:hidden">
                                     <img src="$!Imgs.get_item(3).Cover" style="width:200px; height:125px;" alt="$!Info.Name" />
                                 </div>
                             </div>
-
                             <div style="position:absolute; top:125px; left:300px; width:200px; height:125px;">
                                 <div style=" padding:2px; width:196px; height:121px; overflow:hidden">
                                     <img src="$!Imgs.get_item(4).Cover" style="width:200px; height:125px;" alt="$!Info.Name" />
                                 </div>
                             </div>
-
                             <div style="position:absolute; top:125px; left:500px; width:200px; height:125px;">
                                 <div style=" padding:2px; width:196px; height:121px; overflow:hidden">
                                     <img src="$!Imgs.get_item(5).Cover" style="width:200px; height:125px;" alt="$!Info.Name" />
                                 </div>
                             </div>
-
                             <div style=";position:absolute; top:125px; left:700px; width:150px; height:125px;">
                                 <div style=" padding:2px; width:146px; height:121px; overflow:hidden">
                                     <img src="$!Imgs.get_item(6).Cover" style=" width:150px; height:125px;" alt="$!Info.Name" />
                                 </div>
                             </div>
-
                         </div>
-
                     </div>
-
                 </div>
                 <div id="tournoteTab" style=" position:relative">
                     <div class="divTab" id="tournotelist">
@@ -153,10 +137,8 @@
                                         <div style=" color:#006cbf" class="XoverTip" data="<p>$!item.RoomDescription</p>">$!item.RoomTypeName</div>
                                         #end
                                     </td>
-
                                     <td colspan="7" class="hometypebox" valign="top">
                                         <table>
-
                                             #foreach($rows in $thistool.getHotleRoomRates($roomRates,$item.RoomTypeCode))
 
                                             <tr class="typelist">
@@ -177,7 +159,6 @@
                                                 </td>
                                                 <td class="price">￥$tool.GetHotlePrice($roomStay.BasicPropertys.Rank,$rows,$rows.Rates)</td>
                                                 <td>
-
                                                     #if($rows.AvailabilityStatus=="noavail"||($rows.Payment=="S" && $rows.Quantity==0))
                                                     <a href="javascript:" class="inputbutton" style="width:50px;">已满房</a>
                                                     #else
@@ -188,7 +169,6 @@
                                                     #end
                                                     #end
                                                 </td>
-
                                             </tr>
                                             #end
                                         </table>
@@ -198,8 +178,6 @@
                             </tbody>
                         </table>
                     </div>
-
-
 
                     <div class="thisbox" id="buynotebox">
                         <div style=" padding:10px; line-height:20px">
@@ -226,7 +204,6 @@
                             </div>
                         </div>
 
-
                     </div>
                     <div class="thisbox" id="dpbox">
                         <div style=" padding:10px; line-height:20px">
@@ -235,7 +212,6 @@
                         <div id="comment_list">
                         </div>
                         <div id="pageList" class="pageList">
-
                         </div>
                     </div>
                     <div class="thisbox" id="youjibox">
@@ -252,32 +228,54 @@
                     </div>
                 </div>
 
-
-
             </div>
             <!--右-->
-            <div style="width: 322px; float: right;">
-                <div style=" overflow:hidden; padding-top:10px; height:auto" class="hotellist ">
-                    #foreach($item in $tool.getResultHotels($citycode,5))
-                    <a href="/Hotel/$item.BasicPropertys.CityCode/$inDate/$outDate/$item.BasicPropertys.HotelCode&#46;html" target="_blank" title="在线预订$item.BasicPropertys.HotelName$item.BasicPropertys.HotelEnglishName">
-                        <img onerror="this.src='/res/images/noHotelImg.jpg'" alt="$item.BasicPropertys.HotelName$item.BasicPropertys.HotelEnglishName" height="240" width="320" src="$tool.getHotleImg($item.BasicPropertys.Images)" />
-                        <span class="hotelname" style="width:320px;">$item.BasicPropertys.HotelName</span>
-                        <span style=" width:220px" title="$tool.getstarlevel($item.BasicPropertys.Rank)" class="starlevel  price h$item.BasicPropertys.Rank" style="">
-                            ￥#if($item.BasicPropertys.FlagS)
-                            $tool.GetHotlePrice($item.BasicPropertys.Rank,"S",$item.BasicPropertys.MinRate)
-                            #else
-                            $tool.GetHotlePrice($item.BasicPropertys.Rank,"T",$item.BasicPropertys.MinRate)
-                            #end
-                        </span>
-                    </a>
-                    #end
-
-
+            <div style="width: 300px; float: right;" id="right_box">
+                <div style="background-color: #f7f7f7;" class="thisbox">
+                    <div style="padding: 10px 15px 10px 15px">
+                        <div class="minbox">
+                            <div class="minboxtitle">
+                                <span class="iconStr">理</span><span class="title"><h2>选择驾驴的理由</h2></span>
+                            </div>
+                            <div class="boxcontent">
+                                <div class="contentlist" style="line-height:40px">
+                                    <h3 style="color:#ff6600; font-weight:400">1、20000余种景点门票供您挑选</h3>
+                                    <h3 style="color:#ff6600; font-weight:400">
+                                        2、超过1050万游客的真是点评
+                                    </h3>
+                                    <h3 style="color:#ff6600; font-weight:400">
+                                        3、完美的游记攻略助你出游更加方便
+                                    </h3>
+                                    <h3 style="color:#ff6600; font-weight:400">
+                                        4、自助游，深度游一站解决
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                <div style="background-color: #f7f7f7;" class="thisbox">
+                    <script type="text/javascript">
+                        /*300*250，创建于2013-4-2*/
+                        var cpro_id = "u1251136";
+                    </script>
+                    <script src="http://cpro.baidustatic.com/cpro/ui/c.js" type="text/javascript"></script>
+                </div>
+                <div style="background-color: #f7f7f7;" class="thisbox" id="nearbyBox">
+                    <div style="padding:5px">
+                        <div class="minbox">
+                            <div class="minboxtitle">
+                                <span class="iconStr">Near</span><span class="title"><h2>周边景点</h2></span>
+                            </div>
+                            <div class="boxcontent" id="zbjd_list">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
-
     <script type="text/javascript">
         function postHotleFillPage(indata, outdata, hotlecode, paymnet, rateplancode, roomtypecode) {
 
@@ -376,11 +374,28 @@
         setNoteTab();
         $(window).scroll(function () {
             setNoteTab();
+            //SetnearbyBox();
 
         });
         $(window).resize(function () {
             setNoteTab();
+            //SetnearbyBox();
         });
+
+        function SetnearbyBox() {
+            var sidebar = $("#nearbyBox"),
+               offset = $("#right_box").height();
+            var ws = $(window).scrollTop();
+            if (ws > offset) {
+                //$("#tournotelist").addClass("isPosition")
+                sidebar.addClass("isPosition").css({ position: 'fixed', top: '0px' });
+            }
+            else {
+                sidebar.removeClass("isPosition");
+            }
+
+        }
+
         GetCommentList(0);
         function GetCommentList(page) {
             jQuery.ajax({
@@ -416,15 +431,26 @@
                             }
                         }
                         if (page < 8) {
-                            for (var i = 0; i < 9; i++) {
-                                if (i == page) {
-                                    pageHtml += currentHtml;
-                                    continue;
+                            if (pageCount < 9) {
+                                for (var i = 0; i < pageCount; i++) {
+                                    if (i == page) {
+                                        pageHtml += currentHtml;
+                                        continue;
+                                    }
+                                    pageHtml += '<a href="javascript:void(0)" onclick=" GetCommentList(' + i + ') ">' + (i + 1) + '</a>';
                                 }
-                                pageHtml += '<a href="javascript:void(0)" onclick=" GetCommentList(' + i + ') ">' + (i + 1) + '</a>';
                             }
-                            if (pageCount > (page + 1)) {
-                                pageHtml = pageHtml + '......' + '<a href="javascript:void(0)" onclick="GetCommentList(' + (pageCount - 1) + ')">' + pageCount + '</a>';
+                            else {
+                                for (var i = 0; i < 9; i++) {
+                                    if (i == page) {
+                                        pageHtml += currentHtml;
+                                        continue;
+                                    }
+                                    pageHtml += '<a href="javascript:void(0)" onclick=" GetCommentList(' + i + ') ">' + (i + 1) + '</a>';
+                                }
+                                if (pageCount > (page + 1)) {
+                                    pageHtml = pageHtml + '......' + '<a href="javascript:void(0)" onclick="GetCommentList(' + (pageCount - 1) + ')">' + pageCount + '</a>';
+                                }
                             }
                         }
                         $("#pageList").html(pageHtml);
@@ -497,6 +523,28 @@
                     ' <i style="float:right;padding-right:10px;font-size:12px;">' + json[i].author + '发表于:' + dateFormat("Y-m-d", json[i].dateline) + '</i></div></a>';
                 }
                 $("#YJ_List").html(html);
+            }
+
+        });
+        jQuery.ajax({
+            url: "/AJAX/Scenery/GetInfo.ashx?method=GetNearBy&SceneryId=$!Info.OutSign&page=0&pageSize=5",
+            type: "POST",
+            success: function (response) {
+                jQuery.XloadHide();
+                var json = response.toJson();
+                if (!!json && !!json.Items) {
+                    var html = "";
+                    for (var i = 0; i < json.Items.length; i++) {
+                        var item = json.Items[i];
+                        html += '<div class="contentlist"><div class="imgbox">' +
+                               '<a href="Item0-' + item.id + '.html" title="' + item.adress.InnerXml + '" target="_blank">' +
+                                '<img alt="' + item.name + '" src="http://upload.17u.com/uploadfile/' + item.imgpath.InnerXml + '" width="270px" height="165px" /></a></div>' +
+                               '<div class="namenote">' +
+                                '<a style="overflow:hidden" class="namebox" href="Item0-' + item.id + '.html" title="' + item.name + '" target="_blank">' +
+                               '<span class="productname">' + item.name + '</span>￥' + item.amountAdvice + '起</a></div></div>';
+                    }
+                    $("#zbjd_list").html(html);
+                }
             }
 
         });

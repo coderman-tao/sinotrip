@@ -30,6 +30,8 @@ namespace SinoTrip.WebView
         private static readonly string KEY = ConfigurationManager.AppSettings["ctripKey"];
         protected void Page_Load(object sender, EventArgs e)
         {
+            GetJQDP();
+            //var rs = new SinoTrip.API.LY.Biz.ScenicBiz().GetNearbyScenery(5305, 0, 10);
             //var dal = new SinoTrip.DAL.Common.common_scenery_img();
             //var data = SceneryCache.GetSceneryCache(0, "", 0, 0, 0, "", "");
             //var data1 = data.Where(item => item.ItemId > 390).ToList();
@@ -259,6 +261,7 @@ namespace SinoTrip.WebView
         {
             var biz = new SinoTrip.API.LY.Biz.ScenicBiz();
             var ids = new SinoTrip.DAL.Common.common_scenery().GetIds();
+            var dal = new SinoTrip.DAL.Common.common_scenery();
             foreach (DataRow id in ids.Rows)
             {
 
@@ -298,7 +301,7 @@ namespace SinoTrip.WebView
                             }
                         }
                     }
-                    new SinoTrip.DAL.Common.common_scenery().Update(model);
+                    dal.Update(model);
                 }
                 catch (Exception)
                 {
@@ -336,7 +339,7 @@ namespace SinoTrip.WebView
             XmlNodeList scenerySummary = doc.GetElementsByTagName("scenerySummary");
             foreach (XmlElement a in scenerySummary)
             {
-                a.InnerXml = a.InnerText;
+                a.InnerXml = a.InnerText.Replace("<", "(").Replace(">", ")");
 
             }
             return doc.SelectSingleNode("response/body").InnerXml;
@@ -369,12 +372,15 @@ namespace SinoTrip.WebView
         void GetJQDP()
         {
             var ids = new SinoTrip.DAL.Common.common_scenery().GetIds();
-            foreach (DataRow id in ids.Rows)
+            var dal1 = new SinoTrip.DAL.Scenery.scenery_comment();
+            var dal2 = new SinoTrip.DAL.Scenery.scenery_comment_img();
+            foreach (DataRow row in ids.Rows)
             {
                 try
                 {
-                    var _id = id[0].ToInt32(0);
-                    string postUrl = "http://www.ly.com/Scenery/AjaxHelper/AjaxCall.aspx?action=GetDPList&sort=3&mon=0&type=0&sId=" + _id + "&page=1&tagsulgId=0&isImg=0&sceneryType=20301&iid=0.7431465585250407";
+                    var _id = row[0].ToInt32(0);
+                    var outsign = row[1].ToInt32(0);
+                    string postUrl = "http://www.ly.com/Scenery/AjaxHelper/AjaxCall.aspx?action=GetDPList&sort=3&mon=0&type=0&sId=" + outsign + "&page=1&tagsulgId=0&isImg=0&sceneryType=20301&iid=0.7431465585250407&size=1000";
                     HttpWebRequest request = HttpWebRequest.Create(postUrl) as HttpWebRequest;
                     request.Method = "Get";
                     HttpWebResponse response = (HttpWebResponse)request.GetResponse();
@@ -386,7 +392,7 @@ namespace SinoTrip.WebView
                         sr.Close();
                         for (int i = 1; i <= ss.ShowList.PageCount; i++)
                         {
-                            postUrl = "http://www.ly.com/Scenery/AjaxHelper/AjaxCall.aspx?action=GetDPList&sort=3&mon=0&type=0&sId=" + _id + "&page=" + i + "&tagsulgId=0&isImg=0&sceneryType=20301&iid=0.7431465585250407";
+                            postUrl = "http://www.ly.com/Scenery/AjaxHelper/AjaxCall.aspx?action=GetDPList&sort=3&mon=0&type=0&sId=" + outsign + "&page=" + i + "&tagsulgId=0&isImg=0&sceneryType=20301&iid=0.7431465585250407&size=1000";
                             HttpWebRequest request1 = HttpWebRequest.Create(postUrl) as HttpWebRequest;
                             request1.Method = "Get"; ;
                             HttpWebResponse response1 = (HttpWebResponse)request1.GetResponse();
@@ -396,13 +402,14 @@ namespace SinoTrip.WebView
                                 ret = sr1.ReadToEnd();
                                 DPData dpdata = ret.JsonDeserialize<DPData>();
                                 sr1.Close();
+                                List<SinoTrip.Entity.DataBase.Scenery.scenery_comment> models = new List<Entity.DataBase.Scenery.scenery_comment>();
                                 foreach (var item in dpdata.ShowList.DestinationCommentList)
                                 {
                                     var tempdata = Guid.NewGuid().ToString();
                                     var m1 = new SinoTrip.Entity.DataBase.Scenery.scenery_comment()
                                     {
                                         SceneryId = _id,
-                                        OutSign = _id,
+                                        OutSign = outsign,
                                         Rank = DptypeToInt(item.DPType),
                                         DPTitle = item.DPTitle,
                                         Comment = item.DPContent,
@@ -422,7 +429,7 @@ namespace SinoTrip.WebView
                                         TempData = tempdata,
                                         Status = 0
                                     };
-                                    new SinoTrip.DAL.Scenery.scenery_comment().Add(m1);
+                                    models.Add(m1);
                                     if (item.PicList != null)
                                     {
                                         foreach (var pic in item.PicList)
@@ -432,10 +439,14 @@ namespace SinoTrip.WebView
                                                 TempData = tempdata,
                                                 ImgUrl = pic.WholePath
                                             };
-                                            new SinoTrip.DAL.Scenery.scenery_comment_img().Add(m2);
+                                            dal2.Add(m2);
                                         }
                                     }
 
+                                }
+                                if(models.Count>0)
+                                {
+                                    dal1.BatchAdd(models);
                                 }
                             }
                             //Thread.Sleep(1000);

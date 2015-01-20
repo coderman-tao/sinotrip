@@ -137,7 +137,7 @@ namespace SinoTrip.API.LY.Biz
             XmlNodeList scenerySummary = doc.GetElementsByTagName("scenerySummary");
             foreach (XmlElement a in scenerySummary)
             {
-                a.InnerXml = a.InnerText;
+                a.InnerXml = a.InnerText.Replace("<", "(").Replace(">", ")");
 
             }
             return doc.SelectSingleNode("response/body").InnerXml;
@@ -159,6 +159,87 @@ namespace SinoTrip.API.LY.Biz
                 return "<body>" + doc.SelectSingleNode("response/body").InnerXml + "</body>";
             }
             return rs;
+        }
+
+        /// <summary>
+        /// 获取周边景点
+        /// </summary>
+        /// <param name="serviceName"></param>
+        /// <param name="SceneryId"></param>
+        /// <param name="page"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
+        public SinoTrip.API.LY.Model.NearByScenerys GetNearbyScenery(int SceneryId, int page, int pageSize)
+        {
+            string PostData = "<sceneryId>" + SceneryId + "</sceneryId><page>" + page + "</page><pageSize>" + pageSize + "</pageSize>";
+            string rs = ApiCommon.GetResult(PostData, "GetNearbyScenery", "http://tcopenapi.17usoft.com/handlers/scenery/queryhandler.ashx");
+            if (!string.IsNullOrEmpty(rs))
+            {
+                XmlDocument doc = new XmlDocument();
+                doc.LoadXml(rs);
+                rs = doc.SelectSingleNode("response/body").InnerXml;
+            }
+            return rs.XmlToEntity<SinoTrip.API.LY.Model.NearByScenerys>(); ;
+        }
+
+        public List<SinoTrip.Entity.DataBase.Common.common_scenery> DownLoadScenery(int outSign, List<SinoTrip.Entity.ViewModel.ViewScenery> data,List<Entity.DataBase.Common.common_scenery_type> typeCache)
+        {
+            string rs = GetSceneryList(0, 1).Replace("&", "&amp;");
+            string str = GetJQRs(rs);
+            List<SinoTrip.Entity.DataBase.Common.common_scenery> outsigns = new List<SinoTrip.Entity.DataBase.Common.common_scenery>();
+            var obj = str.XmlToEntity<SinoTrip.API.LY.Model.sceneryList>();
+            if (obj != null)
+            {
+                try
+                {
+                    for (int i = 2; i <= obj.totalPage; i++)
+                    {
+                        str = GetJQRs(GetSceneryList(0, i).Replace("&", "&amp;"));
+                        var model = str.XmlToEntity<SinoTrip.API.LY.Model.sceneryList>();
+                        foreach (var item in model.Scenerys)
+                        {
+                            var f = data.FirstOrDefault(r => r.OutSign == item.sceneryId);
+                            if (f == null)
+                            {
+                                var s = new SinoTrip.Entity.DataBase.Common.common_scenery();
+                                s.Name = item.sceneryName;
+                                s.Address = item.sceneryAddress;
+                                s.Summary = item.scenerySummary;
+                                s.Cover = model.imgbaseURL + item.imgPath;
+                                s.CityName = item.cityName;
+                                s.CityId = item.cityId.ToInt32(0);
+                                s.CountyId = item.countyId.ToInt32(0);
+                                s.CountyName = item.countyName;
+                                s.Grade = item.gradeId;
+                                s.Lat = item.lat.ToDecimal();
+                                s.Lng = item.lon.ToDecimal();
+                                s.Status = item.sceneryId.ToInt32(0);
+                                string themeName = string.Empty;
+                                var th = item.themeList.FirstOrDefault();
+                                if (th != null)
+                                {
+                                    themeName = th.themeName.Trim();
+                                }
+                                var type = typeCache.FirstOrDefault(r => r.Name.Equals(themeName));
+                                if(type!=null)
+                                {
+                                    s.TypeId = type.ItemId;
+                                }
+                                s.ThemeName = themeName;
+                                outsigns.Add(s);
+                            }
+                            
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                    throw;
+                }
+
+            }
+            return outsigns;
         }
         // public string GetPriceCalendar()
     }

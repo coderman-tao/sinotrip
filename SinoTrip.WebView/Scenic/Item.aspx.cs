@@ -26,7 +26,7 @@ namespace SinoTrip.WebView.Scenic
                 if (id <= 0 && string.IsNullOrEmpty(_outSign))
                     Context.Response.Redirect("/");
                 var data = SceneryCache.GetSceneryCache(id, "", 0, 0, 0, "", "", _outSign);
-                if (data != null || data.Count > 0)
+                if (data.Count > 0)
                 {
                     var Info = data.FirstOrDefault();
                     id = Info.ItemId;
@@ -35,7 +35,7 @@ namespace SinoTrip.WebView.Scenic
                     var outSign = Info.OutSign.ToInt32(0);
                     // new ScenicBiz()var rs = new ScenicBiz().GetSceneryDetail(outSign);
                     List<SinoTrip.Entity.DataBase.Common.common_scenery_img> imgs = new SinoTrip.Biz.SceneryBiz().GetImage(id, 7);
-                  
+
 
                     if (imgs.Count == 0)
                     {
@@ -51,7 +51,18 @@ namespace SinoTrip.WebView.Scenic
                     Vt.Put("Imgs", imgs);
                     Vt.Put("Info", Info);
                 }
+                else
+                {
+                    //var typeData = SceneryCache.GetTypeCache(0, "").OrderBy(item => item.OrderNo).ToList();
+                    //var ids = new SinoTrip.API.LY.Biz.ScenicBiz().DownLoadScenery(_outSign.ToInt32(0), SceneryCache.GetSceneryCache(0, "", 0, 0, 0, "", "", ""), typeData);
+                    //var dal = new SinoTrip.DAL.Common.common_scenery();
+                    //foreach (var item in ids)
+                    //{
+                    //    dal.Add(item);
+                    //}
 
+                    Update();
+                }
             }
             catch (Exception ex)
             {
@@ -126,16 +137,18 @@ namespace SinoTrip.WebView.Scenic
         {
             var biz = new SinoTrip.API.LY.Biz.ScenicBiz();
             var dal = new SinoTrip.DAL.Common.common_scenery();
-            var data = SceneryCache.GetSceneryCache(0, "", 0, 0, 0, "", "", string.Empty);
-            foreach (var id in data)
+            var ids = new SinoTrip.DAL.Common.common_scenery().GetIds();
+            foreach (DataRow row in ids.Rows)
             {
                 try
                 {
-                    string rs = biz.GetSceneryDetail(id.OutSign.ToInt32(0));
+                    var outsign = row[1].ToInt32(0);
+                    var id = row[0].ToInt32(0);
+                    string rs = biz.GetSceneryDetail(outsign);
                     XmlDocument doc = new XmlDocument();
                     doc.LoadXml(rs);
 
-                    string sss = biz.GetSceneryTrafficInfo(id.OutSign.ToInt32(0));
+                    string sss = biz.GetSceneryTrafficInfo(outsign);
                     XmlDocument doc1 = new XmlDocument();
                     doc1.LoadXml(sss);
                     var s = doc1.SelectSingleNode("response/body/scenery/traffic").ChildNodes[0].Value;
@@ -167,7 +180,8 @@ namespace SinoTrip.WebView.Scenic
                         }
                     }
                     SinoTrip.Entity.DataBase.Common.common_scenery cs = new Entity.DataBase.Common.common_scenery();
-                    cs.ItemId = id.ItemId;
+                    cs.ItemId = id;
+                    cs.Alias = model.sceneryAlias;
                     cs.Intro = model.intro;
                     cs.BuyNotie = model.buyNotice;
                     cs.Traffic = s;

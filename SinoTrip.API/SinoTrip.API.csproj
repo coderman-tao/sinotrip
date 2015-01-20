@@ -113,6 +113,10 @@
       <Project>{bba7a3fb-22c2-460a-a82e-171bb98001e2}</Project>
       <Name>SinoTrip.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SinoTrip.Entity\SinoTrip.Entity.csproj">
+      <Project>{e232716f-efa0-4dfc-a2dc-e4a340691b8f}</Project>
+      <Name>SinoTrip.Entity</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SinoTrip.FrameWork\SinoTrip.FrameWork.csproj">
       <Project>{ecdfb705-b0e9-43ff-82ae-958af25a1c76}</Project>
       <Name>SinoTrip.FrameWork</Name>
