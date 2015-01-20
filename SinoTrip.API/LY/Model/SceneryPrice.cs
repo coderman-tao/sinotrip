@@ -41,7 +41,7 @@ namespace SinoTrip.API.LY.Model
         public class Policy
         {
             [XmlElement("p")]
-            public List<SceneryPolicy> Policys;
+            public List<SceneryPolicy> Policys{ set; get; }
 
             /// <summary>
             /// 价格策略

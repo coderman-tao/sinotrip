@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -54,8 +55,10 @@ namespace SinoTrip.FrameWork.IO
                 name = Path.Combine(path, name + ".dat");
                 rwl.AcquireWriterLock(1000);//1秒未获取到写权限则放弃
                 fs = new FileStream(name, FileMode.Create);
-                formatter.Serialize(fs, value);
-
+                GZipStream compressionStream = new GZipStream(fs, CompressionMode.Compress);
+                formatter.Serialize(compressionStream, value);
+                compressionStream.Close();
+                compressionStream.Dispose();
                 return true;
             }
             catch (Exception ex)
@@ -101,9 +104,12 @@ namespace SinoTrip.FrameWork.IO
                 }
 
                 rwl.AcquireReaderLock(1000);//读锁，1秒后未获取放弃
-                stream = new FileStream(name, FileMode.Open, FileAccess.Read, FileShare.Read);
-                var obj = formatter.Deserialize(stream);
 
+                stream = new FileStream(name, FileMode.Open, FileAccess.Read, FileShare.Read);
+                GZipStream compressionStream = new GZipStream(stream, CompressionMode.Decompress);
+                var obj = formatter.Deserialize(compressionStream);
+                compressionStream.Close();
+                compressionStream.Dispose();
                 return obj;
             }
             catch (Exception ex)

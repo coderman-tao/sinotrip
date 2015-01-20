@@ -6,6 +6,7 @@ using System.Text;
 
 namespace SinoTrip.Entity.ViewModel
 {
+    [Serializable]
     public class ViewCity : common_city
     {
         public string OutSign { get; set; }

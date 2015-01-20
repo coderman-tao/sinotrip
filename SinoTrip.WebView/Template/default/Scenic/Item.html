@@ -107,78 +107,39 @@
                 <div id="contentList">
                     <!--类型 String类型。SGT:景观， TRA:交通信息， POR:地标 String类型-->
                     <div class="thisbox">
-                        <div style=" height:35px; line-height:35px; background-color:#f7f7f7"></div>
-                        <table class="hotleitem_table">
-                            <thead>
-                                <tr>
-                                    <th style=" text-align:center; width:120px">房型</th>
-                                    <th style=" width:1px"></th>
-                                    <th style=" width:110px">床型</th>
-                                    <th style=" width:170px">早餐</th>
-                                    <th style=" width:80px">宽带</th>
-                                    <th style=" width:80px"></th>
-                                    <th>日均价</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                #foreach($item in $roomStay.RoomTypes)
-                                <tr>
-                                    <td class="hometype">
-                                        #set($_url = $thistool.getHotleImg($roomStay.BasicPropertys.Images,$item.RoomTypeCode))
+                        <div class="s_tab" style=" border-bottom: 1px #8ab923 solid;">
+                            <ul class="tab_nav">
+                                <li class="tab_li">
+                                </li>
+                                <li class="listBt_box">
+                                    <span class="msprice">门市价</span>
+                                    <span class="tcprice">驾驴价</span>
+                                    <!--<span class="favorable">优惠</span>-->
+                                    <span class="payment">支付方式</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="priceBox_$!Info.OutSign" class="s_tab">
+                            #foreach($item in $Price.policy.Policys)
+                            <div style="border-bottom: 1px #ddd dashed;">
+                                <div id="price_$!Price.sceneryId_$!item.policyId">
+                                    <ul class="tab_nav tab_navHover" style="height:35px;">
+                                        <li class="name_li">[$item.ticketName.InnerXml ]<a href="javascript:void(0)" style="color:#005bb5">$!item.policyName.InnerXml</a></li>
+                                        <li class="listBt_box">
+                                            <span class="msprice">¥$!item.price</span><span class="tcprice"><span class="b-orange">¥$!item.tcprice</span></span><span class="payment">
+                                                <span class="a-tip">#if($!item.pMode==0)景区现付 #elseif($!item.pMode==1)在线支付 #else 其它支付 #end</span>
+                                            </span>
+                                            <span class="operate" style="height:23px;line-height:23px;width:160px">
+                                                <a class="bookbtn" target="_blank" href="/scenery/sceneryOrder.aspx?sceneryId=5305&amp;ticketId=119734">预订</a>
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            #end
+                        </div>
 
-                                        #if($_url=="$_url")
-                                        <div style=" padding:5px; line-height:18px; width:100px; MaxHeight:80px; overflow:hidden" class="XoverTip" data="
-                                            <p>$!item.RoomDescription</p><img src='http://media.sohoto.com/market/images/hotelimages$_url' style='width:360px' />">
-                                            <img style=" height:60px; width:100px" src="http://media.sohoto.com/market/images/hotelimages$_url" />
-                                            <div style=" color:#006cbf">$!item.RoomTypeName</div>
-                                        </div>
-                                        #else
-                                        <div style=" color:#006cbf" class="XoverTip" data="<p>$!item.RoomDescription</p>">$!item.RoomTypeName</div>
-                                        #end
-                                    </td>
-                                    <td colspan="7" class="hometypebox" valign="top">
-                                        <table>
-                                            #foreach($rows in $thistool.getHotleRoomRates($roomRates,$item.RoomTypeCode))
-
-                                            <tr class="typelist">
-                                                <td><span data="$rows.RoomTypeDesc" class="XoverTip" style=" color:#006cbf; text-align:center">$!rows.BedType</span></td>
-                                                <td style=" width:170px"><span>$!rows.RatePlanName</span></td>
-                                                <td style=" width:80px"><span>#if($rows.Internet=="Y")免费宽带#elseif($rows.Internet=="N")无网络#esle上网收费#end</span></td>
-                                                <td style=" width:80px; text-align:right;">
-                                                    <!-- $rows.Payment  $rows.AvailabilityStatus $rows.Quantity-->
-                                                    <span class="yhbox $rows.Payment">
-                                                        #if($rows.Payment=="T")
-                                                        酒店现付
-                                                        #elseif($rows.Payment=="S")
-                                                        在线支付
-                                                        #else
-                                                        在线预付
-                                                        #end
-                                                    </span>
-                                                </td>
-                                                <td class="price">￥$tool.GetHotlePrice($roomStay.BasicPropertys.Rank,$rows,$rows.Rates)</td>
-                                                <td>
-                                                    #if($rows.AvailabilityStatus=="noavail"||($rows.Payment=="S" && $rows.Quantity==0))
-                                                    <a href="javascript:" class="inputbutton" style="width:50px;">已满房</a>
-                                                    #else
-                                                    #if($rows.Payment=="T")
-                                                    <a href="javascript:" onclick="postHotleFillPage('$inDate','$outDate','$rows.HotelCode','$rows.Payment','$rows.RatePlanCode','$rows.RoomTypeCode')" class="inputbutton green" style="width:50px;">预约</a>
-                                                    #else
-                                                    <a href="javascript:" onclick="postHotleFillPage('$inDate','$outDate','$rows.HotelCode','$rows.Payment','$rows.RatePlanCode','$rows.RoomTypeCode')" class="inputbutton orange" style="width:50px;">预订</a>
-                                                    #end
-                                                    #end
-                                                </td>
-                                            </tr>
-                                            #end
-                                        </table>
-                                    </td>
-                                </tr>
-                                #end
-                            </tbody>
-                        </table>
                     </div>
-
                     <div class="thisbox" id="buynotebox">
                         <div style=" padding:10px; line-height:20px">
                             <h2 style=" line-height:35px; font-family:微软雅黑; color:#ff6600">预定须知</h2>
@@ -203,7 +164,6 @@
                                 <div class="strbox"><b>地址交通:</b><p style="line-height:20px;">$!Info.Traffic</p></div>
                             </div>
                         </div>
-
                     </div>
                     <div class="thisbox" id="dpbox">
                         <div style=" padding:10px; line-height:20px">
@@ -227,7 +187,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
             <!--右-->
             <div style="width: 300px; float: right;" id="right_box">
@@ -272,7 +231,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

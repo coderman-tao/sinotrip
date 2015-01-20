@@ -30,7 +30,8 @@ namespace SinoTrip.WebView
         private static readonly string KEY = ConfigurationManager.AppSettings["ctripKey"];
         protected void Page_Load(object sender, EventArgs e)
         {
-            GetJQDP();
+            //GetJQImage();
+           // GetJQDP();
             //var rs = new SinoTrip.API.LY.Biz.ScenicBiz().GetNearbyScenery(5305, 0, 10);
             //var dal = new SinoTrip.DAL.Common.common_scenery_img();
             //var data = SceneryCache.GetSceneryCache(0, "", 0, 0, 0, "", "");
@@ -88,8 +89,9 @@ namespace SinoTrip.WebView
             //var dal = new SinoTrip.DAL.Common.common_scenery_img();
             //while (true)
             //{
-            //    if (_c == (4416 - 404))
+            //    if (_c == (6387 - 4416))
             //    {
+            //        Thread.Sleep(10000);
             //        foreach (var item in modelAll)
             //        {
             //            dal.Add(item);
@@ -466,10 +468,10 @@ namespace SinoTrip.WebView
         {
             var biz = new SinoTrip.API.LY.Biz.ScenicBiz();
             var data = SceneryCache.GetSceneryCache(0, "", 0, 0, 0, "", "",string.Empty);
-            var data1 = data.Where(item => item.ItemId > 390).ToList();
-            for (int i = 0; i < 21; i++)
+            var data1 = data.Where(item => item.ItemId > 4416).ToList();
+            for (int i = 0; i < 10; i++)
             {
-                var _data = data1.Where(item => item.ItemId > 390 + (i * 200) && item.ItemId <= 590 + (i * 200)).ToList();
+                var _data = data1.Where(item => item.ItemId > 4416 + (i * 200) && item.ItemId <= 4616 + (i * 200)).ToList();
                 if (_data.Count > 0)
                 {
                     Thread th1 = new Thread(delegate()

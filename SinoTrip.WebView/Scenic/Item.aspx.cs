@@ -50,6 +50,15 @@ namespace SinoTrip.WebView.Scenic
                     }
                     Vt.Put("Imgs", imgs);
                     Vt.Put("Info", Info);
+                    List<int> ids = new List<int>();
+
+                    ids.Add(_outSign.ToInt32(0));
+
+                    var model = new SinoTrip.API.LY.Biz.ScenicBiz().GetSceneryPrice(2, ids);
+                    if(model!=null&&model.scenery!=null)
+                    {
+                        Vt.Put("Price", model.scenery.FirstOrDefault());
+                    }
                 }
                 else
                 {
@@ -61,7 +70,7 @@ namespace SinoTrip.WebView.Scenic
                     //    dal.Add(item);
                     //}
 
-                    Update();
+                    //Update();
                 }
             }
             catch (Exception ex)
