@@ -22,20 +22,25 @@ namespace SinoTrip.WebView.Scenic
         int grade = 0;
         int price = 0;
         int page = 1;
+        string keyword;
         protected void Page_Load(object sender, EventArgs e)
         {
+            page = Context.Request["page"].ToInt32(1);
+            keyword = Context.Request["keyword"];
+
             areaId = Context.Request["provice"].ToInt32(0);
             cityId = Context.Request["city"].ToInt32(0);
             county = Context.Request["county"].ToInt32(0);
             type = Context.Request["type"].ToInt32(0);
             grade = Context.Request["grade"].ToInt32(0);
             price = Context.Request["price"].ToInt32(0);
-            page = Context.Request["page"].ToInt32(1);
             QueryScenery pq = new QueryScenery();
             pq.page = 1;
             pq.pageSize = 10;
             pq.cs = 2;
             pq.sortType = "2";
+            if (!string.IsNullOrEmpty(keyword))
+                pq.keyword = keyword;
             if (grade > 0)
                 pq.gradeId = grade;
             if (page > 0)
@@ -50,7 +55,7 @@ namespace SinoTrip.WebView.Scenic
             var cityArea = new List<ViewCityArea>();
             if (areaId > 0)
             {
-                areaData = AreaCache.GetAreaCache(areaId, 0, "","");
+                areaData = AreaCache.GetAreaCache(areaId, 0, "", "");
                 var areaItem = areaData.FirstOrDefault(item => item.ItemId == areaId);
                 areaName = areaItem.Name;
                 pq.provinceId = areaItem.OutSign.ToInt32(0);
@@ -59,13 +64,16 @@ namespace SinoTrip.WebView.Scenic
             else
             {
                 areaData = AreaCache.GetAreaCache(0, 0, "", "");
+
             }
             // pq.provinceId = areaData.FirstOrDefault().OutSign.ToInt32(0);
             if (cityId > 0)
             {
                 if (areaId == 0)
                 {
-                    areaId = areaData.FirstOrDefault(r => r.Name == (AreaCache.GetCityCache(cityId, "", true,"").FirstOrDefault().Province)).ItemId;
+                    areaData = areaData.Where(r => r.Name == (AreaCache.GetCityCache(cityId, "", true, "").FirstOrDefault().Province)).ToList();
+                    areaId = areaData.FirstOrDefault().ItemId;
+                    areaName = areaData.FirstOrDefault().Name;
                 }
                 var cityItem = AreaCache.GetCityCache(cityId, "", true, "").FirstOrDefault();
                 pq.cityId = cityItem.OutSign.ToInt32(0);
@@ -94,14 +102,14 @@ namespace SinoTrip.WebView.Scenic
                 {
                     cityId = AreaCache.GetCityCache(countyData.CityID.ToInt32(0), "", true, "").FirstOrDefault().ItemId;
                 }
-                 pq.countryId = countyData.OutSign.ToInt32(0);
-                 Vt.Put("countyname", countyData.Name);
+                pq.countryId = countyData.OutSign.ToInt32(0);
+                Vt.Put("countyname", countyData.Name);
             }
-            var typeData = SceneryCache.GetTypeCache(0, "").OrderBy(item=>item.OrderNo).ToList();
+            var typeData = SceneryCache.GetTypeCache(0, "").OrderBy(item => item.OrderNo).ToList();
 
             var data = new ScenicBiz().QueryScenery(pq);
 
-           
+
             Vt.Put("Scenery", data);
             Vt.Put("TypeData", typeData);
             Vt.Put("CityArea", cityArea);
@@ -114,6 +122,7 @@ namespace SinoTrip.WebView.Scenic
             Vt.Put("type", type);
             Vt.Put("price", price);
             Vt.Put("grade", grade);
+            Vt.Put("keyword", keyword);
             Vt.Display("Scenic/List.html");
         }
 

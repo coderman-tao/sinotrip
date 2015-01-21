@@ -88,26 +88,61 @@ namespace SinoTrip.DAL.Common
         }
 
         /// <summary>
+        /// 模糊查询
+        /// </summary>
+        /// <param name="nameLike"></param>
+        /// <returns></returns>
+        public List<ViewScenery> QueryAll(string nameLike)
+        {
+            if (!string.IsNullOrEmpty(nameLike))
+            {
+                return null;
+            }
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("SELECT A.OutSign,A.Supply,B.ItemId,B.Name,B.Address,B.Summary,B.TypeId,B.Cover,B.CityId,B.CityName,");
+            strSql.Append("B.CountyId,B.CountyName,B.Grade,B.ThemeName,B.Lat,B.Lng,B.Intro,B.BuyNotie,B.Alias,B.Traffic,B.NearId,B.Status from common_scenery_outsign as A ");
+            strSql.Append("LEFT JOIN common_scenery as B ON A.SceneryId=B.ItemId WHERE B.Status=0");
+            strSql.Append(" AND B.Name LIKE @Name");
+            MySqlParameter p = new MySqlParameter("@Name", MySqlDbType.VarChar, 255);
+            p.Value = "%" + nameLike + "%";
+            MySqlParameter[] parameters = { p };
+            //  parameters.Add(p);
+            return DALCore.GetSMDB().Query(strSql.ToString(), parameters).Tables[0].ToList<ViewScenery>();
+        }
+
+        /// <summary>
         /// 获取单个景点
         /// </summary>
         /// <param name="id"></param>
         /// <param name="outSign"></param>
         /// <returns></returns>
-        public ViewScenery GetItem(int id, string outSign)
+        public ViewScenery GetItem(int id, string outSign, string nameLike)
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("SELECT A.OutSign,A.Supply,B.ItemId,B.Name,B.Address,B.Summary,B.TypeId,B.Cover,B.CityId,B.CityName,");
             strSql.Append("B.CountyId,B.CountyName,B.Grade,B.ThemeName,B.Lat,B.Lng,B.Intro,B.BuyNotie,B.Alias,B.Traffic,B.NearId,B.Status from common_scenery_outsign as A ");
             strSql.Append("LEFT JOIN common_scenery as B ON A.SceneryId=B.ItemId WHERE B.Status=0");
+            List<MySqlParameter> parameters = new List<MySqlParameter>();
             if (id > 0)
             {
                 strSql.Append(" AND B.ItemId=" + id);
+
             }
             if (!string.IsNullOrEmpty(outSign))
             {
-                strSql.Append(" AND A.OutSign='" + outSign + "'");
+                strSql.Append(" AND A.OutSign=@OutSign");
+                MySqlParameter p = new MySqlParameter("@OutSign", MySqlDbType.VarChar, 50);
+                p.Value = outSign;
+                parameters.Add(p);
             }
-            DataTable dt = DALCore.GetSMDB().Query(strSql.ToString()).Tables[0];
+            if (!string.IsNullOrEmpty(nameLike))
+            {
+                strSql.Append(" AND B.Name LIKE @Name");
+                MySqlParameter p = new MySqlParameter("@Name", MySqlDbType.VarChar, 255);
+                p.Value = "%" + nameLike + "%";
+                parameters.Add(p);
+            }
+            DataTable dt = DALCore.GetSMDB().Query(strSql.ToString(), parameters.ToArray()).Tables[0];
             if (dt.Rows.Count > 0)
             {
                 return dt.Rows[0].FillModel<ViewScenery>();

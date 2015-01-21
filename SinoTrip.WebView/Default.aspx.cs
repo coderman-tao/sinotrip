@@ -28,7 +28,7 @@ namespace SinoTrip.WebView
     public partial class Default : TemplateBase
     {
         public static List<Entity.DataBase.Common.common_scenery_type> ThemeCache;
-        public static List<ViewScenery> _SceneryCache;
+        public List<ViewScenery> _SceneryCache;
         protected string areaName = "安徽";
         protected string cityName = "合肥";
         private string provinceId = "0";
@@ -36,7 +36,7 @@ namespace SinoTrip.WebView
         {
             try
             {
-                var ip = SinoTrip.FrameWork.Web.GetIP.IPAddress;
+                var ip = "61.128.101.255";//SinoTrip.FrameWork.Web.GetIP.IPAddress;
                 var url = "http://ip.taobao.com/service/getIpInfo.php?ip=" + ip;
                 HttpWebRequest request = HttpWebRequest.Create(url) as HttpWebRequest;
                 request.Method = "Get";
@@ -49,8 +49,11 @@ namespace SinoTrip.WebView
                     var ipmodel = ret.JsonDeserialize<API.Taobao.Model.Ip>();
                     if (ipmodel.code == "0")
                     {
-                        areaName = ipmodel.data.region.Trim();
-                        cityName = ipmodel.data.city.Replace("市", "").Trim();
+                        if (ipmodel.data.country_id == "CN")
+                        {
+                            areaName = ipmodel.data.region.Trim();
+                            cityName = ipmodel.data.city.Replace("市", "").Trim();
+                        }
                     }
 
                     sr.Close();
@@ -58,8 +61,8 @@ namespace SinoTrip.WebView
             }
             catch (Exception)
             {
-                
-               
+
+
             }
             var provices = AreaCache.GetAreaCache(0, 0, "", "");
             var provice = provices.FirstOrDefault(item => areaName.Contains(item.Name));
@@ -84,7 +87,7 @@ namespace SinoTrip.WebView
                 data = new ScenicBiz().QueryScenery(pq);
             }
             ThemeCache = SceneryCache.GetTypeCache(0, "").OrderBy(item => item.OrderNo).ToList();
-            _SceneryCache = SceneryCache.GetSceneryCache(0, areaName, 0, 0, 0, "", "", "");
+
             Vt.Put("areaName", areaName);
             Vt.Put("areaId", provice.ItemId);
             Vt.Put("Themes", ThemeCache);
@@ -98,6 +101,9 @@ namespace SinoTrip.WebView
 
         public List<ViewCity> GetHotCity(int size)
         {
+            //_SceneryCache = SceneryCache.GetSceneryCache(0, areaName, 0, 0, 0, "", "", "");
+            var cids = AreaCache.GetCityCache(0, areaName, true, "").Select(item => item.ItemId).ToList();
+            _SceneryCache = this.SecCache.Where(item => cids.Contains(item.CityId)).ToList();
             var rs = new List<ViewCity>();
             var cityData = AreaCache.GetCityCache(0, areaName, true, "");
             foreach (var item in cityData)

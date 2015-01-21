@@ -193,6 +193,8 @@
     <Content Include="Res\js\swfupload\swfupload.swf" />
     <Content Include="Res\js\swfupload\swfupload_fp9.swf" />
     <Content Include="Res\js\swfupload\upload-btn.png" />
+    <Content Include="Scenic\Category.aspx" />
+    <Content Include="Scenic\City.aspx" />
     <Content Include="Scenic\Default.aspx" />
     <Content Include="Scenic\Item.aspx" />
     <Content Include="Scenic\List.aspx" />
@@ -330,6 +332,8 @@
     <Content Include="Skin\Default\style\hotle.css" />
     <Content Include="Skin\Default\style\hotleitem.css" />
     <Content Include="Skin\Default\style\order.css" />
+    <Content Include="Skin\Default\style\scenerycategory.css" />
+    <Content Include="Skin\Default\style\scenerycity.css" />
     <Content Include="Skin\Default\style\sceneryitem.css" />
     <Content Include="Skin\Default\style\SceneryList.css" />
     <Content Include="Skin\Default\style\style.css" />
@@ -370,6 +374,8 @@
     <Content Include="Template\default\Sale\info_visa.html" />
     <Content Include="Template\default\Sale\order_tour.html" />
     <Content Include="Template\default\Sale\order_visa.html" />
+    <Content Include="Template\default\Scenic\Category.html" />
+    <Content Include="Template\default\Scenic\City.html" />
     <Content Include="Template\default\Scenic\Deafult.html" />
     <Content Include="Template\default\Scenic\Item.html" />
     <Content Include="Template\default\Scenic\List.html" />
@@ -428,6 +434,20 @@
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scenic\Category.aspx.cs">
+      <DependentUpon>Category.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Scenic\Category.aspx.designer.cs">
+      <DependentUpon>Category.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Scenic\City.aspx.cs">
+      <DependentUpon>City.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Scenic\City.aspx.designer.cs">
+      <DependentUpon>City.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Scenic\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

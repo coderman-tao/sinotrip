@@ -27,7 +27,7 @@ namespace SinoTrip.WebView.Scenic
                 string _outSign = Context.Request["outsign"];
                 if (id <= 0 && string.IsNullOrEmpty(_outSign))
                     Context.Response.Redirect("/");
-                var Info = new Biz.SceneryBiz().GetItem(id, _outSign);
+                var Info = new Biz.SceneryBiz().GetItem(id, _outSign,"");
                 if (Info != null)
                 {
                     id = Info.ItemId;
@@ -65,6 +65,7 @@ namespace SinoTrip.WebView.Scenic
                 {
 
                     InsertOutScenery(_outSign);
+                    LoggerCore.Error("库内无景点，请抓取来自同程的外部编号:" + _outSign);
                     //Update();
                 }
             }

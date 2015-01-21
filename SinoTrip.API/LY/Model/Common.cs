@@ -17,6 +17,8 @@ namespace SinoTrip.API.LY.Model
         public int? countryId { get; set; }
         public int? gradeId { get; set; }
         public int? themeId { get; set; }
+
+        public string keyword { get; set; }
         /// <summary>
         /// 0-	点评由多到少
         ///1-	景区级别
