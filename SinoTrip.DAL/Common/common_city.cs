@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using SinoTrip.FrameWork.Common;
 using SinoTrip.Entity.ViewModel;
+using System.Data;
 
 namespace SinoTrip.DAL.Common
 {
@@ -18,5 +19,7 @@ namespace SinoTrip.DAL.Common
             strSql.Append(" WHERE B.Status=0");
             return DALCore.GetSMDB().Query(strSql.ToString()).Tables[0].ToList<ViewCity>();
         }
+
+       
     }
 }

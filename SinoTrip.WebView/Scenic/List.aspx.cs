@@ -35,7 +35,7 @@ namespace SinoTrip.WebView.Scenic
             pq.page = 1;
             pq.pageSize = 10;
             pq.cs = 2;
-            pq.sortType = "3";
+            pq.sortType = "2";
             if (grade > 0)
                 pq.gradeId = grade;
             if (page > 0)
@@ -50,7 +50,7 @@ namespace SinoTrip.WebView.Scenic
             var cityArea = new List<ViewCityArea>();
             if (areaId > 0)
             {
-                areaData = AreaCache.GetAreaCache(areaId, 0, "");
+                areaData = AreaCache.GetAreaCache(areaId, 0, "","");
                 var areaItem = areaData.FirstOrDefault(item => item.ItemId == areaId);
                 areaName = areaItem.Name;
                 pq.provinceId = areaItem.OutSign.ToInt32(0);
@@ -58,16 +58,16 @@ namespace SinoTrip.WebView.Scenic
             }
             else
             {
-                areaData = AreaCache.GetAreaCache(0, 0, "");
+                areaData = AreaCache.GetAreaCache(0, 0, "", "");
             }
             // pq.provinceId = areaData.FirstOrDefault().OutSign.ToInt32(0);
             if (cityId > 0)
             {
                 if (areaId == 0)
                 {
-                    areaId = areaData.FirstOrDefault(r => r.Name == (AreaCache.GetCityCache(cityId, "", true).FirstOrDefault().Province)).ItemId;
+                    areaId = areaData.FirstOrDefault(r => r.Name == (AreaCache.GetCityCache(cityId, "", true,"").FirstOrDefault().Province)).ItemId;
                 }
-                var cityItem=AreaCache.GetCityCache(cityId, "", true).FirstOrDefault();
+                var cityItem = AreaCache.GetCityCache(cityId, "", true, "").FirstOrDefault();
                 pq.cityId = cityItem.OutSign.ToInt32(0);
                 cityArea = AreaCache.GetCityAreaCache(0, cityId, string.Empty);
                 Vt.Put("cityname", cityItem.Name);
@@ -77,7 +77,7 @@ namespace SinoTrip.WebView.Scenic
                 cityArea = AreaCache.GetCityAreaCache(0, 0, "合肥");
             }
 
-            var cityData = AreaCache.GetCityCache(0, areaName, true);
+            var cityData = AreaCache.GetCityCache(0, areaName, true, "");
 
             if (cityData.Count > 0 && areaId > 0 && cityId == 0)
             {
@@ -88,11 +88,11 @@ namespace SinoTrip.WebView.Scenic
                 var countyData = cityArea.FirstOrDefault(item => item.ItemId == county);
                 if (areaId == 0)
                 {
-                    areaId = areaData.FirstOrDefault(r => r.Name == (AreaCache.GetCityCache(countyData.CityID.ToInt32(0), "", true).FirstOrDefault().Province)).ItemId;
+                    areaId = areaData.FirstOrDefault(r => r.Name == (AreaCache.GetCityCache(countyData.CityID.ToInt32(0), "", true, "").FirstOrDefault().Province)).ItemId;
                 }
                 if (cityId == 0)
                 {
-                    cityId = AreaCache.GetCityCache(countyData.CityID.ToInt32(0), "", true).FirstOrDefault().ItemId;
+                    cityId = AreaCache.GetCityCache(countyData.CityID.ToInt32(0), "", true, "").FirstOrDefault().ItemId;
                 }
                  pq.countryId = countyData.OutSign.ToInt32(0);
                  Vt.Put("countyname", countyData.Name);

@@ -57,5 +57,20 @@ namespace SinoTrip.Biz
             return new DAL.Scenery.QueryDZPost().GetPostByTag(tag);
 
         }
+
+        /// <summary>
+        /// 获取单个景点
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="outSign"></param>
+        /// <returns></returns>
+        public ViewScenery GetItem(int id, string outSign)
+        {
+            if(id<=0&string.IsNullOrEmpty(outSign))
+            {
+                return null;
+            }
+            return new DAL.Common.common_scenery().GetItem(id, outSign);
+        }
     }
 }

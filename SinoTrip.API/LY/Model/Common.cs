@@ -9,14 +9,14 @@ namespace SinoTrip.API.LY.Model
 {
     public class QueryScenery
     {
-        public string clientIp = "127.0.0.1";
-        public int? cityId;
-        public int? page;
-        public int? pageSize;
-        public int? provinceId;
-        public int? countryId;
-        public int? gradeId;
-        public int? themeId;
+        public string clientIp { get { return "127.0.0.1"; } set { } }
+        public int? cityId { get; set; }
+        public int? page { get; set; }
+        public int? pageSize { get; set; }
+        public int? provinceId { get; set; }
+        public int? countryId { get; set; }
+        public int? gradeId { get; set; }
+        public int? themeId { get; set; }
         /// <summary>
         /// 0-	点评由多到少
         ///1-	景区级别
@@ -25,7 +25,7 @@ namespace SinoTrip.API.LY.Model
         ///4-	按距离升序
         ///默认按同程推荐排序
         /// </summary>
-        public string sortType;
+        public string sortType { get; set; }
         /// <summary>
         /// 当有keyword时必传入，多个用英文逗号隔开
         ///如：
@@ -41,15 +41,15 @@ namespace SinoTrip.API.LY.Model
         ///•	themeName 主题
         ///未指定的话按默认定的字段搜索
         /// </summary>
-        public string searchFields = "city,name,nameAlias,namePYLC,nameTKPY,nameTKFPY,summary,themeName";
+        public string searchFields { get { return "city,name,nameAlias,namePYLC,nameTKPY,nameTKFPY,summary,themeName"; } set { } } 
         /// <summary>
         /// 如0,50，表示0到50
         /// </summary>
-        public string priceRange;
+        public string priceRange { get; set; }
         /// <summary>
         /// 1.mapbar 2.百度；3.谷歌不传默认为1
         /// </summary>
-        public int? cs;
+        public int? cs = 2;
     }
     [Serializable, XmlRoot("body")]
     public class imageRs
