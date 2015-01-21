@@ -60,6 +60,7 @@
     <Compile Include="Utils\HtmlUtil.cs" />
     <Compile Include="Utils\XmlUtil..cs" />
     <Compile Include="Web\AjaxMsg.cs" />
+    <Compile Include="Web\GetIP.cs" />
     <Compile Include="Web\VelocityHelper.cs" />
   </ItemGroup>
   <ItemGroup />

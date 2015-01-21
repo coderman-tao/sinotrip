@@ -7,6 +7,6 @@ C:\Users\taolinse\Source\Repos\sinotrip\SinoTrip.DBCore\bin\Debug\MongoDB.Bson.d
 C:\Users\taolinse\Source\Repos\sinotrip\SinoTrip.DBCore\bin\Debug\MongoDB.dll
 C:\Users\taolinse\Source\Repos\sinotrip\SinoTrip.DBCore\bin\Debug\MongoDB.Driver.dll
 C:\Users\taolinse\Source\Repos\sinotrip\SinoTrip.DBCore\bin\Debug\MySql.Data.dll
-C:\Users\taolinse\Source\Repos\sinotrip\SinoTrip.DBCore\obj\Debug\SinoTrip.DB.csprojResolveAssemblyReference.cache
 C:\Users\taolinse\Source\Repos\sinotrip\SinoTrip.DBCore\obj\Debug\SinoTrip.DBCore.dll
 C:\Users\taolinse\Source\Repos\sinotrip\SinoTrip.DBCore\obj\Debug\SinoTrip.DBCore.pdb
+C:\Users\taolinse\Source\Repos\sinotrip\SinoTrip.DBCore\obj\Debug\SinoTrip.DB.csprojResolveAssemblyReference.cache

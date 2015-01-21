@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using SinoTrip.Core;
 using SinoTrip.FrameWork.Common;
 using System.Data;
 using SinoTrip.Entity.ViewModel;
@@ -88,9 +87,104 @@ namespace SinoTrip.DAL.Common
             return DALCore.GetSMDB().Query(strSql.ToString()).Tables[0].ToList<ViewScenery>();
         }
 
+        /// <summary>
+        /// 获取单个景点
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="outSign"></param>
+        /// <returns></returns>
+        public ViewScenery GetItem(int id, string outSign)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("SELECT A.OutSign,A.Supply,B.ItemId,B.Name,B.Address,B.Summary,B.TypeId,B.Cover,B.CityId,B.CityName,");
+            strSql.Append("B.CountyId,B.CountyName,B.Grade,B.ThemeName,B.Lat,B.Lng,B.Intro,B.BuyNotie,B.Alias,B.Traffic,B.NearId,B.Status from common_scenery_outsign as A ");
+            strSql.Append("LEFT JOIN common_scenery as B ON A.SceneryId=B.ItemId WHERE B.Status=0");
+            if (id > 0)
+            {
+                strSql.Append(" AND B.ItemId=" + id);
+            }
+            if (!string.IsNullOrEmpty(outSign))
+            {
+                strSql.Append(" AND A.OutSign='" + outSign + "'");
+            }
+            DataTable dt = DALCore.GetSMDB().Query(strSql.ToString()).Tables[0];
+            if (dt.Rows.Count > 0)
+            {
+                return dt.Rows[0].FillModel<ViewScenery>();
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// 批量添加外部标识
+        /// </summary>
+        /// <param name="list"></param>
+        /// <returns></returns>
+        public bool BatchAddOutSign(List<SinoTrip.Entity.DataBase.Common.common_city_area_outsign> list)
+        {
+            List<DB.DbMySQL.DbEntity> _list = new List<DB.DbMySQL.DbEntity>();
+            foreach (var model in list)
+            {
+                StringBuilder strSql = new StringBuilder();
+                strSql.Append("insert into common_city_area_outsign(");
+                strSql.Append("AreaId,Supply,OutSign,OutData,Status)");
+                strSql.Append(" values (");
+                strSql.Append("@AreaId,@Supply,@OutSign,@OutData,@Status)");
+                MySqlParameter[] parameters = {
+					new MySqlParameter("@AreaId", MySqlDbType.Int32,11),
+					new MySqlParameter("@Supply", MySqlDbType.Int32,11),
+					new MySqlParameter("@OutSign", MySqlDbType.VarChar,50),
+					new MySqlParameter("@OutData", MySqlDbType.Text),
+					new MySqlParameter("@Status", MySqlDbType.Int32,11)};
+                parameters[0].Value = model.AreaId;
+                parameters[1].Value = model.Supply;
+                parameters[2].Value = model.OutSign;
+                parameters[3].Value = model.OutData;
+                parameters[4].Value = model.Status;
+                _list.Add(new DB.DbMySQL.DbEntity(strSql.ToString(), parameters));
+            }
+            if (_list.Count > 0)
+            {
+                try
+                {
+                    int rows = DALCore.GetSMDB().BatchExcuteSql(_list);
+                    if (rows != _list.Count)
+                        return false;
+                    return true;
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// 批量讲景点表中的临时数据存储到外部标识中
+        /// </summary>
+        /// <param name="supply"></param>
+        /// <returns></returns>
+        public bool InsertOutSignByStatus(int supply)
+        {
+            StringBuilder strsql = new StringBuilder();
+            strsql.Append("INSERT INTO common_scenery_outsign(SceneryId,Supply,OutSign,Status) ");
+            strsql.Append("SELECT ItemId," + supply + ",Status,Status FROM common_scenery WHERE Status>0");
+            int rows = DALCore.GetSMDB().ExecuteSql(strsql.ToString());
+            if (rows > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public DataTable GetIds()
         {
-            string sql = "SELECT SceneryId, OutSign FROM common_scenery_outsign where ItemId>4801";
+            string sql = "SELECT SceneryId, OutSign FROM common_scenery_outsign where OutSign=Status";
             return DALCore.GetSMDB().Query(sql).Tables[0];
         }
 

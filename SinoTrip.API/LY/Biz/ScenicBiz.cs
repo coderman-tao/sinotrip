@@ -59,13 +59,13 @@ namespace SinoTrip.API.LY.Biz
         public sceneryList QueryScenery(QueryScenery pq)
         {
             string request = "";
-            FieldInfo[] fInfos = typeof(QueryScenery).GetFields();
-            foreach (var f in fInfos)
+            PropertyInfo[] pInfos = typeof(QueryScenery).GetProperties();
+            foreach (var pInfo in pInfos)
             {
                 //if(typeof(f).is)
-                if (f.GetValue(pq) != null)
+                if (pInfo.GetValue(pq, null) != null)
                 {
-                    request += "<" + f.Name + ">" + f.GetValue(pq) + "</" + f.Name + ">";
+                    request += "<" + pInfo.Name + ">" + pInfo.GetValue(pq, null) + "</" + pInfo.Name + ">";
                 }
             }
             string rs = ApiCommon.GetResult(request, "GetSceneryList", "http://tcopenapi.17usoft.com/handlers/scenery/queryhandler.ashx").Replace("&", "&amp;");
@@ -182,7 +182,7 @@ namespace SinoTrip.API.LY.Biz
             return rs.XmlToEntity<SinoTrip.API.LY.Model.NearByScenerys>(); ;
         }
 
-        public List<SinoTrip.Entity.DataBase.Common.common_scenery> DownLoadScenery(int outSign, List<SinoTrip.Entity.ViewModel.ViewScenery> data,List<Entity.DataBase.Common.common_scenery_type> typeCache)
+        public List<SinoTrip.Entity.DataBase.Common.common_scenery> DownLoadScenery(int outSign, List<SinoTrip.Entity.ViewModel.ViewScenery> data, List<Entity.DataBase.Common.common_scenery_type> typeCache)
         {
             string rs = GetSceneryList(0, 1).Replace("&", "&amp;");
             string str = GetJQRs(rs);
@@ -221,14 +221,14 @@ namespace SinoTrip.API.LY.Biz
                                     themeName = th.themeName.Trim();
                                 }
                                 var type = typeCache.FirstOrDefault(r => r.Name.Equals(themeName));
-                                if(type!=null)
+                                if (type != null)
                                 {
                                     s.TypeId = type.ItemId;
                                 }
                                 s.ThemeName = themeName;
                                 outsigns.Add(s);
                             }
-                            
+
                         }
                     }
                 }

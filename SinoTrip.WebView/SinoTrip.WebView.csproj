@@ -193,6 +193,7 @@
     <Content Include="Res\js\swfupload\swfupload.swf" />
     <Content Include="Res\js\swfupload\swfupload_fp9.swf" />
     <Content Include="Res\js\swfupload\upload-btn.png" />
+    <Content Include="Scenic\Default.aspx" />
     <Content Include="Scenic\Item.aspx" />
     <Content Include="Scenic\List.aspx" />
     <Content Include="Skin\Default\images\400.jpg" />
@@ -392,6 +393,7 @@
     <Content Include="Template\default\UserWeb\userMenu.htm" />
     <Content Include="Template\default\副本 default.htm" />
     <Content Include="Template\default\副本 pageHead.htm" />
+    <Content Include="test.aspx" />
     <Content Include="ValidateCode.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -426,6 +428,13 @@
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scenic\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Scenic\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Scenic\Item.aspx.cs">
       <DependentUpon>Item.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -442,6 +451,13 @@
     </Compile>
     <Compile Include="TemplateBase.cs">
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="test.aspx.cs">
+      <DependentUpon>test.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="test.aspx.designer.cs">
+      <DependentUpon>test.aspx</DependentUpon>
     </Compile>
     <Compile Include="ValidateCode.aspx.cs">
       <DependentUpon>ValidateCode.aspx</DependentUpon>

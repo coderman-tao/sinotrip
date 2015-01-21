@@ -447,7 +447,7 @@ div.XBoxMsg
 .leftmenu
 {
     width: 230px;
-    height: 450px;
+    height: 282px;
     position: absolute;
     background-color: #ffffff;
     top: 0px;
@@ -458,9 +458,9 @@ div.XBoxMsg
 {
     padding: 0px 20px 0px 0px;
     border-top: 1px dashed #eee;
-    height: 49px;
+    height: 65px;
     background: url(../images/left_menu.png) no-repeat;
-    background-position: right -260px;
+    background-position: right -250px;
 }
 .leftmenu .Itemfirst
 {
@@ -492,8 +492,9 @@ div.XBoxMsg
     font-size: 14px;
     color: #666;
     font-weight: bold;
-    padding-left: 25px;
-    background: url(../images/left_menu.png) no-repeat left 0px;
+    padding-top:5px;
+    padding-left: 20px;
+    /*background: url(../images/left_menu.png) no-repeat left 0px;*/
     line-height: 30px;
 }
 .left_menutitle.thisover
@@ -503,8 +504,9 @@ div.XBoxMsg
 }
 .left_menulable
 {
-    line-height: 16px;
+    line-height: 25px;
     font-size: 12px;
+    padding-left: 25px;
 }
 .left_menuname.index0
 {
@@ -1157,7 +1159,7 @@ span.discountBox span.discountname{-moz-user-select:none; display:inline-block;w
     font-size:12px;
     line-height: 20px;  
     border-bottom:1px dotted  #ccc;
-   padding:5px 0px 5px 80px;
+   padding:5px 0px 5px 0px;
    overflow:hidden;
    background-color:#ffffff
 }
@@ -1173,6 +1175,9 @@ span.discountBox span.discountname{-moz-user-select:none; display:inline-block;w
 
 .leftMenuSearch span,.leftMenuSearch a
 {
+    font-size:14px;
+    color:#666;
+    font-family: 'microsoft yahei';
     -moz-user-select: none;
     display: inline-block;
 
@@ -1185,7 +1190,7 @@ span.discountBox span.discountname{-moz-user-select:none; display:inline-block;w
     color:#666;
 }
 
-.leftMenuSearch a{padding:0px 8px 0px 8px;  text-align:center; color:#006cbf; border:1px solid #fff}
+.leftMenuSearch a{padding:10px;  text-align:center; border:1px solid #fff}
 .leftMenuSearch a:hover{ color:#ff6600; border:1px solid #ff6600}
 
 .leftMenuSearch div.keytypebox{width:100px; height:20px; position:absolute; right:0px; text-align:right}

@@ -100,6 +100,7 @@
     <Compile Include="LY\Model\SceneryPrice.cs" />
     <Compile Include="LY\SDK\ApiCommon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Taobao\Model\Ip.cs" />
     <Compile Include="Zhunar\Model\Header.cs" />
     <Compile Include="Zhunar\Model\Hotel.cs" />
   </ItemGroup>

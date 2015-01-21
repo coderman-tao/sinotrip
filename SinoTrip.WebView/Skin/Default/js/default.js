@@ -159,7 +159,7 @@ jQuery.extend({
         id: 'myFocus', //焦点图盒子ID
         pattern: 'mF_rapoo', //风格应用的名称		
        // width: 950, //设置图片区域宽度(像素)
-        height: 365, //设置图片区域高度(像素)
+        height: 280, //设置图片区域高度(像素)
         waiting:0,
         txtHeight: 'default'//文字层高度设置(像素),'default'为默认高度，0为隐藏
     });

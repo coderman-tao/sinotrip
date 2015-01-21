@@ -28,7 +28,7 @@ namespace SinoTrip.Cache
         /// <param name="parent"></param>
         /// <param name="parentName"></param>
         /// <returns></returns>
-        public static List<ViewArea> GetAreaCache(int id, int parent, string parentName)
+        public static List<ViewArea> GetAreaCache(int id, int parent, string parentName, string name)
         {
             var result = FileCache.ReadCache("Area", DateTime.MinValue, "") as List<ViewArea>;
             if (result == null)
@@ -48,6 +48,10 @@ namespace SinoTrip.Cache
                     return null;
                 }
 
+            }
+            if (!string.IsNullOrEmpty(name))
+            {
+                result = result.Where(item => item.Name == name).ToList();
             }
             if (id > 0)
             {
@@ -77,7 +81,7 @@ namespace SinoTrip.Cache
         /// <param name="parent"></param>
         /// <param name="parentName"></param>
         /// <returns></returns>
-        public static List<ViewCity> GetCityCache(int id, string ProviceName, bool isBigCity)
+        public static List<ViewCity> GetCityCache(int id, string ProviceName, bool isBigCity, string name)
         {
             var result = FileCache.ReadCache("City", DateTime.MinValue, "") as List<ViewCity>;
             if (result == null)
@@ -91,6 +95,10 @@ namespace SinoTrip.Cache
             if (!string.IsNullOrEmpty(ProviceName))
             {
                 result = result.Where(item => item.Province == ProviceName).ToList();
+            }
+            if (!string.IsNullOrEmpty(name))
+            {
+                result = result.Where(item => item.Name == name).ToList();
             }
             if (isBigCity)
                 result = result.Where(item => item.IsBigCity == 1).ToList();
