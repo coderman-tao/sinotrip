@@ -34,24 +34,32 @@ namespace SinoTrip.WebView
         private string provinceId = "0";
         protected void Page_Load(object sender, EventArgs e)
         {
-            var ip = "219.159.235.101";
-            var url = "http://ip.taobao.com/service/getIpInfo.php?ip=" + ip;
-            HttpWebRequest request = HttpWebRequest.Create(url) as HttpWebRequest;
-            request.Method = "Get";
-            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-
-            using (var strem = response.GetResponseStream())
+            try
             {
-                StreamReader sr = new StreamReader(strem, Encoding.UTF8);
-                string ret = sr.ReadToEnd();
-                var ipmodel = ret.JsonDeserialize<API.Taobao.Model.Ip>();
-                if (ipmodel.code == "0")
-                {
-                    areaName = ipmodel.data.region.Trim();
-                    cityName = ipmodel.data.city.Replace("市", "").Trim();
-                }
+                var ip = SinoTrip.FrameWork.Web.GetIP.IPAddress;
+                var url = "http://ip.taobao.com/service/getIpInfo.php?ip=" + ip;
+                HttpWebRequest request = HttpWebRequest.Create(url) as HttpWebRequest;
+                request.Method = "Get";
+                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
 
-                sr.Close();
+                using (var strem = response.GetResponseStream())
+                {
+                    StreamReader sr = new StreamReader(strem, Encoding.UTF8);
+                    string ret = sr.ReadToEnd();
+                    var ipmodel = ret.JsonDeserialize<API.Taobao.Model.Ip>();
+                    if (ipmodel.code == "0")
+                    {
+                        areaName = ipmodel.data.region.Trim();
+                        cityName = ipmodel.data.city.Replace("市", "").Trim();
+                    }
+
+                    sr.Close();
+                }
+            }
+            catch (Exception)
+            {
+                
+               
             }
             var provices = AreaCache.GetAreaCache(0, 0, "", "");
             var provice = provices.FirstOrDefault(item => areaName.Contains(item.Name));

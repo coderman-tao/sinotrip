@@ -6,7 +6,7 @@ using System.Web;
 
 namespace SinoTrip.FrameWork.Web
 {
-    public class IP
+    public class GetIP
     {
         public static string IPAddress
         {

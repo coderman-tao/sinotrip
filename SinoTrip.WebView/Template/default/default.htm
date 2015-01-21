@@ -193,9 +193,9 @@
 </html>
 <script type="text/javascript">
     $("#city_list").find("a").bind("click", function () {
-        $("#city_list").find("a").removeClass("iscurrent");
+        $("#city_list").find("a").removeAttr("style");
         var cid = $(this).attr("cid");
-        $(this).addClass("iscurrent").css({"color": "#f60"});
+        $(this).css({"color": "#f60"});
         var url = "/AJAX/Scenery/GetInfo.ashx?method=List&page=1&pageSize=10&cityId=" + cid;
         jQuery.ajax({
             url: url,
