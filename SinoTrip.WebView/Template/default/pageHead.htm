@@ -18,7 +18,6 @@
 
 
 </script>
-
 <style type="text/css">
     .leftmenubuttomboxbj {
         position: absolute;
@@ -96,8 +95,8 @@
         font-size: 16px;
         font-family: microsoft yahei;
         width: 100%;
-        height: 30px;
-        line-height: 30px;
+        height: 28px;
+        line-height: 28px;
         width: 100%;
         margin-top: -6px;
     }
@@ -108,20 +107,20 @@
         #if ($QU.id>0)
         <div class="pagebox">
             <div style="width: 105px; padding-left: 10px; float: left">
-                <a href="javascript:void(0)"> 荞面</a>
+                <a href="javascript:void(0)"> 驾驴旅游网</a>
             </div>
             <div style="width: 300px; padding-left: 10px; float: left">
-                <span>您好<span style="color: Red">$!QU.username </span>，欢迎光临荞面旅游网 </span>
+                <span>您好<span style="color: Red">$!QU.username </span>，欢迎光临驾驴旅游网 </span>
             </div>
             <div style="width: 200px; padding-left: 10px; float: right">
-                <span> <a href="http://www.qiaomian.com" onclick="window.external.addFavorite(this.href,this.title);return false;" title="荞面旅游网-安徽中青旅旗下电子商务平台" rel="sidebar">收藏我们</a></span> <span class="titleicon line">
+                <span> <a href="http://www.cartrip.cc" onclick="window.external.addFavorite(this.href,this.title);return false;" title="驾驴旅游网-最专业的自驾游向导" rel="sidebar">收藏我们</a></span> <span class="titleicon line">
                     <a href="/help">帮助中心</a>
                 </span>
             </div>
             <div style="width: 400px; padding-left: 10px; float: right;">
                 <span class="titleicon line"><a href="/UserWeb/logout.aspx">退出 </a></span><span class="titleicon myqm">
-                    <a href="/UserWeb/default.aspx">我的荞面 </a>
-                </span><span class="titleicon myorder"><a href="/UserWeb/TourOrderList.aspx">我的订单</a></span>
+                    <a href="/UserWeb/default.aspx">个人中心 </a>
+                </span>
             </div>
         </div>
         #else
@@ -134,8 +133,7 @@
             </div>
             <div style="width: 200px; padding-left: 10px; float: right">
                 <span>
-                    <a href="http://www.qiaomian.com" onclick="window.external.addFavorite(this.href,this.title);return false;" title="荞面旅游网-安徽中青旅旗下电子商务平台" rel="sidebar">收藏我们</a>
-
+                    <a href="http://www.cartrip.cc" onclick="window.external.addFavorite(this.href,this.title);return false;" title="驾驴旅游网-最专业的自驾游向导" rel="sidebar">收藏我们</a>
 
                 </span> <span class="titleicon line">
                     <a href="/help">帮助中心</a>
@@ -146,7 +144,7 @@
                     <a href="/UserWeb/login.aspx">登录</a>
                 </span> <span class="titleicon myqm">
                     <a href="/UserWeb/default.aspx">
-                        我的荞面
+                        个人中心
                     </a>
                 </span>
                 <span class="titleicon myorder"><a href="/UserWeb/TourOrderList.aspx">我的订单</a></span>
@@ -173,20 +171,22 @@
                     <span class="rgtSpan">景区名|城市</span>
                 </div>
             </div>
-            <a href="javascript:;" class="sb-bto">探索</a>
+            <a href="javascript:void(0);" id="btnQuery" class="sb-bto">探索</a>
         </div>
-
     </div>
 </div>
 <div class="page_nav_box_1">
     <div class="pagebox">
-
         <!-- <a class="menubuttom" id="leftmenubuttom" href="javascript:void(0)">推荐旅游产品目的地</a>-->
         <div id="page_nav_list">
-            <span class="navline"></span><a href="/" class="iscurr">网站首页</a>
-            #foreach($menu in $tool.GetMenu("MALL_MENU_ZDH"))
-            <span class="navline">|</span><a href="$menu.url">$menu.text</a>
-            #end
+            <!--class="iscurr"-->
+            <span class="navline"></span><a href="/" >门票首页</a>
+            <span class="navline">|</span><a href="/city.html">城市景点</a>
+            <span class="navline">|</span><a href="/category.html">分类景点</a>
+            <span class="navline">|</span><a href="/Scenic/0-0-0-1-0-0-1.html">当季热卖</a>
+            <span class="navline">|</span><a target="_blank" href="http://hotel.cartrip.cc">驾驴酒店</a>
+            <span class="navline">|</span><a target="_blank" href="http://www.cartrip.cc/bbs">游记攻略</a>
+            <span class="navline">|</span><a target="_blank" href="http://www.cartrip.cc/ask">问答</a>
             <!--<a href="/userweb/default.aspx" class="loginbutton">&nbsp;</a>-->
         </div>
         <div style=" width:1190px; margin:0 auto;">
@@ -208,7 +208,6 @@
                                 景点类型
                             </div>
                             <div class="left_menulable">
-
                                 <a href="javascript:void(0)">温泉</a><a href="javascript:void(0)">滑雪</a><a href="javascript:void(0)">主题乐园</a><a href="javascript:void(0)">名胜古迹</a>
                             </div>
                         </div>
@@ -216,7 +215,7 @@
                     <div class="menuItem">
                         <div class="left_menutitle">
                             <div class="left_menuname">周边景点</div>
-                            <div class="left_menulable" style="overflow:hidden">
+                            <div class="left_menulable" style="overflow:hidden;height:25px">
                                 <a href="/Scenic/Item0&#45;$ZBJD.Scenerys.get_item(0).sceneryId&#46;html">$ZBJD.Scenerys.get_item(0).sceneryName</a>
                                 <a href="/Scenic/Item0&#45;$ZBJD.Scenerys.get_item(1).sceneryId&#46;html">$ZBJD.Scenerys.get_item(1).sceneryName</a>
                             </div>
@@ -263,7 +262,6 @@
                                     #end
                                 </div>
                             </div>
-
                         </div>
                     </div>
                     <div class="menuItem">
@@ -272,7 +270,7 @@
                                 价格区间
                             </div>
                             <div class="left_menulable">
-                                <a href="Scenic/0-0-0-0-1-0-1.html">0-50</a><a href="Scenic/0-0-0-0-2-0-1.html">50-100</a><a href="Scenic/0-0-0-0-3-0-1.html">100-200</a>
+                                <a href="Scenic/0-0-0-0-1-0-1.html">0-50元</a><a href="Scenic/0-0-0-0-2-0-1.html">50-100元</a><a href="Scenic/0-0-0-0-3-0-1.html">100-200元</a>
                             </div>
                         </div>
                         <div class="jd_counetbox" style=" height:300px">
@@ -281,26 +279,50 @@
                                     <div class="leftMenuSearch">
                                         <a href="javascript:void(0)" style=" font-size:16px;color:#ff6600">价格区间</a>
                                     </div>
-                                    <a href="Scenic/0-0-0-0-1-0-1.html">0-50</a>
-                                    <a href="Scenic/0-0-0-0-2-0-1.html">50-100</a>
-                                    <a href="Scenic/0-0-0-0-3-0-1.html">100-200</a>
-                                    <a href="Scenic/0-0-0-0-4-0-1.html">100-200</a>
+                                    <a href="Scenic/0-0-0-0-1-0-1.html">0-50元</a>
+                                    <a href="Scenic/0-0-0-0-2-0-1.html">50-100元</a>
+                                    <a href="Scenic/0-0-0-0-3-0-1.html">100-200元</a>
+                                    <a href="Scenic/0-0-0-0-4-0-1.html">100-200元</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
-
         <!--  <div class="meunextend">
              <a href="/help/">帮助</a> | <a href="http://www.51760.cn" target="_blank">中青旅官网</a> </div>  | <a href="#">攻略</a>-->
 
-
     </div>
 </div>
-
 <script type="text/javascript">
-    $("#txtScenicValue").bind("blur",function(){$(this).val("景区名|城市");}).bind("click",function(){$(this).val("");});
+    $("#txtScenicValue").bind("blur",function(){
+        var keyword= $("#txtScenicValue").val();
+        if(keyword=="")
+        {
+            $(this).val("景区名|城市");
+        }
+
+    }).bind("click",function(){
+        var keyword= $("#txtScenicValue").val();
+        if(keyword==""||keyword=="景区名|城市")
+        {
+            $(this).val("");}
+    }).bind('keypress',function(event){
+        if(event.keyCode == "13")
+        {
+            var keyword= $("#txtScenicValue").val();
+            if(keyword!="景区名|城市"||keyword!="")
+            {
+                window.location.href="/Scenic/List.aspx?keyword="+keyword;
+            }
+        }
+    });
+    $("#btnQuery").bind("click",function(){
+        var keyword= $("#txtScenicValue").val();
+        if(keyword!="景区名|城市"||keyword!="")
+        {
+            window.location.href="/Scenic/List.aspx?keyword="+keyword;
+        }
+    })
 </script>

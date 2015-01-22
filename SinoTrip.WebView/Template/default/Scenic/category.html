@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>景点大全_景点分类_景点百科_驾驴旅游网</title>
+    #include("pageHeadCode.htm")
+    <link href="/Skin/Default/style/scenerycategory.css" rel="stylesheet" />
+</head>
+<body>
+    #parse("pageHead.htm")
+    <div class="pagebox">
+        <div class="pageWay">
+            您的位置：<a href="/" title="驾驴旅游网门票预定">首页</a> > <span title="景点大全">分类景点</span>
+        </div>
+    </div>
+    <div class="pagebox">
+        <div class="hotBox">
+            <span class="title">当季热门</span>
+            <div class="leftbox" id="c_list">
+
+            </div>
+        </div>
+    </div>
+
+    <div id="CategoryList">
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+    var rs = $Categorys;
+    var scenerys = $Scenerys;
+    var chtml = "";
+    for (var i = 0; i < rs.length; i++) {
+        var item = rs[i];
+        if (i < 9) {
+            $("#c_list").append('<a href="#category_' + item.ItemId + '">' + item.Name + '</a>');
+        }
+        chtml += '<div class="pagebox" style="border-bottom: 2px solid #f60;"><div class="contentbox_leftBox" cid="' + item.ItemId + '">' + item.Name + '</div>' +
+            '<div class="contentbox_rightBox" id="crbox_' + item.ItemId + '"><ul id="category_' + item.ItemId + '"></ul></div></div>';
+    }
+    $("#CategoryList").html(chtml);
+    $("#_list").append('<a style="font-size:12px;color:#f60;" href="/Scenic.html">more>></a>');
+    for (var i = 0; i <scenerys.length; i++) {
+        var item = scenerys[i];
+        $("#category_" + item.TypeId).append('<li><a href="/Scenic/Item0-' + item.OutSign+ '.html">' +item.Name + '门票预订</a></li>');
+    }
+    $("#CategoryList").find(".contentbox_leftBox").each(function () {
+        var cid = $(this).attr("cid");
+        var height = $("#crbox_" + cid).height();
+        $(this).css({ "line-height": height+"px" });
+    });
+    delete scenerys;
+</script>

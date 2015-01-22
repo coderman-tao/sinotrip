@@ -64,13 +64,13 @@ namespace SinoTrip.Biz
         /// <param name="id"></param>
         /// <param name="outSign"></param>
         /// <returns></returns>
-        public ViewScenery GetItem(int id, string outSign)
+        public ViewScenery GetItem(int id, string outSign, string nameLike)
         {
-            if(id<=0&string.IsNullOrEmpty(outSign))
+            if (id <= 0 & string.IsNullOrEmpty(outSign) && string.IsNullOrEmpty(nameLike))
             {
                 return null;
             }
-            return new DAL.Common.common_scenery().GetItem(id, outSign);
+            return new DAL.Common.common_scenery().GetItem(id, outSign, nameLike);
         }
     }
 }

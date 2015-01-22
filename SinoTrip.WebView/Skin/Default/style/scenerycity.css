@@ -1,0 +1,104 @@
+﻿body {
+background-color:#f0f0f0;
+}
+.hotBox {
+    padding: 5px 5px 0px 5px;
+    font-family: 'microsoft yahei';
+    height: 30px;
+    border-bottom: 3px solid #ff6600;
+    font-size: 20px;
+}
+
+    .hotBox .title {
+        color: #f60;
+        float: left;
+        padding: 0 15px 0 20px;
+        font-weight: bold;
+    }
+
+    .hotBox .leftbox {
+        float: right;
+        padding-right: 10px;
+        font-size: 16px;
+        color: #666;
+    }
+
+        .hotBox .leftbox a {
+            padding-right: 10px;
+        }
+
+            .hotBox .leftbox a:hover {
+                color: #f60;
+            }
+
+.quicktitle {
+    font-size: 18px;
+    color: #ff6600;
+    padding: 10px;
+    border-bottom: 1px dotted #ccc;
+    font-family: 'microsoft yahei';
+}
+
+.quickbox {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+    .quickbox ul {
+        border-bottom: 1px dotted #ccc;
+        list-style: none;
+        height: 50px;
+    }
+
+    .quickbox li {
+        float: left;
+        width: 28px;
+        height: 26px;
+        text-align: center;
+        color: #f60;
+        line-height: 26px;
+        margin: 5px 15px 10px 0px;
+        background-color: #fff4d9;
+        cursor: pointer;
+    }
+    .quickbox li a{
+        color: #f60;
+    }
+
+        .quickbox li:hover {
+            background-color: #f0f0f0;
+        }
+
+.contentbox_leftBox {
+    width: 150px;
+    text-align: center;
+    color: #f60;
+    font-size: 16px;
+    font-weight:bolder;
+    float: left;
+    height: 150px;
+    line-height:150px;
+    border-right: 2px dashed #ccc;
+}
+
+.contentbox_rightBox {
+    height: 150px;
+    width: 1000px;
+    float: left;
+}
+    .contentbox_rightBox ul {
+     list-style: none;
+    }
+     .contentbox_rightBox ul li {
+        float: left;
+        height: 30px;
+        text-align: center;
+        color: #f60;
+        line-height: 30px;
+        margin: 5px 15px 10px 0px;
+        border-bottom: 1px dotted #ccc;
+        cursor: pointer;
+    }
+     .contentbox_rightBox li a{
+        color: #f60;
+    }

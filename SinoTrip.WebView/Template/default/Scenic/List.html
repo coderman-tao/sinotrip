@@ -19,13 +19,16 @@
     #parse("pageHead.htm")
     <div class="pagebox">
         <div class="pageWay">
-            您的位置：<a href="/" title="驾驴旅游网门票预定">首页</a> > <span title="$tool.GetSetting($tourType).name旅游报价">门票预订</span>
+            您的位置：<a href="/" title="驾驴旅游网门票预定">首页</a> > <span title="$!araename$!cityname$!countyname景区门票预订">门票预订</span>
         </div>
     </div>
     <div class="pagebox">
         <div style="overflow: hidden; position: relative;">
             <!--左-->
             <div style="width: 877px; overflow: hidden; float: left">
+                #if($keyword)
+                <div style="padding:5px 5px 5px 20px;">当前搜索关键字：<span style="color:red;font-size:13px;font-weight:bold;border-bottom:1px dashed #ccc" title="$keyword">$keyword</span></div>
+                #end
                 <div class="thisbox" id="searchKeyList">
                     <div class="searchbox showbox" item="areaType">
                         <div style=" position:absolute">
@@ -129,6 +132,7 @@
                         <a class="#if($grade==1)current#end" href="$provice&#45;$city&#45;$county&#45;$type&#45;$price&#45;1&#45;1&#46;html">A</a>
                     </div>
                 </div>
+
                 <div class="thisbox">
                     <div class="tourlist" id="product_tourlist">
                         #foreach($sitem in $Scenery.Scenerys)
@@ -147,7 +151,7 @@
                         <div class="tourbox" value="$sitem.sceneryId">
                             <div class="imgbox">
                                 <a href="/Scenic/Item0&#45;$sitem.sceneryId&#46;html" target="_blank" title="$sitem.sceneryName">
-                                    <img width="160px" height="120px" src="$Scenery.imgbaseURL/$sitem.imgPath" />
+                                    <img width="160px" height="120px" src="$Scenery.imgbaseURL$sitem.imgPath" />
                                 </a>
                             </div>
                             <div class="tourcounet">
