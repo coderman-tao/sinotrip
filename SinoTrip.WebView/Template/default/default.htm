@@ -25,8 +25,14 @@
                         <ul>
                             <li>
                                 <a href="$block.url" target="_blank">
-                                    <img src="http://upload.17u.com/uploadfile/2015/01/08/2/201501081832467659477.jpg" height="280" width="950" alt="$block.title" text="$block.summary"
-                                         thumb="$block.title" />
+                                    <img src="http://upload.17u.com/uploadfile/2015/01/08/2/201501081832467659477.jpg" height="280" width="950" alt="禅意大别山" text="禅意大别山"
+                                         thumb="禅意大别山" />
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Scenic/Item0-24351.html">
+                                    <img src="http://upload.17u.com/uploadfile/2014/12/23/2/201412230953001357180.jpg" height="280" width="950" alt="黄山醉温泉" text="黄山醉温泉"
+                                         thumb="黄山醉温泉" />
                                 </a>
                             </li>
                         </ul>
@@ -36,127 +42,90 @@
         </div>
     </div>
     <!--抢游-->
-    <div class="pagebox" style=" display:none">
-        <div style="padding-right: 303px; height: 330px; position: relative;">
-            <div style="width: 880px; height: 320px;" class="thisbox">
-                <div class="default_box_title" style="line-height: 65px">
-                    <a href="#">更多线路>></a>
+    <div class="pagebox">
+        <div style="padding-right: 303px; height: 480px; position: relative;">
+            <div style="width: 880px; height: 470px;" class="thisbox">
+                <div class="indexContent">
+                    <span class="title">当季热卖</span>
+                    <div class="leftbox">
+                        <a href="/Scenic/0-0-0-1-0-0-1.html" class="cid_cls">温泉</a>
+                        <a href="/Scenic/0-0-0-2-0-0-1.html" class="cid_cls">滑雪</a>
+                        <a href="/Scenic/0-0-0-13-0-0-1.html" class="cid_cls">海岛度假</a>
+                        <a style="font-size:12px;color:#f60" href="Scenic.html">more>></a>
+                    </div>
                 </div>
                 <ul class="default_product_list">
-                    #set ($tm=$tool.GetBlockData("MK_SYTM"))
-                    #foreach($block in $tm.blockData)
+                    #set ($hotSec=$ThisPage.GetHotScenery("13,14"))
+                    #foreach($hot in $hotSec.Scenerys)
                     <li style=" padding-top:10px">
                         <div class="imgbox">
-                            <a href="$block.url" title="">
-                                <span class="imglab lab_0">特惠抢购</span><span class="imgcontent">
-                                    <img src="$tool.getFileImg($block.coverserver,$block.cover,640)" height="$tm.picheight"
-                                         width="$tm.picwidth" alt="" />
-                                </span>
+                            <a href="/Scenic/Item0&#45;$!hot.sceneryId&#46;html" title="$!hot.sceneryName门票预订">
+                                <img src="$!hotSec.imgbaseURL$!hot.imgPath" alt="$hot.scenerySummary" width="200px" height="150px" />
                             </a>
                         </div>
-                        <a class="namebox" href="$!block.url"><span class="productname">$block.title</span>￥$block.price.toString("0.00")</a>
+                        <a class="namebox" href="/Scenic/Item0&#45;$!hot.sceneryId&#46;html"><span class="productname">$!hot.sceneryName</span>¥$!hot.amountAdv</a>
                     </li>
                     #end
                 </ul>
             </div>
-            <div style="overflow: hidden; height: 345px; width: 300px; position: absolute; right: 0px;
-                top: 0px">
+            <div style="overflow: hidden; height: 470px; width: 300px; position: absolute; right: 0px;
+                top: 0px;border: 1px solid #eee;">
                 <div style="height: 140px" class="thisbox">
                     <div class="default_user">
                         <div class="default_user_box">
                             <div class="default_user_face">
-                                <img alt="用户头像" src="/Skin/default/images/online_face.jpg" />
+                                <img alt="用户头像" height="64px" width="64px" src="/Skin/default/images/8080.png" />
                             </div>
                             <div>
-                                Hi！您好
+                                Hi！$!QU.username
                             </div>
                             <div>
-                                欢迎访问荞面旅游网
+                                欢迎访问驾驴旅游网
                             </div>
+                        </div>
+                        <div class="default_user_buttonlist">
                             #set ($uid=$QU.id)
                             #if ($uid>0)
                             <div class="default_user_function">
-                                <a href="/UserWeb/" title="会员中心">会员中心</a><a href="/UserWeb/RevisePass.aspx" title="密码修改">密码修改</a><a href="/UserWeb/logout.aspx" title="退出登录">退出登录</a>
+                                <span class="buttonbox">
+                                    <a href="http://www.cartrip.cc/home.php?mod=space&uid=$uid&do=profile&from=space" title="个人中心">个人中心</a>
+                                </span>
+                                <span class="buttonbox">
+                                    <a href="http://www.cartrip.cc/home.php?mod=spacecp&ac=profile&op=password" title="密码修改">密码修改</a>
+                                </span>
+                                <span class="buttonbox">
+                                    <a href="http://www.cartrip.cc/home.php?mod=space&uid=$uid&do=thread&view=me&from=space" title="我的游记">我的游记</a>
+                                </span>
                             </div>
+
+                            #else
+                            <span class="buttonbox"><a href="http://www.cartrip.cc/member.php?mod=logging&action=login" title="会员登录">会员登录</a></span> <span class="buttonbox">
+                                <a href="http://www.cartrip.cc/member.php?mod=register" title="免费注册">免费注册</a>
+                            </span>
                             #end
                         </div>
-                        <div class="default_user_buttonlist">
-                            <span class="buttonbox"><a href="/UserWeb/login.aspx" title="会员登录">会员登录</a></span> <span class="buttonbox">
-                                <a href="/UserWeb/Register.aspx" title="免费注册">免费注册</a>
-                            </span> <span class="buttonbox">
-                                #if ($uid>0)
-                                <a href="/UserWeb/TourOrderList.aspx" title="我的订单">我的订单</a>
-                                #end
-                            </span>
-                        </div>
                     </div>
                 </div>
-                <div style="height: 170px" class="thisbox">
-                    <div class="ahcyts_honor">
-                        <div>
-                            全国百强
-                        </div>
-                        <div>
-                            五星诚信
-                        </div>
-                        <div>
-                            全国青年文明号
-                        </div>
-                        <div>
-                            全国旅行社业服务标准化示范单位
-                        </div>
-                        <div>
-                            ISO9001-2008质量认证企业
-                        </div>
-                        <div>
-                            大陆居民赴台指定组团社
-                        </div>
-                        <div>
-                            国际航协一级代理
-                        </div>
-                        <div>
-                            省级客运服务
-                        </div>
+                <div style="height: auto">
+                    <div class="minboxtitle">
+                        <span class="iconStr">理</span><span class="title"><h2>选择驾驴的理由</h2></span>
                     </div>
-                </div>
-                <div style="height: 190px; display:none" class="thisbox">
-                    <div style="padding-left: 10px; font-size: 14px; line-height: 25px; font-weight: bold;
-                        color: #ff6600">
-                        他/她们刚刚下单啦!
-                    </div>
-                    <div class="default_order_list" style="position: relative">
-                        <div class="default_order_face">
-                            <img alt="用户头像" src="/Skin/default/images/offline_face.jpg" />
-                        </div>
-                        <div>
-                            网站会员：admin &nbsp;&nbsp;3分钟前
-                        </div>
-                        <div>
-                            在线预订：韩国双飞5日游
-                        </div>
-                        <div>
-                            手机号码：137****1180
-                        </div>
-                    </div>
-                    <div class="default_order_list" style="position: relative">
-                        <div class="default_order_face">
-                            <img alt="用户头像" src="/Skin/default/images/offline_face.jpg" />
-                        </div>
-                        <div>
-                            网站会员：admin &nbsp;&nbsp;4分钟前
-                        </div>
-                        <div>
-                            在线预订：台湾环岛八日游
-                        </div>
-                        <div>
-                            手机号码：137****1180
-                        </div>
+                    <div class="contentlist" style="line-height:40px;padding-left:10px">
+                        <h3 style="color:#ff6600; font-weight:400">1、20000余种景点门票供您挑选</h3>
+                        <h3 style="color:#ff6600; font-weight:400">
+                            2、超过1050万游客的真是点评
+                        </h3>
+                        <h3 style="color:#ff6600; font-weight:400">
+                            3、完美的游记攻略助你出游更加方便
+                        </h3>
+                        <h3 style="color:#ff6600; font-weight:400">
+                            4、自助游，深度游一站解决
+                        </h3>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!--5楼-->
     <div class="pagebox switch_dist_list">
         <div class="indexContent">
             <span class="title">驾驴精选</span>

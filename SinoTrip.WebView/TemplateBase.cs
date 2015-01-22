@@ -40,7 +40,7 @@ namespace SinoTrip.WebView
                 {
                     vt = new VelocityHelper();
                     vt.Init(TemplatePath);//模板路径 
-                    //vt.Put("QU", QU);
+                    vt.Put("QU", QU);
                     //vt.Put("now", DateTime.Now.ToUnixInt());
                     //vt.Put("SITE", SITE);
                     //vt.Put("LINK", LINK);

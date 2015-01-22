@@ -26,7 +26,7 @@ namespace SinoTrip.WebView.Scenic
             {
                 StreamReader sr = new StreamReader(strem, Encoding.UTF8);
                 string ret = sr.ReadToEnd();
-                var ipmodel = ret.JsonDeserialize<API.Taobao.Model.Ip>();
+                var ipmodel = ret.JsonDeserialize<SinoTrip.API.Taobao.Model.Ip>();
                 if (ipmodel.code == "1")
                 {
 

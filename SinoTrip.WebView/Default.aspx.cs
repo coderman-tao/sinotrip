@@ -34,29 +34,42 @@ namespace SinoTrip.WebView
         private string provinceId = "0";
         protected void Page_Load(object sender, EventArgs e)
         {
+            string _area = Context.Request["area"];
+            var provices = AreaCache.GetAreaCache(0, 0, "", "");
+             string[] names = new string[] { "香港","台湾","澳门" };//         
+             provices = provices.Where(item => !names.Contains(item.Name)).ToList();
+            ViewArea provice =null;
             try
             {
-                var ip = "61.128.101.255";//SinoTrip.FrameWork.Web.GetIP.IPAddress;
-                var url = "http://ip.taobao.com/service/getIpInfo.php?ip=" + ip;
-                HttpWebRequest request = HttpWebRequest.Create(url) as HttpWebRequest;
-                request.Method = "Get";
-                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-
-                using (var strem = response.GetResponseStream())
+                if (!string.IsNullOrEmpty(_area))
                 {
-                    StreamReader sr = new StreamReader(strem, Encoding.UTF8);
-                    string ret = sr.ReadToEnd();
-                    var ipmodel = ret.JsonDeserialize<API.Taobao.Model.Ip>();
-                    if (ipmodel.code == "0")
-                    {
-                        if (ipmodel.data.country_id == "CN")
-                        {
-                            areaName = ipmodel.data.region.Trim();
-                            cityName = ipmodel.data.city.Replace("市", "").Trim();
-                        }
-                    }
+                    provice = provices.FirstOrDefault(item => _area == item.English);
+                }
+                else
+                {
+                    var ip = SinoTrip.FrameWork.Web.GetIP.IPAddress;
+                    var url = "http://ip.taobao.com/service/getIpInfo.php?ip=" + ip;
+                    HttpWebRequest request = HttpWebRequest.Create(url) as HttpWebRequest;
+                    request.Method = "Get";
+                    HttpWebResponse response = (HttpWebResponse)request.GetResponse();
 
-                    sr.Close();
+                    using (var strem = response.GetResponseStream())
+                    {
+                        StreamReader sr = new StreamReader(strem, Encoding.UTF8);
+                        string ret = sr.ReadToEnd();
+                        var ipmodel = ret.JsonDeserialize<API.Taobao.Model.Ip>();
+                        if (ipmodel.code == "0")
+                        {
+                            if (ipmodel.data.country_id == "CN")
+                            {
+                                areaName = ipmodel.data.region.Trim();
+                                cityName = ipmodel.data.city.Replace("市", "").Trim();
+                            }
+                        }
+
+                        sr.Close();
+                    }
+                   
                 }
             }
             catch (Exception)
@@ -64,17 +77,25 @@ namespace SinoTrip.WebView
 
 
             }
-            var provices = AreaCache.GetAreaCache(0, 0, "", "");
-            var provice = provices.FirstOrDefault(item => areaName.Contains(item.Name));
+            if (provice == null)
+            {
+                provice = provices.FirstOrDefault(item => areaName.Contains(item.Name));
+            }
             areaName = provice.Name;
             var cityData = AreaCache.GetCityCache(0, provice.Name, true, "");
+
             QueryScenery pq = new QueryScenery();
             pq.page = 1;
             pq.pageSize = 10;
             pq.cs = 2;
             pq.sortType = "3";
             pq.provinceId = provice.OutSign.ToInt32(0);
-            pq.cityId = cityData.Where(item => item.Name == cityName).FirstOrDefault().OutSign.ToInt32(0);
+            var cityItem = cityData.Where(item => item.Name == cityName).FirstOrDefault();
+            if (string.IsNullOrEmpty(_area))
+            {
+                pq.cityId = cityData.Where(item => item.Name == cityName).FirstOrDefault().OutSign.ToInt32(0);
+            }
+            
 
             provinceId = provice.OutSign;
 
@@ -87,7 +108,6 @@ namespace SinoTrip.WebView
                 data = new ScenicBiz().QueryScenery(pq);
             }
             ThemeCache = SceneryCache.GetTypeCache(0, "").OrderBy(item => item.OrderNo).ToList();
-
             Vt.Put("areaName", areaName);
             Vt.Put("areaId", provice.ItemId);
             Vt.Put("Themes", ThemeCache);
@@ -116,6 +136,32 @@ namespace SinoTrip.WebView
                 }
             }
             return rs;
+        }
+
+        /// <summary>
+        /// 获取热门景点
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public sceneryList GetHotScenery(string ids)
+        {
+            string[] _ids = ids.Split(',');
+            List<int> PostId = new List<int>();
+            foreach (var item in _ids)
+            {
+                var _id = item.ToInt32(0);
+                if (_id > 0)
+                {
+                    PostId.Add(ThemeCache.FirstOrDefault(r => r.ItemId == _id).OrderNo.ToInt32(0));
+                }
+            }
+            QueryScenery pq = new QueryScenery();
+            pq.page = 1;
+            pq.pageSize = 10;
+            pq.cs = 2;
+            pq.sortType = "0";
+            pq.themeId = string.Join(",", PostId);
+            return new ScenicBiz().QueryScenery(pq);
         }
 
 
