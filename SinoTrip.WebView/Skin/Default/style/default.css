@@ -248,30 +248,30 @@ table.default_top_min_advert {
     .default_product_list li {
         overflow: hidden;
         margin: 0;
-        height: 235px;
-        width: 275px;
+        height: 200px;
+        width: 200px;
         padding-left: 13px;
         float: left;
     }
 
         .default_product_list li .imgbox {
             border: 1px solid #eee;
-            height: 175px;
+            height: 150px;
         }
 
             .default_product_list li .imgbox a {
                 -moz-user-select: none;
                 display: inline-block;
-                width: 275px;
-                height: 175px;
+                width: 200px;
+                height: 150px;
                 position: absolute;
             }
 
                 .default_product_list li .imgbox a .imgcontent {
                     -moz-user-select: none;
                     display: inline-block;
-                    width: 275px;
-                    height: 175px;
+                    width: 200px;
+                    height: 150px;
                     overflow: hidden;
                     position: relative;
                     z-index: 1;
@@ -282,7 +282,7 @@ table.default_top_min_advert {
                 }
 
         .default_product_list li a.namebox {
-            width: 275px;
+            width: 200px;
             -moz-user-select: none;
             display: inline-block;
             line-height: 35px;
@@ -423,7 +423,7 @@ table.default_top_min_advert {
         width: 200px;
         height: 175px;
         float: left;
-        padding: 5px 0px 5px 30px;
+        padding: 5px 25px 5px 13px;
     }
 
         .switch_dist_content a .contentbox {
@@ -531,9 +531,20 @@ table.default_top_min_advert {
         color: #666;
     }
 
-    .indexContent .leftbox a{
-        padding-right: 10px;
-    }
-     .indexContent .leftbox a:hover{
-       color:#f60;
-    }
+        .indexContent .leftbox a {
+            padding-right: 10px;
+        }
+
+            .indexContent .leftbox a:hover {
+                color: #f60;
+            }
+
+.selectProvice {
+    background: url(../images/Scenery/pic_list_6.png) no-repeat;
+    width: 57px;
+    height: 35px;
+    color: #f60;
+    background-position: -248px -277px;
+    padding: 0 0 0 17px;
+    margin-left: 20px;
+}

@@ -50,7 +50,7 @@ namespace SinoTrip.WebView.Scenic
             if (price > 0)
                 pq = GetPriceRange(pq);
             if (type > 0)
-                pq.themeId = type;
+                pq.themeId = type.ToString();
             var areaData = new List<ViewArea>();
             var cityArea = new List<ViewCityArea>();
             if (areaId > 0)

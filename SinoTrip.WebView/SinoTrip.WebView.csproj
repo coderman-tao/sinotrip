@@ -199,6 +199,7 @@
     <Content Include="Scenic\Item.aspx" />
     <Content Include="Scenic\List.aspx" />
     <Content Include="Skin\Default\images\400.jpg" />
+    <Content Include="Skin\Default\images\8080.png" />
     <Content Include="Skin\Default\images\ahcyts_honor.png" />
     <Content Include="Skin\Default\images\arrow.png" />
     <Content Include="Skin\Default\images\buy.jpg" />
@@ -412,6 +413,9 @@
     <Compile Include="Ajax\Scenery\GetInfo.ashx.cs">
       <DependentUpon>GetInfo.ashx</DependentUpon>
     </Compile>
+    <Compile Include="ReturnPage\API\uc.ashx.cs">
+      <DependentUpon>uc.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -566,6 +570,7 @@
     <Content Include="Res\js\mf-pattern\img\mF_tbhuabao\.svn\text-base\btn-bg.gif.svn-base" />
     <Content Include="Ajax\Scenery\GetInfo.ashx" />
     <Content Include="Ajax\Hotel\GetHotel.ashx" />
+    <Content Include="ReturnPage\API\uc.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

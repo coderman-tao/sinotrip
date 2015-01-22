@@ -16,7 +16,10 @@ namespace SinoTrip.API.LY.Model
         public int? provinceId { get; set; }
         public int? countryId { get; set; }
         public int? gradeId { get; set; }
-        public int? themeId { get; set; }
+        /// <summary>
+        /// 如1,2,3,4,5，可传多个，以英文逗号隔开
+        /// </summary>
+        public string themeId { get; set; }
 
         public string keyword { get; set; }
         /// <summary>
