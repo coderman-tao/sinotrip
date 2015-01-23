@@ -196,6 +196,7 @@
     <Content Include="Scenic\Category.aspx" />
     <Content Include="Scenic\City.aspx" />
     <Content Include="Scenic\Default.aspx" />
+    <Content Include="Scenic\goto.aspx" />
     <Content Include="Scenic\Item.aspx" />
     <Content Include="Scenic\List.aspx" />
     <Content Include="Skin\Default\images\400.jpg" />
@@ -459,6 +460,13 @@
     <Compile Include="Scenic\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Scenic\goto.aspx.cs">
+      <DependentUpon>goto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Scenic\goto.aspx.designer.cs">
+      <DependentUpon>goto.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Scenic\Item.aspx.cs">
       <DependentUpon>Item.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -571,6 +579,7 @@
     <Content Include="Ajax\Scenery\GetInfo.ashx" />
     <Content Include="Ajax\Hotel\GetHotel.ashx" />
     <Content Include="ReturnPage\API\uc.ashx" />
+    <None Include="Properties\PublishProfiles\Web.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

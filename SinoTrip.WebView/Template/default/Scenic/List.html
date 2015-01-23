@@ -151,7 +151,7 @@
                         <div class="tourbox" value="$sitem.sceneryId">
                             <div class="imgbox">
                                 <a href="/Scenic/Item0&#45;$sitem.sceneryId&#46;html" target="_blank" title="$sitem.sceneryName">
-                                    <img width="160px" height="120px" src="$Scenery.imgbaseURL$sitem.imgPath" />
+                                    <img width="160px" height="120px" src="http://upload.17u.com/uploadfile/scenerypic_common/300_225/$sitem.imgPath" />
                                 </a>
                             </div>
                             <div class="tourcounet">
@@ -289,7 +289,7 @@
                             '<span class="msprice">¥' + _price.Policys[j].price + '</span>' +
                             '<span class="tcprice"><span class="b-orange">¥' + _price.Policys[j].tcPrice + '</span></span>' +
                             '<span class="payment"><span class="a-tip">' + GetModelName(_price.Policys[j].pMode) + '</span></span>' +
-                            '<span class="operate" style="height:23px;line-height:23px;"><a class="bookbtn" target="_blank" href="/scenery/sceneryOrder.aspx?sceneryId=5305&amp;ticketId=119734">预订</a></span>' +
+                            '<span class="operate" style="height:23px;line-height:23px;"><a class="bookbtn" target="_blank" href="/Scenic/goto.aspx?supply=2&sid=' + json.scenery[i].sceneryId + '&tid=' + _price.Policys[j].policyId + '">预订</a></span>' +
                             '</li>';
                             html1 += ' <b>包含项目：</b>' + _price.Policys[j].containItems + '<br /><b>预订说明：</b>' + _price.Policys[j].remark.InnerXml + '</div>';
                             html += "</ul></div>" + html1 + "</div>";

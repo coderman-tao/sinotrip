@@ -3,10 +3,9 @@ C:\Users\taolinse\Source\Repos\sinotrip\SinoTrip.FrameWork\bin\Debug\SinoTrip.Fr
 C:\Users\taolinse\Source\Repos\sinotrip\SinoTrip.FrameWork\bin\Debug\NVelocity.dll
 C:\Users\taolinse\Source\Repos\sinotrip\SinoTrip.FrameWork\obj\Debug\SinoTrip.FrameWork.dll
 C:\Users\taolinse\Source\Repos\sinotrip\SinoTrip.FrameWork\obj\Debug\SinoTrip.FrameWork.pdb
+C:\Users\taolinse\Source\Repos\sinotrip\SinoTrip.FrameWork\obj\Debug\SinoTrip.FrameWork.csprojResolveAssemblyReference.cache
 C:\Users\coderman\Source\Repos\sinotrip\SinoTrip.FrameWork\bin\Debug\SinoTrip.FrameWork.dll
 C:\Users\coderman\Source\Repos\sinotrip\SinoTrip.FrameWork\bin\Debug\SinoTrip.FrameWork.pdb
 C:\Users\coderman\Source\Repos\sinotrip\SinoTrip.FrameWork\bin\Debug\NVelocity.dll
-C:\Users\coderman\Source\Repos\sinotrip\SinoTrip.FrameWork\obj\Debug\SinoTrip.FrameWork.csprojResolveAssemblyReference.cache
 C:\Users\coderman\Source\Repos\sinotrip\SinoTrip.FrameWork\obj\Debug\SinoTrip.FrameWork.dll
 C:\Users\coderman\Source\Repos\sinotrip\SinoTrip.FrameWork\obj\Debug\SinoTrip.FrameWork.pdb
-C:\Users\taolinse\Source\Repos\sinotrip\SinoTrip.FrameWork\obj\Debug\SinoTrip.FrameWork.csprojResolveAssemblyReference.cache

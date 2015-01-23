@@ -12,7 +12,7 @@
     <!--是否显示左侧菜单,1显示,0隐藏-->
     #parse("pageHead.htm")
     <!--内容-->
-    <div class="pagebox" style="margin-top: 2px; width: 1190px">
+    <div class="pagebox" style="margin-top: 2px; width: 1190px" >
         <div style="padding-left: 235px;">
             <div style="width: 953px; height: 280px;" class="thisbox">
                 <div id="myFocus">
@@ -51,7 +51,7 @@
                         <a href="/Scenic/0-0-0-1-0-0-1.html" class="cid_cls">温泉</a>
                         <a href="/Scenic/0-0-0-2-0-0-1.html" class="cid_cls">滑雪</a>
                         <a href="/Scenic/0-0-0-13-0-0-1.html" class="cid_cls">海岛度假</a>
-                        <a style="font-size:12px;color:#f60" href="Scenic.html">more>></a>
+                        <a style="font-size:12px;color:#f60" href="/Scenic.html">more>></a>
                     </div>
                 </div>
                 <ul class="default_product_list">
@@ -60,7 +60,7 @@
                     <li style=" padding-top:10px">
                         <div class="imgbox">
                             <a href="/Scenic/Item0&#45;$!hot.sceneryId&#46;html" title="$!hot.sceneryName门票预订">
-                                <img src="$!hotSec.imgbaseURL$!hot.imgPath" alt="$hot.scenerySummary" width="200px" height="150px" />
+                                <img src="http://upload.17u.com/uploadfile/scenerypic_common/300_225/$!hot.imgPath" alt="$hot.scenerySummary" width="200px" height="150px" />
                             </a>
                         </div>
                         <a class="namebox" href="/Scenic/Item0&#45;$!hot.sceneryId&#46;html"><span class="productname">$!hot.sceneryName</span>¥$!hot.amountAdv</a>
@@ -134,7 +134,7 @@
                 #foreach($city in $citys)
                 <a href="javascript:void(0)" class="cid_cls" cid="$!city.OutSign">$!city.Name</a>
                 #end
-                <a style="font-size:12px;color:#f60" href="Scenic.html">more>></a>
+                <a style="font-size:12px;color:#f60" href="/Scenic.html">more>></a>
             </div>
         </div>
         <div style="clear:both"></div>
@@ -148,8 +148,8 @@
                                 $!zbjd.sceneryName</br>$!zbjd.scenerySummary
                             </span> <span class="productname">$!zbjd.sceneryName</span>
                             <span class="price">¥$!zbjd.amountAdv</span>
-                            <img class="productimg" width="220px" height="135px" src="$!ZBJD.imgbaseURL$zbjd.imgPath"
-                                 alt="$sitem.scenerySummary" />
+                            <img class="productimg" width="220px" height="135px" src="http://upload.17u.com/uploadfile/scenerypic_common/300_225/$zbjd.imgPath"
+                                 alt="$!zbjds.scenerySummary" />
                         </span>
                     </a>
                     #end
@@ -180,7 +180,7 @@
                         html += '<a href="/Scenic/Item0-' + item.sceneryId + '.html">' +
                         '<span class="contentbox"><span class="contenttitle_bj"></span><span class="contenttitle">' + item.sceneryName + '</br>' + item.scenerySummary +
                     '</span> <span class="productname">' + item.sceneryName + '</span><span class="price">¥' + item.amountAdv + '</span>' +
-                    '<img class="productimg" width="220px" height="135px" src="' + json.imgbaseURL + item.imgPath + '" alt="' + item.scenerySummary + '" /></span></a>';
+                    '<img class="productimg" width="220px" height="135px" src="http://upload.17u.com/uploadfile/scenerypic_common/300_225/'+ item.imgPath + '" alt="' + item.scenerySummary + '" /></span></a>';
                     }
                     $("#scenery_list").html(html);
                 }

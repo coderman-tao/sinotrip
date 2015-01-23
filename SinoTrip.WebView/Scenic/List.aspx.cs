@@ -38,7 +38,7 @@ namespace SinoTrip.WebView.Scenic
             pq.page = 1;
             pq.pageSize = 10;
             pq.cs = 2;
-            pq.sortType = "2";
+            pq.sortType = "0";
             if (!string.IsNullOrEmpty(keyword))
                 pq.keyword = keyword;
             if (grade > 0)

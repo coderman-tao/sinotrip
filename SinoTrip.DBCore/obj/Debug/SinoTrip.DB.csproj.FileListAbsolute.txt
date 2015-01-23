@@ -19,6 +19,5 @@ C:\Users\coderman\Source\Repos\sinotrip\SinoTrip.DBCore\bin\Debug\MongoDB.Bson.d
 C:\Users\coderman\Source\Repos\sinotrip\SinoTrip.DBCore\bin\Debug\MongoDB.dll
 C:\Users\coderman\Source\Repos\sinotrip\SinoTrip.DBCore\bin\Debug\MongoDB.Driver.dll
 C:\Users\coderman\Source\Repos\sinotrip\SinoTrip.DBCore\bin\Debug\MySql.Data.dll
-C:\Users\coderman\Source\Repos\sinotrip\SinoTrip.DBCore\obj\Debug\SinoTrip.DB.csprojResolveAssemblyReference.cache
 C:\Users\coderman\Source\Repos\sinotrip\SinoTrip.DBCore\obj\Debug\SinoTrip.DBCore.dll
 C:\Users\coderman\Source\Repos\sinotrip\SinoTrip.DBCore\obj\Debug\SinoTrip.DBCore.pdb

@@ -29,7 +29,8 @@ namespace SinoTrip.WebView
         private static readonly string KEY = ConfigurationManager.AppSettings["ctripKey"];
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            var biz = new SinoTrip.API.LY.Biz.ScenicBiz();
+            string rs = biz.GetCityListByProvinceId(21);
         }
 
         void GetCountyListByCityId()

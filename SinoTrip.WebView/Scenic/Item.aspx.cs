@@ -65,6 +65,7 @@ namespace SinoTrip.WebView.Scenic
                 {
 
                     InsertOutScenery(_outSign);
+                    SceneryCache.SetSceneryCache();
                     LoggerCore.Error("库内无景点，请抓取来自同程的外部编号:" + _outSign);
                     //Update();
                 }
@@ -171,48 +172,50 @@ namespace SinoTrip.WebView.Scenic
                 {
                     var outsign = row[1].ToInt32(0);
                     var id = row[0].ToInt32(0);
-                    string rs = biz.GetSceneryDetail(outsign);
-                    XmlDocument doc = new XmlDocument();
-                    doc.LoadXml(rs);
+                    GetImg(id, row[1].ToString());
 
-                    string sss = biz.GetSceneryTrafficInfo(outsign);
-                    XmlDocument doc1 = new XmlDocument();
-                    doc1.LoadXml(sss);
-                    var s = doc1.SelectSingleNode("response/body/scenery/traffic").ChildNodes[0].Value;
+                    //string rs = biz.GetSceneryDetail(outsign);
+                    //XmlDocument doc = new XmlDocument();
+                    //doc.LoadXml(rs);
 
-                    XmlNodeList nodeList = doc.SelectSingleNode("response/body/scenery").ChildNodes;
-                    SinoTrip.API.LY.Model.sceneryDetail model = new API.LY.Model.sceneryDetail();
-                    foreach (XmlElement item in nodeList)
-                    {
-                        string r = item.InnerText;
-                        //item.InnerXml = item.InnerText;
-                        //item.Value
-                        PropertyInfo[] pInfos = typeof(SinoTrip.API.LY.Model.sceneryDetail).GetProperties();
-                        foreach (PropertyInfo pInfo in pInfos)
-                        {
-                            if (item.Name == pInfo.Name)
-                            {
-                                try
-                                {
-                                    if (pInfo.PropertyType.IsGenericType)
-                                        pInfo.SetValue(model, Convert.ChangeType(r, pInfo.PropertyType.GetGenericArguments()[0]), null);
-                                    else
-                                        pInfo.SetValue(model, Convert.ChangeType(r, pInfo.PropertyType), null);
-                                }
-                                catch
-                                {
-                                }
-                                continue;
-                            }
-                        }
-                    }
-                    SinoTrip.Entity.DataBase.Common.common_scenery cs = new Entity.DataBase.Common.common_scenery();
-                    cs.ItemId = id;
-                    cs.Alias = model.sceneryAlias;
-                    cs.Intro = model.intro;
-                    cs.BuyNotie = model.buyNotice;
-                    cs.Traffic = s;
-                    dal.UpdateIntro(cs);
+                    //string sss = biz.GetSceneryTrafficInfo(outsign);
+                    //XmlDocument doc1 = new XmlDocument();
+                    //doc1.LoadXml(sss);
+                    //var s = doc1.SelectSingleNode("response/body/scenery/traffic").ChildNodes[0].Value;
+
+                    //XmlNodeList nodeList = doc.SelectSingleNode("response/body/scenery").ChildNodes;
+                    //SinoTrip.API.LY.Model.sceneryDetail model = new API.LY.Model.sceneryDetail();
+                    //foreach (XmlElement item in nodeList)
+                    //{
+                    //    string r = item.InnerText;
+                    //    //item.InnerXml = item.InnerText;
+                    //    //item.Value
+                    //    PropertyInfo[] pInfos = typeof(SinoTrip.API.LY.Model.sceneryDetail).GetProperties();
+                    //    foreach (PropertyInfo pInfo in pInfos)
+                    //    {
+                    //        if (item.Name == pInfo.Name)
+                    //        {
+                    //            try
+                    //            {
+                    //                if (pInfo.PropertyType.IsGenericType)
+                    //                    pInfo.SetValue(model, Convert.ChangeType(r, pInfo.PropertyType.GetGenericArguments()[0]), null);
+                    //                else
+                    //                    pInfo.SetValue(model, Convert.ChangeType(r, pInfo.PropertyType), null);
+                    //            }
+                    //            catch
+                    //            {
+                    //            }
+                    //            continue;
+                    //        }
+                    //    }
+                    //}
+                    //SinoTrip.Entity.DataBase.Common.common_scenery cs = new Entity.DataBase.Common.common_scenery();
+                    //cs.ItemId = id;
+                    //cs.Alias = model.sceneryAlias;
+                    //cs.Intro = model.intro;
+                    //cs.BuyNotie = model.buyNotice;
+                    //cs.Traffic = s;
+                    //dal.UpdateIntro(cs);
                 }
                 catch (Exception)
                 {

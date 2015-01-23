@@ -1,18 +1,11 @@
 ﻿<script type="text/javascript">
 
-                #if ($lefMeun == 1)
+                #if ($isIndex==1)
+                    var leftmeun = 1;
                     #set($MeunBox = "black")
-                    #set($MeunBoxbutton = "none")
-    var leftmeun = 1;
-                #elseif ($lefMeun == 2)
-                    #set($MeunBoxbutton = "black")
-                    #set($MeunBox = "none")
-    var leftmeun =0;
                 #else
-                 #set($MeunBoxbutton = "none")
+    var leftmeun = 2;
                      #set($MeunBox = "none")
-    var leftmeun =0;
-
                  #end
 
 
@@ -102,13 +95,13 @@
     }
 </style>
 <script src="/Skin/Default/js/pageHead.js" type="text/javascript"></script>
-    <div class="menucounet" style="width:500px; display:none;" id="s_area_Box">
-        <div class="leftMenuSearch">
-            #foreach($provice in $Provice)
-            <a href="/$provice.English&#46;html">$provice.Name</a>
-            #end
-        </div>
+<div class="menucounet" style="width:500px; display:none;" id="s_area_Box">
+    <div class="leftMenuSearch">
+        #foreach($provice in $Provice)
+        <a href="/$provice.English/index.html">$provice.Name</a>
+        #end
     </div>
+</div>
 <div class="page_top_title">
     <div class="pagebox" id="page_member_login">
         #if ($QU.id>0)
@@ -127,7 +120,7 @@
             <div style="width: 150px; padding-left: 10px; float: right;">
                 <span class="titleicon line"><a href="http://www.cartrip.cc/home.php?mod=space&do=notice&type=post&isread=1">消息 </a></span><span class="titleicon myqm">
                     <a href="http://www.cartrip.cc/home.php?mod=space&uid=$QU.id&do=profile&from=space">个人中心 </a>
-                     <a href="http://www.cartrip.cc/home.php?mod=space&uid=$uid&do=thread&view=me&from=space" title="我的游记">我的游记</a>
+                    <a href="http://www.cartrip.cc/home.php?mod=space&uid=$uid&do=thread&view=me&from=space" title="我的游记">我的游记</a>
                 </span>
             </div>
         </div>
@@ -157,7 +150,6 @@
     </div>
 </div>
 <div>
-
 </div>
 <div class="pagebox">
     <div class="page_top_logo_box">
@@ -178,10 +170,10 @@
             </div>
             <a href="javascript:void(0);" id="btnQuery" class="sb-bto">探索</a>
         </div>
-        <div class="page_400box" style="line-height:95px; font-size:16px;">
+        <div class="page_400box" style="line-height:95px; font-size:16px; display:$MeunBox">
             <a href="javascript:void(0)" class="selectProvice" id="select_area" style="">$areaName</a>
         </div>
-      
+
     </div>
 </div>
 <div class="page_nav_box_1">
@@ -198,7 +190,7 @@
             <span class="navline">|</span><a target="_blank" href="http://www.cartrip.cc/ask">问答</a>
             <!--<a href="/userweb/default.aspx" class="loginbutton">&nbsp;</a>-->
         </div>
-        <div style=" width:1190px; margin:0 auto;">
+        <div style=" width:1190px; margin:0 auto; display:$MeunBox">
             <div style=" position:absolute; z-index:990">
                 <div class="thisbox leftmenu" id="jd_menubox">
                     <div class="menuItem Itemfirst">
@@ -246,9 +238,9 @@
                                 省市景点
                             </div>
                             <div class="left_menulable">
-                                <a href="Scenic/0&#45;$City.get_item(0).ItemId&#45;0-0-0-0-1.html">$City.get_item(0).Name</a>
-                                <a href="Scenic/0&#45;$City.get_item(1).ItemId&#45;0-0-0-0-1.html">$City.get_item(1).Name</a>
-                                <a href="Scenic/0&#45;$City.get_item(2).ItemId&#45;0-0-0-0-1.html">$City.get_item(2).Name</a>
+                                #foreach($mcity in $menuCity)
+                                <a href="/Scenic/0&#45;$mcity.ItemId&#45;0-0-0-0-1.html">$mcity.Name</a>
+                                #end
                             </div>
                         </div>
                         <div class="jd_counetbox">
@@ -258,7 +250,7 @@
                                         <a href="javascript:void(0)" style=" font-size:16px;color:#ff6600">目的地</a>
                                     </div>
                                     #foreach($city in $City)
-                                    <a href="Scenic/0&#45;$city.ItemId&#45;0-0-0-0-1.html">$city.Name</a>
+                                    <a href="/Scenic/0&#45;$city.ItemId&#45;0-0-0-0-1.html">$city.Name</a>
                                     #end
 
                                 </div>
@@ -267,7 +259,7 @@
                                         <a href="javascript:void(0)" style=" font-size:16px;color:#ff6600">所有省份</a>
                                     </div>
                                     #foreach($provice in $Provice)
-                                    <a href="Scenic/$provice.ItemId&#45;0-0-0-0-0-1.html">$provice.Name</a>
+                                    <a href="/Scenic/$provice.ItemId&#45;0-0-0-0-0-1.html">$provice.Name</a>
                                     #end
                                 </div>
                             </div>
@@ -279,7 +271,7 @@
                                 价格区间
                             </div>
                             <div class="left_menulable">
-                                <a href="Scenic/0-0-0-0-1-0-1.html">0-50元</a><a href="Scenic/0-0-0-0-2-0-1.html">50-100元</a><a href="Scenic/0-0-0-0-3-0-1.html">100-200元</a>
+                                <a href="/Scenic/0-0-0-0-1-0-1.html">0-50元</a><a href="/Scenic/0-0-0-0-2-0-1.html">50-100元</a><a href="/Scenic/0-0-0-0-3-0-1.html">100-200元</a>
                             </div>
                         </div>
                         <div class="jd_counetbox" style=" height:300px">
@@ -288,10 +280,10 @@
                                     <div class="leftMenuSearch">
                                         <a href="javascript:void(0)" style=" font-size:16px;color:#ff6600">价格区间</a>
                                     </div>
-                                    <a href="Scenic/0-0-0-0-1-0-1.html">0-50元</a>
-                                    <a href="Scenic/0-0-0-0-2-0-1.html">50-100元</a>
-                                    <a href="Scenic/0-0-0-0-3-0-1.html">100-200元</a>
-                                    <a href="Scenic/0-0-0-0-4-0-1.html">100-200元</a>
+                                    <a href="/Scenic/0-0-0-0-1-0-1.html">0-50元</a>
+                                    <a href="/Scenic/0-0-0-0-2-0-1.html">50-100元</a>
+                                    <a href="/Scenic/0-0-0-0-3-0-1.html">100-200元</a>
+                                    <a href="/Scenic/0-0-0-0-4-0-1.html">100-200元</a>
                                 </div>
                             </div>
                         </div>
