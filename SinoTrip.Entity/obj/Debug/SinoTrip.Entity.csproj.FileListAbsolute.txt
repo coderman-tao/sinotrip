@@ -6,3 +6,4 @@ C:\Users\coderman\Source\Repos\sinotrip\SinoTrip.Entity\bin\Debug\SinoTrip.Entit
 C:\Users\coderman\Source\Repos\sinotrip\SinoTrip.Entity\bin\Debug\SinoTrip.Entity.pdb
 C:\Users\coderman\Source\Repos\sinotrip\SinoTrip.Entity\obj\Debug\SinoTrip.Entity.dll
 C:\Users\coderman\Source\Repos\sinotrip\SinoTrip.Entity\obj\Debug\SinoTrip.Entity.pdb
+C:\Users\coderman\Source\Repos\sinotrip\SinoTrip.Entity\obj\Debug\SinoTrip.Entity.csprojResolveAssemblyReference.cache
