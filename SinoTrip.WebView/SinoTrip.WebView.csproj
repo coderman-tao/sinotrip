@@ -73,6 +73,7 @@
     <Content Include="App_Config\Search\PanGu.xml" />
     <Content Include="Data\Ctrip\gncs.xml" />
     <Content Include="Default.aspx" />
+    <Content Include="Global.asax" />
     <Content Include="head.aspx" />
     <Content Include="Hotel\Default.aspx" />
     <Content Include="Res\images\close.png" />
@@ -413,6 +414,9 @@
     </Compile>
     <Compile Include="Ajax\Scenery\GetInfo.ashx.cs">
       <DependentUpon>GetInfo.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="ReturnPage\API\uc.ashx.cs">
       <DependentUpon>uc.ashx</DependentUpon>

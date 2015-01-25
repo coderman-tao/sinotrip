@@ -303,7 +303,7 @@ namespace SinoTrip.DAL.Common
         public bool UpdateIntro(SinoTrip.Entity.DataBase.Common.common_scenery model)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("update common_scenery set ");
+            strSql.Append("update common_scenery set Status=0,");
             strSql.Append("Intro=@Intro,");
             strSql.Append("BuyNotie=@BuyNotie,");
             strSql.Append("Alias=@Alias,");
@@ -321,6 +321,20 @@ namespace SinoTrip.DAL.Common
             parameters[3].Value = model.Traffic;
             parameters[4].Value = model.ItemId;
             int rows = DALCore.GetSMDB().ExecuteSql(strSql.ToString(), parameters);
+            if (rows > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool UpdateOutSignStatus(int Sid)
+        {
+            string sql = "Update common_scenery_outsign Set Status=0 Where SceneryId=" + Sid;
+            int rows = DALCore.GetSMDB().ExecuteSql(sql);
             if (rows > 0)
             {
                 return true;
