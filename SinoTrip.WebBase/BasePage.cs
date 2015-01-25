@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Web.UI;
 using SinoTrip.FrameWork.Common;
+using SinoTrip.Core;
 
 namespace SinoTrip.WebBase
 {
@@ -34,24 +35,14 @@ namespace SinoTrip.WebBase
                     // var _s = Session;
                     qU = new PageUser();
                     qU.id = Session["uid"].ToInt32(0);
+                    LoggerCore.Debug(qU.id.ToString()+"---"+Session["username"]);
                     qU.username = Session["username"].ToStringEx(string.Empty);
                     qU.mobile = Session["mobile"].ToStringEx(string.Empty);
                     qU.email = Session["email"].ToStringEx(string.Empty);
-                    qU.sex = Session["sex"].ToInt32();
                     qU.avatar = Session["avatar"].ToStringEx(string.Empty);
                     qU.realname = Session["realname"].ToStringEx(string.Empty);
                     qU.nickname = Session["nickname"].ToStringEx(string.Empty);
-                    var _time = Session["lasttime"].ToStringEx(string.Empty);
-                    if (!string.IsNullOrEmpty(_time))
-                    {
-                        qU.lasttime = DateTime.Parse(Session["lasttime"].ToStringEx(string.Empty));
-                    }
   
-                }
-                if (qU.lasttime.AddMinutes(Session.Timeout) < DateTime.Now)
-                {
-                    Session["lasttime"] = DateTime.Now;
-                    return null;
                 }
 
                 return qU;

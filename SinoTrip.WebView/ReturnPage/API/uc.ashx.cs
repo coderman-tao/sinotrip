@@ -1,10 +1,12 @@
 ﻿using SinoTrip.API.Cartrip.Ucenter;
 using SinoTrip.API.Cartrip.Ucenter.Api;
 using SinoTrip.API.Cartrip.Ucenter.Client;
+using SinoTrip.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.SessionState;
 
 namespace SinoTrip.WebView.ReturnPage.API
 {
@@ -36,6 +38,7 @@ namespace SinoTrip.WebView.ReturnPage.API
                 UcUserInfo user = client.UserInfo(uid);
                 if (user.Success)
                 {
+                    LoggerCore.Debug(user.Uid + "--" + user.UserName);
                     context.Session["uid"] = user.Uid;
                     context.Session["username"] = user.UserName;
                     context.Session["email"] = user.Mail;
@@ -43,8 +46,9 @@ namespace SinoTrip.WebView.ReturnPage.API
                 }
                 return ApiReturn.Failed;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                LoggerCore.Debug("远程登录错误", ex);
                 return ApiReturn.Failed;
             }
         }
