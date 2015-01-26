@@ -251,6 +251,7 @@
     <Content Include="Skin\Default\images\index7.jpg" />
     <Content Include="Skin\Default\images\journey_icon.gif" />
     <Content Include="Skin\Default\images\left_menu.png" />
+    <Content Include="Skin\Default\images\loading.gif" />
     <Content Include="Skin\Default\images\logo.jpg" />
     <Content Include="Skin\Default\images\menu_login_button.jpg" />
     <Content Include="Skin\Default\images\mini_kf.png" />
