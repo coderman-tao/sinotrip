@@ -79,6 +79,7 @@ namespace SinoTrip.WebView.Scenic
             }
             finally
             {
+                
                 Vt.Display("Scenic/Item.html");
             }
 

@@ -14,7 +14,7 @@ namespace SinoTrip.WebView.Scenic
         protected void Page_Load(object sender, EventArgs e)
         {
             var citydata = AreaCache.GetCityCache(0, "", true, "");
-            Vt.Put("Citys", citydata.ToJson());
+            Vt.Put("Citys", citydata);
             Vt.Display("Scenic/City.html");
         }
     }
