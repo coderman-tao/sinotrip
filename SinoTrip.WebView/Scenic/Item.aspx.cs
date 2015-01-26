@@ -27,9 +27,11 @@ namespace SinoTrip.WebView.Scenic
                 string _outSign = Context.Request["outsign"];
                 if (id <= 0 && string.IsNullOrEmpty(_outSign))
                     Context.Response.Redirect("/");
-                var Info = new Biz.SceneryBiz().GetItem(id, _outSign,"");
+                var Info = new Biz.SceneryBiz().GetItem(id, _outSign, "");
+
                 if (Info != null)
                 {
+                    //GetSignleDP(Info.ItemId, _outSign.ToInt32(0));
                     id = Info.ItemId;
                     Info.BuyNotie = Info.BuyNotie.Replace("同程", "驾驴");
                     Info.Intro = Info.Intro.Replace("同程", "驾驴");
@@ -64,8 +66,8 @@ namespace SinoTrip.WebView.Scenic
                 else
                 {
 
-                    InsertOutScenery(_outSign);
-                    SceneryCache.SetSceneryCache();
+                    //InsertOutScenery(_outSign);
+                    //SceneryCache.SetSceneryCache();
                     LoggerCore.Error("库内无景点，请抓取来自同程的外部编号:" + _outSign);
                     //Update();
                 }
@@ -143,7 +145,7 @@ namespace SinoTrip.WebView.Scenic
         {
             //1、插入主库，Status存储外部标识
             var typeData = SceneryCache.GetTypeCache(0, "").OrderBy(item => item.OrderNo).ToList();
-            var ids = new SinoTrip.API.LY.Biz.ScenicBiz().DownLoadScenery(outsign.ToInt32(0), SceneryCache.GetSceneryCache(0, "", 0, 0, 0, "", "", ""), typeData);
+            var ids = new SinoTrip.API.LY.Biz.ScenicBiz().DownLoadScenery( SceneryCache.GetSceneryCache(0, "", 0, 0, 0, "", "", ""), typeData);
             var dal = new SinoTrip.DAL.Common.common_scenery();
 
             foreach (var item in ids)
@@ -315,6 +317,84 @@ namespace SinoTrip.WebView.Scenic
                     continue;
                 }
 
+            }
+        }
+
+        void GetSignleDP(int _id, int outsign)
+        {
+            try
+            {
+                var dal1 = new SinoTrip.DAL.Scenery.scenery_comment();
+                var dal2 = new SinoTrip.DAL.Scenery.scenery_comment_img();
+                string postUrl = "http://www.ly.com/Scenery/AjaxHelper/AjaxCall.aspx?action=GetDPList&sort=3&mon=0&type=0&sId=" + outsign + "&page=1&tagsulgId=0&isImg=0&sceneryType=20301&iid=0.7431465585250407&size=10";
+                HttpWebRequest request = HttpWebRequest.Create(postUrl) as HttpWebRequest;
+                request.Method = "Get";
+                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                using (var strem = response.GetResponseStream())
+                {
+                    StreamReader sr = new StreamReader(strem, Encoding.UTF8);
+                    string ret = sr.ReadToEnd();
+                    DPData ss = ret.JsonDeserialize<DPData>();
+                    sr.Close();
+                    List<SinoTrip.Entity.DataBase.Scenery.scenery_comment> models = new List<Entity.DataBase.Scenery.scenery_comment>();
+                    foreach (var item in ss.ShowList.DestinationCommentList)
+                    {
+                        var tempdata = Guid.NewGuid().ToString();
+                        var dptime = DateTime.Parse(item.DPTime).ToString("yyyy-MM-dd");
+                        if (dptime == DateTime.Now.ToString("yyyy-MM-dd"))
+                        {
+                            var m1 = new SinoTrip.Entity.DataBase.Scenery.scenery_comment()
+                            {
+                                SceneryId = _id,
+                                OutSign = outsign,
+                                Rank = DptypeToInt(item.DPType),
+                                DPTitle = item.DPTitle,
+                                Comment = item.DPContent,
+                                Uid = 0,
+                                UserName = item.DPUser,
+                                DPService = item.DPService,
+                                DPShiGouYu = item.DPShiGouYu,
+                                DPTraffic = item.DPTraffic,
+                                ServiceScore = item.ServiceScore,
+                                ServiceGrade = item.ServiceGrade,
+                                ConvenientScore = item.ConvenientScore,
+                                ConvenientGrade = item.ConvenientGrade,
+                                DiscountScore = item.DiscountScore,
+                                DiscountGrade = item.DiscountGrade,
+                                DPGanwu = item.DPGanWu,
+                                DPTime = DateTime.Parse(item.DPTime).ToUnixInt(),
+                                TempData = tempdata,
+                                Status = 0
+                            };
+                            models.Add(m1);
+                            if (item.PicList != null)
+                            {
+                                foreach (var pic in item.PicList)
+                                {
+                                    var m2 = new SinoTrip.Entity.DataBase.Scenery.scenery_comment_img()
+                                    {
+                                        TempData = tempdata,
+                                        ImgUrl = pic.WholePath
+                                    };
+                                    dal2.Add(m2);
+                                }
+                            }
+
+                        }
+                    }
+
+                    if (models.Count > 0)
+                    {
+                        dal1.BatchAdd(models);
+                    }
+                }
+                //Thread.Sleep(1000);
+
+
+            }
+            catch (Exception)
+            {
+                return;
             }
         }
 

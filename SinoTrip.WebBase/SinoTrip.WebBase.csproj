@@ -53,6 +53,7 @@
     <Compile Include="BasePage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="WebTask.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SinoTrip.API\SinoTrip.API.csproj">
@@ -66,6 +67,14 @@
     <ProjectReference Include="..\SinoTrip.Cache\SinoTrip.Cache.csproj">
       <Project>{76a7cef3-0cd5-4a61-8fce-c98175c764c3}</Project>
       <Name>SinoTrip.Cache</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SinoTrip.Core\SinoTrip.Core.csproj">
+      <Project>{bba7a3fb-22c2-460a-a82e-171bb98001e2}</Project>
+      <Name>SinoTrip.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SinoTrip.DAL\SinoTrip.DAL.csproj">
+      <Project>{c045ecf2-a06a-4f76-9910-f7b91c6c5385}</Project>
+      <Name>SinoTrip.DAL</Name>
     </ProjectReference>
     <ProjectReference Include="..\SinoTrip.Entity\SinoTrip.Entity.csproj">
       <Project>{e232716f-efa0-4dfc-a2dc-e4a340691b8f}</Project>
