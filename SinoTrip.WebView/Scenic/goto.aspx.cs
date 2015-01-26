@@ -14,15 +14,22 @@ namespace SinoTrip.WebView.Scenic
         {
             var supply = Context.Request["supply"].ToInt32(0);
             var sid = Context.Request["sid"].ToInt32(0);
-            var tid = Context.Request["tid"];
-            if (sid <= 0 || string.IsNullOrEmpty(tid))
+            var tid = Context.Request["tid"].ToStringEx("");
+            var method = Context.Request["method"].ToStringEx("");
+            if (sid <= 0 || supply <= 0)
             {
                 Context.Response.Redirect("/");
                 return;
             }
+
             if (supply == 2)
             {
-                Context.Response.Redirect("http://www.ly.com/scenery/sceneryydorder.aspx?sceneryId=" + sid + "&ticketId=" + tid + "&refid=39610880");
+                var url = "http://www.ly.com/scenery/sceneryydorder.aspx?sceneryId=" + sid + "&ticketId=" + tid + "&refid=39610880";
+                if (string.IsNullOrEmpty(tid))
+                {
+                    url = "http://www.ly.com/scenery/SceneryTickets.aspx?sceneryid=" + sid + "&refid=39610880";
+                }
+                Context.Response.Redirect(url);
                 //http://www.ly.com/scenery/sceneryydorder.aspx?sceneryId=00000&ticketId=00000&refid=0000
             }
         }

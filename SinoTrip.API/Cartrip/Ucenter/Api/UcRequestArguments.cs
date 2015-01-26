@@ -1,3 +1,4 @@
+using SinoTrip.Core;
 using System.Collections.Specialized;
 using System.Text;
 using System.Web;
@@ -49,10 +50,12 @@ namespace SinoTrip.API.Cartrip.Ucenter.Api
         /// <param name="request">Request</param>
         public UcRequestArguments(HttpRequest request)
         {
-            Code = request.QueryString["code"];
+            Code = request.QueryString["code"].Replace(' ', '+');
+            LoggerCore.Debug(request.Url.ToString());
             FormData = HttpUtility.UrlDecode(request.Form.ToString(), Encoding.GetEncoding(UcConfig.UcCharset));
             QueryString = HttpUtility.ParseQueryString(UcUtility.AuthCodeDecode(Code));
             Action = QueryString["action"];
+            LoggerCore.Debug(request.Url.ToString() + "/Action" + Action + "Öµ£º" + QueryString);
             long time;
             if (long.TryParse(QueryString["time"], out time)) Time = time;
             IsInvalidRequest = request.QueryString.Count == 0 && UcActions.Contains(Action);

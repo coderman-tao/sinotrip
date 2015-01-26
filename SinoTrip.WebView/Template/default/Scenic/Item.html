@@ -120,6 +120,7 @@
                             </ul>
                         </div>
                         <div id="priceBox_$!Info.OutSign" class="s_tab">
+                            #if($Price.policy.Policys.Count>0)
                             #foreach($item in $Price.policy.Policys)
                             <div style="border-bottom: 1px #ddd dashed;">
                                 <div id="price_$!Price.sceneryId_$!item.policyId">
@@ -131,6 +132,23 @@
                                             </span>
                                             <span class="operate" style="height:23px;line-height:23px;width:160px">
                                                 <a class="bookbtn" target="_blank" href="/Scenic/goto.aspx?supply=2&sid=$Info.OutSign&tid=$item.policyId">预订</a>
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            #end
+                            #else
+                            <div style="border-bottom: 1px #ddd dashed;">
+                                <div id="price_$!Info.OutSign_0">
+                                    <ul class="tab_nav tab_navHover" style="height:35px;">
+                                        <li class="name_li">[-]<a href="javascript:void(0)" style="color:#005bb5">通用票</a></li>
+                                        <li class="listBt_box">
+                                            <span class="msprice">¥暂无</span><span class="tcprice"><span class="b-orange">¥0</span></span><span class="payment">
+                                                <span class="a-tip">景区现付</span>
+                                            </span>
+                                            <span class="operate" style="height:23px;line-height:23px;width:160px">
+                                                <a class="bookbtn" target="_blank" href="/Scenic/goto.aspx?supply=2&sid=$Info.OutSign">前往</a>
                                             </span>
                                         </li>
                                     </ul>

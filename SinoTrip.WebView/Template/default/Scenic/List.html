@@ -132,7 +132,6 @@
                         <a class="#if($grade==1)current#end" href="$provice&#45;$city&#45;$county&#45;$type&#45;$price&#45;1&#45;1&#46;html">A</a>
                     </div>
                 </div>
-
                 <div class="thisbox">
                     <div class="tourlist" id="product_tourlist">
                         #foreach($sitem in $Scenery.Scenerys)
@@ -269,6 +268,7 @@
         }
     });
     var url = "/AJAX/Scenery/GetInfo.ashx?method=GetPrice&ids=" + ids;
+    var nids = "";
     jQuery.ajax({
         url: url,
         traditional: true,
@@ -297,12 +297,54 @@
                             $("#priceBox_" + json.scenery[i].sceneryId).append(html);
                         }
                     }
+                    else {
+                        //var _url = "http://www.ly.com/scenery/AjaxHelper/SceneryPriceFrame.aspx?action=GETJSONSPNEWFORLAST&ids=" + json.scenery[i].sceneryId + "&isSimple=1&isShowAppThree=0&widthtype=1&isGrap=1&IsSelfScenery=1&nobookid=&isyry=1&YpState=1&iid=0.5907752618659288";
+                        //jQuery.ajax({
+                        //    url: "/AJAX/Scenery/GetInfo.ashx?method=GetTCRemotePrice",
+                        //    type: "Post",
+                        //    data: { outsign: json.scenery[i].sceneryId },
+                        //    success: function (responsetc) {
+                        //        var tcjson = responsetc.toJson();
+                        //        if (!!tcjson) {
+                        //            if (!!tcjson.SceneryPrices) {
+                        //                for (var i = 0; i < tcjson.SceneryPrices.length; i++) {
+                        //                    var item = tcjson.SceneryPrices[i];
+                        //                    var ps = item.ChannelPriceSearchLayerTypeEntityList;
+                        //                    for (var j = 0; j < ps.ChannelPriceModelEntityList.length; j++) {
+                        //                        var typeName = GetModelName(ps.ChannelPriceModelEntityList.ChannelId);
+                        //                        for (var k = 0; k < ps.ChannelPriceModelEntityList[j].ChannelPriceModelEntityList.length; k++) {
+                        //                            var pitem = ps.ChannelPriceModelEntityList[j].ChannelPriceModelEntityList[k];
+                        //                            var html = ' <div style="border-bottom: 1px #ddd dashed;"><div id="price_' + json.scenery[i].sceneryId + '_' + _price.Policys[j].policyId + '"><ul class="tab_nav tab_navHover" style="height:35px;">';
+                        //                            var html1 = '<div class="divReamrk_box" id="remark_' + json.scenery[i].sceneryId + '_' + _price.Policys[j].policyId + '">';
+                        //                            html += '<li class="name_li">[' + _price.Policys[j].ticketName.InnerXml + ']<a onclick="showDetail(' + json.scenery[i].sceneryId + ',' + _price.Policys[j].policyId + ')" href="javascript:void(0)" style="color:#005bb5">' + _price.Policys[j].policyName.InnerXml + '</a></li>' +
+                        //                            '<li class="listBt_box">' +
+                        //                            '<span class="msprice">¥' + _price.Policys[j].price + '</span>' +
+                        //                            '<span class="tcprice"><span class="b-orange">¥' + _price.Policys[j].tcPrice + '</span></span>' +
+                        //                            '<span class="payment"><span class="a-tip">' + GetModelName(_price.Policys[j].pMode) + '</span></span>' +
+                        //                            '<span class="operate" style="height:23px;line-height:23px;"><a class="bookbtn" target="_blank" href="/Scenic/goto.aspx?supply=2&sid=' + json.scenery[i].sceneryId + '&tid=' + _price.Policys[j].policyId + '">预订</a></span>' +
+                        //                            '</li>';
+                        //                            html1 += ' <b>包含项目：</b>' + _price.Policys[j].containItems + '<br /><b>预订说明：</b>' + _price.Policys[j].remark.InnerXml + '</div>';
+                        //                            html += "</ul></div>" + html1 + "</div>";
 
+                        //                            $("#priceBox_" + json.scenery[i].sceneryId).append(html);
+                        //                        }
+                        //                    }
+                        //                }
+                        //            }
+                        //        }
+                        //    }
+                        //});
+                    }
                 }
             }
+            if (nids != "") {
+                alert(nids);
+            }
+
         }
 
     });
+
     function GetModelName(paymode) {
         if (paymode == 0)
             return "景区现付";
