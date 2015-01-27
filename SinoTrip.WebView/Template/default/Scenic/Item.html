@@ -3,7 +3,7 @@
 <head>
     <title>$!Info.Name门票预定_$!Info.Name门票价格_$!Info.Name游客点评_$!Info.Name交通信息_景点百科_驾驴旅游网</title>
     <meta name='keywords' content='$!Info.Name门票、$!Info.Name门票价格、$!Info.Name点评、$!Info.Name交通、$!Info.Name百科、$!Info.Name' />
-    <meta name='description' content='$!Info.Name怎么玩?$!Info.Name门票怎么预订？$!Info.Name景点百科。驾驴旅游网提供$!Info.Name特价门票预订，无需在线支付，解除您一切后顾之忧。' />
+    <meta name='description' content='$!Info.Name怎么玩?$!Info.Name好玩吗?$!Info.Name门票怎么预订？$!Info.Name景点百科。驾驴旅游网提供$!Info.Name特价门票预订，无需在线支付，解除您一切后顾之忧。' />
     #include("pageHeadCode.htm")
     <link href="/Skin/default/style/sceneryitem.css" rel="stylesheet" type="text/css" />
     <style type="text/css">
@@ -120,6 +120,7 @@
                             </ul>
                         </div>
                         <div id="priceBox_$!Info.OutSign" class="s_tab">
+                            #if($Price.policy.Policys.Count>0)
                             #foreach($item in $Price.policy.Policys)
                             <div style="border-bottom: 1px #ddd dashed;">
                                 <div id="price_$!Price.sceneryId_$!item.policyId">
@@ -130,7 +131,24 @@
                                                 <span class="a-tip">#if($!item.pMode==0)景区现付 #elseif($!item.pMode==1)在线支付 #else 其它支付 #end</span>
                                             </span>
                                             <span class="operate" style="height:23px;line-height:23px;width:160px">
-                                                <a class="bookbtn" target="_blank" href="/Scenic/goto.aspx?supply=2&sid=$Info.OutSign&tid=$item.policyId">预订</a>
+                                                <a class="bookbtn" target="_blank" href="/Scenic/goto.aspx?supply=2&sid=$Info.OutSign&tid=$item.policyId" rel="external nofollow">预订</a>
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            #end
+                            #else
+                            <div style="border-bottom: 1px #ddd dashed;">
+                                <div id="price_$!Info.OutSign_0">
+                                    <ul class="tab_nav tab_navHover" style="height:35px;">
+                                        <li class="name_li">[-]<a href="javascript:void(0)" style="color:#005bb5">通用票</a></li>
+                                        <li class="listBt_box">
+                                            <span class="msprice">¥暂无</span><span class="tcprice"><span class="b-orange">¥0</span></span><span class="payment">
+                                                <span class="a-tip">景区现付</span>
+                                            </span>
+                                            <span class="operate" style="height:23px;line-height:23px;width:160px">
+                                                <a class="bookbtn" target="_blank" href="/Scenic/goto.aspx?supply=2&sid=$Info.OutSign" rel="external nofollow">前往</a>
                                             </span>
                                         </li>
                                     </ul>
@@ -167,7 +185,8 @@
                     </div>
                     <div class="thisbox" id="dpbox">
                         <div style=" padding:10px; line-height:20px">
-                            <h2 style=" line-height:35px; font-family:微软雅黑; color:#ff6600">游客点评</h2>
+                            <h2 style=" line-height:35px; font-family:微软雅黑; color:#ff6600">游客点评<a target="_blank" style="float:right;font-size:12px;color:#f60; padding-right:5px;" href="/Scenic/Dp/$!Info.ItemId&#45;$!Info.OutSign&#45;1.html">更多点评>></a></h2>
+                            
                         </div>
                         <div id="comment_list">
                         </div>
@@ -189,7 +208,7 @@
                 </div>
             </div>
             <!--右-->
-            <div style="width: 300px; float: right;" id="right_box">
+            <div style="width: 302px; float: right;" id="right_box">
                 <div style="background-color: #f7f7f7;" class="thisbox">
                     <div style="padding: 10px 15px 10px 15px">
                         <div class="minbox">

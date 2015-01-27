@@ -70,6 +70,7 @@ namespace SinoTrip.Core
             //        strSql.Append(" DESC");
             //}
             //strSql.Append(")AS Row, T.*  from (");
+            page = page == 1 ? page = 0 : page;
             strSql.AppendFormat(" LIMIT {0},{1}", page, size);
             //strSql.Append(")T ) TT");
             //strSql.AppendFormat(" WHERE TT.Row> {0} and  TT.Row<={1}", start, start + limit);

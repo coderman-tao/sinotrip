@@ -4,6 +4,9 @@ using System.Linq;
 using System.Web;
 using SinoTrip.FrameWork.Common;
 using SinoTrip.API.LY.Model;
+using System.Net;
+using System.IO;
+using System.Text;
 namespace SinoTrip.WebView.Ajax.Scenery
 {
     /// <summary>
@@ -31,6 +34,9 @@ namespace SinoTrip.WebView.Ajax.Scenery
                     break;
                 case "GetNearBy":
                     GetNearBy(context);
+                    break;
+                case "GetTCRemotePrice":
+                    GetTCRemotePrice(context);
                     break;
             }
         }
@@ -97,6 +103,24 @@ namespace SinoTrip.WebView.Ajax.Scenery
             int pageSize = context.Request["pageSize"].ToInt32(0);
             var model = new SinoTrip.API.LY.Biz.ScenicBiz().GetNearbyScenery(id, page, pageSize);
             context.Response.Write(model.ToJson());
+        }
+
+        void GetTCRemotePrice(HttpContext context)
+        {
+            var id = context.Request["outsign"];
+            var url = "http://www.ly.com/scenery/AjaxHelper/SceneryPriceFrame.aspx?action=GETJSONSPNEWFORLAST&ids=" + id + "&isSimple=1&isShowAppThree=0&widthtype=1&isGrap=1&IsSelfScenery=1&nobookid=&isyry=1&YpState=1&iid=0.5907752618659288";
+
+            HttpWebRequest request = HttpWebRequest.Create(url) as HttpWebRequest;
+            request.Method = "Get";
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            using (var strem = response.GetResponseStream())
+            {
+                StreamReader sr = new StreamReader(strem, Encoding.UTF8);
+                string ret = sr.ReadToEnd();
+                context.Response.Write(ret);
+                sr.Close();
+                sr.Dispose();
+            }
         }
         public bool IsReusable
         {

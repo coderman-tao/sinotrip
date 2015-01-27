@@ -1,0 +1,293 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>$!Info.Name怎么样?_$!Info.Name好玩吗?_$!Info.Name游客点评_景点百科_驾驴旅游网</title>
+    <meta name='keywords' content='$!Info.Name门票、$!Info.Name门票价格、$!Info.Name点评、$!Info.Name交通、$!Info.Name百科、$!Info.Name' />
+    <meta name='description' content='$!Info.Name怎么玩?$!Info.Name好玩吗?$!Info.Name门票怎么预订？$!Info.Name景点百科。驾驴旅游网提供$!Info.Name特价门票预订，无需在线支付，解除您一切后顾之忧。' />
+    #include("pageHeadCode.htm")
+    <link href="/Skin/default/style/sceneryitem.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        .hotellist a {
+            -moz-user-select: none;
+            display: inline-block;
+            margin-top: 10px;
+            border-bottom: 1px dashed #999;
+        }
+
+            .hotellist a:hover {
+                background-color: #fff4d9;
+            }
+
+            .hotellist a span {
+                -moz-user-select: none;
+                display: inline-block;
+            }
+
+                .hotellist a span.hotelname {
+                    width: 280px;
+                    height: 30px;
+                    line-height: 30px;
+                    padding-top: 5px;
+                    overflow: hidden;
+                    font-family: 微软雅黑;
+                }
+    </style>
+</head>
+<body>
+    #parse("pageHead.htm")
+
+    <div class="pagebox">
+        <div class="pageWay">
+            您的位置：<a href="/" title="驾驴旅游网门票预定">首页</a> > <a href="/Scenic/Item0-$!Info.OutSign&#46;html" title="$!Info.Name景区门票">$!Info.Name景区门票</a> > <span title="$!Info.Name景区点评">$!Info.Name景区点评</span>
+        </div>
+    </div>
+    <div class="pagebox">
+        <div style="overflow: hidden; position: relative;">
+            <div style="width: 880px; overflow: hidden; float: left">
+                <div class="thisbox" id="dpbox">
+                    <div style=" padding:10px; line-height:20px">
+                        <h2 style=" line-height:35px; font-family:微软雅黑; color:#ff6600">$!Info.Name游客点评($total条)</h2>
+                    </div>
+                    <div id="comment_list">
+                        <script type="text/javascript">
+                            /*878*120 创建于 2015-01-27*/
+                            var cpro_id = "u1925983";
+                        </script>
+                        <script src="http://cpro.baidustatic.com/cpro/ui/c.js" type="text/javascript"></script>
+                        #foreach($c in $Comments)
+                        #set ($rank = "好评")
+                        #if ($c.Rank == 2)
+                        #set ($rank = "中评")
+                        #elseif ($c.Rank == 3)
+                        #set ($rank = "差评")
+                        #end
+                        <div class="comment">
+                            <div class="comment_left">
+                                <div><span>$c.UserName</span></div>
+                                <div style="padding-top:5px"><span style="color:red; font-weight:bold">$rank</span></div>
+                                <div style="padding-top:5px">$tool.UnixFormat($c.DPTime,"yyyy-MM-dd")</div>
+                            </div>
+                            <div class="comment_right">
+                                服务：<span>$c.ServiceGrade</span>&nbsp;&nbsp;&nbsp;&nbsp;便捷：<span>$c.DPTraffic</span>&nbsp;&nbsp;&nbsp;&nbsp;食购娱：<span>$c.DPShiGouYu</span>&nbsp;&nbsp;&nbsp;&nbsp;优惠：<span>$c.DiscountGrade</span>&nbsp;&nbsp;&nbsp;&nbsp;<br />
+                                <div class="commenttitle">$c.DPTitle</div>
+                                <div class="commentcontent">$c.Comment</div>
+                                <div class="commentGanwu"><span>旅行感悟：</span>$c.DPGanwu</div>
+                            </div>
+                        </div>
+                        #end
+                    </div>
+                    <div id="pageList" class="pageList">
+                        $tool.getPageList("<a class='{0}' href='/Scenic/Dp/$!Info.ItemId&#45;$!Info.OutSign&#45;{1}&#46;html'>{2}</a>","current",6,$page,10,$total)
+                    </div>
+                </div>
+            </div>
+            <!--右-->
+            <div style="width: 302px; float: right;" id="right_box">
+                <div style="background-color: #f7f7f7;" class="thisbox">
+                    <div style="padding: 10px 15px 10px 15px">
+                        <div class="minbox">
+                            <div class="minboxtitle">
+                                <span class="iconStr">理</span><span class="title"><h2>选择驾驴的理由</h2></span>
+                            </div>
+                            <div class="boxcontent">
+                                <div class="contentlist" style="line-height:40px">
+                                    <h3 style="color:#ff6600; font-weight:400">1、20000余种景点门票供您挑选</h3>
+                                    <h3 style="color:#ff6600; font-weight:400">
+                                        2、超过1050万游客的真是点评
+                                    </h3>
+                                    <h3 style="color:#ff6600; font-weight:400">
+                                        3、完美的游记攻略助你出游更加方便
+                                    </h3>
+                                    <h3 style="color:#ff6600; font-weight:400">
+                                        4、自助游，深度游一站解决
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="background-color: #f7f7f7;" class="thisbox">
+                    <script type="text/javascript">
+                        /*300*250，创建于2013-4-2*/
+                        var cpro_id = "u1251136";
+                    </script>
+                    <script src="http://cpro.baidustatic.com/cpro/ui/c.js" type="text/javascript"></script>
+                </div>
+                <div style="background-color: #f7f7f7;" class="thisbox" id="nearbyBox">
+                    <div style="padding:5px">
+                        <div class="minbox">
+                            <div class="minboxtitle">
+                                <span class="iconStr">Near</span><span class="title"><h2>周边景点</h2></span>
+                            </div>
+                            <div class="boxcontent" id="zbjd_list">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        //GetCommentList(0);
+        function GetCommentList(page) {
+            jQuery.ajax({
+                url: "/AJAX/Scenery/GetInfo.ashx?method=GetComment&page=" + page + "&pageSize=20&id=$!Info.ItemId",
+                traditional: true,
+                type: "POST",
+                success: function (response) {
+                    jQuery.XloadHide();
+                    var json = response.toJson();
+                    if (json.length > 0) {
+                        $("#dp_count").html(json[0].Total);
+                        var pageCount = Math.round(json[0].Total / 6) + 1;
+                        var pageHtml = "";
+                        var currentHtml = '<a class="current" href="javascript:void(0)" onclick=" GetCommentList(' + page + ') ">' + (page + 1) + '</a>';
+                        if (page >= 8) {
+                            if ((page + 1) < pageCount) {
+                                pageHtml += '<a href="javascript:void(0)" onclick=" GetCommentList(0) ">1</a>......';
+                                pageHtml += '<a href="javascript:void(0)" onclick=" GetCommentList(' + (page - 2) + ') ">' + (page - 2) + '</a>';
+                                pageHtml += '<a href="javascript:void(0)" onclick=" GetCommentList(' + (page - 1) + ') ">' + (page - 1) + '</a>';
+                                pageHtml += '<a href="javascript:void(0)" onclick=" GetCommentList(' + page + ') ">' + page + '</a>';
+                                pageHtml += currentHtml;
+                                pageHtml += '<a href="javascript:void(0)" onclick=" GetCommentList(' + (page + 2) + ') ">' + (page + 2) + '</a>';
+                                pageHtml += '<a href="javascript:void(0)" onclick="GetCommentList(' + (page + 3) + ') ">' + (page + 3) + '</a>';
+                                pageHtml += '<a href="javascript:void(0)" onclick=" GetCommentList(' + (page + 4) + ')">' + (page + 4) + '</a>';
+                                pageHtml = pageHtml + '......' + '<a href="javascript:void(0)" onclick="GetCommentList(' + (pageCount - 1) + ')">' + pageCount + '</a>';
+                            }
+                            else {
+                                pageHtml += '<a href="javascript:void(0)" onclick=" GetCommentList(0) ">1</a>......';
+                                for (var i = 9; i > 0; i--) {
+                                    pageHtml += '<a href="javascript:void(0)" onclick=" GetCommentList(' + (pageCount - i) + ') ">' + (pageCount - i) + '</a>';
+                                }
+                                pageHtml += currentHtml;
+                            }
+                        }
+                        if (page < 8) {
+                            if (pageCount < 9) {
+                                for (var i = 0; i < pageCount; i++) {
+                                    if (i == page) {
+                                        pageHtml += currentHtml;
+                                        continue;
+                                    }
+                                    pageHtml += '<a href="javascript:void(0)" onclick=" GetCommentList(' + i + ') ">' + (i + 1) + '</a>';
+                                }
+                            }
+                            else {
+                                for (var i = 0; i < 9; i++) {
+                                    if (i == page) {
+                                        pageHtml += currentHtml;
+                                        continue;
+                                    }
+                                    pageHtml += '<a href="javascript:void(0)" onclick=" GetCommentList(' + i + ') ">' + (i + 1) + '</a>';
+                                }
+                                if (pageCount > (page + 1)) {
+                                    pageHtml = pageHtml + '......' + '<a href="javascript:void(0)" onclick="GetCommentList(' + (pageCount - 1) + ')">' + pageCount + '</a>';
+                                }
+                            }
+                        }
+                        $("#pageList").html(pageHtml);
+                    }
+                    $("#comment_list").html("");
+                    for (var i = 0; i < json.length; i++) {
+                        var item = json[i];
+                        var rank = "好评";
+                        if (item.Rank == 2)
+                            rank = "中评";
+                        if (item.Rank == 3)
+                            rank = "差评";
+                        if (item.DPGanwu.length == 0) {
+                            item.DPGanwu = '真的很不错';
+                        }
+                        var html = '<div class="comment"><div class="comment_left">' +
+                                        '<div><span>游客' + item.UserName + '</span></div>' +
+                        '<div style="padding-top:5px"><span style="color:red; font-weight:bold">' + rank + '</span></div>' +
+                        '<div style="padding-top:5px">' + dateFormat("Y-m-d", item.DPTime) + '</div></div>' +
+                        '<div class="comment_right">服务：<span>' + item.ServiceGrade + '</span>&nbsp;&nbsp;&nbsp;&nbsp;' +
+                        '便捷：<span>' + item.DPTraffic + '</span>&nbsp;&nbsp;&nbsp;&nbsp;' +
+                         '食购娱：<span>' + item.DPShiGouYu + '</span>&nbsp;&nbsp;&nbsp;&nbsp;' +
+                        '优惠：<span>' + item.DiscountGrade + '</span>&nbsp;&nbsp;&nbsp;&nbsp;<br />' +
+                        '<div class="commenttitle">' + item.DPTitle + '</div>' +
+                        '<div class="commentcontent">' + item.Comment + '</div>' +
+                        ' <div class="commentGanwu"><span>旅行感悟：</span>' + item.DPGanwu + '</div>' +
+                         '</div></div>';
+                        $("#comment_list").append(html);
+                    }
+                }
+
+            });
+        }
+        jQuery.ajax({
+            url: "/AJAX/Hotel/GetHotel.ashx?method=List&page=1&pagesize=9&lat=$Info.Lat&lng=$Info.Lng",
+            traditional: true,
+            type: "POST",
+            success: function (response) {
+                jQuery.XloadHide();
+                var json = response.toJson();
+                //http://hotel.cartrip.cc/hotelinfo/117983/
+                for (var i = 0; i < json.reqdata.length; i++) {
+                    var item = json.reqdata[i];
+                    if (parseInt(item.min_jiage) == 0) {
+                        item.min_jiage = '今日无房';
+                    }
+                    else {
+                        item.min_jiage = "¥" + item.min_jiage
+                    }
+                    var html = '<div style="overflow:hidden;width:280px;float:left;padding:5px">' +
+                            '<a href="http://hotel.cartrip.cc/hotelinfo/' + item.ID + '/" target="_blank" title="在线预订' + item.HotelName + '">' +
+                            '<img alt="' + item.HotelName + '" height="180px" width="280px" src="' + item.Picture + '" />' +
+                            '<span class="hotelname">' + item.HotelName + '<span style="float:right;padding-right:30px;font-size:16px;" title="' + item.content + '" class="price">' +
+                               item.min_jiage + '</span></a></div>';
+                    $("#hotelbox").append(html);
+                }
+            }
+
+        });
+
+        jQuery.ajax({
+            url: "/AJAX/Scenery/GetInfo.ashx?method=GetYJ&tag=$!Info.CityName",
+            type: "POST",
+            success: function (response) {
+                jQuery.XloadHide();
+                var json = response.toJson();
+                var html = "";
+                for (var i = 0; i < json.length; i++) {
+                    html += '<a href="http://www.cartrip.cc/thread-' + json[i].tid + '-1-1.html" target="_blank"><div style="padding:10px; font-size:13px;color:#ff6600;border-bottom:1px #ddd dashed">' + json[i].subject +
+                    ' <i style="float:right;padding-right:10px;font-size:12px;">' + json[i].author + '发表于:' + dateFormat("Y-m-d", json[i].dateline) + '</i></div></a>';
+                }
+                $("#YJ_List").html(html);
+            }
+
+        });
+        jQuery.ajax({
+            url: "/AJAX/Scenery/GetInfo.ashx?method=GetNearBy&SceneryId=$!Info.OutSign&page=0&pageSize=5",
+            type: "POST",
+            success: function (response) {
+                jQuery.XloadHide();
+                var json = response.toJson();
+                if (!!json && !!json.Items) {
+                    var html = "";
+                    for (var i = 0; i < json.Items.length; i++) {
+                        var item = json.Items[i];
+                        html += '<div class="contentlist"><div class="imgbox">' +
+                               '<a href="Item0-' + item.id + '.html" title="' + item.adress.InnerXml + '" target="_blank">' +
+                                '<img alt="' + item.name + '" src="http://upload.17u.com/uploadfile/' + item.imgpath.InnerXml + '" width="270px" height="165px" /></a></div>' +
+                               '<div class="namenote">' +
+                                '<a style="overflow:hidden" class="namebox" href="Item0-' + item.id + '.html" title="' + item.name + '" target="_blank">' +
+                               '<span class="productname">' + item.name + '</span>￥' + item.amountAdvice + '起</a></div></div>';
+                    }
+                    $("#zbjd_list").html(html);
+                }
+            }
+
+        });
+    </script>
+    #parse("pageFoot.htm")
+
+</body>
+</html>
+<script type="text/javascript">
+    /*120*270 创建于 2015-01-27*/
+    var cpro_id = "u1925972";
+</script>
+<script src="http://cpro.baidustatic.com/cpro/ui/f.js" type="text/javascript"></script>
+

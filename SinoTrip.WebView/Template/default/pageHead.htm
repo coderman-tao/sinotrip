@@ -104,48 +104,11 @@
 </div>
 <div class="page_top_title">
     <div class="pagebox" id="page_member_login">
-        #if ($QU.id>0)
-        <div class="pagebox">
-            <div style="width: 105px; padding-left: 10px; float: left">
-                <a href="http://www.cartrip.cc"> 驾驴旅游网</a>
-            </div>
-            <div style="width: 300px; padding-left: 10px; float: left">
-                <span>您好<span style="color: Red">$!QU.username </span>，欢迎光临驾驴旅游网 </span>
-            </div>
-            <div style="width: 200px; padding-left: 10px; float: right">
-                <span> <a href="http://www.cartrip.cc" onclick="window.external.addFavorite(this.href,this.title);return false;" title="驾驴旅游网-最专业的自驾游向导" rel="sidebar">收藏我们</a></span> <span class="titleicon line">
-                    <a href="http://www.cartrip.cc/misc.php?mod=faq&action=faq&id=1&messageid=2">关于我们</a>
-                </span>
-            </div>
-            <div style="width: 200px; padding-left: 10px; float: right;">
-                <span class="titleicon line"><a href="http://www.cartrip.cc/home.php?mod=space&do=notice&type=post&isread=1">消息 </a></span><span class="titleicon myqm">
-                    <a href="http://www.cartrip.cc/home.php?mod=space&uid=$QU.id&do=profile&from=space">个人中心 </a>
-                    <a href="http://www.cartrip.cc/home.php?mod=space&uid=$QU.id&do=thread&view=me&from=space" title="我的游记">我的游记</a>
-                </span>
-            </div>
-        </div>
-        #else
-        <div class="pagebox">
+        <div class="pagebox" id="UserLoginBox">
             <div style="width: 105px; padding-left: 10px; float: left">
                 <a href="http://www.cartrip.cc">驾驴旅游网</a>
             </div>
-            <div style="width: 300px; padding-left: 10px; float: left">
-                <span>您好，欢迎光临驾驴旅游网</span>
-            </div>
-            <div style="width: 200px; padding-left: 10px; float: right">
-                <span>
-                    <a href="http://www.cartrip.cc" onclick="window.external.addFavorite(this.href,this.title);return false;" title="驾驴旅游网-最专业的自驾游向导" rel="sidebar">收藏我们</a>
-                </span> <span class="titleicon line">
-                    <a href="http://www.cartrip.cc/misc.php?mod=faq&action=faq&id=1&messageid=2">关于我们</a>
-                </span>
-            </div>
-            <div style="width: 100px; padding-left: 10px; float: right;">
-                <span><a href="http://www.cartrip.cc/member.php?mod=register">注册</a></span> <span class="titleicon line">
-                    <a href="http://www.cartrip.cc/member.php?mod=logging&action=login">登录</a>
-                </span>
-            </div>
         </div>
-        #end
 
     </div>
 </div>
@@ -173,7 +136,6 @@
         <div class="page_400box" style="line-height:95px; font-size:16px; display:$MeunBox">
             <a href="javascript:void(0)" class="selectProvice" id="select_area" style="">$areaName</a>
         </div>
-
     </div>
 </div>
 <div class="page_nav_box_1">
@@ -327,5 +289,37 @@
     });
     $("#select_area").bind("click",function(){
         $("#s_area_Box").Xwindow({ title: '区域选择' });
+    });
+    jQuery.ajax({
+        url: "/AJAX/User/Login.aspx?method=GetLogin",
+        type: "POST",
+        success: function (response) {
+            jQuery.XloadHide();
+            var json = response.toJson();
+            if(json.id>0)
+            {
+                $("#UserLoginBox").append('<div style="width: 300px; padding-left: 10px; float: left">'+
+                '<span>您好<span style="color: Red">'+json.username+' </span>，欢迎光临驾驴旅游网 </span></div>'+
+            '<div style="width: 200px; padding-left: 10px; float: right">'+
+                '<span> <a href="http://www.cartrip.cc" onclick="window.external.addFavorite(this.href,this.title);return false;" title="驾驴旅游网-最专业的自驾游向导" rel="sidebar">收藏我们</a></span> <span class="titleicon line">'+
+                    '<a href="http://www.cartrip.cc/misc.php?mod=faq&action=faq&id=1&messageid=2">关于我们</a></span></div>'+
+            '<div style="width: 200px; padding-left: 10px; float: right;">'+
+                '<span class="titleicon line"><a href="http://www.cartrip.cc/home.php?mod=space&do=notice&type=post&isread=1">消息 </a></span><span class="titleicon myqm">'+
+                    '<a href="http://www.cartrip.cc/home.php?mod=space&uid='+json.id+'&do=profile&from=space">个人中心 </a>'+
+                    '<a href="http://www.cartrip.cc/home.php?mod=space&uid='+json.id+'&do=thread&view=me&from=space" title="我的游记">我的游记</a></span></div>');
+            }
+            else
+            {
+                $("#UserLoginBox").append('<div style="width: 300px; padding-left: 10px; float: left">'+
+                '<span>您好，欢迎光临驾驴旅游网</span></div>'+
+            '<div style="width: 200px; padding-left: 10px; float: right"><span>'+
+                    '<a href="http://www.cartrip.cc" onclick="window.external.addFavorite(this.href,this.title);return false;" title="驾驴旅游网-最专业的自驾游向导" rel="sidebar">收藏我们</a>'+
+                '</span> <span class="titleicon line"><a href="http://www.cartrip.cc/misc.php?mod=faq&action=faq&id=1&messageid=2">关于我们</a></span>'+
+            '</div><div style="width: 100px; padding-left: 10px; float: right;">'+
+                '<span><a href="http://www.cartrip.cc/member.php?mod=register">注册</a></span> <span class="titleicon line">'+
+                    '<a href="http://www.cartrip.cc/member.php?mod=logging&action=login">登录</a></span></div>');
+            }
+        }
+
     });
 </script>

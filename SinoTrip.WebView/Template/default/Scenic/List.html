@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>$!araename$!cityname$!countyname景区门票预订_$!araename$!cityname$!countyname旅游景点大全_景点门票_驾驴旅游网</title>
-    <meta name='keywords' content='旅游景点大全,景点百科,$!araename$!cityname$!countyname景区门票预订,景点门票' />
+    <meta name='keywords' content='$!araename$!cityname$!countyname旅游景点大全,景点百科,$!araename$!cityname$!countyname景区门票预订,景点门票,$!araename$!cityname$!countyname自驾游景点' />
     <meta name='description' content='$!araename$!cityname$!countyname景点大全和景点百科。驾驴旅游网提供$!araename$!cityname$!countyname区域特价门票预订，无需在线支付，解除您一切后顾之忧。' />
     #include("pageHeadCode.htm")
     <link href="/Skin/default/style/SceneryList.css" rel="stylesheet" type="text/css" />
@@ -132,7 +132,6 @@
                         <a class="#if($grade==1)current#end" href="$provice&#45;$city&#45;$county&#45;$type&#45;$price&#45;1&#45;1&#46;html">A</a>
                     </div>
                 </div>
-
                 <div class="thisbox">
                     <div class="tourlist" id="product_tourlist">
                         #foreach($sitem in $Scenery.Scenerys)
@@ -164,7 +163,7 @@
                                         <a class="mapbtn" href="javascript:void(0)" onclick="showMap($sitem.lon,$sitem.lat,'$sitem.sceneryName','$sitem.sceneryAddress','$Scenery.imgbaseURL/$sitem.imgPath')">查看地图</a>
                                     </div>
                                     <div>景区等级：$sitem.gradeId</div>
-                                    <div>有<a href="/Scenic/Item0&#45;$sitem.sceneryId&#46;html#dpbox" target="_blank" style="color:#005bb5">$sitem.commentCount</a>位网友曾点评过</div>
+                                    <div>有<a href=" /Scenic/Dp/0&#45;$sitem.sceneryId&#45;1.html" target="_blank" style="color:#005bb5">$sitem.commentCount</a>位网友曾点评过</div>
                                     <!--<div class="tourlistDis">
                                         <span class="discountBox couponetitle"><span class="discountname">券</span>优惠券</span>
                                         <span class="discountBox couponetitle"><span class="discountname">减</span>下单立减</span>
@@ -199,7 +198,7 @@
                                 </ul>
                             </div>
                             <div id="priceBox_$sitem.sceneryId" class="s_tab">
-                                <div style="color:red;text-align:center">暂无信息，请查看详情获取</div>
+                                <div style="color:red;text-align:center" class="loadingPrice"><img src="/skin/default/images/loading.gif" alt="" /></div>
                             </div>
                         </div>
                         #end
@@ -213,7 +212,7 @@
                 </div>
             </div>
             <!--右-->
-            <div style="width: 300px; float: right;">
+            <div style="width: 302px; float: right;">
                 <div style="background-color: #f7f7f7;" class="thisbox">
                     <div style="padding: 10px 15px 10px 15px">
                         <div class="minbox">
@@ -269,6 +268,7 @@
         }
     });
     var url = "/AJAX/Scenery/GetInfo.ashx?method=GetPrice&ids=" + ids;
+    var nids = "";
     jQuery.ajax({
         url: url,
         traditional: true,
@@ -276,6 +276,7 @@
         success: function (response) {
             jQuery.XloadHide();
             var json = response.toJson();
+            $("#product_tourlist").find(".loadingPrice").html('<div style="color:red;text-align:center">暂无信息，请查看详情获取</div>');
             for (var i = 0; i < json.scenery.length; i++) {
                 var _price = json.scenery[i].policy;
                 if (!!_price && !!_price.Policys) {
@@ -289,7 +290,7 @@
                             '<span class="msprice">¥' + _price.Policys[j].price + '</span>' +
                             '<span class="tcprice"><span class="b-orange">¥' + _price.Policys[j].tcPrice + '</span></span>' +
                             '<span class="payment"><span class="a-tip">' + GetModelName(_price.Policys[j].pMode) + '</span></span>' +
-                            '<span class="operate" style="height:23px;line-height:23px;"><a class="bookbtn" target="_blank" href="/Scenic/goto.aspx?supply=2&sid=' + json.scenery[i].sceneryId + '&tid=' + _price.Policys[j].policyId + '">预订</a></span>' +
+                            '<span class="operate" style="height:23px;line-height:23px;"><a class="bookbtn" rel="external nofollow" target="_blank" href="/Scenic/goto.aspx?supply=2&sid=' + json.scenery[i].sceneryId + '&tid=' + _price.Policys[j].policyId + '">预订</a></span>' +
                             '</li>';
                             html1 += ' <b>包含项目：</b>' + _price.Policys[j].containItems + '<br /><b>预订说明：</b>' + _price.Policys[j].remark.InnerXml + '</div>';
                             html += "</ul></div>" + html1 + "</div>";
@@ -297,12 +298,17 @@
                             $("#priceBox_" + json.scenery[i].sceneryId).append(html);
                         }
                     }
-
+                    else {
+                        $("#priceBox_" + json.scenery[i].sceneryId).html('<div style="color:red;text-align:center">暂无信息，请查看详情获取</div>');
+                    }
                 }
+                
             }
+
         }
 
     });
+
     function GetModelName(paymode) {
         if (paymode == 0)
             return "景区现付";

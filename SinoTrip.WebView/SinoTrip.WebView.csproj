@@ -63,6 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Ajax\User\Login.aspx" />
     <Content Include="App_Config\data\MallChannel.xml" />
     <Content Include="App_Config\Search\Dictionaries\ChsDoubleName1.txt" />
     <Content Include="App_Config\Search\Dictionaries\ChsDoubleName2.txt" />
@@ -76,7 +77,10 @@
     <Content Include="Global.asax" />
     <Content Include="head.aspx" />
     <Content Include="Hotel\Default.aspx" />
+    <Content Include="Res\images\box_linebj.png" />
     <Content Include="Res\images\close.png" />
+    <Content Include="Res\images\Qload.gif" />
+    <Content Include="Res\images\Qload2.gif" />
     <Content Include="Res\js\common.js" />
     <Content Include="Res\js\flights.js" />
     <Content Include="Res\js\Hotel.js" />
@@ -197,6 +201,7 @@
     <Content Include="Scenic\Category.aspx" />
     <Content Include="Scenic\City.aspx" />
     <Content Include="Scenic\Default.aspx" />
+    <Content Include="Scenic\Dp.aspx" />
     <Content Include="Scenic\goto.aspx" />
     <Content Include="Scenic\Item.aspx" />
     <Content Include="Scenic\List.aspx" />
@@ -250,6 +255,7 @@
     <Content Include="Skin\Default\images\index7.jpg" />
     <Content Include="Skin\Default\images\journey_icon.gif" />
     <Content Include="Skin\Default\images\left_menu.png" />
+    <Content Include="Skin\Default\images\loading.gif" />
     <Content Include="Skin\Default\images\logo.jpg" />
     <Content Include="Skin\Default\images\menu_login_button.jpg" />
     <Content Include="Skin\Default\images\mini_kf.png" />
@@ -380,6 +386,7 @@
     <Content Include="Template\default\Scenic\Category.html" />
     <Content Include="Template\default\Scenic\City.html" />
     <Content Include="Template\default\Scenic\Deafult.html" />
+    <Content Include="Template\default\Scenic\Dp.html" />
     <Content Include="Template\default\Scenic\Item.html" />
     <Content Include="Template\default\Scenic\List.html" />
     <Content Include="Template\default\UserWeb\CheckTourPact.htm" />
@@ -414,6 +421,13 @@
     </Compile>
     <Compile Include="Ajax\Scenery\GetInfo.ashx.cs">
       <DependentUpon>GetInfo.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Ajax\User\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ajax\User\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -463,6 +477,13 @@
     </Compile>
     <Compile Include="Scenic\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Scenic\Dp.aspx.cs">
+      <DependentUpon>Dp.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Scenic\Dp.aspx.designer.cs">
+      <DependentUpon>Dp.aspx</DependentUpon>
     </Compile>
     <Compile Include="Scenic\goto.aspx.cs">
       <DependentUpon>goto.aspx</DependentUpon>

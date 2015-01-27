@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web.SessionState;
 
 namespace SinoTrip.WebView.ReturnPage.API
 {
@@ -36,19 +35,20 @@ namespace SinoTrip.WebView.ReturnPage.API
             {
                 IUcClient client = new UcClient();
                 UcUserInfo user = client.UserInfo(uid);
+                LoggerCore.Debug("开始登录---------------------");
                 if (user.Success)
                 {
-                    LoggerCore.Debug(user.Uid + "--" + user.UserName);
+                    LoggerCore.Debug("成功---------------------------------");
                     context.Session["uid"] = user.Uid;
                     context.Session["username"] = user.UserName;
                     context.Session["email"] = user.Mail;
                     return ApiReturn.Success;
                 }
+                LoggerCore.Debug("失败---------------------------------");
                 return ApiReturn.Failed;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                LoggerCore.Debug("远程登录错误", ex);
                 return ApiReturn.Failed;
             }
         }

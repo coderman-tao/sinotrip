@@ -51,11 +51,9 @@ namespace SinoTrip.API.Cartrip.Ucenter.Api
         public UcRequestArguments(HttpRequest request)
         {
             Code = request.QueryString["code"];
-            
             FormData = HttpUtility.UrlDecode(request.Form.ToString(), Encoding.GetEncoding(UcConfig.UcCharset));
             QueryString = HttpUtility.ParseQueryString(UcUtility.AuthCodeDecode(Code));
             Action = QueryString["action"];
-            LoggerCore.Debug("Code值：" + Code + ".QueryString:" + Action + "接收地址：" + request.RawUrl);
             long time;
             if (long.TryParse(QueryString["time"], out time)) Time = time;
             IsInvalidRequest = request.QueryString.Count == 0 && UcActions.Contains(Action);

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using SinoTrip.Core;
+using System.Collections.Generic;
 using System.Web;
 using System.Web.SessionState;
 
@@ -29,6 +30,7 @@ namespace SinoTrip.API.Cartrip.Ucenter.Api
             Response = context.Response;
             Request = context.Request;
             Args = new UcRequestArguments(Request);
+            LoggerCore.Debug("接收信息+" + Request.RawUrl);
             if (!check()) return;
             switchAction(context);
         }

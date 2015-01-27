@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Web;
 
 namespace SinoTrip.FrameWork.Web
@@ -106,6 +107,43 @@ namespace SinoTrip.FrameWork.Web
                 write2.Flush();
                 write2.Close();
             }
+        }
+
+        public string GetHtml(string folder, string htmlname, DateTime last)
+        {
+            ReaderWriterLock rwl = new ReaderWriterLock();
+            try
+            {
+                string path = System.AppDomain.CurrentDomain.BaseDirectory;
+                if (!string.IsNullOrEmpty(folder))
+                {
+                    path = Path.Combine(path, folder);
+                }
+                htmlname = Path.Combine(path, htmlname);
+                var fi = new FileInfo(htmlname);
+                if (fi.LastWriteTime < last)
+                {
+                    return string.Empty;
+                }
+              
+                rwl.AcquireReaderLock(1000);//读锁，1秒后未获取放弃
+
+                string strHtmlContent = File.ReadAllText(htmlname, Encoding.UTF8);
+                return strHtmlContent;
+            }
+            catch (Exception)
+            {
+
+                return string.Empty;
+            }
+            finally
+            {
+                if (rwl.IsReaderLockHeld)
+                {
+                    rwl.ReleaseReaderLock();
+                }
+            }
+
         }
 
 

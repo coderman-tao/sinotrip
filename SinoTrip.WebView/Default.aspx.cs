@@ -36,6 +36,7 @@ namespace SinoTrip.WebView
         {
             string _area = Context.Request["area"];
             var provices = AreaCache.GetAreaCache(0, 0, "", "");
+            LoggerCore.Info("区域:" + _area);
             //string[] names = new string[] { "香港","台湾","澳门" };//         
             //provices = provices.Where(item => !names.Contains(item.Name)).ToList();
             ViewArea provice = null;
@@ -49,12 +50,17 @@ namespace SinoTrip.WebView
                 {
                     if(Session!=null)
                     {
-                        _area = Session["area"].ToString();
-                        provice = provices.FirstOrDefault(item => _area == item.English);
+                        _area = Session["area"].ToStringEx("");
+                        LoggerCore.Info("Session区域:" + _area);
+                        if (!string.IsNullOrEmpty(_area))
+                        {
+                            provice = provices.FirstOrDefault(item => _area == item.English);
+                        }
                     }
                     if (string.IsNullOrEmpty(_area))
                     {
                         var ip = SinoTrip.FrameWork.Web.GetIP.IPAddress;
+                        LoggerCore.Info("IP地址：" + ip);
                         var url = "http://ip.taobao.com/service/getIpInfo.php?ip=" + ip;
                         HttpWebRequest request = HttpWebRequest.Create(url) as HttpWebRequest;
                         request.Method = "Get";
