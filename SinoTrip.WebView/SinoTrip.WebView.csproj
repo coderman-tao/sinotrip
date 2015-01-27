@@ -201,6 +201,7 @@
     <Content Include="Scenic\Category.aspx" />
     <Content Include="Scenic\City.aspx" />
     <Content Include="Scenic\Default.aspx" />
+    <Content Include="Scenic\Dp.aspx" />
     <Content Include="Scenic\goto.aspx" />
     <Content Include="Scenic\Item.aspx" />
     <Content Include="Scenic\List.aspx" />
@@ -385,6 +386,7 @@
     <Content Include="Template\default\Scenic\Category.html" />
     <Content Include="Template\default\Scenic\City.html" />
     <Content Include="Template\default\Scenic\Deafult.html" />
+    <Content Include="Template\default\Scenic\Dp.html" />
     <Content Include="Template\default\Scenic\Item.html" />
     <Content Include="Template\default\Scenic\List.html" />
     <Content Include="Template\default\UserWeb\CheckTourPact.htm" />
@@ -475,6 +477,13 @@
     </Compile>
     <Compile Include="Scenic\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Scenic\Dp.aspx.cs">
+      <DependentUpon>Dp.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Scenic\Dp.aspx.designer.cs">
+      <DependentUpon>Dp.aspx</DependentUpon>
     </Compile>
     <Compile Include="Scenic\goto.aspx.cs">
       <DependentUpon>goto.aspx</DependentUpon>
