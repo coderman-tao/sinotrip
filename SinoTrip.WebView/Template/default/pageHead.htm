@@ -162,7 +162,7 @@
                             </div>
                             <div class="leftMenuSearch">
                                 #foreach($theme in $Themes)
-                                <a href="/Scenic/0-0-0&#45;$theme.OrderNo&#45;0-0-1.html" style=" font-size:14px;">$theme.Name</a>
+                                <a href="/Scenic/0-0-0-${theme.OrderNo}-0-0-1.html" style=" font-size:14px;">$theme.Name</a>
                                 #end
                             </div>
                         </div>
@@ -179,8 +179,8 @@
                         <div class="left_menutitle">
                             <div class="left_menuname">周边景点</div>
                             <div class="left_menulable" style="overflow:hidden;height:25px">
-                                <a href="/Scenic/Item0&#45;$ZBJD.Scenerys.get_item(0).sceneryId&#46;html">$ZBJD.Scenerys.get_item(0).sceneryName</a>
-                                <a href="/Scenic/Item0&#45;$ZBJD.Scenerys.get_item(1).sceneryId&#46;html">$ZBJD.Scenerys.get_item(1).sceneryName</a>
+                                <a href="/Scenic/Item0-${ZBJD.Scenerys.get_item(0).sceneryId}.html">$ZBJD.Scenerys.get_item(0).sceneryName</a>
+                                <a href="/Scenic/Item0-${ZBJD.Scenerys.get_item(1).sceneryId}.html">$ZBJD.Scenerys.get_item(1).sceneryName</a>
                             </div>
                         </div>
                         <div class="jd_counetbox" style=" padding:20px; width:600px">
@@ -189,7 +189,7 @@
                                     <a href="javascript:void(0)" style=" font-size:16px;color:#ff6600">周边景点</a>
                                 </div>
                                 #foreach($zbjd in $ZBJD.Scenerys)
-                                <a href="/Scenic/Item0&#45;$zbjd.sceneryId&#46;html" style=" font-size:14px;">$zbjd.sceneryName</a>
+                                <a href="/Scenic/Item0-${zbjd.sceneryId}.html" style=" font-size:14px;">$zbjd.sceneryName</a>
                                 #end
                             </div>
                         </div>
@@ -201,7 +201,7 @@
                             </div>
                             <div class="left_menulable">
                                 #foreach($mcity in $menuCity)
-                                <a href="/Scenic/0&#45;$mcity.ItemId&#45;0-0-0-0-1.html">$mcity.Name</a>
+                                <a href="/Scenic/0-${mcity.ItemId}-0-0-0-0-1.html">$mcity.Name</a>
                                 #end
                             </div>
                         </div>
@@ -212,7 +212,7 @@
                                         <a href="javascript:void(0)" style=" font-size:16px;color:#ff6600">目的地</a>
                                     </div>
                                     #foreach($city in $City)
-                                    <a href="/Scenic/0&#45;$city.ItemId&#45;0-0-0-0-1.html">$city.Name</a>
+                                    <a href="/Scenic/0-${city.ItemId}-0-0-0-0-1.html">$city.Name</a>
                                     #end
 
                                 </div>
@@ -221,7 +221,7 @@
                                         <a href="javascript:void(0)" style=" font-size:16px;color:#ff6600">所有省份</a>
                                     </div>
                                     #foreach($provice in $Provice)
-                                    <a href="/Scenic/$provice.ItemId&#45;0-0-0-0-0-1.html">$provice.Name</a>
+                                    <a href="/Scenic/${provice.ItemId}-0-0-0-0-0-1.html">$provice.Name</a>
                                     #end
                                 </div>
                             </div>

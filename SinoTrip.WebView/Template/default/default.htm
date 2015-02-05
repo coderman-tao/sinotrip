@@ -85,11 +85,11 @@
                     #foreach($hot in $hotSec.Scenerys)
                     <li style=" padding-top:10px">
                         <div class="imgbox">
-                            <a href="/Scenic/Item0&#45;$!hot.sceneryId&#46;html" title="$!hot.sceneryName门票预订">
+                            <a href="/Scenic/Item0-$!{hot.sceneryId}.html" title="$!hot.sceneryName门票预订">
                                 <img src="http://upload.17u.com/uploadfile/scenerypic_common/300_225/$!hot.imgPath" alt="$hot.scenerySummary" width="200px" height="150px" />
                             </a>
                         </div>
-                        <a class="namebox" href="/Scenic/Item0&#45;$!hot.sceneryId&#46;html"><span class="productname">$!hot.sceneryName</span>¥$!hot.amountAdv</a>
+                        <a class="namebox" href="/Scenic/Item0-$!{hot.sceneryId}.html"><span class="productname">$!hot.sceneryName</span>¥$!hot.amountAdv</a>
                     </li>
                     #end
                 </ul>
@@ -168,7 +168,7 @@
             <div style="overflow: hidden; position: relative; height: 375px;">
                 <div class="switch_dist_content" style="display: block;width:1190px;" id="scenery_list">
                     #foreach($zbjd in $ZBJD.Scenerys)
-                    <a href="/Scenic/Item0&#45;$!zbjd.sceneryId&#46;html">
+                    <a href="/Scenic/Item0-$!{zbjd.sceneryId}.html">
                         <span class="contentbox">
                             <span class="contenttitle_bj"></span><span class="contenttitle">
                                 $!zbjd.sceneryName</br>$!zbjd.scenerySummary

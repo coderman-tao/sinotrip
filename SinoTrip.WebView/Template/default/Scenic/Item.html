@@ -125,7 +125,7 @@
                             <div style="border-bottom: 1px #ddd dashed;">
                                 <div id="price_$!Price.sceneryId_$!item.policyId">
                                     <ul class="tab_nav tab_navHover" style="height:35px;">
-                                        <li class="name_li">[$item.ticketName.InnerXml ]<a href="javascript:void(0)" style="color:#005bb5">$!item.policyName.InnerXml</a></li>
+                                        <li class="name_li">[$item.ticketName.InnerXml]<a href="javascript:void(0)" style="color:#005bb5">$!item.policyName.InnerXml</a></li>
                                         <li class="listBt_box">
                                             <span class="msprice">¥$!item.price</span><span class="tcprice"><span class="b-orange">¥$!item.tcprice</span></span><span class="payment">
                                                 <span class="a-tip">#if($!item.pMode==0)景区现付 #elseif($!item.pMode==1)在线支付 #else 其它支付 #end</span>
@@ -185,7 +185,7 @@
                     </div>
                     <div class="thisbox" id="dpbox">
                         <div style=" padding:10px; line-height:20px">
-                            <h2 style=" line-height:35px; font-family:微软雅黑; color:#ff6600">游客点评<a target="_blank" style="float:right;font-size:12px;color:#f60; padding-right:5px;" href="/Scenic/Dp/$!Info.ItemId&#45;$!Info.OutSign&#45;1.html">更多点评>></a></h2>
+                            <h2 style=" line-height:35px; font-family:微软雅黑; color:#ff6600">游客点评<a target="_blank" style="float:right;font-size:12px;color:#f60; padding-right:5px;" href="/Scenic/Dp/$!{Info.ItemId}-$!{Info.OutSign}-1.html">更多点评>></a></h2>
                             
                         </div>
                         <div id="comment_list">

@@ -39,13 +39,13 @@
                                 <span class="inputbutton keywordbutton" name="morebutton">- 收起</span>
                             </div>
                         </div>
-                        <a class="allkeyword" href="/Scenic/0&#45;0&#45;0&#45;$type&#45;$price&#45;$grade&#45;1&#46;html">全部</a>
+                        <a class="allkeyword" href="/Scenic/0-0-0-${type}-${price}-${grade}-1.html">全部</a>
                         <!--<a class="current" href="">安徽</a>-->
                         #foreach($area in $Area)
                         #if ($area.ItemId==$provice)
                         <a class="current" href="javascript:void(0)">$area.Name</a>
                         #else
-                        <a href="/Scenic/$area.ItemId&#45;0&#45;0&#45;$type&#45;$price&#45;$grade&#45;1&#46;html">$area.Name</a>
+                        <a href="/Scenic/${area.ItemId}-0-0-${type}-${price}-${grade}-1.html">$area.Name</a>
                         #end
 
                         #end
@@ -59,14 +59,13 @@
                                 <span class="inputbutton keywordbutton">- 收起</span>
                             </div>
                         </div>
-                        <a class="allkeyword" href="/Scenic/$provice&#45;0&#45;0&#45;$type&#45;$price&#45;$grade&#45;1&#46;html">全部</a>
+                        <a class="allkeyword" href="/Scenic/${provice}-0-0-${type}-${price}-${grade}-1.html">全部</a>
                         #foreach($CItem in $City)
                         #if ($CItem.ItemId==$city)
                         <a class="current" href="javascript:void(0)">$CItem.Name</a>
                         #else
-                        <a href="/Scenic/$provice&#45;$CItem.ItemId&#45;0&#45;$type&#45;$price&#45;$grade&#45;1&#46;html">$CItem.Name</a>
+                        <a href="/Scenic/${provice}-${CItem.ItemId}-0-${type}-${price}-${grade}-1.html">$CItem.Name</a>
                         #end
-                        <!--<a href="$provice&#45;$city&#45;$county&#45;$type&#45;$price&#45;$grade&#45;1&#46;html">$area.Name</a>-->
                         #end
                     </div>
                     <div class="searchbox showbox" item="tratype">
@@ -78,12 +77,12 @@
                                 <span class="inputbutton keywordbutton">- 收起</span>
                             </div>
                         </div>
-                        <a class="allkeyword" href="$provice&#45;$city&#45;0&#45;$type&#45;$price&#45;$grade&#45;1&#46;html">全部</a>
+                        <a class="allkeyword" href="${provice}-${city}-0-${type}-${price}-${grade}-1.html">全部</a>
                         #foreach($CArea in $CityArea)
                         #if ($CArea.ItemId==$county)
                         <a class="current" href="javascript:void(0)">$CArea.Name</a>
                         #else
-                        <a href="/Scenic/$provice&#45;$city&#45;$CArea.ItemId&#45;$type&#45;$price&#45;$grade&#45;1&#46;html">$CArea.Name</a>
+                        <a href="/Scenic/${provice}-${city}-${CArea.ItemId}-${type}-${price}-${grade}-1.html">$CArea.Name</a>
                         #end
                         #end
                     </div>
@@ -96,14 +95,13 @@
                                 <span class="inputbutton keywordbutton">- 收起</span>
                             </div>
                         </div>
-                        <a class="allkeyword" href="$provice&#45;$city&#45;$county&#45;0&#45;$price&#45;$grade&#45;1&#46;html">全部</a>
+                        <a class="allkeyword" href="${provice}-${city}-${county}-0-${price}-${grade}-1.html">全部</a>
                         #foreach($TItem in $TypeData)
                         #if ($TItem.OrderNo==$type)
                         <a class="current" href="javascript:void(0)">$TItem.Name</a>
                         #else
-                        <a href="/Scenic/$provice&#45;$city&#45;$county&#45;$TItem.OrderNo&#45;$price&#45;$grade&#45;1&#46;html">$TItem.Name</a>
+                        <a href="/Scenic/${provice}-${city}-${county}-${TItem.OrderNo}-${price}-${grade}-1.html">$TItem.Name</a>
                         #end
-                        <!--<a href="$provice&#45;$city&#45;$county&#45;$type&#45;$price&#45;$grade&#45;1&#46;html">$area.Name</a>-->
                         #end
                     </div>
                     <div class="searchbox" item="hotleType">
@@ -112,11 +110,11 @@
                                 门票价格：
                             </div>
                         </div>
-                        <a class="allkeyword" href="$provice&#45;$city&#45;$county&#45;$type&#45;0&#45;$grade&#45;1&#46;html">全部</a>
-                        <a class="#if($price==1)current#end" href="$provice&#45;$city&#45;$county&#45;$type&#45;1&#45;$grade&#45;1&#46;html">0-50</a>
-                        <a class="#if($price==2)current#end" href="$provice&#45;$city&#45;$county&#45;$type&#45;2&#45;$grade&#45;1&#46;html">50-100</a>
-                        <a class="#if($price==3)current#end" href="$provice&#45;$city&#45;$county&#45;$type&#45;3&#45;$grade&#45;1&#46;html">100-200</a>
-                        <a class="#if($price==4)current#end" href="$provice&#45;$city&#45;$county&#45;$type&#45;4&#45;$grade&#45;1&#46;html">200以上</a>
+                        <a class="allkeyword" href="${provice}-${city}-${county}-${type}-0-${grade}-1.html">全部</a>
+                        <a class="#if($price==1)current#end" href="${provice}-${city}-${county}-${type}-1-${grade}-1.html">0-50</a>
+                        <a class="#if($price==2)current#end" href="${provice}-${city}-${county}-${type}-2-${grade}-1.html">50-100</a>
+                        <a class="#if($price==3)current#end" href="${provice}-${city}-${county}-${type}-3-${grade}-1.html">100-200</a>
+                        <a class="#if($price==4)current#end" href="${provice}-${city}-${county}-${type}-4-${grade}-1.html">200以上</a>
                     </div>
                     <div class="searchbox">
                         <div style=" position:absolute">
@@ -124,12 +122,12 @@
                                 景区等级：
                             </div>
                         </div>
-                        <a class="allkeyword" href="$provice&#45;$city&#45;$county&#45;$type&#45;$price&#45;0&#45;1&#46;html">全部</a>
-                        <a class="#if($grade==5)current#end" href="$provice&#45;$city&#45;$county&#45;$type&#45;$price&#45;5&#45;1&#46;html">AAAAA</a>
-                        <a class="#if($grade==4)current#end" href="$provice&#45;$city&#45;$county&#45;$type&#45;$price&#45;4&#45;1&#46;html">AAAA</a>
-                        <a class="#if($grade==3)current#end" href="$provice&#45;$city&#45;$county&#45;$type&#45;$price&#45;3&#45;1&#46;html">AAA</a>
-                        <a class="#if($grade==2)current#end" href="$provice&#45;$city&#45;$county&#45;$type&#45;$price&#45;2&#45;1&#46;html">AA</a>
-                        <a class="#if($grade==1)current#end" href="$provice&#45;$city&#45;$county&#45;$type&#45;$price&#45;1&#45;1&#46;html">A</a>
+                        <a class="allkeyword" href="${provice}-${city}-${county}-${type}-${price}-0-1.html">全部</a>
+                        <a class="#if($grade==5)current#end" href="${provice}-${city}-${county}-${type}-${price}-5-1.html">AAAAA</a>
+                        <a class="#if($grade==4)current#end" href="${provice}-${city}-${county}-${type}-${price}-4-1.html">AAAA</a>
+                        <a class="#if($grade==3)current#end" href="${provice}-${city}-${county}-${type}-${price}-3-1.html">AAA</a>
+                        <a class="#if($grade==2)current#end" href="${provice}-${city}-${county}-${type}-${price}-2-1.html">AA</a>
+                        <a class="#if($grade==1)current#end" href="${provice}-${city}-${county}-${type}-${price}-1-1.html">A</a>
                     </div>
                 </div>
                 <div class="thisbox">
@@ -149,13 +147,13 @@
                         </script>
                         <div class="tourbox" value="$sitem.sceneryId">
                             <div class="imgbox">
-                                <a href="/Scenic/Item0&#45;$sitem.sceneryId&#46;html" target="_blank" title="$sitem.sceneryName">
+                                <a href="/Scenic/Item0-${sitem.sceneryId}.html" target="_blank" title="$sitem.sceneryName">
                                     <img width="160px" height="120px" src="http://upload.17u.com/uploadfile/scenerypic_common/300_225/$sitem.imgPath" />
                                 </a>
                             </div>
                             <div class="tourcounet">
                                 <div class="touritem">
-                                    <a href="/Scenic/Item0&#45;$sitem.sceneryId&#46;html" target="_blank" title="$sitem.scenerySummary">
+                                    <a href="/Scenic/Item0-${sitem.sceneryId}.html" target="_blank" title="$sitem.scenerySummary">
                                         <h3>$sitem.sceneryName&nbsp;&nbsp;($sitem.provinceName#if($sitem.cityName!=$sitem.provinceName)·$sitem.cityName #end)</h3>
                                     </a>
                                     <div>
@@ -163,7 +161,7 @@
                                         <a class="mapbtn" href="javascript:void(0)" onclick="showMap($sitem.lon,$sitem.lat,'$sitem.sceneryName','$sitem.sceneryAddress','$Scenery.imgbaseURL/$sitem.imgPath')">查看地图</a>
                                     </div>
                                     <div>景区等级：$sitem.gradeId</div>
-                                    <div>有<a href=" /Scenic/Dp/0&#45;$sitem.sceneryId&#45;1.html" target="_blank" style="color:#005bb5">$sitem.commentCount</a>位网友曾点评过</div>
+                                    <div>有<a href=" /Scenic/Dp/0-${sitem.sceneryId}-1.html" target="_blank" style="color:#005bb5">$sitem.commentCount</a>位网友曾点评过</div>
                                     <!--<div class="tourlistDis">
                                         <span class="discountBox couponetitle"><span class="discountname">券</span>优惠券</span>
                                         <span class="discountBox couponetitle"><span class="discountname">减</span>下单立减</span>
@@ -173,7 +171,7 @@
                                     <div class="price">¥$sitem.amountAdv</div>
                                     <div>门市价：<span style="text-decoration: line-through; color:#666">¥$sitem.amount</span></div>
                                     <div style="padding-top:15px">
-                                        <a href="/Scenic/Item0&#45;$sitem.sceneryId&#46;html" target="_blank" title="在线预订$sitem.sceneryName">
+                                        <a href="/Scenic/Item0-${sitem.sceneryId}.html" target="_blank" title="在线预订$sitem.sceneryName">
                                             <span class="inputbutton green" style=" width:60px">查看详情</span>
                                         </a>
                                     </div>
@@ -207,7 +205,7 @@
 
                     </div>
                     <div class="pageList">
-                        $tool.getPageList("<a class='{0}' href='/Scenic/$provice&#45;$city&#45;$county&#45;$type&#45;$price&#45;$grade&#45;{1}&#46;html'>{2}</a>","current",6,$page,10,$Scenery.totalCount)
+                        $tool.getPageList("<a class='{0}' href='/Scenic/${provice}-${city}-${county}-${type}-${price}-${grade}-{1}.html'>{2}</a>","current",6,$page,10,$Scenery.totalCount)
                     </div>
                 </div>
             </div>
