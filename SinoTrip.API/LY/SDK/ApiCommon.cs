@@ -18,8 +18,8 @@ namespace SinoTrip.API.LY.SDK
 
             Hashtable ht = new Hashtable();                                 //将参数放入Hashtable中，便于操作
             ht.Add("Version", "20111128102912");                            //接口协议版本号，详见接口协议文档
-            ht.Add("AccountID", "4bc54d24-a31a-4b1b-a19b-98e32ac35e3e");                                        //API帐户ID，待申请审批通过后发放
-            ht.Add("AccountKey", "caf9126d19922aa3");                                       //API帐户密钥，待申请审批通过后发放
+            ht.Add("AccountID", "");                                        //API帐户ID，待申请审批通过后发放
+            ht.Add("AccountKey", "");                                       //API帐户密钥，待申请审批通过后发放
             ht.Add("ServiceName", ServiceName);                          //调用接口的方法名称
             ht.Add("ReqTime", DateTime.Now);                                //当前日期时间
 
